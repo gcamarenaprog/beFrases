@@ -48,6 +48,7 @@
 
   # Get all authors from list phrases no repeat
   $listAuthorsNoRepeat = getAllAuthorsNoRepeat($listPhrases);
+  print_r($listAuthorsNoRepeat);
 
   # Get all phrases from list phrases no repeat
   //$listPhrasesNoRepeat = getAllPhrasesNoRepeat($listPhrases);
@@ -326,7 +327,7 @@
 
 <script>
 $( function() {
-  var data = <?php echo json_encode($listAuthorsNoRepeat) ?>;  
+  var data = <?php echo json_encode($listAuthorsNoRepeat) ?>;
   $( "#iInputEditPhraseAuthor" ).autocomplete({
     source: data,
     minLength: 3
@@ -334,26 +335,11 @@ $( function() {
 } );
 
 $( function() {
-  var data = <?php echo json_encode($listAuthorsNoRepeat) ?>;  
+  var data = <?php echo json_encode($listAuthorsNoRepeat) ?>;
   $( "#iInputAuthor" ).autocomplete({
     source: data,
     minLength: 3
   });
 } );
 
-$( function() {
-  var data = <?php echo json_encode($listPhrasesNoRepeat) ?>;  
-  $( "#iTextAreaPhrase" ).autocomplete({
-    source: data,
-    minLength: 4
-  });
-} );
-
-$( function() {
-  var data = <?php echo json_encode($listPhrasesNoRepeat) ?>;  
-  $( "#iTextAreaEditPhraseText" ).autocomplete({
-    source: data,
-    minLength: 4
-  });
-} );
 </script>
