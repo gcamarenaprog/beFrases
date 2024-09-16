@@ -27,20 +27,13 @@ p.be-description {
   font-weight: 300;
 }
 
-p.be-message {
-  font-size: 1.08em;
-  font-weight: 300;
-}
-
 p.be-author-delete-confirmation {
-  font-size: 1.1em;
-  font-weight: 300;
   text-align: right;
+  font-style: italic;
+  font-weight: 600;
 }
 
 p.be-quote-delete-confirmation {
-  font-size: 1.1em;
-  font-weight: 300;
   text-align: right;
   font-style: italic;
 }
@@ -48,12 +41,6 @@ p.be-quote-delete-confirmation {
 p.be-quote {
   font-size: 1.1em;
   font-weight: 400;
-}
-
-p.widget-align-quote-right {
-  display: block;
-  text-align: right;
-  padding: 0px;
 }
 
 /* Override Datatables styles */
@@ -80,14 +67,7 @@ table.dataTable tfoot th {
   padding-bottom: 4px !important
 }
 
-
-
-.card {
-  padding-top: 0px !important;
-  padding-right: 0px !important;
-  padding-bottom: 0px !important;
-  padding-left: 0px !important;
-}
+/* Override WP Core UI styles */
 
 .wp-core-ui select {
   -webkit-appearance: auto !important;
@@ -122,6 +102,10 @@ select {
 }
 
 .card {
+  padding-top: 0px !important;
+  padding-right: 0px !important;
+  padding-bottom: 0px !important;
+  padding-left: 0px !important;
   border-radius: 0px;
   max-width: 100%;
 }

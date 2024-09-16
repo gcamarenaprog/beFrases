@@ -140,30 +140,44 @@
           <!-- Edit quote form -->
           <form method="post" class="mb-3" style="display: none;" id="iFormEditQuote" name="nFormEditQuote">
 
+            <!-- Title and description /-->
             <h5 class="card-title">Editar frase</h5>
             <p class="card-text">Modificar la frase seleccionada.</p>
 
             <hr>
 
-            <input type="hidden" class="form-control" name="nInputEditQuoteId" id="iInputEditQuoteId">
+            <!-- Quote Id /-->
+            <input type="hidden"
+                   class="form-control"
+                   name="nInputEditQuoteId"
+                   id="iInputEditQuoteId">
 
+            <!-- Author /-->
             <div class="mb-3">
               <label for="iInputEditQuoteAuthor" class="form-label">Autor</label>
-              <input class="form-control" name="nInputEditQuoteAuthor" id="iInputEditQuoteAuthor">
+              <input class="form-control"
+                     name="nInputEditQuoteAuthor"
+                     id="iInputEditQuoteAuthor">
               <div id="iHelpQuoteAuthor" class="form-text">El nombre del autor.</div>
             </div>
 
+            <!-- Quote /-->
             <div class="mb-3">
               <label for="iTextAreaEditQuoteText" class="form-label">Frase</label>
-              <textarea class="form-control" name="nTextAreaEditQuoteText" id="iTextAreaEditQuoteText"
+              <textarea class="form-control"
+                        name="nTextAreaEditQuoteText"
+                        id="iTextAreaEditQuoteText"
                         rows="3"></textarea>
               <div id="iHelpQuoteDescription" class="form-text">Escriba la frase sin comillas al inicio o al final.
               </div>
             </div>
 
+            <!-- Category /-->
             <div class="mb-3">
               <label for="iSelectEditCategory" class="form-label">Categoría</label>
-              <select class="form-select" aria-label="Default select example" id="iSelectEditCategory"
+              <select class="form-select"
+                      aria-label="Default select example"
+                      id="iSelectEditCategory"
                       name="nSelectEditCategory">
                 <?php
                   $namesCategoriesList = getAllCategoriesList ();
@@ -177,11 +191,21 @@
               <div id="iHelpEditCategory" class="form-text">Nombre de la categoría.</div>
             </div>
 
-            <button type="submit" name="nButtonSaveEditQuote" id="iButtonSaveEditQuote" class="btn btn-dark">Guardar
-              cambios
+            <!-- Save edit /-->
+            <button type="submit"
+                    name="nButtonSaveEditQuote"
+                    id="iButtonSaveEditQuote"
+                    class="btn btn-dark">
+              Guardar cambios
             </button>
-            <button type="button" name="nButtonCancelEditQuote" id="iButtonCancelEditQuote" class="btn btn-dark"
-                    onclick="hiddeFormEditQuote()">Cancelar
+
+            <!-- Cancel edit /-->
+            <button type="button"
+                    name="nButtonCancelEditQuote"
+                    id="iButtonCancelEditQuote"
+                    class="btn btn-dark"
+                    onclick="hiddeFormEditQuote()">
+              Cancelar
             </button>
 
           </form>
@@ -189,29 +213,47 @@
           <!-- Delete quote form -->
           <form method="post" class="mb-3" style="display: none;" id="iFormDeleteQuote" name="nFormDeleteQuote">
 
+            <!-- Title and description /-->
             <h5 class="card-title">Eliminar frase</h5>
-            <p class="card-text">Eliminar la frase seleccionada.</p>
+            <p class="card-text">¿Desea eliminar el siguiente registro?</p>
 
             <hr>
 
-            <div class="card">
-              <h5 class="card-header">Eliminar frase</h5>
-              <div class="card-body">
-                <h5 class="card-title">¿Confirmar la eliminación de la siguiente frase?</h5>
-                <hr>
-                <p class="be-quote-delete-confirmation" id="iParagrahpDeleteQuoteText" class="card-text"></p>
-                <p class="be-author-delete-confirmation" id="iParagrahpDeleteAuthorText" class="card-text"></p>
-                <p id="iQuote" name="nQuote"></p>
-                <hr>
-                <input type="hidden" class="form-control" name="nInputDeleteQuoteId" id="iInputDeleteQuoteId">
-                <button type="submit" name="nButtonDeleteQuote" id="iButtonDeleteQuote" class="btn btn-dark">Eliminar
-                </button>
-                <button type="button" name="nButtonCancelDeleteQuote" id="iButtonCancelDeleteQuote"
-                        class="btn btn-dark"
-                        onclick="hiddeFormDeleteQuote()">Cancelar
-                </button>
-              </div>
+            <!-- Quote and author /-->
+            <div class="mb-4" style="padding: 10px !important;">
+
+              <!-- Quote text /-->
+              <p class="card-text be-quote-delete-confirmation" id="iParagrahpDeleteQuoteText"></p>
+
+              <!-- Quote author /-->
+              <p class="card-text be-author-delete-confirmation" id="iParagrahpDeleteAuthorText"></p>
+              
             </div>
+
+            <hr>
+      
+            <!-- Quote Id /-->
+            <input type="hidden"
+                   class="form-control"
+                   name="nInputDeleteQuoteId"
+                   id="iInputDeleteQuoteId">
+
+            <!-- Cancel delete /-->
+            <button type="button"
+                    name="nButtonCancelDeleteQuote"
+                    id="iButtonCancelDeleteQuote"
+                    class="btn btn-primary btn-sm"
+                    onclick="hiddeFormDeleteQuote()">
+              Cancelar
+            </button>
+
+            <!-- Delete quote /-->
+            <button type="submit"
+                    name="nButtonDeleteQuote"
+                    id="iButtonDeleteQuote"
+                    class="btn btn-danger btn-sm">
+              Eliminar
+            </button>
 
           </form>
 
@@ -262,7 +304,7 @@
               <tr>
                 <td></td>
                 <td><?php echo $quoteAuthor; ?></td>
-                <td><?php echo $quoteText; ?></td>
+                <td>"<?php echo $quoteText; ?>"</td>
                 <td><?php echo $quoteCategory; ?></td>
 
                 <!-- Edit button /-->
@@ -305,6 +347,7 @@
 
       </div>
     </div>
+
   </div>
 </div>
 
