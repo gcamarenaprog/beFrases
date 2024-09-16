@@ -113,7 +113,7 @@
     $wpdb->query ($sqlDefaultValuesBeFrasesTable);
     
     # INSERT default values on categories table (0, 'Default')
-    $sqlDefaultValuesCategoriesTable = "INSERT IGNORE INTO {$wpdb -> prefix}befrases_cat (befrases_cat_id, befrases_cat_name, befrases_cat_description) VALUES (1, 'Default', 'Default category')";
+    $sqlDefaultValuesCategoriesTable = "INSERT IGNORE INTO {$wpdb -> prefix}befrases_cat (befrases_cat_id, befrases_cat_name, befrases_cat_description) VALUES (1, 'Uncategorized', 'Default category if none is chosen.')";
     $wpdb->query ($sqlDefaultValuesCategoriesTable);
     
     # INSERT default values on options table (1,3,4,4,1)
@@ -271,24 +271,17 @@
     }
     
     
-    // JQuery
-    wp_enqueue_script ('script-jquery', plugins_url ('/js/jquery-3.7.0/jquery.min.js', __FILE__), array('jquery'));
+    // JQuery 3.7.1
+    wp_enqueue_script ('script-jquery', plugins_url ('/js/jquery-3.7.0/jquery.min-3.7.1.js', __FILE__), array('jquery'));
     
-    // JQuery UI
-    wp_enqueue_script ('script-jquery-ui', plugins_url ('/js/jquery-ui-1.13.2/jquery-ui.min.js', __FILE__), array('jquery'));
+    // DataTables 2.1.6
+    wp_enqueue_script ('script-jquery-datatables', plugins_url ('/js/datatables-1.13.5/datatables.min.2.1.6.js', __FILE__), array('jquery'));
     
-    // DataTables
-    wp_enqueue_script ('script-jquery-datatables', plugins_url ('/js/datatables-1.13.5/datatables.min.js', __FILE__), array('jquery'));
+    // Bootstrap 5.3.3
+    wp_enqueue_script ('script-jquery-bootstrap-bundle', plugins_url ('/js/bootstrap-5.3.3/bootstrap.bundle.min.5.3.3.js', __FILE__), array('jquery'));
     
-    // Bootstrap
-    wp_enqueue_script ('script-jquery-bootstrap', plugins_url ('/js/bootstrap-5.3.1/bootstrap.min.js', __FILE__), array('jquery'));
-    wp_enqueue_script ('script-jquery-bootstrap-bundle', plugins_url ('/js/bootstrap-5.3.1/bootstrap.bundle.min.js', __FILE__), array('jquery'));
-    
-    // Others
-    wp_enqueue_script ('script-poppersjs', plugins_url ('/js/others/popperjs_core-2.11.8.min.js', __FILE__), array('jquery'));
-    
-    // My Scripts
-    wp_enqueue_script ('miJs', plugins_url ('/js/beFrases.js', __FILE__), array('jquery'), '2.0.0');
+    // Personalized script
+    wp_enqueue_script ('be-js-personalized', plugins_url ('/js/script.js', __FILE__), array('jquery'), '2.0.0');
     
   }
   
@@ -315,10 +308,14 @@
     if (($hook != $urlMain) && ($hook != $urlBeFrases) && ($hook != $urlSettings) && ($hook != $urlCategories) && ($hook != $urlAbout) && ($hook != $urlWidget) && ($hook != $urlHelp)) {
       return;
     }
-    wp_enqueue_style ('myCSS4', plugins_url ('/css/bootstrap.css', __FILE__));
-    wp_enqueue_style ('myCSS5', plugins_url ('/css/docs.css', __FILE__));
-    wp_enqueue_style ('jqdt', plugins_url ('/css/jquery.dataTables.css', __FILE__));
-    wp_enqueue_style ('myCSS1', plugins_url ('/css/style.css', __FILE__));
+    // Bootstrap 5.3.3
+    wp_enqueue_style ('be-css-bootstrap', plugins_url ('/css/bootstrap.5.3.3.css', __FILE__));
+    
+    // DataTables 2.1.6
+    wp_enqueue_style ('be-css-jquery-datatables', plugins_url ('/css/jquery.dataTables.2.1.6.css', __FILE__));
+    
+    // Personalized styles
+    wp_enqueue_style ('be-css-style', plugins_url ('/css/style.css', __FILE__));
 
   }
   
