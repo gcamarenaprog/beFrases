@@ -457,15 +457,15 @@ button,
 select,
 optgroup,
 textarea {
-  margin: 0 !important;
-  font-family: inherit !important;
-  font-size: inherit !important;
-  line-height: inherit !important;
+  margin: 0;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
 }
 
 button,
 select {
-  text-transform: none !important;
+  text-transform: none;
 }
 
 [role=button] {
@@ -473,7 +473,7 @@ select {
 }
 
 select {
-  word-wrap: normal !important;
+  word-wrap: normal;
 }
 select:disabled {
   opacity: 1;

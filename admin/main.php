@@ -1,345 +1,373 @@
 <?php
-/*
- * Manage plugin option
- *
- * @package   				beFrases
- * @version  					2.0.0
- * @author    				Guillermo Camarena <gcamarenaprog@outlook.com>
- * @copyright 				Copyright (c) 2004 - 2023, Guillermo Camarena
- * @link      				https://gcamarenaprog.com/beFrases/
- * @license   				http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
- * 
- */
+  /*
+   * Manage plugin option
+   *
+   * @package   				beFrases
+   * @version  					2.0.0
+   * @author    				Guillermo Camarena <gcamarenaprog@outlook.com>
+   * @copyright 				Copyright (c) 2004 - 2023, Guillermo Camarena
+   * @link      				https://gcamarenaprog.com/beFrases/
+   * @license   				http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
+   *
+   */
 ?>
 
-
 <?php
-
+  
   # Prevent PHP code from being executed by inserting the path in the browser bar
-  defined('ABSPATH') or die("Bye bye and remember: Silence is golden!");
-
+  defined ('ABSPATH') or die("Bye bye and remember: Silence is golden!");
+  
   global $wpdb;
-
-  # Add new phrase from add form
-  if(isset($_POST['nButtonNewPhrase'])){
-    $authorPrhase = $_POST['nInputAuthor'];
-    $textPhrase = $_POST['nTextAreaPhrase'];
-    $categoryIdPhrase = $_POST['nSelectCategory'];
-    addPhraseRecord($authorPrhase, $textPhrase, $categoryIdPhrase);
+  
+  # Add new quote from add form
+  if (isset($_POST['nButtonNewQuote'])) {
+    $authorQuote = $_POST['nInputAuthor'];
+    $textQuote = $_POST['nTextAreaQuote'];
+    $categoryIdQuote = $_POST['nSelectCategory'];
+    addQuoteRecord ($authorQuote, $textQuote, $categoryIdQuote);
   }
   
   # Update the changes from edit form
-  if(isset($_POST['nButtonSaveEditPhrase'])){
-    $idPhrase = $_POST['nInputEditPhraseId'];
-    $authorPrhase = $_POST['nInputEditPhraseAuthor'];
-    $textPhrase = $_POST['nTextAreaEditPhraseText'];
-    $categoryIdPhrase = $_POST['nSelectEditCategory'];
-    updatePhraseRecord($idPhrase, $authorPrhase, $textPhrase, $categoryIdPhrase);
+  if (isset($_POST['nButtonSaveEditQuote'])) {
+    $idQuote = $_POST['nInputEditQuoteId'];
+    $authorQuote = $_POST['nInputEditQuoteAuthor'];
+    $textQuote = $_POST['nTextAreaEditQuoteText'];
+    $categoryIdQuote = $_POST['nSelectEditCategory'];
+    updateQuoteRecord ($idQuote, $authorQuote, $textQuote, $categoryIdQuote);
   }
-
+  
   # Delete record from delete form
-  if(isset($_POST['nButtonDeletePhrase'])){
-    $idPhrase = $_POST['nInputDeletePhraseId'];
-    deletePhraseRecord($idPhrase);
+  if (isset($_POST['nButtonDeleteQuote'])) {
+    $idQuote = $_POST['nInputDeleteQuoteId'];
+    deleteQuoteRecord ($idQuote);
   }
-
-  # Get all phrases from database
-  $listPhrases = getPhrases();
-
-  # Get all authors from list phrases no repeat
-  $listAuthorsNoRepeat = getAllAuthorsNoRepeat($listPhrases);
-  print_r($listAuthorsNoRepeat);
-
-  # Get all phrases from list phrases no repeat
-  //$listPhrasesNoRepeat = getAllPhrasesNoRepeat($listPhrases);
-
- // print_r($listPhrasesNoRepeat);
+  
+  # Get all quotes from database
+  $listQuotes = getAllQuotes ();
+  
+  # Get all authors from list quotes no repeat
+  $listAuthorsWithoutRepeat = getAllAuthorsWithoutRepeat ($listQuotes);
 
 ?>
 
+<div class="container" style="max-width: 100%">
+  <div class="row g-2" style="margin-right: 10px;">
 
-<!-- HTML Code -->
-  <div class="container-fluid">
-
-  <h1 class="display-6"><?php echo get_admin_page_title(); ?></h1>
-  <p class="lead">Un plugin fácil y simple de usar que te permitirá gestionar una colección de frases célebres con sus autores respectivos, además de categorizarlas y mostrarlas de en un widget aleatoriamente.</p>
-
-  <hr>
-
-  <!-- Row: Content -->
-  <div class="row">
-
-    <!-- First column -->
-    <div class="col-lg-3 col-md-6 col-sm-12">
-
-      <!-- Add phrase form -->
-      <form method="post" class="mb-3" style="display: block;" id="iFormAddPhrase" name="nFormAddPhrase">
-
-        <p class="be-title"><strong>Añadir frase</strong> </p>
-        <p class="be-description">Escribe el autor, frase y categoría de la frase.</p>
-      
-        <hr>
-
-        <div class="mb-3">
-          <label for="iInputAuthor" class="form-label">Autor</label>
-          <input class="form-control" name="nInputAuthor" id="iInputAuthor" placeholder="Autor.." required>
-          <div id="iHelpAuthorName" class="form-text">Autor de la frase</div>
+    <!-- Title and description /-->
+    <div>
+      <div class="card">
+        <h5 class="card-header"><?php echo get_admin_page_title (); ?></h5>
+        <div class="card-body">
+          <p class="card-text">
+            Un plugin fácil y simple de usar que te permitirá gestionar una colección de frases célebres con sus autores
+            respectivos, además de categorizarlas y mostrarlas de en un widget aleatoriamente.
+          </p>
         </div>
-
-        <div class="mb-3">
-          <label for="iTextAreaPhrase" class="form-label">Frase</label>
-          <textarea class="form-control" name="nTextAreaPhrase" id="iTextAreaPhrase" placeholder="Escriba aquí la frase.." rows="3" required></textarea>
-          <div id="iHelpPhraseDescription" class="form-text">Escriba la frase sin comillas al inicio o al final.</div>
-        </div>
-
-        <div class="mb-3">
-          <label for="iSelectCategory" class="form-label">Categoría</label>
-          <select class="form-select" aria-label="Default select example" id="iSelectCategory" name="nSelectCategory">
-            <?php         
-              $namesCategoriesList = getAllDataCategoriesList();
-              foreach ($namesCategoriesList as $key => $value) {
-                $phraseCategoryId = $value['befrases_cat_id'];
-                $phraseCategoryName = $value['befrases_cat_name']; 
-                if($phraseCategoryId == 1){
-                  echo '<option selected value="'.$phraseCategoryId.'">'.$phraseCategoryName.'</option>';
-                } else {
-                  echo '<option value="'.$phraseCategoryId.'">'.$phraseCategoryName.'</option>';
-                }                
-              }
-            ?>
-          </select>
-          <div id="iHelpCategory" class="form-text">Nombre de la categoría.</div>
-        </div>
-
-        <button id="iButtonNewPhrase" name="nButtonNewPhrase" type="submit" class="btn btn-dark">Añadir</button>
-        
-      </form>
-      
-      <!-- Edit phrase form -->
-      <form method="post" class="mb-3" style="display: none;" id="iFormEditPhrase" name="nFormEditPhrase">
-
-        <p class="be-title"><strong>Editar frase</strong> </p>
-        <p class="be-description">Modificar la frase seleccionada.</p>
-        
-        <hr>
-
-        <input type="hidden" class="form-control" name="nInputEditPhraseId" id="iInputEditPhraseId">
-
-        <div class="mb-3">
-          <label for="iInputEditPhraseAuthor" class="form-label">Autor</label>
-          <input class="form-control" name="nInputEditPhraseAuthor" id="iInputEditPhraseAuthor">
-          <div id="iHelpPhraseAuthor" class="form-text">El nombre del autor.</div>
-        </div>
-
-        <div class="mb-3">
-          <label for="iTextAreaEditPhraseText" class="form-label">Frase</label>
-          <textarea class="form-control" name="nTextAreaEditPhraseText" id="iTextAreaEditPhraseText" rows="3"></textarea>
-          <div id="iHelpPhraseDescription" class="form-text">Escriba la frase sin comillas al inicio o al final.</div>
-        </div>
-
-        <div class="mb-3">
-          <label for="iSelectEditCategory" class="form-label">Categoría</label>
-          <select class="form-select" aria-label="Default select example" id="iSelectEditCategory" name="nSelectEditCategory">            
-            <?php         
-              $namesCategoriesList = getAllCategoriesList();
-              foreach ($namesCategoriesList as $key => $value) {
-                $phraseCategoryId = $value['befrases_cat_id'];
-                $phraseCategoryName = $value['befrases_cat_name']; 
-                echo '<option value="'.$phraseCategoryId.'">'.$phraseCategoryName.'</option>';             
-              }
-            ?>
-          </select>
-          <div id="iHelpEditCategory" class="form-text">Nombre de la categoría.</div>
-        </div>
-
-        <button type="submit" name="nButtonSaveEditPhrase" id="iButtonSaveEditPhrase" class="btn btn-dark">Guardar cambios</button>
-        <button type="button" name="nButtonCancelEditPhrase" id="iButtonCancelEditPhrase" class="btn btn-dark" onclick="hiddeFormEditPhrase()">Cancelar</button>
-
-      </form>
-
-      <!-- Delete phrase form -->
-      <form method="post" class="mb-3" style="display: none;" id="iFormDeletePhrase" name="nFormDeletePhrase">
-
-        <p class="be-title"><strong>Eliminar frase</strong> </p>
-        <p class="be-description">Eliminar la frase seleccionada.</p>
-        
-        <hr>
-
-        <div class="card">
-          <h5 class="card-header">Eliminar frase</h5>
-          <div class="card-body">
-            <h5 class="card-title">¿Confirmar la eliminación de la siguiente frase?</h5>
-            <hr>
-            <p class="be-phrase-delete-confirmation" id="iParagrahpDeletePhraseText" class="card-text"></p>
-            <p class="be-author-delete-confirmation" id="iParagrahpDeleteAuthorText" class="card-text"></p>
-            <p id="iPhrase" name="nPhrase"></p>
-            <hr>
-            <input type="hidden" class="form-control" name="nInputDeletePhraseId" id="iInputDeletePhraseId">
-            <button type="submit" name="nButtonDeletePhrase" id="iButtonDeletePhrase" class="btn btn-dark">Eliminar</button>
-            <button type="button" name="nButtonCancelDeletePhrase" id="iButtonCancelDeletePhrase" class="btn btn-dark" onclick="hiddeFormDeletePhrase()">Cancelar</button>
-          </div>
-        </div>
-
-      </form>
-
+      </div>
     </div>
 
-    <!-- Second column -->
-    <div class="col-lg-9 col-md-6 col-sm-12">
+    <!-- Add, edit and delete content /-->
+    <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-12 col-sm-12">
+      <div class="border mb-3 p-3">
+        <div class="card-body">
 
-      <p class="be-title"><strong>Lista de frases</strong> </p>
-      <p class="be-description">Lista de frases, selecciona una para editar o eliminar.</p>							
+          <!-- Add quote form /-->
+          <form method="post" class="mb-3" style="display: block;" id="iFormAddQuote" name="nFormAddQuote">
 
-      <hr>
+            <!-- Title and description /-->
+            <h5 class="card-title">Añadir frase</h5>
+            <p class="card-text">Escribe el autor, frase y categoría de la frase.</p>
 
-      <!-- Data Table -->
-      <table id="table" class="display nowrap" style="width:100%">
-          <thead>
-            <tr>
-              <th><strong></strong></th>
-              <th><strong>Autor</strong></th>
-              <th><strong>Frase</strong></th>
-              <th><strong>Categoría</strong></th>
-              <th class="text-center"><strong>Editar</strong></th>
-              <th class="text-center"><strong>Borrar</strong></th>
-            </tr>
-          </thead>
-          <tbody>
-            <?php
-              
-              foreach ($listPhrases as $key => $value) {										
-                $phraseId = $value['befrases_id'];
-                $phraseAuthor = $value['befrases_author']; 
-                $phraseText = $value['befrases_phrase'];
-                $phraseCategoryId = $value['befrases_category'];
+            <hr>
 
-                $name = getCategoryName($phraseCategoryId);
+            <!-- Author /-->
+            <div class="mb-3">
+              <label for="iInputAuthor" class="form-label">Autor</label>
+              <input class="form-control"
+                     name="nInputAuthor"
+                     id="iInputAuthor"
+                     placeholder="Nombre de autor.."
+                     required>
+              <div id="iHelpAuthorName" class="form-text">Nombre de autor de la frase</div>
+            </div>
 
-                foreach ($name as $key => $value) {
-                  $phraseCategory = $value['befrases_cat_name'];
-                }                                
-                echo "
-                <tr>                
-                  <td></td>
-                  <td>$phraseAuthor</td>
-                  <td>$phraseText</td>
-                  <td>$phraseCategory</td>"; ?>
-                  <td style="text-align:center">			
-										<button 
-                      class="btn btn-success" 
-                      id="iButtonEditPhraseRegister" 
-                      name="nButtonEditPhraseRegister" 
-                      onclick="showFormEditPhrase('<?php echo $phraseId;?>', '<?php echo $phraseAuthor;?>', '<?php echo $phraseText;?>', '<?php echo $phraseCategoryId;?>')"
-                      style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;" \">
-                      Editar
-                    </button>
+            <!-- Quote /-->
+            <div class="mb-3">
+              <label for="iTextAreaQuote" class="form-label">Frase</label>
+              <textarea class="form-control"
+                        name="nTextAreaQuote"
+                        id="iTextAreaQuote"
+                        placeholder="Escriba la frase.."
+                        rows="3"
+                        required></textarea>
+              <div id="iHelpQuoteDescription" class="form-text">Escriba la frase sin comillas.</div>
+            </div>
 
-                 
-                  </td>
-                
-                  <td style="text-align:center">						
-                    <button 
-                    class="btn btn-danger" 
-                    id="iButtonDeletePhraseRegister" 
-                    name="nButtonDeletePhraseRegister" 
-                    onclick="showFormDeletePhrase('<?php echo $phraseId;?>', '<?php echo $phraseAuthor;?>', '<?php echo $phraseText;?>')" 
-                    style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;\" \">Eliminar</button>
-                  </td>               
-
+            <!-- Category /-->
+            <div class="mb-3">
+              <label for="iSelectCategory" class="form-label">Categoría</label>
+              <select class="form-select"
+                      aria-label="Default select example"
+                      id="iSelectCategory"
+                      name="nSelectCategory"
+              >
                 <?php
-                echo "
-                </tr>";
-              }
-            ?>  
-          <tfoot>
-            <th><strong></strong></th>
-            <th><strong>Autor</strong></th>
-            <th><strong>Frase</strong></th>
-            <th><strong>Categoría</strong></th>
-            <th class="text-center"><strong>Editar</strong></th>
-            <th class="text-center"><strong>Borrar</strong></th>
-          </tfoot>
-        </table>
-   
+                  $namesCategoriesList = getAllDataCategoriesList ();
+                  foreach ($namesCategoriesList as $key => $value) {
+                    $quoteCategoryId = $value['befrases_cat_id'];
+                    $quoteCategoryName = $value['befrases_cat_name'];
+                    if ($quoteCategoryId == 1) {
+                      echo '<option selected value="' . $quoteCategoryId . '">' . $quoteCategoryName . '</option>';
+                    } else {
+                      echo '<option value="' . $quoteCategoryId . '">' . $quoteCategoryName . '</option>';
+                    }
+                  }
+                ?>
+              </select>
+              <div id="iHelpCategory" class="form-text">Nombre de la categoría.</div>
+            </div>
+
+            <!-- Add button /-->
+            <button id="iButtonNewQuote"
+                    name="nButtonNewQuote"
+                    type="submit"
+                    class="btn btn-dark btn-sm">
+              Añadir
+            </button>
+
+          </form>
+
+          <!-- Edit quote form -->
+          <form method="post" class="mb-3" style="display: none;" id="iFormEditQuote" name="nFormEditQuote">
+
+            <h5 class="card-title">Editar frase</h5>
+            <p class="card-text">Modificar la frase seleccionada.</p>
+
+            <hr>
+
+            <input type="hidden" class="form-control" name="nInputEditQuoteId" id="iInputEditQuoteId">
+
+            <div class="mb-3">
+              <label for="iInputEditQuoteAuthor" class="form-label">Autor</label>
+              <input class="form-control" name="nInputEditQuoteAuthor" id="iInputEditQuoteAuthor">
+              <div id="iHelpQuoteAuthor" class="form-text">El nombre del autor.</div>
+            </div>
+
+            <div class="mb-3">
+              <label for="iTextAreaEditQuoteText" class="form-label">Frase</label>
+              <textarea class="form-control" name="nTextAreaEditQuoteText" id="iTextAreaEditQuoteText"
+                        rows="3"></textarea>
+              <div id="iHelpQuoteDescription" class="form-text">Escriba la frase sin comillas al inicio o al final.
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="iSelectEditCategory" class="form-label">Categoría</label>
+              <select class="form-select" aria-label="Default select example" id="iSelectEditCategory"
+                      name="nSelectEditCategory">
+                <?php
+                  $namesCategoriesList = getAllCategoriesList ();
+                  foreach ($namesCategoriesList as $key => $value) {
+                    $quoteCategoryId = $value['befrases_cat_id'];
+                    $quoteCategoryName = $value['befrases_cat_name'];
+                    echo '<option value="' . $quoteCategoryId . '">' . $quoteCategoryName . '</option>';
+                  }
+                ?>
+              </select>
+              <div id="iHelpEditCategory" class="form-text">Nombre de la categoría.</div>
+            </div>
+
+            <button type="submit" name="nButtonSaveEditQuote" id="iButtonSaveEditQuote" class="btn btn-dark">Guardar
+              cambios
+            </button>
+            <button type="button" name="nButtonCancelEditQuote" id="iButtonCancelEditQuote" class="btn btn-dark"
+                    onclick="hiddeFormEditQuote()">Cancelar
+            </button>
+
+          </form>
+
+          <!-- Delete quote form -->
+          <form method="post" class="mb-3" style="display: none;" id="iFormDeleteQuote" name="nFormDeleteQuote">
+
+            <h5 class="card-title">Eliminar frase</h5>
+            <p class="card-text">Eliminar la frase seleccionada.</p>
+
+            <hr>
+
+            <div class="card">
+              <h5 class="card-header">Eliminar frase</h5>
+              <div class="card-body">
+                <h5 class="card-title">¿Confirmar la eliminación de la siguiente frase?</h5>
+                <hr>
+                <p class="be-quote-delete-confirmation" id="iParagrahpDeleteQuoteText" class="card-text"></p>
+                <p class="be-author-delete-confirmation" id="iParagrahpDeleteAuthorText" class="card-text"></p>
+                <p id="iQuote" name="nQuote"></p>
+                <hr>
+                <input type="hidden" class="form-control" name="nInputDeleteQuoteId" id="iInputDeleteQuoteId">
+                <button type="submit" name="nButtonDeleteQuote" id="iButtonDeleteQuote" class="btn btn-dark">Eliminar
+                </button>
+                <button type="button" name="nButtonCancelDeleteQuote" id="iButtonCancelDeleteQuote"
+                        class="btn btn-dark"
+                        onclick="hiddeFormDeleteQuote()">Cancelar
+                </button>
+              </div>
+            </div>
+
+          </form>
+
+        </div>
+      </div>
     </div>
 
+    <!-- List of quotes /-->
+    <div class="col-xxl-9 col-xl-9 col-lg-9 col-md-12 col-sm-12">
+      <div class="border mb-3 p-3">
+
+        <!-- Title and description /-->
+        <h5 class="card-title">Lista de frases</h5>
+        <p class="card-text">Lista de frases, selecciona una para editar o eliminar.</p>
+
+        <hr>
+
+        <!-- List of quotes table /-->
+        <table id="table" class="display " style="width:100%">
+
+          <thead>
+          <tr>
+            <th>#</th>
+            <th>Autor</th>
+            <th>Frase</th>
+            <th>Categoría</th>
+            <th class="text-center">Editar</th>
+            <th class="text-center">Borrar</th>
+          </tr>
+          </thead>
+
+          <tbody>
+          <?php
+            
+            foreach ($listQuotes as $key => $value) {
+              $quoteId = $value['befrases_id'];
+              $quoteAuthor = $value['befrases_author'];
+              $quoteText = $value['befrases_quote'];
+              $quoteCategoryId = $value['befrases_category'];
+              
+              $name = getCategoryName ($quoteCategoryId);
+              
+              foreach ($name as $key => $value) {
+                $quoteCategory = $value['befrases_cat_name'];
+              }
+              ?>
+
+              <tr>
+                <td></td>
+                <td><?php echo $quoteAuthor; ?></td>
+                <td><?php echo $quoteText; ?></td>
+                <td><?php echo $quoteCategory; ?></td>
+
+                <!-- Edit button /-->
+                <td style="text-align:center">
+                  <button
+                      class="btn btn-primary btn-sm"
+                      id="iButtonEditQuoteRegister"
+                      name="nButtonEditQuoteRegister"
+                      onclick="showFormEditQuote('<?php echo $quoteId; ?>', '<?php echo $quoteAuthor; ?>', '<?php echo $quoteText; ?>', '<?php echo $quoteCategoryId; ?>')">
+                    Editar
+                  </button>
+                </td>
+
+                <!-- Delete button /-->
+                <td style="text-align:center">
+                  <button
+                      class="btn btn-danger btn-sm"
+                      id="iButtonDeleteQuoteRegister"
+                      name="nButtonDeleteQuoteRegister"
+                      onclick="showFormDeleteQuote('<?php echo $quoteId; ?>', '<?php echo $quoteAuthor; ?>', '<?php echo $quoteText; ?>')">
+                    Eliminar
+                  </button>
+                </td>
+
+              </tr>
+              <?php
+            }
+          ?>
+
+          <tfoot>
+          <th>#</th>
+          <th>Autor</th>
+          <th>Frase</th>
+          <th>Categoría</th>
+          <th class="text-center">Editar</th>
+          <th class="text-center">Borrar</th>
+          </tfoot>
+
+        </table>
+
+      </div>
+    </div>
   </div>
+</div>
 
-  <hr>
+<script>
 
-  </div>
-<!-- HTML Code /-->
+  $(document).ready(function () {
 
+    // DataTables
+    let t = $('#table').DataTable({
+      "responsive": true,
+      "pagingType": "full_numbers",
+      "columnDefs": [{
+        "searchable": false,
+        "orderable": false,
+        "targets": [0, 4, 5]
+      }],
+      "order": [[1, "asc"]],
+      "language": {
+        "lengthMenu": "Mostrar _MENU_ registros por página",
+        "emptyTable": "¡No hay registros para mostrar!",
+        "zeroRecords": "¡No hay registros para mostrar!",
+        "info": "Mostrando página _PAGE_ de _PAGES_",
+        "infoEmpty": "No hay registros disponinles",
+        "infoFiltered": "(filtered from _MAX_ total records)",
+        "search": "Buscar:",
+        "paginate": {
+          first: "Primero",
+          previous: "Anterior",
+          next: "Siguiente",
+          last: "Último"
+        },
+      },
+    });
 
-<!-- JS Code -->
-  <script>
-
-    $(document).ready( function () {
-      
-      // DataTables
-      var t = $('#table').DataTable( {  
-        "responsive": true,
-        "pagingType": "full_numbers",    
-        "columnDefs": [ {
-              "searchable": false,
-              "orderable": false,
-              "targets": [0, 4,5]
-          } ],
-        "order": [[ 1, "asc" ]],
-
-        "language": {
-          "lengthMenu": "Mostrar _MENU_ registros por página",
-          "zeroRecords": "¡No hay registros para mostrar!",
-          "info": "Mostrando página _PAGE_ de _PAGES_",
-          "infoEmpty": "No hay registros disponinles",
-          "infoFiltered": "(filtered from _MAX_ total records)",
-          "search": "Buscar:",
-          "paginate": {
-            first:      "Primero",
-            previous:   "Anterior",
-            next:       "Siguiente",
-            last:       "Último"
-          },
-        },							
-      
-      });
-  
-      t
+    t
       .on('order.dt search.dt', function () {
         let i = 1;
         t
-          .cells(null, 0, { search: 'applied', order: 'applied' })
+          .cells(null, 0, {search: 'applied', order: 'applied'})
           .every(function (cell) {
-              this.data(i++);
+            this.data(i++);
           });
       })
-      .draw();	
+      .draw();
 
-    });    
-
-  </script>
-<!-- JS Code /-->
-
-
-
-
-
-
-<script>
-$( function() {
-  var data = <?php echo json_encode($listAuthorsNoRepeat) ?>;
-  $( "#iInputEditPhraseAuthor" ).autocomplete({
-    source: data,
-    minLength: 3
   });
-} );
 
-$( function() {
-  var data = <?php echo json_encode($listAuthorsNoRepeat) ?>;
-  $( "#iInputAuthor" ).autocomplete({
-    source: data,
-    minLength: 3
+  // Autocomplete input edit quote author function
+  $(function () {
+    let data = <?php echo json_encode ($listAuthorsWithoutRepeat) ?>;
+    $("#iInputEditQuoteAuthor").autocomplete({
+      source: data,
+      minLength: 3
+    });
   });
-} );
+
+  // Autocomplete input author function
+  $(function () {
+    let data = <?php echo json_encode ($listAuthorsWithoutRepeat) ?>;
+    $("#iInputAuthor").autocomplete({
+      source: data,
+      minLength: 3
+    });
+  });
 
 </script>

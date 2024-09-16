@@ -7,7 +7,7 @@
   Version:     2.0.0
   Author:      Guillermo Camarena
   Author URI:  https://gcamarenaprog.com/
-  Description: Creates a manage a list of phrases and authors with category option. Display options for your sidebar (widget).
+  Description: Creates a manage a list of quotes and authors with category option. Display options for your sidebar (widget).
   Text Domain: beFrases
   Domain Path: /languages
   License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -85,7 +85,7 @@
     $sqlMain = "CREATE TABLE IF NOT EXISTS {$wpdb -> prefix}befrases (
     `befrases_id` INT NOT NULL AUTO_INCREMENT,
     `befrases_author` VARCHAR(45) NULL,
-    `befrases_phrase` VARCHAR(200) NULL,
+    `befrases_quote` VARCHAR(200) NULL,
     `befrases_category` INT(45) NULL,
     PRIMARY KEY (`befrases_id`));";
     $wpdb->query ($sqlMain);
@@ -109,7 +109,7 @@
     $wpdb->query ($sqlOptions);
     
     # INSERT default values on befrases table (1, 'Guillermo Camarena', 'Vivimos una grandiosa novela, en un gran teatro, montado por gente inteligente que le gusta jugar a las marionetas', '1')
-    $sqlDefaultValuesBeFrasesTable = "INSERT IGNORE INTO {$wpdb -> prefix}befrases (befrases_id, befrases_author, befrases_phrase, befrases_category) VALUES (1, 'Guillermo Camarena', 'Vivimos una grandiosa novela, en un gran teatro, montado por gente inteligente que le gusta jugar a las marionetas', '1')";
+    $sqlDefaultValuesBeFrasesTable = "INSERT IGNORE INTO {$wpdb -> prefix}befrases (befrases_id, befrases_author, befrases_quote, befrases_category) VALUES (1, 'Guillermo Camarena', 'Vivimos una grandiosa novela, en un gran teatro, montado por gente inteligente que le gusta jugar a las marionetas', '1')";
     $wpdb->query ($sqlDefaultValuesBeFrasesTable);
     
     # INSERT default values on categories table (0, 'Default')
@@ -350,33 +350,33 @@
   /**
    * Gets the beFrases plugin option settings from the databases
    *
-   * @return array $listPhrases List of the all phrases with his data
+   * @return array $listQuotes List of the all quotes with his data
    */
-  function getAllPhrasesFromIdCategory ($phraseCategoryId): array
+  function getAllQuotesFromIdCategory ($quoteCategoryId): array
   {
     global $wpdb;
-    $listPhrases = $wpdb->get_results ("SELECT * FROM  {$wpdb -> prefix}befrases	WHERE	befrases_category = {$phraseCategoryId}", ARRAY_A);
-    return $listPhrases;
+    $listQuotes = $wpdb->get_results ("SELECT * FROM  {$wpdb -> prefix}befrases	WHERE	befrases_category = {$quoteCategoryId}", ARRAY_A);
+    return $listQuotes;
   }
   
   # Functions of bFrases-widget.php
   /**
-   * Print the phrase text
+   * Print the quote text
    *
-   * @param number $alignmentPhraseText Option number of the alignement phrase text
-   * @param number $stylePhraseText     Option number of the style phrase text
-   * @param string $phraseText          Text of the selected phrase
+   * @param number $alignmentQuoteText Option number of the alignement quote text
+   * @param number $styleQuoteText     Option number of the style quote text
+   * @param string $quoteText          Text of the selected quote
    * @return
    */
-  function printPhraseText ($alignmentPhraseText, $stylePhraseText, $phraseText)
+  function printQuoteText ($alignmentQuoteText, $styleQuoteText, $quoteText)
   {
-    if ($alignmentPhraseText == 0): ?>
+    if ($alignmentQuoteText == 0): ?>
       <p style="display:block;text-align:right; padding: 0px;">
     <?php
-    elseif ($alignmentPhraseText == 1): ?>
+    elseif ($alignmentQuoteText == 1): ?>
       <p style="display:block;text-align:center; padding: 0px;">
     <?php
-    elseif ($alignmentPhraseText == 2): ?>
+    elseif ($alignmentQuoteText == 2): ?>
       <p style="display:block;text-align:left; padding: 0px;">
     <?php
     else: ?>
@@ -386,13 +386,13 @@
     
     
     <?php
-  if ($stylePhraseText == 0): ?>
+  if ($styleQuoteText == 0): ?>
   
   <?php
-  elseif ($stylePhraseText == 1): ?>
+  elseif ($styleQuoteText == 1): ?>
     <em>
     <?php
-      elseif ($stylePhraseText == 2): ?>
+      elseif ($styleQuoteText == 2): ?>
     <b>
     <?php
       else: ?>
@@ -400,15 +400,15 @@
   <?php
   endif; ?>
     
-    <?php echo "\"" . $phraseText . "\""; ?>
+    <?php echo "\"" . $quoteText . "\""; ?>
     
     <?php
-  if ($stylePhraseText == 0): ?>
+  if ($styleQuoteText == 0): ?>
   <?php
-  elseif ($stylePhraseText == 1): ?>
+  elseif ($styleQuoteText == 1): ?>
     </em>
     <?php
-      elseif ($stylePhraseText == 2): ?>
+      elseif ($styleQuoteText == 2): ?>
     </b>
   <?php
     else: ?>
@@ -474,39 +474,41 @@
     </p> <?php
   }
   
-  # Functions of main.php file
   
   /**
-   * Gets the beFrases plugin option settings from the databases
-   *
-   * @return array $listPhrases List of the all phrases with his data
+   * Functions of main.php file ----------------------------------------------------------------------------------------
    */
-  function getPhrases (): array
+  
+  /**
+   * Get all quotes.
+   *
+   * @return array
+   */
+  function getAllQuotes (): array
   {
     global $wpdb;
     $tableName = "{$wpdb -> prefix}befrases";
     $query = "SELECT * FROM {$tableName}";
-    $listPhrases = $wpdb->get_results ($query, ARRAY_A);
-    return $listPhrases;
+    return $wpdb->get_results ($query, ARRAY_A);
   }
   
   /**
-   * Update data of a phrase record
+   * Update data of a quote record.
    *
-   * @param number $idPhrase         Id of the phrase to update
-   * @param string $authorPrhase     Name of the phrase to update
-   * @param string $textPhrase       Description of the phrase to update
-   * @param number $categoryIdPhrase Id number of the category of the phrase to update
-   * @return
+   * @param number $idQuote         Id of the quote to update
+   * @param string $authorQuote     Name of the quote to update
+   * @param string $textQuote       Description of the quote to update
+   * @param number $categoryIdQuote Id number of the category of the quote to update
+   * @return void
    */
-  function updatePhraseRecord ($idPhrase, $authorPrhase, $textPhrase, $categoryIdPhrase)
+  function updateQuoteRecord ($idQuote, string $authorQuote, string $textQuote, $categoryIdQuote): void
   {
     global $wpdb;
     $data = array(
-      'befrases_id' => $idPhrase,
-      'befrases_author' => $authorPrhase,
-      'befrases_phrase' => $textPhrase,
-      'befrases_category' => $categoryIdPhrase
+      'befrases_id' => $idQuote,
+      'befrases_author' => $authorQuote,
+      'befrases_quote' => $textQuote,
+      'befrases_category' => $categoryIdQuote
     );
     $tableName = "{$wpdb -> prefix}befrases";
     $replace = $wpdb->replace ($tableName, $data);
@@ -527,36 +529,36 @@
   }
   
   /**
-   * Add a new phrase record
+   * Add a new quote record
    *
-   * @param number $authorPhrase     Author of the phrase for new record
-   * @param number $textPhrase       Text phrase of the phrase for new record
-   * @param number $categoryIdPhrase Category Id of the phrase for new record
+   * @param number $authorQuote     Author of the quote for new record
+   * @param number $textQuote       Text quote of the quote for new record
+   * @param number $categoryIdQuote Category Id of the quote for new record
    * @return
    */
-  function addPhraseRecord ($authorPhrase, $textPhrase, $categoryIdPhrase)
+  function addQuoteRecord ($authorQuote, $textQuote, $categoryIdQuote)
   {
     global $wpdb;
     $data = array(
-      'befrases_author' => $authorPhrase,
-      'befrases_phrase' => $textPhrase,
-      'befrases_category' => $categoryIdPhrase
+      'befrases_author' => $authorQuote,
+      'befrases_quote' => $textQuote,
+      'befrases_category' => $categoryIdQuote
     );
     $tableName = "{$wpdb -> prefix}befrases";
     $replace = $wpdb->insert ($tableName, $data);
   }
   
   /**
-   * Delete a phrase with id number phrase provided
+   * Delete a quote with id number quote provided
    *
-   * @param number $idPhrase Phrase id for delete record
+   * @param number $idQuote Quote id for delete record
    * @return
    */
-  function deletePhraseRecord ($idPhrase)
+  function deleteQuoteRecord ($idQuote)
   {
     global $wpdb;
     $data = array(
-      'befrases_id' => $idPhrase
+      'befrases_id' => $idQuote
     );
     $tableName = "{$wpdb -> prefix}befrases";
     $replace = $wpdb->delete ($tableName, $data);
@@ -576,14 +578,20 @@
   }
   
   
-  function getAllAuthorsNoRepeat ($listPhrases)
+  /**
+   * Get all authors without repeat
+   *
+   * @param $listQuotes
+   * @return array
+   */
+  function getAllAuthorsWithoutRepeat ($listQuotes): array
   {
     global $wpdb;
     $listAuthors = array();
-    $lenghtArray = count ($listPhrases);
+    $lenghtArray = count ($listQuotes);
     //echo $lenghtArray;
     for ($i = 0; $i < $lenghtArray; ++$i) {
-      $extractedRecord = $listPhrases[$i];
+      $extractedRecord = $listQuotes[$i];
       $authorExtractedRecord = $extractedRecord['befrases_author'];
       array_push ($listAuthors, $authorExtractedRecord);
     }
@@ -592,23 +600,23 @@
     return $listAuthorsNoRepeat;
   }
   
-  function getAllPhrasesNoRepeat ($listPhrases)
+  function getAllQuotesNoRepeat ($listQuotes)
   {
-    //print_r($listPhrases);
+    //print_r($listQuotes);
     global $wpdb;
-    $listPhrases = array();
-    $lenghtArray1 = count ($listPhrases);
+    $listQuotes = array();
+    $lenghtArray1 = count ($listQuotes);
     echo $lenghtArray1;
     
     for ($i = 0; $i < $lenghtArray; ++$i) {
-      $extractedRecord = $listPhrases[$i];
-      $phraseExtractedRecord = $extractedRecord['befrases_phrase'];
-      array_push ($listPhrases, $phraseExtractedRecord);
+      $extractedRecord = $listQuotes[$i];
+      $quoteExtractedRecord = $extractedRecord['befrases_quote'];
+      array_push ($listQuotes, $quoteExtractedRecord);
     }
     
-    print_r ($listPhrases);
-    $listPhrasesNoRepeat = array_values (array_unique ($listPhrases));
-    return $listPhrasesNoRepeat;
+    print_r ($listQuotes);
+    $listQuotesNoRepeat = array_values (array_unique ($listQuotes));
+    return $listQuotesNoRepeat;
   }
   
   # Functions of settings.php file
@@ -631,12 +639,12 @@
    * Save the beFrases plugin option settings on the databases
    *
    * @param string $alignmentTextAuthorOption The option selected for alignment text author
-   * @param string $alignmentTextPhraseOption The option selected for alignment text phrase
+   * @param string $alignmentTextQuoteOption The option selected for alignment text quote
    * @param string $styleTextAuthorOption     The option selected for style text author
-   * @param string $styleTextPhraseOption     The option selected for style text phrase
+   * @param string $styleTextQuoteOption     The option selected for style text quote
    * @return none
    */
-  function saveSettings ($alignmentTextAuthorOption, $alignmentTextPhraseOption, $styleTextAuthorOption, $styleTextPhraseOption)
+  function saveSettings ($alignmentTextAuthorOption, $alignmentTextQuoteOption, $styleTextAuthorOption, $styleTextQuoteOption)
   {
     global $wpdb;
     $idOptions = 1;
@@ -644,8 +652,8 @@
       'befrases_opt_id' => $idOptions,
       'befrases_ali_txt_aut' => $alignmentTextAuthorOption,
       'befrases_sty_txt_aut' => $styleTextAuthorOption,
-      'befrases_ali_txt_phr' => $alignmentTextPhraseOption,
-      'befrases_sty_txt_phr' => $styleTextPhraseOption
+      'befrases_ali_txt_phr' => $alignmentTextQuoteOption,
+      'befrases_sty_txt_phr' => $styleTextQuoteOption
     );
     $tableName = "{$wpdb -> prefix}befrases_opt";
     $replace = $wpdb->replace ($tableName, $data);
@@ -726,16 +734,16 @@
   }
   
   /**
-   * Count the total phrases of a category with the id number
+   * Count the total quotes of a category with the id number
    *
    * @param number $idCategory Id number of the category to be counted
-   * @return number $totalPhrases Number of total records of a category
+   * @return number $totalQuotes Number of total records of a category
    */
   function countTotalRecordsCategory ($idCategory)
   {
     global $wpdb;
-    $totalPhrases = $wpdb->get_var ("SELECT COUNT(befrases_category) FROM {$wpdb -> prefix}befrases WHERE befrases_category = {$idCategory} ");
-    return $totalPhrases;
+    $totalQuotes = $wpdb->get_var ("SELECT COUNT(befrases_category) FROM {$wpdb -> prefix}befrases WHERE befrases_category = {$idCategory} ");
+    return $totalQuotes;
   }
 
 ?>
