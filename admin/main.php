@@ -93,7 +93,7 @@
 
         <div class="mb-3">
           <label for="iSelectCategory" class="form-label">Categoría</label>
-          <select class="form-select" aria-label="Default select example" id="iSelectCategory" name="nSelectCategory">            
+          <select class="form-select" aria-label="Default select example" id="iSelectCategory" name="nSelectCategory">
             <?php         
               $namesCategoriesList = getAllDataCategoriesList();
               foreach ($namesCategoriesList as $key => $value) {
@@ -192,9 +192,7 @@
       <hr>
 
       <!-- Data Table -->
-      <div class="table-responsive">
-
-        <table id="table" class="table table-bordered table-striped display compact" style="width:100%">
+      <table id="table" class="display nowrap" style="width:100%">
           <thead>
             <tr>
               <th><strong></strong></th>
@@ -261,9 +259,7 @@
             <th class="text-center"><strong>Borrar</strong></th>
           </tfoot>
         </table>
-
-      </div>
-
+   
     </div>
 
   </div>
@@ -278,7 +274,7 @@
   <script>
 
     $(document).ready( function () {
-
+      
       // DataTables
       var t = $('#table').DataTable( {  
         "responsive": true,

@@ -160,7 +160,7 @@
 				<!-- Data Table -->
 				<div class="table-responsive">
 
-					<table id="table" class="table table-bordered table-striped display compact" style="width:100%">
+          <table id="table" class="display nowrap" style="width:100%">
 						<thead>
 							<tr>
 								<th><strong></strong></th>

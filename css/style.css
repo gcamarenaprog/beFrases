@@ -4,13 +4,16 @@
  * Copyright 2011-2024 Guillermo Camarena
  * Licensed under MIT
  */
+
+/* Personalized styles */
 p.be-title {
-  font-size: 1.2em;
+  font-size: 1.1em;
   font-weight: 300;
+  margin-bottom: 0px;
 }
 
 p.be-description {
-  font-size: 1.1em;
+  font-size: 1em;
   font-weight: 300; 
 }
 
@@ -51,12 +54,8 @@ legend {
 }
 
 label {
-  font-size: 1.1em;
-  font-weight: 300;
-}
-
-input {
-  height: 35px;
+  margin-right: 5px;
+  margin-bottom: 0px;
 }
 
 .dataTables_filter {
@@ -64,14 +63,12 @@ input {
 }
 
 table.dataTable thead th {
-  font-size: 1.05em;
   font-weight: 300;
   background: #2c3338;
   color: #f0f0f1;
 }
 
 table.dataTable tfoot th {
-  font-size: 1.05em;
   font-weight: 300;
   background: #2c3338;
   color: #f0f0f1;
@@ -81,7 +78,6 @@ table.dataTable tfoot th {
 }
 
 table.dataTable td {
-  font-size: 1.05em !important;
   font-weight: 300;
 }
 
@@ -100,19 +96,14 @@ table.dataTable td {
   font-weight: 400;
 }
 
-.dataTables_info {
-  font-size: 1.1em;
-  font-weight: 400;
-}
-
-.wp-core-ui select {
-  margin-bottom: 5px;
-  padding: 6px !important;
-}
-
 .card {
   padding-top: 0px !important;
   padding-right: 0px !important;
   padding-bottom: 0px !important;
   padding-left: 0px !important;
+}
+
+.wp-core-ui select {
+  -webkit-appearance: auto !important;
+  background: none !important;
 }

@@ -272,13 +272,15 @@
     
     
     // JQuery 3.7.1
-    wp_enqueue_script ('script-jquery', plugins_url ('/js/jquery-3.7.0/jquery.min-3.7.1.js', __FILE__), array('jquery'));
+    wp_enqueue_script ('script-jquery', plugins_url ('/js/jquery.min-3.7.1.js', __FILE__), array('jquery'));
     
     // DataTables 2.1.6
-    wp_enqueue_script ('script-jquery-datatables', plugins_url ('/js/datatables-1.13.5/datatables.min.2.1.6.js', __FILE__), array('jquery'));
+    wp_enqueue_script ('script-jquery-datatables', plugins_url ('/js/dataTables.2.1.6.js', __FILE__), array('jquery'));
+    wp_enqueue_script ('script-responsive-datatables', plugins_url ('/js/responsive.dataTables.js', __FILE__), array('jquery'));
+    wp_enqueue_script ('script-datatables-responsive', plugins_url ('/js/dataTables.responsive.js', __FILE__), array('jquery'));
     
     // Bootstrap 5.3.3
-    wp_enqueue_script ('script-jquery-bootstrap-bundle', plugins_url ('/js/bootstrap-5.3.3/bootstrap.bundle.min.5.3.3.js', __FILE__), array('jquery'));
+    wp_enqueue_script ('script-jquery-bootstrap-bundle', plugins_url ('/js/bootstrap.bundle.min.5.3.3.js', __FILE__), array('jquery'));
     
     // Personalized script
     wp_enqueue_script ('be-js-personalized', plugins_url ('/js/script.js', __FILE__), array('jquery'), '2.0.0');
@@ -313,6 +315,7 @@
     
     // DataTables 2.1.6
     wp_enqueue_style ('be-css-jquery-datatables', plugins_url ('/css/jquery.dataTables.2.1.6.css', __FILE__));
+    wp_enqueue_style ('be-css-responsive-datatables', plugins_url ('/css/responsive.dataTables.css', __FILE__));
     
     // Personalized styles
     wp_enqueue_style ('be-css-style', plugins_url ('/css/style.css', __FILE__));
