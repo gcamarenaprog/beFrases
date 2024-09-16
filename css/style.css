@@ -1,0 +1,112 @@
+p.be-title {
+  font-size: 1.2em;
+  font-weight: 300;
+}
+
+p.be-description {
+  font-size: 1.1em;
+  font-weight: 300; 
+}
+
+p.be-message {
+  font-size: 1.08em;
+  font-weight: 300; 
+}
+
+p.be-author-delete-confirmation {
+  font-size: 1.1em;
+  font-weight: 300; 
+  text-align: right;
+}
+
+p.be-phrase-delete-confirmation {
+  font-size: 1.1em;
+  font-weight: 300;
+  text-align: right; 
+  font-style: italic;
+}
+
+p.phrase {
+  font-size: 1.1em;
+  font-weight: 400;
+}
+
+p.widget-align-phrase-right {
+  display: block;
+  text-align: right;
+  padding: 0px;
+}
+
+/* Override styles */
+
+legend {
+  font-size: 1.1em;
+  font-weight: 300; 
+}
+
+label {
+  font-size: 1.1em;
+  font-weight: 300;
+}
+
+input {
+  height: 35px;
+}
+
+.dataTables_filter {
+  margin-bottom: 10px;
+}
+
+table.dataTable thead th {
+  font-size: 1.05em;
+  font-weight: 300;
+  background: #2c3338;
+  color: #f0f0f1;
+}
+
+table.dataTable tfoot th {
+  font-size: 1.05em;
+  font-weight: 300;
+  background: #2c3338;
+  color: #f0f0f1;
+  padding: 10px !important;
+  padding-top: 4px !important; 
+  padding-bottom: 4px !important
+}
+
+table.dataTable td {
+  font-size: 1.05em !important;
+  font-weight: 300;
+}
+
+.paginate_button {
+  font-size: 1.1em;
+  font-weight: 300;
+}
+
+.first {
+  font-size: 1.1em;
+  font-weight: 400;
+}
+
+.last {
+  font-size: 1.1em;
+  font-weight: 400;
+}
+
+.dataTables_info {
+  font-size: 1.1em;
+  font-weight: 400;
+}
+
+.wp-core-ui select {
+  margin-bottom: 5px;
+  padding: 6px !important;
+}
+
+.card {
+  padding-top: 0px !important;
+  padding-right: 0px !important;
+  padding-bottom: 0px !important;
+  padding-left: 0px !important;
+}
