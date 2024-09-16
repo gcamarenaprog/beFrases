@@ -14,25 +14,30 @@
 /* Functions of main.php file --------------------------------------------------------------------------------------- */
 
 /**
- * Show form edit
+ * Show form edit quote
  *
- * @param {number} id Id number of the phrase
- * @param {text} autor Author text of the phrase
- * @param {text} phrase Quote text of the phrase
- * @param {number} idCategory Id number of the cateogry associated with the phrase
+ * @param {number} id Id number of the quote
+ * @param {text} autor Author text of the quote
+ * @param {text} quote Quote text of the quote
+ * @param {number} idCategory Id number of the cateogry associated with the quote
+ * @return none
  */
-function showFormEditQuote(id, autor, phrase, idCategory) {
+function showFormEditQuote(id, autor, quote, idCategory) {
   document.getElementById("iFormEditQuote").style.display = "block";
   document.getElementById("iFormAddQuote").style.display = "none";
   document.getElementById("iFormDeleteQuote").style.display = "none";
   document.getElementById('iInputEditQuoteId').value = id;
   document.getElementById('iInputEditQuoteAuthor').value = autor;
-  document.getElementById('iTextAreaEditQuoteText').textContent = phrase;
+  document.getElementById('iTextAreaEditQuoteText').textContent = quote;
   let element = document.getElementById("iSelectEditCategory");
   element.value = idCategory;
 }
 
-// Hidde form edit
+/**
+ * Hidde form edit quote
+ *
+ * @return none
+ */
 function hiddeFormEditQuote() {
   document.getElementById("iFormEditQuote").style.display = "none";
   document.getElementById("iFormDeleteQuote").style.display = "none";
@@ -57,7 +62,11 @@ function showFormDeleteQuote(idQuote, authorQuote, contentQuote) {
   document.getElementById("iParagrahpDeleteAuthorText").textContent = "— " + authorQuote;
 }
 
-// Hidde form delete
+/**
+ * Hidde form delete quote
+ *
+ * @return none
+ */
 function hiddeFormDeleteQuote() {
   document.getElementById("iFormEditQuote").style.display = "none";
   document.getElementById("iFormDeleteQuote").style.display = "none";
@@ -128,16 +137,16 @@ function checkRadioButtonGroup2(styleAuthor) {
  */
 function checkRadioButtonGroup3(alignmentQuote) {
   if (alignmentQuote == 0) {
-    document.getElementById("phrase").style.textAlign = "right";
+    document.getElementById("quote").style.textAlign = "right";
     document.getElementById('iRadioButton3-1').checked = true;
   } else if (alignmentQuote == 1) {
-    document.getElementById("phrase").style.textAlign = "center";
+    document.getElementById("quote").style.textAlign = "center";
     document.getElementById('iRadioButton3-2').checked = true;
   } else if (alignmentQuote == 2) {
-    document.getElementById("phrase").style.textAlign = "left";
+    document.getElementById("quote").style.textAlign = "left";
     document.getElementById('iRadioButton3-3').checked = true;
   } else {
-    document.getElementById("phrase").style.textAlign = "justify";
+    document.getElementById("quote").style.textAlign = "justify";
     document.getElementById('iRadioButton3-4').checked = true;
   }
 }
@@ -149,28 +158,28 @@ function checkRadioButtonGroup3(alignmentQuote) {
  */
 function checkRadioButtonGroup4(styleQuote) {
   if (styleQuote == 0) {
-    document.getElementById("phrase1").style.display = "block";
-    document.getElementById("phrase2").style.display = "none";
-    document.getElementById("phrase3").style.display = "none";
-    document.getElementById("phrase4").style.display = "none";
+    document.getElementById("quote1").style.display = "block";
+    document.getElementById("quote2").style.display = "none";
+    document.getElementById("quote3").style.display = "none";
+    document.getElementById("quote4").style.display = "none";
     document.getElementById('iRadioButton4-1').checked = true;
   } else if (styleQuote == 1) {
-    document.getElementById("phrase1").style.display = "none";
-    document.getElementById("phrase2").style.display = "block";
-    document.getElementById("phrase3").style.display = "none";
-    document.getElementById("phrase4").style.display = "none";
+    document.getElementById("quote1").style.display = "none";
+    document.getElementById("quote2").style.display = "block";
+    document.getElementById("quote3").style.display = "none";
+    document.getElementById("quote4").style.display = "none";
     document.getElementById('iRadioButton4-2').checked = true;
   } else if (styleQuote == 2) {
-    document.getElementById("phrase1").style.display = "none";
-    document.getElementById("phrase2").style.display = "none";
-    document.getElementById("phrase3").style.display = "block";
-    document.getElementById("phrase4").style.display = "none";
+    document.getElementById("quote1").style.display = "none";
+    document.getElementById("quote2").style.display = "none";
+    document.getElementById("quote3").style.display = "block";
+    document.getElementById("quote4").style.display = "none";
     document.getElementById('iRadioButton4-3').checked = true;
   } else {
-    document.getElementById("phrase1").style.display = "none";
-    document.getElementById("phrase2").style.display = "none";
-    document.getElementById("phrase3").style.display = "none";
-    document.getElementById("phrase4").style.display = "block";
+    document.getElementById("quote1").style.display = "none";
+    document.getElementById("quote2").style.display = "none";
+    document.getElementById("quote3").style.display = "none";
+    document.getElementById("quote4").style.display = "block";
     document.getElementById('iRadioButton4-4').checked = true;
   }
 }
@@ -200,7 +209,7 @@ function changeAlignAuthor() {
 }
 
 /**
- * Change align of phrase for demo section
+ * Change align of quote for demo section
  *
  * @type void
  * @param none
@@ -211,20 +220,20 @@ function changeAlignQuote() {
   for (i = 0; i < element.length; i++) {
     if (element[i].checked) {
       if (i == 0) {
-        document.getElementById("phrase").style.textAlign = "right";
+        document.getElementById("quote").style.textAlign = "right";
       } else if (i == 1) {
-        document.getElementById("phrase").style.textAlign = "center";
+        document.getElementById("quote").style.textAlign = "center";
       } else if (i == 2) {
-        document.getElementById("phrase").style.textAlign = "left";
+        document.getElementById("quote").style.textAlign = "left";
       } else {
-        document.getElementById("phrase").style.textAlign = "justify";
+        document.getElementById("quote").style.textAlign = "justify";
       }
     }
   }
 }
 
 /**
- * Change styles of author and phrase text for demo section
+ * Change styles of author and quote text for demo section
  *
  * @type void
  * @param none
@@ -261,7 +270,7 @@ function changeStyleAuthor() {
 }
 
 /**
- * Change styles of phrase and phrase text for demo section
+ * Change styles of quote and quote text for demo section
  *
  * @type void
  * @param none
@@ -273,25 +282,25 @@ function changeStyleQuote() {
     if (element[i].checked) {
 
       if (i == 0) {
-        document.getElementById("phrase1").style.display = "block";
-        document.getElementById("phrase2").style.display = "none";
-        document.getElementById("phrase3").style.display = "none";
-        document.getElementById("phrase4").style.display = "none";
+        document.getElementById("quote1").style.display = "block";
+        document.getElementById("quote2").style.display = "none";
+        document.getElementById("quote3").style.display = "none";
+        document.getElementById("quote4").style.display = "none";
       } else if (i == 1) {
-        document.getElementById("phrase1").style.display = "none";
-        document.getElementById("phrase2").style.display = "block";
-        document.getElementById("phrase3").style.display = "none";
-        document.getElementById("phrase4").style.display = "none";
+        document.getElementById("quote1").style.display = "none";
+        document.getElementById("quote2").style.display = "block";
+        document.getElementById("quote3").style.display = "none";
+        document.getElementById("quote4").style.display = "none";
       } else if (i == 2) {
-        document.getElementById("phrase1").style.display = "none";
-        document.getElementById("phrase2").style.display = "none";
-        document.getElementById("phrase3").style.display = "block";
-        document.getElementById("phrase4").style.display = "none";
+        document.getElementById("quote1").style.display = "none";
+        document.getElementById("quote2").style.display = "none";
+        document.getElementById("quote3").style.display = "block";
+        document.getElementById("quote4").style.display = "none";
       } else {
-        document.getElementById("phrase1").style.display = "none";
-        document.getElementById("phrase2").style.display = "none";
-        document.getElementById("phrase3").style.display = "none";
-        document.getElementById("phrase4").style.display = "block";
+        document.getElementById("quote1").style.display = "none";
+        document.getElementById("quote2").style.display = "none";
+        document.getElementById("quote3").style.display = "none";
+        document.getElementById("quote4").style.display = "block";
       }
     }
   }

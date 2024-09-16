@@ -179,7 +179,7 @@
 									$categoryName = $value['befrases_cat_name']; 
 									$categoryDescription = $value['befrases_cat_description'];
 
-									$categoryTotalPhrases = countTotalRecordsCategory($categoryId);
+									$categoryTotalQuotes = countTotalRecordsCategory($categoryId);
 							
 									echo "
 									<tr>
@@ -187,13 +187,13 @@
 										<td>$categoryId</td>
 										<td>$categoryName</td>
 										<td>$categoryDescription</td>
-										<td>$categoryTotalPhrases</td>"; ?>									
+										<td>$categoryTotalQuotes</td>"; ?>
 										<td style="text-align:center">																				
 											<button class="btn btn-success" id="iButtonEditCategoryRegister" name="nButtonEditCategoryRegister"  onclick="showFormEditCategory('<?php echo $categoryId;?>', '<?php echo $categoryName;?>', '<?php echo $categoryDescription;?>')" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;" \">Editar</button>
 										</td>
 								
 										<td style="text-align:center">						
-											<button class="btn btn-danger" id="iButtonDeleteCategoryRegister" name="nButtonDeleteCategoryRegister" onclick="showFormDeleteCategory('<?php echo $categoryId;?>', '<?php echo $categoryName;?>', '<?php echo $categoryTotalPhrases; ?>')" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;\" \">Eliminar</button>
+											<button class="btn btn-danger" id="iButtonDeleteCategoryRegister" name="nButtonDeleteCategoryRegister" onclick="showFormDeleteCategory('<?php echo $categoryId;?>', '<?php echo $categoryName;?>', '<?php echo $categoryTotalQuotes; ?>')" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;\" \">Eliminar</button>
 										</td>
 									<?php
 									echo "

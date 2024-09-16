@@ -38,19 +38,19 @@ p.be-author-delete-confirmation {
   text-align: right;
 }
 
-p.be-phrase-delete-confirmation {
+p.be-quote-delete-confirmation {
   font-size: 1.1em;
   font-weight: 300;
   text-align: right;
   font-style: italic;
 }
 
-p.phrase {
+p.be-quote {
   font-size: 1.1em;
   font-weight: 400;
 }
 
-p.widget-align-phrase-right {
+p.widget-align-quote-right {
   display: block;
   text-align: right;
   padding: 0px;

@@ -65,7 +65,7 @@
     <!-- Phrase -->
     <figure class="text-center">
       <blockquote class="blockquote">
-      <p class="phrase">"Vivimos una grandiosa novela, en un gran teatro, montado por gente inteligente que le gusta jugar a las marionetas".</p>
+      <p class="be-quote">"Vivimos una grandiosa novela, en un gran teatro, montado por gente inteligente que le gusta jugar a las marionetas".</p>
       </blockquote>
       <figcaption class="blockquote-footer">
         Guillermo Camarena<cite title="Source Title"> / Desarrollador Full-Stack, Investigador, Pódcaster y Bloguero de Fenómenos Forteanos</cite>
