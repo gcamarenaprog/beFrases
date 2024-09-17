@@ -30,7 +30,7 @@
   # Update the changes from edit form
   if (isset($_POST['nButtonSaveEditQuote'])) {
     $idQuote = $_POST['nInputEditQuoteId'];
-    $authorQuote = $_POST['nInputEditQuoteAuthor'];
+    $authorQuote = $_POST['nSelectEditAuthor'];
     $textQuote = $_POST['nTextAreaEditQuoteText'];
     $categoryIdQuote = $_POST['nSelectEditCategory'];
     updateQuoteRecord ($idQuote, $authorQuote, $textQuote, $categoryIdQuote);
@@ -86,24 +86,20 @@
               <select class="form-select"
                       id="iSelectAuthor"
                       name="nSelectAuthor"
+                      required
               >
                 <?php
                   $namesAuthorsList = getAllDataAuthorsList ();
+                  echo '<option selected></option>';
                   foreach ($namesAuthorsList as $key => $value) {
                     $quoteAuthorId = $value['befrases_aut_id'];
                     $quoteAuthorName = $value['befrases_aut_name'];
-                    if ($quoteAuthorId == 1) {
-                      echo '<option selected value="' . $quoteAuthorId . '">' . $quoteAuthorName . '</option>';
-                    } else {
-                      echo '<option value="' . $quoteAuthorId . '">' . $quoteAuthorName . '</option>';
-                    }
+                    echo '<option value="' . $quoteAuthorId . '">' . $quoteAuthorName . '</option>';
                   }
                 ?>
               </select>
               <div id="iHelpCategory" class="form-text">Nombre de la categoría.</div>
             </div>
-            
-            
 
             <!-- Quote /-->
             <div class="mb-3">
@@ -123,17 +119,16 @@
               <select class="form-select"
                       id="iSelectCategory"
                       name="nSelectCategory"
+                      required
               >
                 <?php
                   $namesCategoriesList = getAllDataCategoriesList ();
+                  echo '<option selected></option>';
                   foreach ($namesCategoriesList as $key => $value) {
                     $quoteCategoryId = $value['befrases_cat_id'];
                     $quoteCategoryName = $value['befrases_cat_name'];
-                    if ($quoteCategoryId == 1) {
-                      echo '<option selected value="' . $quoteCategoryId . '">' . $quoteCategoryName . '</option>';
-                    } else {
-                      echo '<option value="' . $quoteCategoryId . '">' . $quoteCategoryName . '</option>';
-                    }
+                    echo '<option value="' . $quoteCategoryId . '">' . $quoteCategoryName . '</option>';
+                    
                   }
                 ?>
               </select>
@@ -144,7 +139,7 @@
             <button id="iButtonNewQuote"
                     name="nButtonNewQuote"
                     type="submit"
-                    class="btn btn-dark btn-sm">
+                    class="btn btn-success btn-sm">
               Añadir
             </button>
 
@@ -167,11 +162,20 @@
 
             <!-- Author /-->
             <div class="mb-3">
-              <label for="iInputEditQuoteAuthor" class="form-label">Autor</label>
-              <input class="form-control"
-                     name="nInputEditQuoteAuthor"
-                     id="iInputEditQuoteAuthor">
-              <div id="iHelpQuoteAuthor" class="form-text">El nombre del autor.</div>
+              <label for="iSelectEditAuthor" class="form-label">Categoría</label>
+              <select class="form-select"
+                      id="iSelectEditAuthor"
+                      name="nSelectEditAuthor">
+                <?php
+                  $namesCategoriesList = getAllDataAuthorsList ();
+                  foreach ($namesCategoriesList as $key => $value) {
+                    $quoteAuthorId = $value['befrases_aut_id'];
+                    $quoteAuthorName = $value['befrases_aut_name'];
+                    echo '<option value="' . $quoteAuthorId . '">' . $quoteAuthorName . '</option>';
+                  }
+                ?>
+              </select>
+              <div id="iHelpEditAuthor" class="form-text">Nombre de la categoría.</div>
             </div>
 
             <!-- Quote /-->
@@ -208,15 +212,15 @@
             <button type="submit"
                     name="nButtonSaveEditQuote"
                     id="iButtonSaveEditQuote"
-                    class="btn btn-dark">
-              Guardar cambios
+                    class="btn btn-success btn-sm">
+              Guardar
             </button>
 
             <!-- Cancel edit /-->
             <button type="button"
                     name="nButtonCancelEditQuote"
                     id="iButtonCancelEditQuote"
-                    class="btn btn-dark"
+                    class="btn btn-danger btn-sm"
                     onclick="hiddeFormEditQuote()">
               Cancelar
             </button>
@@ -251,21 +255,21 @@
                    name="nInputDeleteQuoteId"
                    id="iInputDeleteQuoteId">
 
-            <!-- Cancel delete /-->
-            <button type="button"
-                    name="nButtonCancelDeleteQuote"
-                    id="iButtonCancelDeleteQuote"
-                    class="btn btn-primary btn-sm"
-                    onclick="hiddeFormDeleteQuote()">
-              Cancelar
-            </button>
-
             <!-- Delete quote /-->
             <button type="submit"
                     name="nButtonDeleteQuote"
                     id="iButtonDeleteQuote"
-                    class="btn btn-danger btn-sm">
+                    class="btn btn-success btn-sm">
               Eliminar
+            </button>
+
+            <!-- Cancel delete /-->
+            <button type="button"
+                    name="nButtonCancelDeleteQuote"
+                    id="iButtonCancelDeleteQuote"
+                    class="btn btn-danger btn-sm"
+                    onclick="hiddeFormDeleteQuote()">
+              Cancelar
             </button>
 
           </form>
@@ -331,7 +335,7 @@
                       class="btn btn-primary btn-sm"
                       id="iButtonEditQuoteRegister"
                       name="nButtonEditQuoteRegister"
-                      onclick="showFormEditQuote('<?php echo $quoteId; ?>', '<?php echo $quoteAuthor; ?>', '<?php echo $quoteText; ?>', '<?php echo $quoteCategoryId; ?>')">
+                      onclick="showFormEditQuote('<?php echo $quoteId; ?>', '<?php echo $quoteAuthorId; ?>', '<?php echo $quoteText; ?>', '<?php echo $quoteCategoryId; ?>')">
                     Editar
                   </button>
                 </td>

@@ -534,8 +534,7 @@
   {
     global $wpdb;
     $query = "SELECT befrases_cat_id, befrases_cat_name FROM {$wpdb -> prefix}befrases_cat";
-    $categoriesList = $wpdb->get_results ($query, ARRAY_A);
-    return $categoriesList;
+    return $wpdb->get_results ($query, ARRAY_A);
   }
   
   /**
@@ -591,9 +590,9 @@
    * Get category name from category id
    *
    * @param number $CategoryId Id number of the category
-   * @return string $categoryName Name of category
+   * @return array $categoryName Name of category
    */
-  function getCategoryName ($CategoryId)
+  function getCategoryName ($CategoryId): array
   {
     global $wpdb;
     return $wpdb->get_results ("SELECT befrases_cat_name FROM  {$wpdb -> prefix}befrases_cat	WHERE	befrases_cat_id = {$CategoryId}", ARRAY_A);
@@ -603,9 +602,9 @@
    * Get author name from author id
    *
    * @param number $authorId Id number of the author
-   * @return string $authorName Name of author
+   * @return array $authorName Name of author
    */
-  function getAuthorName ($authorId)
+  function getAuthorName ($authorId): array
   {
     global $wpdb;
     return $wpdb->get_results ("SELECT befrases_aut_name FROM  {$wpdb -> prefix}befrases_aut	WHERE	befrases_aut_id = {$authorId}", ARRAY_A);

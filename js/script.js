@@ -16,21 +16,20 @@
 /**
  * Show form edit quote
  *
- * @param {number} id Id number of the quote
- * @param {text} autor Author text of the quote
- * @param {text} quote Quote text of the quote
- * @param {number} idCategory Id number of the cateogry associated with the quote
+ * @param {string} quoteId Id number of the quote
+ * @param {string} autorId Author text of the quote
+ * @param {string} quoteText Quote text of the quote
+ * @param {string} idCategory Id number of the cateogry associated with the quote
  * @return none
  */
-function showFormEditQuote(id, autor, quote, idCategory) {
+function showFormEditQuote(quoteId, autorId, quoteText, categoryId) {
   document.getElementById("iFormEditQuote").style.display = "block";
   document.getElementById("iFormAddQuote").style.display = "none";
   document.getElementById("iFormDeleteQuote").style.display = "none";
-  document.getElementById('iInputEditQuoteId').value = id;
-  document.getElementById('iInputEditQuoteAuthor').value = autor;
-  document.getElementById('iTextAreaEditQuoteText').textContent = quote;
-  let element = document.getElementById("iSelectEditCategory");
-  element.value = idCategory;
+  document.getElementById('iInputEditQuoteId').value = quoteId;
+  document.getElementById('iTextAreaEditQuoteText').textContent = quoteText;
+  document.getElementById("iSelectEditAuthor").value = autorId;
+  document.getElementById("iSelectEditCategory").value = categoryId;
 }
 
 /**
