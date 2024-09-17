@@ -34,8 +34,8 @@
   foreach ($listOptions as $key => $value) {
     $alignmentAuthor = $value['befrases_ali_txt_aut'];
     $styleAuthor = $value['befrases_sty_txt_aut'];
-    $alignmentQuote = $value['befrases_ali_txt_phr'];
-    $styleQuote = $value['befrases_sty_txt_phr'];
+    $alignmentQuote = $value['befrases_ali_txt_quo'];
+    $styleQuote = $value['befrases_sty_txt_quo'];
   }
 
 ?>

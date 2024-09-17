@@ -84,9 +84,9 @@
     # CREATE the befrases table
     $sqlMain = "CREATE TABLE IF NOT EXISTS {$wpdb -> prefix}befrases (
     `befrases_id` INT NOT NULL AUTO_INCREMENT,
-    `befrases_author` VARCHAR(45) NULL,
+    `befrases_author` INT(10) NULL,
     `befrases_quote` VARCHAR(200) NULL,
-    `befrases_category` INT(45) NULL,
+    `befrases_category` INT(10) NULL,
     PRIMARY KEY (`befrases_id`));";
     $wpdb->query ($sqlMain);
     
@@ -98,26 +98,37 @@
     PRIMARY KEY (`befrases_cat_id`));";
     $wpdb->query ($sqlCategories);
     
+    # CREATE the author table
+    $sqlAuthors = "CREATE TABLE IF NOT EXISTS {$wpdb -> prefix}befrases_aut (
+    `befrases_aut_id` INT NOT NULL AUTO_INCREMENT,
+    `befrases_aut_name` VARCHAR(50) NULL,
+    PRIMARY KEY (`befrases_aut_id`));";
+    $wpdb->query ($sqlAuthors);
+    
     # CREATE the options table
     $sqlOptions = "CREATE TABLE IF NOT EXISTS {$wpdb -> prefix}befrases_opt (
     `befrases_opt_id` INT NOT NULL,
     `befrases_ali_txt_aut` INT NULL,
     `befrases_sty_txt_aut` INT NULL,
-    `befrases_ali_txt_phr` INT NULL,
-    `befrases_sty_txt_phr` INT NULL,
+    `befrases_ali_txt_quo` INT NULL,
+    `befrases_sty_txt_quo` INT NULL,
     PRIMARY KEY (`befrases_opt_id`))";
     $wpdb->query ($sqlOptions);
     
-    # INSERT default values on befrases table (1, 'Guillermo Camarena', 'Vivimos una grandiosa novela, en un gran teatro, montado por gente inteligente que le gusta jugar a las marionetas', '1')
-    $sqlDefaultValuesBeFrasesTable = "INSERT IGNORE INTO {$wpdb -> prefix}befrases (befrases_id, befrases_author, befrases_quote, befrases_category) VALUES (1, 'Guillermo Camarena', 'Vivimos una grandiosa novela, en un gran teatro, montado por gente inteligente que le gusta jugar a las marionetas', '1')";
+    # INSERT default values on befrases table
+    $sqlDefaultValuesBeFrasesTable = "INSERT IGNORE INTO {$wpdb -> prefix}befrases (befrases_id, befrases_author, befrases_quote, befrases_category) VALUES (1, 0, 'Vivimos una grandiosa novela, en un gran teatro, montado por gente inteligente que le gusta jugar a las marionetas', '1'), (2, 1, 'La ciencia no es más que perversión en sí misma a menos que tenga como objetivo último mejorar la humanidad', '1')";
     $wpdb->query ($sqlDefaultValuesBeFrasesTable);
+    
+    # INSERT default values on authors table (0, 'Guillermo Camarena')
+    $sqlDefaultValuesAuthorsTable = "INSERT IGNORE INTO {$wpdb -> prefix}befrases_aut (befrases_cat_id, befrases_cat_name) VALUES (0, 'Guillermo Camarena'), (1, 'Nikola Tesla')";
+    $wpdb->query ($sqlDefaultValuesAuthorsTable);
     
     # INSERT default values on categories table (0, 'Default')
     $sqlDefaultValuesCategoriesTable = "INSERT IGNORE INTO {$wpdb -> prefix}befrases_cat (befrases_cat_id, befrases_cat_name, befrases_cat_description) VALUES (1, 'Uncategorized', 'Default category if none is chosen.')";
     $wpdb->query ($sqlDefaultValuesCategoriesTable);
     
     # INSERT default values on options table (1,3,4,4,1)
-    $sqlDefaultValuesOptionsTable = "INSERT IGNORE INTO {$wpdb -> prefix}befrases_opt (befrases_opt_id, befrases_ali_txt_aut, befrases_sty_txt_aut, befrases_ali_txt_phr, befrases_sty_txt_phr) VALUES (1,3,4,4,1)";
+    $sqlDefaultValuesOptionsTable = "INSERT IGNORE INTO {$wpdb -> prefix}befrases_opt (befrases_opt_id, befrases_ali_txt_aut, befrases_sty_txt_aut, befrases_ali_txt_quo, befrases_sty_txt_quo) VALUES (1,3,4,4,1)";
     $wpdb->query ($sqlDefaultValuesOptionsTable);
     
   }
@@ -517,7 +528,6 @@
   /**
    * Get all categories list
    *
-   * @param
    * @return array $categoriesList List of all categories and his data
    */
   function getAllDataCategoriesList ()
@@ -529,18 +539,31 @@
   }
   
   /**
+   * Get all authors list
+   *
+   * @return array $authorsList List of all authors and his data
+   */
+  function getAllDataAuthorsList ()
+  {
+    global $wpdb;
+    $query = "SELECT befrases_aut_id, befrases_aut_name FROM {$wpdb -> prefix}befrases_aut";
+    $authorsList = $wpdb->get_results ($query, ARRAY_A);
+    return $authorsList;
+  }
+  
+  /**
    * Add a new quote record
    *
    * @param number $authorQuote     Author of the quote for new record
    * @param number $textQuote       Text quote of the quote for new record
    * @param number $categoryIdQuote Category Id of the quote for new record
-   * @return
+   * @return void
    */
-  function addQuoteRecord ($authorQuote, $textQuote, $categoryIdQuote)
+  function addQuoteRecord ($authorIdQuote, $textQuote, $categoryIdQuote): void
   {
     global $wpdb;
     $data = array(
-      'befrases_author' => $authorQuote,
+      'befrases_author' => $authorIdQuote,
       'befrases_quote' => $textQuote,
       'befrases_category' => $categoryIdQuote
     );
@@ -565,16 +588,27 @@
   }
   
   /**
-   * Get category name from id category
+   * Get category name from category id
    *
-   * @param number $idCategory Id number of the category
-   * @return string $categoryName Name Name of category
+   * @param number $CategoryId Id number of the category
+   * @return string $categoryName Name of category
    */
-  function getCategoryName ($idCategory)
+  function getCategoryName ($CategoryId)
   {
     global $wpdb;
-    $categoryName = $wpdb->get_results ("SELECT befrases_cat_name FROM  {$wpdb -> prefix}befrases_cat	WHERE	befrases_cat_id = {$idCategory}", ARRAY_A);
-    return $categoryName;
+    return $wpdb->get_results ("SELECT befrases_cat_name FROM  {$wpdb -> prefix}befrases_cat	WHERE	befrases_cat_id = {$CategoryId}", ARRAY_A);
+  }
+  
+  /**
+   * Get author name from author id
+   *
+   * @param number $authorId Id number of the author
+   * @return string $authorName Name of author
+   */
+  function getAuthorName ($authorId)
+  {
+    global $wpdb;
+    return $wpdb->get_results ("SELECT befrases_aut_name FROM  {$wpdb -> prefix}befrases_aut	WHERE	befrases_aut_id = {$authorId}", ARRAY_A);
   }
   
   
@@ -652,8 +686,8 @@
       'befrases_opt_id' => $idOptions,
       'befrases_ali_txt_aut' => $alignmentTextAuthorOption,
       'befrases_sty_txt_aut' => $styleTextAuthorOption,
-      'befrases_ali_txt_phr' => $alignmentTextQuoteOption,
-      'befrases_sty_txt_phr' => $styleTextQuoteOption
+      'befrases_ali_txt_quo' => $alignmentTextQuoteOption,
+      'befrases_sty_txt_quo' => $styleTextQuoteOption
     );
     $tableName = "{$wpdb -> prefix}befrases_opt";
     $replace = $wpdb->replace ($tableName, $data);

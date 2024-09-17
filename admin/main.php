@@ -21,10 +21,10 @@
   
   # Add new quote from add form
   if (isset($_POST['nButtonNewQuote'])) {
-    $authorQuote = $_POST['nInputAuthor'];
+    $authorIdQuote = $_POST['nSelectAuthor'];
     $textQuote = $_POST['nTextAreaQuote'];
     $categoryIdQuote = $_POST['nSelectCategory'];
-    addQuoteRecord ($authorQuote, $textQuote, $categoryIdQuote);
+    addQuoteRecord ($authorIdQuote, $textQuote, $categoryIdQuote);
   }
   
   # Update the changes from edit form
@@ -82,14 +82,28 @@
 
             <!-- Author /-->
             <div class="mb-3">
-              <label for="iInputAuthor" class="form-label">Autor</label>
-              <input class="form-control"
-                     name="nInputAuthor"
-                     id="iInputAuthor"
-                     placeholder="Nombre de autor.."
-                     required>
-              <div id="iHelpAuthorName" class="form-text">Nombre de autor de la frase</div>
+              <label for="iSelectAuthor" class="form-label">Autor</label>
+              <select class="form-select"
+                      id="iSelectAuthor"
+                      name="nSelectAuthor"
+              >
+                <?php
+                  $namesAuthorsList = getAllDataAuthorsList ();
+                  foreach ($namesAuthorsList as $key => $value) {
+                    $quoteAuthorId = $value['befrases_aut_id'];
+                    $quoteAuthorName = $value['befrases_aut_name'];
+                    if ($quoteAuthorId == 1) {
+                      echo '<option selected value="' . $quoteAuthorId . '">' . $quoteAuthorName . '</option>';
+                    } else {
+                      echo '<option value="' . $quoteAuthorId . '">' . $quoteAuthorName . '</option>';
+                    }
+                  }
+                ?>
+              </select>
+              <div id="iHelpCategory" class="form-text">Nombre de la categoría.</div>
             </div>
+            
+            
 
             <!-- Quote /-->
             <div class="mb-3">
@@ -107,7 +121,6 @@
             <div class="mb-3">
               <label for="iSelectCategory" class="form-label">Categoría</label>
               <select class="form-select"
-                      aria-label="Default select example"
                       id="iSelectCategory"
                       name="nSelectCategory"
               >
@@ -227,11 +240,11 @@
 
               <!-- Quote author /-->
               <p class="card-text be-author-delete-confirmation" id="iParagrahpDeleteAuthorText"></p>
-              
+
             </div>
 
             <hr>
-      
+
             <!-- Quote Id /-->
             <input type="hidden"
                    class="form-control"
@@ -289,15 +302,20 @@
           <?php
             
             foreach ($listQuotes as $key => $value) {
+              
               $quoteId = $value['befrases_id'];
-              $quoteAuthor = $value['befrases_author'];
+              $quoteAuthorId = $value['befrases_author'];
               $quoteText = $value['befrases_quote'];
               $quoteCategoryId = $value['befrases_category'];
               
-              $name = getCategoryName ($quoteCategoryId);
-              
-              foreach ($name as $key => $value) {
+              $nameOfCategory = getCategoryName ($quoteCategoryId);
+              foreach ($nameOfCategory as $key => $value) {
                 $quoteCategory = $value['befrases_cat_name'];
+              }
+              
+              $nameOfAuthor = getAuthorName ($quoteAuthorId);
+              foreach ($nameOfAuthor as $key => $value) {
+                $quoteAuthor = $value['befrases_aut_name'];
               }
               ?>
 
