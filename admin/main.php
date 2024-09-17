@@ -324,9 +324,16 @@
               ?>
 
               <tr>
+                <!-- # /-->
                 <td></td>
+
+                <!-- Author /-->
                 <td><?php echo $quoteAuthor; ?></td>
+
+                <!-- Quote /-->
                 <td>"<?php echo $quoteText; ?>"</td>
+
+                <!-- Category /-->
                 <td><?php echo $quoteCategory; ?></td>
 
                 <!-- Edit button /-->
@@ -369,7 +376,6 @@
 
       </div>
     </div>
-
   </div>
 </div>
 
@@ -415,24 +421,6 @@
       })
       .draw();
 
-  });
-
-  // Autocomplete input edit quote author function
-  $(function () {
-    let data = <?php echo json_encode ($listAuthorsWithoutRepeat) ?>;
-    $("#iInputEditQuoteAuthor").autocomplete({
-      source: data,
-      minLength: 3
-    });
-  });
-
-  // Autocomplete input author function
-  $(function () {
-    let data = <?php echo json_encode ($listAuthorsWithoutRepeat) ?>;
-    $("#iInputAuthor").autocomplete({
-      source: data,
-      minLength: 3
-    });
   });
 
 </script>
