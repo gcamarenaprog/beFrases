@@ -240,10 +240,10 @@
             <div class="mb-4" style="padding: 10px !important;">
 
               <!-- Quote text /-->
-              <p class="card-text be-quote-delete-confirmation" id="iParagrahpDeleteQuoteText"></p>
+              <p class="card-text be-quote-delete-confirmation" id="iDeleteQuoteText"></p>
 
               <!-- Quote author /-->
-              <p class="card-text be-author-delete-confirmation" id="iParagrahpDeleteAuthorText"></p>
+              <p class="card-text be-author-delete-confirmation" id="iDeleteAuthorText"></p>
 
             </div>
 

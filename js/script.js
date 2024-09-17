@@ -19,7 +19,7 @@
  * @param {string} quoteId Id number of the quote
  * @param {string} autorId Author text of the quote
  * @param {string} quoteText Quote text of the quote
- * @param {string} idCategory Id number of the cateogry associated with the quote
+ * @param {string} idCategory Id number of the category associated with the quote
  * @return none
  */
 function showFormEditQuote(quoteId, autorId, quoteText, categoryId) {
@@ -57,8 +57,8 @@ function showFormDeleteQuote(idQuote, authorQuote, contentQuote) {
   document.getElementById("iFormAddQuote").style.display = "none";
   document.getElementById("iFormDeleteQuote").style.display = "block";
   document.getElementById('iInputDeleteQuoteId').value = idQuote;
-  document.getElementById("iParagrahpDeleteQuoteText").textContent = "\"" + contentQuote + "\"";
-  document.getElementById("iParagrahpDeleteAuthorText").textContent = "— " + authorQuote;
+  document.getElementById("iDeleteQuoteText").textContent = "\"" + contentQuote + "\"";
+  document.getElementById("iDeleteAuthorText").textContent = "— " + authorQuote;
 }
 
 /**
