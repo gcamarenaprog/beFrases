@@ -180,21 +180,25 @@
             <!-- Data to delete /-->
             <input type="hidden" class="form-control" name="nInputDeleteCategoryId" id="iInputDeleteCategoryId">
 
+            <!-- Title /-->
             <p class="card-text" style="margin-bottom: 0px;">
               <b name="nTextDeleteCategoryTitleName"
                  id="iTextDeleteCategoryTitleName">Nombre</b
             </p>
 
+            <!-- Title text /-->
             <p class="card-text"
                name="nTextDeleteCategoryName"
                id="iTextDeleteCategoryName">
             </p>
 
+            <!-- Descriptionn title /-->
             <p class="card-text" style="margin-bottom: 0px;">
               <b name="nTextDeleteCategoryTitleDescription"
                  id="iTextDeleteCategoryTitleDescription">Descripción</b>
             </p>
 
+            <!-- Description text /-->
             <p class="card-text"
                name="nTextDeleteCategoryDescription"
                id="iTextDeleteCategoryDescription">
