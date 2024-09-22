@@ -1,47 +1,20 @@
-﻿<?php
-  /*
+<?php
+  /**
   @wordpress-plugin
   
   Plugin Name: beFrases
   Plugin URI:  https://guillermocamarena.com/beFrases/
+  Description: Creates a manage a list of quotes and authors with category option. Display options for your sidebar (widget).
   Version:     2.0.0
   Author:      Guillermo Camarena
   Author URI:  https://gcamarenaprog.com/
-  Description: Creates a manage a list of quotes and authors with category option. Display options for your sidebar (widget).
   Text Domain: beFrases
   Domain Path: /languages
   License URI: https://www.gnu.org/licenses/gpl-2.0.html
   */
   
-  /* Copyright 2024  Guillermo Camarena (beFrases : gcamarenaprog@outlook.com)
-   *
-   * This program is free software; you can redistribute it and/or modify it under the terms of the GNU
-   * General Public License as published by the Free Software Foundation; either version 2 of the License,
-   * or (at your option) any later version.
-   *
-   * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
-   * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-   *
-   * You should have received a copy of the GNU General Public License along with this program; if not,
-   * write to the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
-   *
-   * You should have received a copy of the GNU General Public License
-   * along with beFrases. If not, see https://guillermocamarena.com/beFrases/
-   *
-   * @package   				beFrases
-   * @version  					2.0.0
-   * @author    				Guillermo Camarena <gcamarenaprog@outlook.com>
-   * @copyright 				Copyright (c) 2004 - 2024, Guillermo Camarena
-   * @link      				https://gcamarenaprog.com.com/beFrases/
-   * @license   				http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
-   *
-   * @wordpress-plugin
-   *
-   */
-  
-  
   # Prevent PHP code from being executed by inserting the path in the browser bar
-  defined('ABSPATH') or die("Bye bye");
+  defined ('ABSPATH') or die("Bye bye");
   
   /**
    * Routes definition -------------------------------------------------------------------------------------------------
@@ -78,7 +51,6 @@
    */
   function beFrases_active (): void
   {
-    
     global $wpdb;
     
     # CREATE the befrases table
@@ -116,11 +88,11 @@
     $wpdb->query ($sqlOptions);
     
     # INSERT default values on befrases table
-    $sqlDefaultValuesBeFrasesTable = "INSERT IGNORE INTO {$wpdb -> prefix}befrases (befrases_id, befrases_author, befrases_quote, befrases_category) VALUES (1, 0, 'Vivimos una grandiosa novela, en un gran teatro, montado por gente inteligente que le gusta jugar a las marionetas', '1'), (2, 1, 'La ciencia no es más que perversión en sí misma a menos que tenga como objetivo último mejorar la humanidad', '1')";
+    $sqlDefaultValuesBeFrasesTable = "INSERT IGNORE INTO {$wpdb -> prefix}befrases (befrases_id, befrases_author, befrases_quote, befrases_category) VALUES (1, 1, 'Vivimos una grandiosa novela, en un gran teatro, montado por gente inteligente que le gusta jugar a las marionetas', '1'), (2, 2, 'La ciencia no es más que perversión en sí misma a menos que tenga como objetivo último mejorar la humanidad', '1')";
     $wpdb->query ($sqlDefaultValuesBeFrasesTable);
     
     # INSERT default values on authors table (0, 'Guillermo Camarena')
-    $sqlDefaultValuesAuthorsTable = "INSERT IGNORE INTO {$wpdb -> prefix}befrases_aut (befrases_cat_id, befrases_cat_name) VALUES (0, 'Guillermo Camarena'), (1, 'Nikola Tesla')";
+    $sqlDefaultValuesAuthorsTable = "INSERT IGNORE INTO {$wpdb -> prefix}befrases_aut (befrases_aut_id, befrases_aut_name) VALUES (1, 'Guillermo Camarena'), (2, 'Nikola Tesla')";
     $wpdb->query ($sqlDefaultValuesAuthorsTable);
     
     # INSERT default values on categories table (0, 'Default')
@@ -130,7 +102,6 @@
     # INSERT default values on options table (1,3,4,4,1)
     $sqlDefaultValuesOptionsTable = "INSERT IGNORE INTO {$wpdb -> prefix}befrases_opt (befrases_opt_id, befrases_ali_txt_aut, befrases_sty_txt_aut, befrases_ali_txt_quo, befrases_sty_txt_quo) VALUES (1,3,4,4,1)";
     $wpdb->query ($sqlDefaultValuesOptionsTable);
-    
   }
   
   /**
@@ -150,25 +121,25 @@
    */
   function beFrases_uninstall (): void
   {
-    
     global $wpdb;
+    
     $wpdb->plugin = $wpdb->prefix . 'befrases';
-    $wpdb->options = $wpdb->prefix . 'befrases_opt';
+    $wpdb->authors = $wpdb->prefix . 'befrases_aut';
     $wpdb->categories = $wpdb->prefix . 'befrases_cat';
+    $wpdb->configure = $wpdb->prefix . 'befrases_opt';
     
     if ($wpdb->plugin) {
-      $wpdb->query ("DROP TABLE IF EXISTS " . $wpdb->plugin);
-      $wpdb->query ("DROP TABLE IF EXISTS " . $wpdb->options);
-      $wpdb->query ("DROP TABLE IF EXISTS " . $wpdb->categories);
+      $wpdb->query ("DROP TABLE IF EXISTS $wpdb->plugin");
+      $wpdb->query ("DROP TABLE IF EXISTS $wpdb->authors");
+      $wpdb->query ("DROP TABLE IF EXISTS $wpdb->categories");
+      $wpdb->query ("DROP TABLE IF EXISTS $wpdb->configure");
     }
-    
   }
   
-  # Hooks register
+  # Hooks registers
   register_activation_hook (__FILE__, 'beFrases_active');
   register_deactivation_hook (__FILE__, 'beFrases_deactivate');
   register_uninstall_hook (__FILE__, 'beFrases_uninstall');
-  
   
   /**
    * Main menu ---------------------------------------------------------------------------------------------------------
@@ -278,7 +249,7 @@
       ($hook != $urlWidget) &&
       ($hook != $urlHelp)
     ) {
-      return;;
+      return;
     }
     
     
@@ -333,29 +304,21 @@
     
     // Personalized styles
     wp_enqueue_style ('be-css-style', plugins_url ('/css/style.css', __FILE__));
-
+    
   }
   
   add_action ('admin_enqueue_scripts', 'fn_CallMyCSS');
   
   
   # Widget declaration
-  
-  // We call the class where the widget's functionalities are
   include_once dirname (__FILE__) . '/includes/beFrases-widget.php';
   
   // Widget initialization
-  add_action ("widgets_init", "chargeWidget");
-  
-  if (!function_exists ("chargeWidget")) {
-    function chargeWidget ()
-    {
-      
-      // Create the widget and pass the name of the widget class as a parameter
-      register_widget ("beFrases_widget");
-      
-    }
+  function beFrases_register_widget() {
+    return register_widget( 'beFrases_widget' );
   }
+  add_action ('widgets_init', 'beFrases_register_widget');
+  
   
   # Functions of beFrases-widget.php
   /**
@@ -467,7 +430,7 @@
   <?php
   endif; ?>
     
-    <?php echo "— " . $authorText;
+    <?php echo "� " . $authorText;
   
   if ($styleAuthorText == 0): ?>
   
@@ -778,5 +741,3 @@
     $totalQuotes = $wpdb->get_var ("SELECT COUNT(befrases_category) FROM {$wpdb -> prefix}befrases WHERE befrases_category = {$idCategory} ");
     return $totalQuotes;
   }
-
-?>

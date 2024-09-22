@@ -1,5 +1,5 @@
 <?php
-  /*
+  /**
    * Manage plugin option
    *
    * @package   				beFrases
@@ -10,9 +10,6 @@
    * @license   				http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
    *
    */
-?>
-
-<?php
   
   # Prevent PHP code from being executed by inserting the path in the browser bar
   defined ('ABSPATH') or die("Bye bye and remember: Silence is golden!");
@@ -56,7 +53,7 @@
     <!-- Title and description /-->
     <div>
       <div class="card">
-        <h5 class="card-header"><?php echo get_admin_page_title (); ?></h5>
+        <h5 class="card-header">beFrases / <?php echo get_admin_page_title (); ?></h5>
         <div class="card-body">
           <p class="card-text">
             Un plugin fácil y simple de usar que te permitirá gestionar una colección de frases célebres con sus autores

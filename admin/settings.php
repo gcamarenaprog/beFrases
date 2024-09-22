@@ -1,5 +1,5 @@
 <?php
-  /*
+  /**
    * Settings plugin option
    *
    * @package   				beFrases
@@ -10,10 +10,6 @@
    * @license   				http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
    *
    */
-?>
-
-
-<?php
   
   # Prevent PHP code from being executed by inserting the path in the browser bar
   defined ('ABSPATH') or die("Bye bye and remember: Silence is golden!");

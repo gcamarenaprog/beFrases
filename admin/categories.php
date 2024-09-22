@@ -1,5 +1,5 @@
 <?php
-  /*
+  /**
    * Add categories plugin option
    *
    * @package   				beFrases
@@ -10,9 +10,6 @@
    * @license   				http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
    *
    */
-?>
-
-<?php
   
   # Prevent PHP code from being executed by inserting the path in the browser bar
   defined ('ABSPATH') or die("Bye bye and remember: Silence is golden!");
@@ -268,9 +265,6 @@
           </form>
 
 
-
-
-
           <!-- Add category form -->
           <form method="post" class="mb-3" style="display: block;" id="iFormAddCategory" name="nFormAddCategory">
 
@@ -281,7 +275,8 @@
 
             <div class="mb-3">
               <label for="iInputCategoryName" class="form-label">Nombre de la categoría</label>
-              <input class="form-control" name="nInputCategoryName" id="iInputCategoryName" placeholder="Nombre.." required>
+              <input class="form-control" name="nInputCategoryName" id="iInputCategoryName" placeholder="Nombre.."
+                     required>
               <div id="iHelpCategoryName" class="form-text">El nombre es como aparece en tu sitio..</div>
             </div>
 
@@ -289,7 +284,8 @@
               <label for="iTextAreaCategoryDescription" class="form-label">Descripción</label>
               <textarea class="form-control" name="nTextAreaCategoryDescription" id="iTextAreaCategoryDescription"
                         placeholder="Descripción.." rows="3" required></textarea>
-              <div id="iHelpCategoryDescription" class="form-text">La descripción no se muestra por defecto; sin embargo,
+              <div id="iHelpCategoryDescription" class="form-text">La descripción no se muestra por defecto; sin
+                embargo,
                 hay algunos temas y opciones que pueden mostrarla.
               </div>
             </div>
@@ -316,14 +312,17 @@
 
             <div class="mb-3">
               <label for="iTextAreaEditCategoryDescription" class="form-label">Descripción</label>
-              <textarea class="form-control" name="nTextAreaEditCategoryDescription" id="iTextAreaEditCategoryDescription"
+              <textarea class="form-control" name="nTextAreaEditCategoryDescription"
+                        id="iTextAreaEditCategoryDescription"
                         rows="3"></textarea>
-              <div id="iHelpCategoryDescription" class="form-text">La descripción no se muestra por defecto; sin embargo,
+              <div id="iHelpCategoryDescription" class="form-text">La descripción no se muestra por defecto; sin
+                embargo,
                 hay algunos temas y opciones que pueden mostrarla.
               </div>
             </div>
 
-            <button type="submit" name="nButtonSaveEditCategory" id="iButtonSaveEditCategory" class="btn btn-dark">Guardar
+            <button type="submit" name="nButtonSaveEditCategory" id="iButtonSaveEditCategory" class="btn btn-dark">
+              Guardar
               cambios
             </button>
             <button type="button" name="nButtonCancelEditCategory" id="iButtonCancelEditCategory" class="btn btn-dark"
@@ -470,7 +469,7 @@
         </div>
       </div>
     </div>
-    
+
   </div>
 </div>
 
