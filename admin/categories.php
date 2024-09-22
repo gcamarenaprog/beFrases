@@ -2,12 +2,12 @@
   /**
    * Add categories plugin option
    *
-   * @package   				beFrases
-   * @version  					2.0.0
-   * @author    				Guillermo Camarena <gcamarenaprog@outlook.com>
-   * @copyright 				Copyright (c) 2004 - 2023, Guillermo Camarena
-   * @link      				https://gcamarenaprog.com/beFrases/
-   * @license   				http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
+   * @package            beFrases
+   * @version            2.0.0
+   * @author             Guillermo Camarena <gcamarenaprog@outlook.com>
+   * @copyright          Copyright (c) 2004 - 2023, Guillermo Camarena
+   * @link               https://gcamarenaprog.com/beFrases/
+   * @license            http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
    *
    */
   
@@ -49,7 +49,7 @@
         <h5 class="card-header"><?php echo get_admin_page_title (); ?></h5>
         <div class="card-body">
           <p class="card-text">
-            En esta sección podrás añadir, editar o eliminar categorías, para editar o eliminar selecciona una categoría
+            En esta sección podrás añadir, editar o eliminar categorías. Para editar o eliminar selecciona una categoría
             de la lista.
           </p>
         </div>
@@ -70,68 +70,41 @@
 
             <hr>
 
-            <!-- Author /-->
+            <!-- Categoría /-->
             <div class="mb-3">
-              <label for="iSelectAuthor" class="form-label">Autor</label>
-              <select class="form-select"
-                      id="iSelectAuthor"
-                      name="nSelectAuthor"
-                      required
-              >
-                <?php
-                  $namesAuthorsList = getAllDataAuthorsList ();
-                  echo '<option selected></option>';
-                  foreach ($namesAuthorsList as $key => $value) {
-                    $quoteAuthorId = $value['befrases_aut_id'];
-                    $quoteAuthorName = $value['befrases_aut_name'];
-                    echo '<option value="' . $quoteAuthorId . '">' . $quoteAuthorName . '</option>';
-                  }
-                ?>
-              </select>
-              <div id="iHelpCategory" class="form-text">Nombre de la categoría.</div>
+              <label for="iInputCategoryName" class="form-label">Nombre</label>
+              <input class="form-control"
+                     name="nInputCategoryName"
+                     id="iInputCategoryName"
+                     title="Nombre de la categoría."
+                     placeholder="Nombre.."
+                     required>
+              <div id="iHelpCategoryName" class="form-text">Nombre de la categoría.</div>
             </div>
 
-            <!-- Quote /-->
+            <!-- Description /-->
             <div class="mb-3">
-              <label for="iTextAreaQuote" class="form-label">Frase</label>
+              <label for="iTextAreaCategoryDescription" class="form-label">Descripción</label>
               <textarea class="form-control"
-                        name="nTextAreaQuote"
-                        id="iTextAreaQuote"
-                        placeholder="Escriba la frase.."
+                        name="nTextAreaCategoryDescription"
+                        id="iTextAreaCategoryDescription"
+                        placeholder="Escribe una descripción.."
                         rows="3"
-                        required></textarea>
-              <div id="iHelpQuoteDescription" class="form-text">Escriba la frase sin comillas.</div>
-            </div>
-
-            <!-- Category /-->
-            <div class="mb-3">
-              <label for="iSelectCategory" class="form-label">Categoría</label>
-              <select class="form-select"
-                      id="iSelectCategory"
-                      name="nSelectCategory"
-                      required
-              >
-                <?php
-                  $namesCategoriesList = getAllDataCategoriesList ();
-                  echo '<option selected></option>';
-                  foreach ($namesCategoriesList as $key => $value) {
-                    $quoteCategoryId = $value['befrases_cat_id'];
-                    $quoteCategoryName = $value['befrases_cat_name'];
-                    echo '<option value="' . $quoteCategoryId . '">' . $quoteCategoryName . '</option>';
-                    
-                  }
-                ?>
-              </select>
-              <div id="iHelpCategory" class="form-text">Nombre de la categoría.</div>
+                        title="Descripción de la categoría."
+                        required
+              ></textarea>
+              <div id="iHelpCategoryDescription" class="form-text">La descripción de la categoría.</div>
             </div>
 
             <!-- Add button /-->
-            <button id="iButtonNewQuote"
-                    name="nButtonNewQuote"
+            <button class="btn btn-success btn-sm"
+                    name="nButtonNewCategory"
+                    id="iButtonNewCategory"
                     type="submit"
-                    class="btn btn-success btn-sm">
-              Añadir
+                    title="Clic para guardar."
+            >Guardar
             </button>
+
 
           </form>
 
@@ -139,81 +112,59 @@
           <form method="post" class="mb-3" style="display: none;" id="iFormEditCategory" name="nFormEditCategory">
 
             <!-- Title and description /-->
-            <h5 class="card-title">Editar frase</h5>
-            <p class="card-text">Modificar la frase seleccionada.</p>
+            <h5 class="card-title">Editar categoría</h5>
+            <p class="card-text">Modificar la categoría seleccionada.</p>
 
             <hr>
 
-            <!-- Quote Id /-->
+            <!-- Category Id /-->
             <input type="hidden"
                    class="form-control"
-                   name="nInputEditQuoteId"
-                   id="iInputEditQuoteId">
+                   name="nInputEditCategoryId"
+                   id="iInputEditCategoryId">
 
-            <!-- Author /-->
+            <!-- Name /-->
             <div class="mb-3">
-              <label for="iSelectEditAuthor" class="form-label">Categoría</label>
-              <select class="form-select"
-                      id="iSelectEditAuthor"
-                      name="nSelectEditAuthor">
-                <?php
-                  $namesCategoriesList = getAllDataAuthorsList ();
-                  foreach ($namesCategoriesList as $key => $value) {
-                    $quoteAuthorId = $value['befrases_aut_id'];
-                    $quoteAuthorName = $value['befrases_aut_name'];
-                    echo '<option value="' . $quoteAuthorId . '">' . $quoteAuthorName . '</option>';
-                  }
-                ?>
-              </select>
-              <div id="iHelpEditAuthor" class="form-text">Nombre de la categoría.</div>
+              <label for="iInputEditCategoryName" class="form-label">Nombre de la categoría</label>
+              <input class="form-control"
+                     name="nInputEditCategoryName"
+                     id="iInputEditCategoryName"
+                     required
+                     title="Nombre de la categoría">
+              <div id="iHelpCategoryName" class="form-text">Nombre de la categoría.</div>
             </div>
 
-            <!-- Quote /-->
+            <!-- Description /-->
             <div class="mb-3">
-              <label for="iTextAreaEditQuoteText" class="form-label">Frase</label>
+              <label for="iTextAreaEditCategoryDescription" class="form-label">Descripción</label>
               <textarea class="form-control"
-                        name="nTextAreaEditQuoteText"
-                        id="iTextAreaEditQuoteText"
+                        name="nTextAreaEditCategoryDescription"
+                        id="iTextAreaEditCategoryDescription"
+                        placeholder="Descripción de la categoría"
+                        required
+                        title="Escribe una descripción."
                         rows="3"></textarea>
-              <div id="iHelpQuoteDescription" class="form-text">Escriba la frase sin comillas al inicio o al final.
+              <div id="iHelpCategoryDescription" class="form-text">Descripción de la categoría.
               </div>
-            </div>
-
-            <!-- Category /-->
-            <div class="mb-3">
-              <label for="iSelectEditCategory" class="form-label">Categoría</label>
-              <select class="form-select"
-                      aria-label="Default select example"
-                      id="iSelectEditCategory"
-                      name="nSelectEditCategory">
-                <?php
-                  $namesCategoriesList = getAllCategoriesList ();
-                  foreach ($namesCategoriesList as $key => $value) {
-                    $quoteCategoryId = $value['befrases_cat_id'];
-                    $quoteCategoryName = $value['befrases_cat_name'];
-                    echo '<option value="' . $quoteCategoryId . '">' . $quoteCategoryName . '</option>';
-                  }
-                ?>
-              </select>
-              <div id="iHelpEditCategory" class="form-text">Nombre de la categoría.</div>
             </div>
 
             <!-- Save edit /-->
             <button type="submit"
-                    name="nButtonSaveEditQuote"
-                    id="iButtonSaveEditQuote"
-                    class="btn btn-success btn-sm">
-              Guardar
+                    name="nButtonSaveEditCategory"
+                    id="iButtonSaveEditCategory"
+                    title="Clic para actualizar cambios."
+                    class="btn btn-success btn-sm">Actualizar
             </button>
 
             <!-- Cancel edit /-->
             <button type="button"
-                    name="nButtonCancelEditQuote"
-                    id="iButtonCancelEditQuote"
+                    name="nButtonCancelEditCategory"
+                    id="iButtonCancelEditCategory"
+                    title="Clic para cancelar."
                     class="btn btn-danger btn-sm"
-                    onclick="hiddeFormEditQuote()">
-              Cancelar
+                    onclick="hiddeFormEditCategory()">Cancelar
             </button>
+
 
           </form>
 
@@ -221,156 +172,52 @@
           <form method="post" class="mb-3" style="display: none;" id="iFormDeleteCategory" name="nFormDeleteCategory">
 
             <!-- Title and description /-->
-            <h5 class="card-title">Eliminar frase</h5>
+            <h5 class="card-title">Eliminar categoría</h5>
             <p class="card-text">¿Desea eliminar el siguiente registro?</p>
 
             <hr>
 
-            <!-- Quote and author /-->
-            <div class="mb-4" style="padding: 10px !important;">
+            <!-- Data to delete /-->
+            <input type="hidden" class="form-control" name="nInputDeleteCategoryId" id="iInputDeleteCategoryId">
 
-              <!-- Quote text /-->
-              <p class="card-text be-quote-delete-confirmation" id="iDeleteQuoteText"></p>
+            <p class="card-text" style="margin-bottom: 0px;">
+              <b name="nTextDeleteCategoryTitleName"
+                 id="iTextDeleteCategoryTitleName">Nombre</b
+            </p>
 
-              <!-- Quote author /-->
-              <p class="card-text be-author-delete-confirmation" id="iDeleteAuthorText"></p>
+            <p class="card-text"
+               name="nTextDeleteCategoryName"
+               id="iTextDeleteCategoryName">
+            </p>
 
-            </div>
+            <p class="card-text" style="margin-bottom: 0px;">
+              <b name="nTextDeleteCategoryTitleDescription"
+                 id="iTextDeleteCategoryTitleDescription">Descripción</b>
+            </p>
+
+            <p class="card-text"
+               name="nTextDeleteCategoryDescription"
+               id="iTextDeleteCategoryDescription">
+            </p>
 
             <hr>
 
-            <!-- Quote Id /-->
-            <input type="hidden"
-                   class="form-control"
-                   name="nInputDeleteQuoteId"
-                   id="iInputDeleteQuoteId">
-
             <!-- Delete quote /-->
             <button type="submit"
-                    name="nButtonDeleteQuote"
-                    id="iButtonDeleteQuote"
-                    class="btn btn-success btn-sm">
-              Eliminar
+                    class="btn btn-success btn-sm"
+                    name="nButtonAcceptDeleteCategory"
+                    id="iButtonAcceptDeleteCategory"
+                    title="Clic para eliminar.">Eliminar
             </button>
 
             <!-- Cancel delete /-->
             <button type="button"
-                    name="nButtonCancelDeleteQuote"
-                    id="iButtonCancelDeleteQuote"
                     class="btn btn-danger btn-sm"
-                    onclick="hiddeFormDeleteQuote()">
-              Cancelar
+                    name="nButtonCancelDeleteCategory"
+                    id="iButtonCancelDeleteCategory"
+                    title="Clic para cancelar."
+                    onclick="hiddeFormDeleteCategory()">Cancelar
             </button>
-
-          </form>
-
-
-          <!-- Add category form -->
-          <form method="post" class="mb-3" style="display: block;" id="iFormAddCategory" name="nFormAddCategory">
-
-            <p class="be-title"><strong>Añadir categoría</strong></p>
-            <p class="be-description">Escribe el nombre y la descripción de la nueva categoría.</p>
-
-            <hr>
-
-            <div class="mb-3">
-              <label for="iInputCategoryName" class="form-label">Nombre de la categoría</label>
-              <input class="form-control" name="nInputCategoryName" id="iInputCategoryName" placeholder="Nombre.."
-                     required>
-              <div id="iHelpCategoryName" class="form-text">El nombre es como aparece en tu sitio..</div>
-            </div>
-
-            <div class="mb-3">
-              <label for="iTextAreaCategoryDescription" class="form-label">Descripción</label>
-              <textarea class="form-control" name="nTextAreaCategoryDescription" id="iTextAreaCategoryDescription"
-                        placeholder="Descripción.." rows="3" required></textarea>
-              <div id="iHelpCategoryDescription" class="form-text">La descripción no se muestra por defecto; sin
-                embargo,
-                hay algunos temas y opciones que pueden mostrarla.
-              </div>
-            </div>
-
-            <button id="iButtonNewCategory" name="nButtonNewCategory" type="submit" class="btn btn-dark">Añadir</button>
-
-          </form>
-
-          <!-- Edit category form -->
-          <form method="post" class="mb-3" style="display: none;" id="iFormEditCategory" name="nFormEditCategory">
-
-            <p class="be-title"><strong>Editar categoría</strong></p>
-            <p class="be-description">Modificar la categoría seleccionada.</p>
-
-            <hr>
-
-            <input type="hidden" class="form-control" name="nInputEditCategoryId" id="iInputEditCategoryId">
-
-            <div class="mb-3">
-              <label for="iInputEditCategoryName" class="form-label">Nombre de la categoría</label>
-              <input class="form-control" name="nInputEditCategoryName" id="iInputEditCategoryName">
-              <div id="iHelpCategoryName" class="form-text">El nombre es como aparece en tu sitio..</div>
-            </div>
-
-            <div class="mb-3">
-              <label for="iTextAreaEditCategoryDescription" class="form-label">Descripción</label>
-              <textarea class="form-control" name="nTextAreaEditCategoryDescription"
-                        id="iTextAreaEditCategoryDescription"
-                        rows="3"></textarea>
-              <div id="iHelpCategoryDescription" class="form-text">La descripción no se muestra por defecto; sin
-                embargo,
-                hay algunos temas y opciones que pueden mostrarla.
-              </div>
-            </div>
-
-            <button type="submit" name="nButtonSaveEditCategory" id="iButtonSaveEditCategory" class="btn btn-dark">
-              Guardar
-              cambios
-            </button>
-            <button type="button" name="nButtonCancelEditCategory" id="iButtonCancelEditCategory" class="btn btn-dark"
-                    onclick="hiddeFormEditCategory()">Cancelar
-            </button>
-
-          </form>
-
-          <!-- Delete category form -->
-          <form method="post" class="mb-3" style="display: none;" id="iFormDeleteCategory" name="nFormDeleteCategory">
-
-            <p class="be-title"><strong>Eliminar categoría</strong></p>
-            <p class="be-description">Eliminar la categoría seleccionada.</p>
-
-            <hr>
-
-            <div id="iCardDeleteMessageYes" name="nCardDeleteMessageYes" class="card text-center">
-              <h5 class="card-header">Eliminar categoría</h5>
-              <div class="card-body">
-                <h5 class="card-title" id="iCardDeleteMessageTitleMessage" name="nCardDeleteMessageTitleMessage"></h5>
-                <p class="be-message" id="iCardDeleteMessageParagrahpMessage" name="nCardDeleteMessageParagrahpMessage"
-                   class="card-text"><strong id="iCardDeleteMessageParagrahpStrongMessage"
-                                             name="nCardDeleteMessageParagrahpStrongMessage"></strong></p>
-                <input type="hidden" class="form-control" name="nInputDeleteCategoryId" id="iInputDeleteCategoryId">
-
-                <div class="row justify-content-center">
-                  <div class="col-4">
-                    <button type="button" name="nButtonAcceptDeleteCategory" id="iButtonAcceptDeleteCategory"
-                            class="btn btn-dark" style="display: none;" onclick="hiddeFormDeleteCategory()">Aceptar
-                    </button>
-                  </div>
-                </div>
-
-                <div class="row justify-content-center">
-                  <div class="col-4">
-                    <button type="submit" name="nButtonDeleteCategory" id="iButtonDeleteCategory" class="btn btn-dark"
-                            style="display: none;">Eliminar
-                    </button>
-                  </div>
-                  <div class="col-4">
-                    <button type="button" name="nButtonCancelDeleteCategory" id="iButtonCancelDeleteCategory"
-                            class="btn btn-dark" style="display: none;" onclick="hiddeFormDeleteCategory()">Cancelar
-                    </button>
-                  </div>
-                </div>
-
-              </div>
-            </div>
 
           </form>
 
@@ -406,11 +253,7 @@
 
             <tbody>
             <?php
-              
-              foreach ($categoriesList
-                       
-                       as $key => $value) {
-                
+              foreach ($categoriesList as $key => $value) {
                 $categoryId = $value['befrases_cat_id'];
                 $categoryName = $value['befrases_cat_name'];
                 $categoryDescription = $value['befrases_cat_description'];
@@ -435,6 +278,7 @@
                     <button class="btn btn-primary btn-sm"
                             id="iButtonEditCategoryRegister"
                             name="nButtonEditCategoryRegister"
+                            title="Clic para editar."
                             onclick="showFormEditCategory('<?php echo $categoryId; ?>', '<?php echo $categoryName; ?>', '<?php echo $categoryDescription; ?>')">
                       Editar
                     </button>
@@ -445,7 +289,8 @@
                     <button class="btn btn-danger btn-sm"
                             id="iButtonDeleteCategoryRegister"
                             name="nButtonDeleteCategoryRegister"
-                            onclick="showFormDeleteCategory('<?php echo $categoryId; ?>', '<?php echo $categoryName; ?>', '<?php echo $categoryTotalQuotes; ?>')">
+                            title="Clic para eliminar."
+                            onclick="showFormDeleteCategory('<?php echo $categoryId; ?>', '<?php echo $categoryName; ?>', '<?php echo $categoryDescription; ?>' , '<?php echo $categoryTotalQuotes; ?>')">
                       Eliminar
                     </button>
                   </td>

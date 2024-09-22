@@ -56,7 +56,7 @@
     <!-- Title and description /-->
     <div>
       <div class="card">
-        <h5 class="card-header">beFrases / <?php echo get_admin_page_title (); ?></h5>
+        <h5 class="card-header"><?php echo get_admin_page_title (); ?></h5>
         <div class="card-body">
           <p class="card-text">
             Un plugin fácil y simple de usar que te permitirá gestionar una colección de frases célebres con sus autores
@@ -86,7 +86,7 @@
               <select class="form-select"
                       id="iSelectAuthor"
                       name="nSelectAuthor"
-                      title="Escoge un autor"
+                      title="Escoge un autor."
                       required
               >
                 <?php
@@ -108,7 +108,7 @@
               <textarea class="form-control"
                         name="nTextAreaQuote"
                         id="iTextAreaQuote"
-                        placeholder="Escriba la frase.."
+                        placeholder="Escriba una frase.."
                         rows="3"
                         title="Escriba la frase sin comillas al inicio y al final."
                         required></textarea>
@@ -122,7 +122,7 @@
               <select class="form-select"
                       id="iSelectCategory"
                       name="nSelectCategory"
-                      title="Escoge una categoría"
+                      title="Escoge una categoría."
                       required
               >
                 <?php
@@ -141,6 +141,7 @@
             <button id="iButtonNewQuote"
                     name="nButtonNewQuote"
                     type="submit"
+                    title="Clic para añadir la categoría."
                     class="btn btn-success btn-sm">
               Añadir
             </button>
@@ -167,7 +168,7 @@
               <label for="iSelectEditAuthor" class="form-label">Autor</label>
               <select class="form-select"
                       id="iSelectEditAuthor"
-                      title="Escoge un autor"
+                      title="Escoge un autor."
                       name="nSelectEditAuthor">
                 <?php
                   $namesCategoriesList = getAllDataAuthorsList ();
@@ -219,8 +220,9 @@
             <button type="submit"
                     name="nButtonSaveEditQuote"
                     id="iButtonSaveEditQuote"
+                    title="Clic para actualizar los cambios."
                     class="btn btn-success btn-sm">
-              Guardar
+              Actualizar
             </button>
 
             <!-- Cancel edit /-->
@@ -228,6 +230,7 @@
                     name="nButtonCancelEditQuote"
                     id="iButtonCancelEditQuote"
                     class="btn btn-danger btn-sm"
+                    title="Clic para cancelar."
                     onclick="hiddeFormEditQuote()">
               Cancelar
             </button>
@@ -266,6 +269,7 @@
             <button type="submit"
                     name="nButtonDeleteQuote"
                     id="iButtonDeleteQuote"
+                    title="Clic para eliminar la frase."
                     class="btn btn-success btn-sm">
               Eliminar
             </button>
@@ -275,6 +279,7 @@
                     name="nButtonCancelDeleteQuote"
                     id="iButtonCancelDeleteQuote"
                     class="btn btn-danger btn-sm"
+                    title="Clic para cancelar."
                     onclick="hiddeFormDeleteQuote()">
               Cancelar
             </button>
@@ -349,6 +354,7 @@
                       class="btn btn-primary btn-sm"
                       id="iButtonEditQuoteRegister"
                       name="nButtonEditQuoteRegister"
+                      title="Clic para editar."
                       onclick="showFormEditQuote('<?php echo $quoteId; ?>', '<?php echo $quoteAuthorId; ?>', '<?php echo $quoteText; ?>', '<?php echo $quoteCategoryId; ?>')">
                     Editar
                   </button>
@@ -360,6 +366,7 @@
                       class="btn btn-danger btn-sm"
                       id="iButtonDeleteQuoteRegister"
                       name="nButtonDeleteQuoteRegister"
+                      title="Clic para eliminar."
                       onclick="showFormDeleteQuote('<?php echo $quoteId; ?>', '<?php echo $quoteAuthor; ?>', '<?php echo $quoteText; ?>')">
                     Eliminar
                   </button>

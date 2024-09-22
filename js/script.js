@@ -51,8 +51,6 @@ function hiddeFormEditQuote() {
  * @param contentQuote
  */
 function showFormDeleteQuote(idQuote, authorQuote, contentQuote) {
-  console.log(authorQuote);
-  console.log(contentQuote);
   document.getElementById("iFormEditQuote").style.display = "none";
   document.getElementById("iFormAddQuote").style.display = "none";
   document.getElementById("iFormDeleteQuote").style.display = "block";
@@ -311,41 +309,57 @@ function changeStyleQuote() {
 /**
  * Show form delete
  *
- * @param {number} id of the category to delete
- * @param {string} name of the category to delete
  * @return none
+ * @param {string} categoryId
+ * @param {string} categoryName
+ * @param {string} totalQuotesCategory
+ * @param {string} categoryDescription
  */
-function showFormDeleteCategory(categoryId, categoryName, totalQuotesCategory) {
-  document.getElementById("iFormEditCategory").style.display = "none";
-  document.getElementById("iFormAddCategory").style.display = "none";
-  document.getElementById("iFormDeleteCategory").style.display = "block";
-  document.getElementById('iInputDeleteCategoryId').value = categoryId;
+function showFormDeleteCategory(categoryId, categoryName, categoryDescription, totalQuotesCategory) {
 
-  if (totalQuotesCategory != 0) {
-    document.getElementById("iButtonDeleteCategory").style.display = "none";
-    document.getElementById("iButtonCancelDeleteCategory").style.display = "none";
-    document.getElementById("iButtonAcceptDeleteCategory").style.display = "block";
-    document.getElementById("iCardDeleteMessageTitleMessage").textContent = "¡Error al intentar eliminar!";
-    document.getElementById("iCardDeleteMessageParagrahpMessage").textContent = "Tiene registros, no es posible eliminar la categoría: ";
-    $('#iCardDeleteMessageParagrahpMessage').append('<strong>' + categoryName + '</strong>');
+  if (totalQuotesCategory != 0  && categoryId != 1) {
+    document.getElementById("iFormEditCategory").style.display = "none";
+    document.getElementById("iFormAddCategory").style.display = "none";
+    document.getElementById("iFormDeleteCategory").style.display = "block";
+    document.getElementById('iInputDeleteCategoryId').value = categoryId;
+    document.getElementById('iTextDeleteCategoryTitleName').textContent = "¡Error al intentar eliminar!";
+    document.getElementById('iTextDeleteCategoryName').textContent = "La categoría tiene frases asociadas.";
+    document.getElementById('iTextDeleteCategoryDescription').style.display = "none";
+    document.getElementById('iTextDeleteCategoryTitleDescription').style.display = "none";
+    document.getElementById('iButtonAcceptDeleteCategory').style.display = "none";
+    document.getElementById("iButtonCancelDeleteCategory").innerHTML = 'Aceptar';
+    document.getElementById("iButtonCancelDeleteCategory").title = 'Clic para aceptar.';
+
   }
   if (categoryId == 1) {
-    document.getElementById("iButtonDeleteCategory").style.display = "none";
-    document.getElementById("iButtonCancelDeleteCategory").style.display = "none";
-    document.getElementById("iButtonAcceptDeleteCategory").style.display = "block";
-    document.getElementById("iCardDeleteMessageTitleMessage").textContent = "¡Error al intentar eliminar!";
-    document.getElementById("iCardDeleteMessageParagrahpMessage").textContent = "No es posible eliminar la categoría: ";
-    $('#iCardDeleteMessageParagrahpMessage').append('<strong>' + categoryName + '</strong>');
+    document.getElementById("iFormEditCategory").style.display = "none";
+    document.getElementById("iFormAddCategory").style.display = "none";
+    document.getElementById("iFormDeleteCategory").style.display = "block";
+    document.getElementById('iInputDeleteCategoryId').value = categoryId;
+    document.getElementById('iTextDeleteCategoryTitleName').textContent = "¡Error al intentar eliminar!";
+    document.getElementById('iTextDeleteCategoryName').textContent = "No es posible eliminar esta categoría.";
+    document.getElementById('iTextDeleteCategoryDescription').style.display = "none";
+    document.getElementById('iTextDeleteCategoryTitleDescription').style.display = "none";
+    document.getElementById('iButtonAcceptDeleteCategory').style.display = "none";
+    document.getElementById("iButtonCancelDeleteCategory").innerHTML = 'Aceptar';
+    document.getElementById("iButtonCancelDeleteCategory").title = 'Clic para aceptar.';
   }
 
-  if (totalQuotesCategory == 0) {
-    document.getElementById("iButtonDeleteCategory").style.display = "block";
-    document.getElementById("iButtonCancelDeleteCategory").style.display = "block";
-    document.getElementById("iButtonAcceptDeleteCategory").style.display = "none";
-    document.getElementById("iCardDeleteMessageTitleMessage").textContent = "¿Seguro de eliminar la categoría?";
-    document.getElementById("iCardDeleteMessageParagrahpMessage").textContent = "Se eliminará de forma permanente la categoría con nombre: ";
-    $('#iCardDeleteMessageParagrahpStrongMessage').append('<strong>' + categoryName + '</strong>');
+  if (totalQuotesCategory == 0 && categoryId != 1) {
+    document.getElementById("iFormEditCategory").style.display = "none";
+    document.getElementById("iFormAddCategory").style.display = "none";
+    document.getElementById("iFormDeleteCategory").style.display = "block";
+    document.getElementById('iInputDeleteCategoryId').value = categoryId;
+    document.getElementById('iTextDeleteCategoryTitleName').textContent = "Nombre";
+    document.getElementById('iTextDeleteCategoryName').textContent = categoryName;
+    document.getElementById('iTextDeleteCategoryTitleDescription').style.display = "Descripción";
+    document.getElementById('iTextDeleteCategoryDescription').textContent = categoryDescription;
+    document.getElementById("iButtonCancelDeleteCategory").innerHTML = 'Cancelar';
+    document.getElementById('iButtonAcceptDeleteCategory').style.display = "inline";
+    document.getElementById("iButtonCancelDeleteCategory").title = 'Clic para cancelar.';
   }
+
+
 }
 
 /**
@@ -364,18 +378,18 @@ function hiddeFormDeleteCategory() {
 /**
  * Show form edit category
  *
- * @param {number} id of the category to edit
- * @param {string} name of the category to edit
- * @param {string} description of the category to edit
+ * @param {string} categoryId Id number of the category
+ * @param {string} categoryName of the category to edit
+ * @param {string} categoryDescription of the category to edit
  * @return none
  */
-function showFormEditCategory(id, name, description) {
+function showFormEditCategory(categoryId, categoryName, categoryDescription) {
   document.getElementById("iFormEditCategory").style.display = "block";
   document.getElementById("iFormAddCategory").style.display = "none";
   document.getElementById("iFormDeleteCategory").style.display = "none";
-  document.getElementById('iInputEditCategoryId').value = id;
-  document.getElementById('iInputEditCategoryName').value = name;
-  document.getElementById('iTextAreaEditCategoryDescription').textContent = description;
+  document.getElementById('iInputEditCategoryId').value = categoryId;
+  document.getElementById('iInputEditCategoryName').value = categoryName;
+  document.getElementById('iTextAreaEditCategoryDescription').textContent = categoryDescription;
 }
 
 /**
