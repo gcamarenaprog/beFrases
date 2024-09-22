@@ -45,7 +45,7 @@
   
   
   /**
-   * Activate hook function
+   * Activate hook function, create and insert initial data
    *
    * @return void
    */
@@ -53,7 +53,7 @@
   {
     global $wpdb;
     
-    # CREATE the befrases table
+    # Create the befrases table
     $sqlMain = "CREATE TABLE IF NOT EXISTS {$wpdb -> prefix}befrases (
     `befrases_id` INT NOT NULL AUTO_INCREMENT,
     `befrases_author` INT(10) NULL,
@@ -62,7 +62,7 @@
     PRIMARY KEY (`befrases_id`));";
     $wpdb->query ($sqlMain);
     
-    # CREATE the category table
+    # Create the category table
     $sqlCategories = "CREATE TABLE IF NOT EXISTS {$wpdb -> prefix}befrases_cat (
     `befrases_cat_id` INT NOT NULL AUTO_INCREMENT,
     `befrases_cat_name` VARCHAR(45) NULL,
@@ -70,14 +70,14 @@
     PRIMARY KEY (`befrases_cat_id`));";
     $wpdb->query ($sqlCategories);
     
-    # CREATE the author table
+    # Create the author table
     $sqlAuthors = "CREATE TABLE IF NOT EXISTS {$wpdb -> prefix}befrases_aut (
     `befrases_aut_id` INT NOT NULL AUTO_INCREMENT,
     `befrases_aut_name` VARCHAR(50) NULL,
     PRIMARY KEY (`befrases_aut_id`));";
     $wpdb->query ($sqlAuthors);
     
-    # CREATE the options table
+    # Create the options table
     $sqlOptions = "CREATE TABLE IF NOT EXISTS {$wpdb -> prefix}befrases_opt (
     `befrases_opt_id` INT NOT NULL,
     `befrases_ali_txt_aut` INT NULL,
@@ -87,19 +87,19 @@
     PRIMARY KEY (`befrases_opt_id`))";
     $wpdb->query ($sqlOptions);
     
-    # INSERT default values on befrases table
+    # Insert default values on befrases table
     $sqlDefaultValuesBeFrasesTable = "INSERT IGNORE INTO {$wpdb -> prefix}befrases (befrases_id, befrases_author, befrases_quote, befrases_category) VALUES (1, 1, 'Vivimos una grandiosa novela, en un gran teatro, montado por gente inteligente que le gusta jugar a las marionetas', '1'), (2, 2, 'La ciencia no es más que perversión en sí misma a menos que tenga como objetivo último mejorar la humanidad', '1')";
     $wpdb->query ($sqlDefaultValuesBeFrasesTable);
     
-    # INSERT default values on authors table (0, 'Guillermo Camarena')
+    # Insert default values on authors table
     $sqlDefaultValuesAuthorsTable = "INSERT IGNORE INTO {$wpdb -> prefix}befrases_aut (befrases_aut_id, befrases_aut_name) VALUES (1, 'Guillermo Camarena'), (2, 'Nikola Tesla')";
     $wpdb->query ($sqlDefaultValuesAuthorsTable);
     
-    # INSERT default values on categories table (0, 'Default')
+    # Insert default values on categories table
     $sqlDefaultValuesCategoriesTable = "INSERT IGNORE INTO {$wpdb -> prefix}befrases_cat (befrases_cat_id, befrases_cat_name, befrases_cat_description) VALUES (1, 'Uncategorized', 'Default category if none is chosen.')";
     $wpdb->query ($sqlDefaultValuesCategoriesTable);
     
-    # INSERT default values on options table (1,3,4,4,1)
+    # Insert default values on options table
     $sqlDefaultValuesOptionsTable = "INSERT IGNORE INTO {$wpdb -> prefix}befrases_opt (befrases_opt_id, befrases_ali_txt_aut, befrases_sty_txt_aut, befrases_ali_txt_quo, befrases_sty_txt_quo) VALUES (1,3,4,4,1)";
     $wpdb->query ($sqlDefaultValuesOptionsTable);
   }
@@ -115,7 +115,7 @@
   }
   
   /**
-   * Uninstall hook function
+   * Uninstall hook function, drop tables of plugin
    *
    * @return void
    */
@@ -182,6 +182,16 @@
       'Categorías', // Menu title
       'manage_options', // Capability
       plugin_dir_path (__FILE__) . 'admin/categories.php', // Slug
+      null // Content
+    );
+    
+    # 'Authors' submenu option
+    add_submenu_page (
+      plugin_dir_path (__FILE__) . 'admin/main.php',  // Parent slug
+      'Autores', // Page title
+      'Autores', // Menu title
+      'manage_options', // Capability
+      plugin_dir_path (__FILE__) . 'admin/authors.php', // Slug
       null // Content
     );
     
