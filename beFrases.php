@@ -14,6 +14,7 @@
   # Prevent PHP code from being executed by inserting the path in the browser bar
   defined ('ABSPATH') or die("Bye bye");
   
+  
   /**
    * Routes definition -------------------------------------------------------------------------------------------------
    */
@@ -40,8 +41,7 @@
   /**
    * Hooks -------------------------------------------------------------------------------------------------------------
    */
-  
-  
+   
   /**
    * Activate hook function, create and insert initial data
    *
@@ -341,7 +341,7 @@
   
   
   /**
-   * Functions of beFrases-widget.php file -----------------------------------------------------------------------------
+   * Widget functions --------------------------------------------------------------------------------------------------
    */
   
   /**
@@ -358,8 +358,8 @@
   /**
    * Print the quote text
    *
-   * @param int $alignmentQuoteText Option number of the alignement quote text
-   * @param int $styleQuoteText     Option number of the style quote text
+   * @param int    $alignmentQuoteText Option number of the alignement quote text
+   * @param int    $styleQuoteText     Option number of the style quote text
    * @param string $quoteText          Text of the selected quote
    * @return void
    */
@@ -416,8 +416,8 @@
   /**
    * Print the author text
    *
-   * @param int $alignmentAuthorText Option number of the alignement author text
-   * @param int $styleAuthorText     Option number of the style author text
+   * @param int    $alignmentAuthorText Option number of the alignement author text
+   * @param int    $styleAuthorText     Option number of the style author text
    * @param string $authorText          Text of the selected author
    * @return void
    */
@@ -471,7 +471,7 @@
   
   
   /**
-   * Functions of main.php file ----------------------------------------------------------------------------------------
+   * General functions -------------------------------------------------------------------------------------------------
    */
   
   /**
@@ -485,6 +485,42 @@
     $tableName = "{$wpdb -> prefix}befrases";
     $query = "SELECT * FROM {$tableName}";
     return $wpdb->get_results ($query, ARRAY_A);
+  }
+  
+  /**
+   * Add a new quote record
+   *
+   * @param int    $authorIdQuote   Author id of the quote
+   * @param string $textQuote       Text quote of the quote
+   * @param int    $categoryIdQuote Category id of the quote
+   * @return void
+   */
+  function addQuoteRecord (int $authorIdQuote, string $textQuote, int $categoryIdQuote): void
+  {
+    global $wpdb;
+    $data = array(
+      'befrases_author' => $authorIdQuote,
+      'befrases_quote' => $textQuote,
+      'befrases_category' => $categoryIdQuote
+    );
+    $tableName = "{$wpdb -> prefix}befrases";
+    $wpdb->insert ($tableName, $data);
+  }
+  
+  /**
+   * Delete a quote with id number quote provided
+   *
+   * @param int $idQuote Quote id for delete record
+   * @return void
+   */
+  function deleteQuoteRecord (int $idQuote): void
+  {
+    global $wpdb;
+    $data = array(
+      'befrases_id' => $idQuote
+    );
+    $tableName = "{$wpdb -> prefix}befrases";
+    $wpdb->delete ($tableName, $data);
   }
   
   /**
@@ -506,7 +542,7 @@
       'befrases_category' => $categoryIdQuote
     );
     $tableName = "{$wpdb -> prefix}befrases";
-    $replace = $wpdb->replace ($tableName, $data);
+    $wpdb->replace ($tableName, $data);
   }
   
   /**
@@ -514,7 +550,7 @@
    *
    * @return array $categoriesList List of all categories and his data
    */
-  function getAllDataCategoriesList ()
+  function getAllDataCategoriesList (): array
   {
     global $wpdb;
     $query = "SELECT befrases_cat_id, befrases_cat_name FROM {$wpdb -> prefix}befrases_cat";
@@ -526,57 +562,20 @@
    *
    * @return array $authorsList List of all authors and his data
    */
-  function getAllDataAuthorsList ()
+  function getAllDataAuthorsList (): array
   {
     global $wpdb;
     $query = "SELECT befrases_aut_id, befrases_aut_name FROM {$wpdb -> prefix}befrases_aut";
-    $authorsList = $wpdb->get_results ($query, ARRAY_A);
-    return $authorsList;
-  }
-  
-  /**
-   * Add a new quote record
-   *
-   * @param number $authorQuote     Author of the quote for new record
-   * @param number $textQuote       Text quote of the quote for new record
-   * @param number $categoryIdQuote Category Id of the quote for new record
-   * @return void
-   */
-  function addQuoteRecord ($authorIdQuote, $textQuote, $categoryIdQuote): void
-  {
-    global $wpdb;
-    $data = array(
-      'befrases_author' => $authorIdQuote,
-      'befrases_quote' => $textQuote,
-      'befrases_category' => $categoryIdQuote
-    );
-    $tableName = "{$wpdb -> prefix}befrases";
-    $replace = $wpdb->insert ($tableName, $data);
-  }
-  
-  /**
-   * Delete a quote with id number quote provided
-   *
-   * @param number $idQuote Quote id for delete record
-   * @return
-   */
-  function deleteQuoteRecord ($idQuote)
-  {
-    global $wpdb;
-    $data = array(
-      'befrases_id' => $idQuote
-    );
-    $tableName = "{$wpdb -> prefix}befrases";
-    $replace = $wpdb->delete ($tableName, $data);
+    return $wpdb->get_results ($query, ARRAY_A);
   }
   
   /**
    * Get category name from category id
    *
-   * @param number $CategoryId Id number of the category
+   * @param int $CategoryId Id number of the category
    * @return array $categoryName Name of category
    */
-  function getCategoryName ($CategoryId): array
+  function getCategoryName (int $CategoryId): array
   {
     global $wpdb;
     return $wpdb->get_results ("SELECT befrases_cat_name FROM  {$wpdb -> prefix}befrases_cat	WHERE	befrases_cat_id = {$CategoryId}", ARRAY_A);
@@ -585,23 +584,22 @@
   /**
    * Get author name from author id
    *
-   * @param number $authorId Id number of the author
+   * @param int $authorId Id number of the author
    * @return array $authorName Name of author
    */
-  function getAuthorName ($authorId): array
+  function getAuthorName (int $authorId): array
   {
     global $wpdb;
     return $wpdb->get_results ("SELECT befrases_aut_name FROM  {$wpdb -> prefix}befrases_aut	WHERE	befrases_aut_id = {$authorId}", ARRAY_A);
   }
   
-  
   /**
    * Get all authors without repeat
    *
-   * @param $listQuotes
+   * @param array $listQuotes
    * @return array
    */
-  function getAllAuthorsWithoutRepeat ($listQuotes): array
+  function getAllAuthorsWithoutRepeat (array $listQuotes): array
   {
     global $wpdb;
     $listAuthors = array();
@@ -617,6 +615,10 @@
     return $listAuthorsNoRepeat;
   }
   
+  /**
+   * @param $listQuotes
+   * @return array
+   */
   function getAllQuotesNoRepeat ($listQuotes)
   {
     //print_r($listQuotes);
@@ -636,32 +638,29 @@
     return $listQuotesNoRepeat;
   }
   
-  # Functions of settings.php file
-  
   /**
-   * Gets the beFrases plugin option settings from the databases
+   * Gets the plugin options settings
    *
-   * @return array $listOptions
+   * @return array
    */
-  function getSettings ()
+  function getSettings (): array
   {
     global $wpdb;
     $tableName = "{$wpdb -> prefix}befrases_opt";
     $queryOptions = "SELECT * FROM {$tableName}";
-    $listOptions = $wpdb->get_results ($queryOptions, ARRAY_A);
-    return $listOptions;
+    return $wpdb->get_results ($queryOptions, ARRAY_A);
   }
   
   /**
    * Save the beFrases plugin option settings on the databases
    *
-   * @param string $alignmentTextAuthorOption The option selected for alignment text author
-   * @param string $alignmentTextQuoteOption  The option selected for alignment text quote
-   * @param string $styleTextAuthorOption     The option selected for style text author
-   * @param string $styleTextQuoteOption      The option selected for style text quote
-   * @return none
+   * @param int $alignmentTextAuthorOption The option selected for alignment text author
+   * @param int $alignmentTextQuoteOption  The option selected for alignment text quote
+   * @param int $styleTextAuthorOption     The option selected for style text author
+   * @param int $styleTextQuoteOption      The option selected for style text quote
+   * @return void
    */
-  function saveSettings ($alignmentTextAuthorOption, $alignmentTextQuoteOption, $styleTextAuthorOption, $styleTextQuoteOption)
+  function saveSettings (int $alignmentTextAuthorOption, int $alignmentTextQuoteOption, int $styleTextAuthorOption, int $styleTextQuoteOption): void
   {
     global $wpdb;
     $idOptions = 1;
@@ -673,25 +672,21 @@
       'befrases_sty_txt_quo' => $styleTextQuoteOption
     );
     $tableName = "{$wpdb -> prefix}befrases_opt";
-    $replace = $wpdb->replace ($tableName, $data);
+    $wpdb->replace ($tableName, $data);
   }
-  
-  # Functions of categories.php file
   
   /**
    * Gets list of all categories from database
    *
-   * @param
    * @return array $categoriesList associative array with list of all categories and his data
    */
-  function getAllCategoriesList ()
+  function getAllCategoriesList (): array
   {
     global $wpdb;
     $query = "SELECT * FROM {$wpdb -> prefix}befrases_cat";
     $categoriesList = $wpdb->get_results ($query, ARRAY_A);
     if (empty($categoriesList)) {
-      $categoriesList = array();
-      return $categoriesList;
+      return array();
     }
     return $categoriesList;
   }
@@ -701,9 +696,9 @@
    *
    * @param string $categoryName        The category name of the new record
    * @param string $categoryDescription The category description of the new record
-   * @return
+   * @return void
    */
-  function saveNewCategoryRecord ($categoryName, $categoryDescription)
+  function saveNewCategoryRecord (string $categoryName, string $categoryDescription): void
   {
     global $wpdb;
     $data = array(
@@ -711,34 +706,34 @@
       'befrases_cat_description' => $categoryDescription
     );
     $tableName = "{$wpdb -> prefix}befrases_cat";
-    $replace = $wpdb->insert ($tableName, $data);
+    $wpdb->insert ($tableName, $data);
   }
   
   /**
    * Delete a category with id number provided
    *
-   * @param array $id array with the data of new record
-   * @return
+   * @param int $idCategory array with the data of new record
+   * @return void
    */
-  function deleteCategoryRecord ($id)
+  function deleteCategoryRecord (int $idCategory): void
   {
     global $wpdb;
     $data = array(
-      'befrases_cat_id' => $id
+      'befrases_cat_id' => $idCategory
     );
     $tableName = "{$wpdb -> prefix}befrases_cat";
-    $replace = $wpdb->delete ($tableName, $data);
+    $wpdb->delete ($tableName, $data);
   }
   
   /**
    * Update data of a category record
    *
-   * @param string $idCategory          Id of category to update
+   * @param int    $idCategory          Id of category to update
    * @param string $nameCategory        Name of category to update
    * @param string $descriptionCategory Description of category to update
    * @return void
    */
-  function updateCategoryRecord ($idCategory, $nameCategory, $descriptionCategory)
+  function updateCategoryRecord (int $idCategory, string $nameCategory, string $descriptionCategory): void
   {
     global $wpdb;
     $data = array(
@@ -747,18 +742,17 @@
       'befrases_cat_description' => $descriptionCategory
     );
     $tableName = "{$wpdb -> prefix}befrases_cat";
-    $replace = $wpdb->replace ($tableName, $data);
+    $wpdb->replace ($tableName, $data);
   }
   
   /**
    * Count the total quotes of a category with the id number
    *
-   * @param number $idCategory Id number of the category to be counted
-   * @return number $totalQuotes Number of total records of a category
+   * @param int $idCategory Id number of the category to be counted
+   * @return int Number of total records of a category
    */
-  function countTotalRecordsCategory ($idCategory)
+  function countTotalRecordsCategory (int $idCategory): int
   {
     global $wpdb;
-    $totalQuotes = $wpdb->get_var ("SELECT COUNT(befrases_category) FROM {$wpdb -> prefix}befrases WHERE befrases_category = {$idCategory} ");
-    return $totalQuotes;
+    return $wpdb->get_var ("SELECT COUNT(befrases_category) FROM {$wpdb -> prefix}befrases WHERE befrases_category = {$idCategory} ");
   }

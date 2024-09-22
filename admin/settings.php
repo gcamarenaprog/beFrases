@@ -2,12 +2,12 @@
   /**
    * Settings plugin option
    *
-   * @package   				beFrases
-   * @version  					2.0.0
-   * @author    				Guillermo Camarena <gcamarenaprog@outlook.com>
-   * @copyright 				Copyright (c) 2004 - 2023, Guillermo Camarena
-   * @link      				https://gcamarenaprog.com.com/beFrases/
-   * @license   				http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
+   * @package            beFrases
+   * @version            2.0.0
+   * @author             Guillermo Camarena <gcamarenaprog@outlook.com>
+   * @copyright          Copyright (c) 2004 - 2023, Guillermo Camarena
+   * @link               https://gcamarenaprog.com.com/beFrases/
+   * @license            http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
    *
    */
   
