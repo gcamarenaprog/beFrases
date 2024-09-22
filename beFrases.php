@@ -1,17 +1,15 @@
 <?php
   /**
-  @wordpress-plugin
+   * @wordpress-plugin
+   *
+   * Plugin Name: beFrases
+   * Plugin URI:  https://guillermocamarena.com/beFrases/
+   * Description: Creates a manage a list of quotes and authors with category option. Display options for your sidebar
+   * (widget). Version:     2.0.0 Author:      Guillermo Camarena Author URI:  https://gcamarenaprog.com/ Text Domain:
+   * beFrases Domain Path: /languages License URI: https://www.gnu.org/licenses/gpl-2.0.html
+   */
   
-  Plugin Name: beFrases
-  Plugin URI:  https://guillermocamarena.com/beFrases/
-  Description: Creates a manage a list of quotes and authors with category option. Display options for your sidebar (widget).
-  Version:     2.0.0
-  Author:      Guillermo Camarena
-  Author URI:  https://gcamarenaprog.com/
-  Text Domain: beFrases
-  Domain Path: /languages
-  License URI: https://www.gnu.org/licenses/gpl-2.0.html
-  */
+  include_once dirname (__FILE__) . '/includes/beFrases-widget.php';
   
   # Prevent PHP code from being executed by inserting the path in the browser bar
   defined ('ABSPATH') or die("Bye bye");
@@ -257,11 +255,9 @@
       ($hook != $urlCategories) &&
       ($hook != $urlAbout) &&
       ($hook != $urlWidget) &&
-      ($hook != $urlHelp)
-    ) {
+      ($hook != $urlHelp)) {
       return;
     }
-    
     
     // JQuery 3.7.1
     wp_enqueue_script ('script-jquery', plugins_url ('/js/jquery.min-3.7.1.js', __FILE__), array('jquery'));
@@ -302,9 +298,16 @@
     global $urlWidget;
     global $urlBeFrases;
     
-    if (($hook != $urlMain) && ($hook != $urlBeFrases) && ($hook != $urlSettings) && ($hook != $urlCategories) && ($hook != $urlAbout) && ($hook != $urlWidget) && ($hook != $urlHelp)) {
+    if (($hook != $urlMain)
+      && ($hook != $urlBeFrases)
+      && ($hook != $urlSettings)
+      && ($hook != $urlCategories)
+      && ($hook != $urlAbout)
+      && ($hook != $urlWidget)
+      && ($hook != $urlHelp)) {
       return;
     }
+    
     // Bootstrap 5.3.3
     wp_enqueue_style ('be-css-bootstrap', plugins_url ('/css/bootstrap.5.3.3.css', __FILE__));
     
@@ -320,17 +323,27 @@
   add_action ('admin_enqueue_scripts', 'fn_CallMyCSS');
   
   
-  # Widget declaration
-  include_once dirname (__FILE__) . '/includes/beFrases-widget.php';
+  /**
+   * Widget ------------------------------------------------------------------------------------------------------------
+   */
   
-  // Widget initialization
-  function beFrases_register_widget() {
-    return register_widget( 'beFrases_widget' );
+  /**
+   * Widget initialization
+   *
+   * @return mixed
+   */
+  function beFrases_register_widget ()
+  {
+    return register_widget ('beFrases_widget');
   }
+  
   add_action ('widgets_init', 'beFrases_register_widget');
   
   
-  # Functions of beFrases-widget.php
+  /**
+   * Functions of beFrases-widget.php file -----------------------------------------------------------------------------
+   */
+  
   /**
    * Gets the beFrases plugin option settings from the databases
    *
@@ -339,20 +352,18 @@
   function getAllQuotesFromIdCategory ($quoteCategoryId): array
   {
     global $wpdb;
-    $listQuotes = $wpdb->get_results ("SELECT * FROM  {$wpdb -> prefix}befrases	WHERE	befrases_category = {$quoteCategoryId}", ARRAY_A);
-    return $listQuotes;
+    return $wpdb->get_results ("SELECT * FROM  {$wpdb -> prefix}befrases	WHERE	befrases_category = {$quoteCategoryId}", ARRAY_A);
   }
   
-  # Functions of bFrases-widget.php
   /**
    * Print the quote text
    *
-   * @param number $alignmentQuoteText Option number of the alignement quote text
-   * @param number $styleQuoteText     Option number of the style quote text
+   * @param int $alignmentQuoteText Option number of the alignement quote text
+   * @param int $styleQuoteText     Option number of the style quote text
    * @param string $quoteText          Text of the selected quote
-   * @return
+   * @return void
    */
-  function printQuoteText ($alignmentQuoteText, $styleQuoteText, $quoteText)
+  function printQuoteText ($alignmentQuoteText, $styleQuoteText, $quoteText): void
   {
     if ($alignmentQuoteText == 0): ?>
       <p style="display:block;text-align:right; padding: 0px;">
@@ -405,12 +416,12 @@
   /**
    * Print the author text
    *
-   * @param number $alignmentAuthorText Option number of the alignement author text
-   * @param number $styleAuthorText     Option number of the style author text
+   * @param int $alignmentAuthorText Option number of the alignement author text
+   * @param int $styleAuthorText     Option number of the style author text
    * @param string $authorText          Text of the selected author
-   * @return
+   * @return void
    */
-  function printAuthorText ($alignmentAuthorText, $styleAuthorText, $authorText)
+  function printAuthorText ($alignmentAuthorText, $styleAuthorText, string $authorText): void
   {
     if ($alignmentAuthorText == 0): ?>
       <p style="display:block;text-align: right;padding: 0px; margin: 0px;">
@@ -479,13 +490,13 @@
   /**
    * Update data of a quote record.
    *
-   * @param number $idQuote         Id of the quote to update
+   * @param int    $idQuote         Id of the quote to update
    * @param string $authorQuote     Name of the quote to update
    * @param string $textQuote       Description of the quote to update
-   * @param number $categoryIdQuote Id number of the category of the quote to update
+   * @param int    $categoryIdQuote Id number of the category of the quote to update
    * @return void
    */
-  function updateQuoteRecord ($idQuote, string $authorQuote, string $textQuote, $categoryIdQuote): void
+  function updateQuoteRecord (int $idQuote, string $authorQuote, string $textQuote, int $categoryIdQuote): void
   {
     global $wpdb;
     $data = array(
@@ -645,9 +656,9 @@
    * Save the beFrases plugin option settings on the databases
    *
    * @param string $alignmentTextAuthorOption The option selected for alignment text author
-   * @param string $alignmentTextQuoteOption The option selected for alignment text quote
+   * @param string $alignmentTextQuoteOption  The option selected for alignment text quote
    * @param string $styleTextAuthorOption     The option selected for style text author
-   * @param string $styleTextQuoteOption     The option selected for style text quote
+   * @param string $styleTextQuoteOption      The option selected for style text quote
    * @return none
    */
   function saveSettings ($alignmentTextAuthorOption, $alignmentTextQuoteOption, $styleTextAuthorOption, $styleTextQuoteOption)
