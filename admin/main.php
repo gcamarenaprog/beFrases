@@ -2,12 +2,12 @@
   /**
    * Manage plugin option
    *
-   * @package   				beFrases
-   * @version  					2.0.0
-   * @author    				Guillermo Camarena <gcamarenaprog@outlook.com>
-   * @copyright 				Copyright (c) 2004 - 2023, Guillermo Camarena
-   * @link      				https://gcamarenaprog.com/beFrases/
-   * @license   				http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
+   * @package            beFrases
+   * @version            2.0.0
+   * @author             Guillermo Camarena <gcamarenaprog@outlook.com>
+   * @copyright          Copyright (c) 2004 - 2023, Guillermo Camarena
+   * @link               https://gcamarenaprog.com/beFrases/
+   * @license            http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
    *
    */
   
@@ -39,11 +39,14 @@
     deleteQuoteRecord ($idQuote);
   }
   
-  # Get all quotes from database
+  # Get all quotes
   $listQuotes = getAllQuotes ();
   
   # Get all authors from list quotes no repeat
   $listAuthorsWithoutRepeat = getAllAuthorsWithoutRepeat ($listQuotes);
+  
+  # Get all categories
+  $namesCategoriesList = getAllDataCategoriesList ();
 
 ?>
 
@@ -83,6 +86,7 @@
               <select class="form-select"
                       id="iSelectAuthor"
                       name="nSelectAuthor"
+                      title="Escoge un autor"
                       required
               >
                 <?php
@@ -95,7 +99,7 @@
                   }
                 ?>
               </select>
-              <div id="iHelpCategory" class="form-text">Nombre de la categoría.</div>
+              <div id="iHelpCategory" class="form-text">Nombre de la autor.</div>
             </div>
 
             <!-- Quote /-->
@@ -106,8 +110,10 @@
                         id="iTextAreaQuote"
                         placeholder="Escriba la frase.."
                         rows="3"
+                        title="Escriba la frase sin comillas al inicio y al final."
                         required></textarea>
-              <div id="iHelpQuoteDescription" class="form-text">Escriba la frase sin comillas.</div>
+              <div id="iHelpQuoteDescription" class="form-text">Escriba la frase sin comillas al inicio y al final.
+              </div>
             </div>
 
             <!-- Category /-->
@@ -116,16 +122,15 @@
               <select class="form-select"
                       id="iSelectCategory"
                       name="nSelectCategory"
+                      title="Escoge una categoría"
                       required
               >
                 <?php
-                  $namesCategoriesList = getAllDataCategoriesList ();
                   echo '<option selected></option>';
                   foreach ($namesCategoriesList as $key => $value) {
                     $quoteCategoryId = $value['befrases_cat_id'];
                     $quoteCategoryName = $value['befrases_cat_name'];
                     echo '<option value="' . $quoteCategoryId . '">' . $quoteCategoryName . '</option>';
-                    
                   }
                 ?>
               </select>
@@ -159,9 +164,10 @@
 
             <!-- Author /-->
             <div class="mb-3">
-              <label for="iSelectEditAuthor" class="form-label">Categoría</label>
+              <label for="iSelectEditAuthor" class="form-label">Autor</label>
               <select class="form-select"
                       id="iSelectEditAuthor"
+                      title="Escoge un autor"
                       name="nSelectEditAuthor">
                 <?php
                   $namesCategoriesList = getAllDataAuthorsList ();
@@ -172,7 +178,7 @@
                   }
                 ?>
               </select>
-              <div id="iHelpEditAuthor" class="form-text">Nombre de la categoría.</div>
+              <div id="iHelpEditAuthor" class="form-text">Nombre del autor.</div>
             </div>
 
             <!-- Quote /-->
@@ -181,8 +187,10 @@
               <textarea class="form-control"
                         name="nTextAreaEditQuoteText"
                         id="iTextAreaEditQuoteText"
+                        required
+                        title="Escriba la frase sin comillas al inicio y al final."
                         rows="3"></textarea>
-              <div id="iHelpQuoteDescription" class="form-text">Escriba la frase sin comillas al inicio o al final.
+              <div id="iHelpQuoteDescription" class="form-text">Escriba la frase sin comillas al inicio y al final.
               </div>
             </div>
 
@@ -192,7 +200,9 @@
               <select class="form-select"
                       aria-label="Default select example"
                       id="iSelectEditCategory"
-                      name="nSelectEditCategory">
+                      name="nSelectEditCategory"
+                      title="Escoge una categoría."
+              >
                 <?php
                   $namesCategoriesList = getAllCategoriesList ();
                   foreach ($namesCategoriesList as $key => $value) {
@@ -202,7 +212,7 @@
                   }
                 ?>
               </select>
-              <div id="iHelpEditCategory" class="form-text">Nombre de la categoría.</div>
+              <div id="iHelpEditCategory" class="form-text">Escoge una categoría.</div>
             </div>
 
             <!-- Save edit /-->
@@ -373,6 +383,7 @@
 
       </div>
     </div>
+
   </div>
 </div>
 
