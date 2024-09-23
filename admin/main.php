@@ -75,7 +75,7 @@
           <form method="post" class="mb-3" style="display: block;" id="iFormAddQuote" name="nFormAddQuote">
 
             <!-- Title and description /-->
-            <h5 class="card-title">Añadir frase</h5>
+            <h6 class="card-title">Añadir frase</h6>
             <p class="card-text">Escribe el autor, frase y categoría de la frase.</p>
 
             <hr>
@@ -109,7 +109,7 @@
                         name="nTextAreaQuote"
                         id="iTextAreaQuote"
                         placeholder="Escriba una frase.."
-                        rows="3"
+                        rows="4"
                         title="Escriba la frase sin comillas al inicio y al final."
                         required></textarea>
               <div id="iHelpQuoteDescription" class="form-text">Escriba la frase sin comillas al inicio y al final.
@@ -152,7 +152,7 @@
           <form method="post" class="mb-3" style="display: none;" id="iFormEditQuote" name="nFormEditQuote">
 
             <!-- Title and description /-->
-            <h5 class="card-title">Editar frase</h5>
+            <h6 class="card-title">Editar frase</h6>
             <p class="card-text">Modificar la frase seleccionada.</p>
 
             <hr>
@@ -190,7 +190,7 @@
                         id="iTextAreaEditQuoteText"
                         required
                         title="Escriba la frase sin comillas al inicio y al final."
-                        rows="3"></textarea>
+                        rows="4"></textarea>
               <div id="iHelpQuoteDescription" class="form-text">Escriba la frase sin comillas al inicio y al final.
               </div>
             </div>
@@ -241,7 +241,7 @@
           <form method="post" class="mb-3" style="display: none;" id="iFormDeleteQuote" name="nFormDeleteQuote">
 
             <!-- Title and description /-->
-            <h5 class="card-title">Eliminar frase</h5>
+            <h6 class="card-title">Eliminar frase</h6>
             <p class="card-text">¿Desea eliminar el siguiente registro?</p>
 
             <hr>
@@ -295,7 +295,7 @@
       <div class="border mb-3 p-3">
 
         <!-- Title and description /-->
-        <h5 class="card-title">Lista de frases</h5>
+        <h6 class="card-title">Lista de frases</h6>
         <p class="card-text">Lista de frases, selecciona una para editar o eliminar.</p>
 
         <hr>
@@ -414,7 +414,7 @@
         "zeroRecords": "¡No hay registros para mostrar!",
         "info": "Mostrando página _PAGE_ de _PAGES_",
         "infoEmpty": "No hay registros disponinles",
-        "infoFiltered": "(filtered from _MAX_ total records)",
+        "infoFiltered": "(Filtrado de un total de _MAX_)",
         "search": "Buscar:",
         "paginate": {
           first: "Primero",

@@ -304,7 +304,7 @@ function changeStyleQuote() {
 }
 
 
-/* Functions of categories.php file --------------------------------------------------------------------------------- */
+/* Categories functions --------------------------------------------------------------------------------------------- */
 
 /**
  * Show form delete
@@ -318,6 +318,7 @@ function changeStyleQuote() {
 function showFormDeleteCategory(categoryId, categoryName, categoryDescription, totalQuotesCategory) {
 
   if (totalQuotesCategory != 0  && categoryId != 1) {
+    console.log('1')
     document.getElementById("iFormEditCategory").style.display = "none";
     document.getElementById("iFormAddCategory").style.display = "none";
     document.getElementById("iFormDeleteCategory").style.display = "block";
@@ -326,12 +327,10 @@ function showFormDeleteCategory(categoryId, categoryName, categoryDescription, t
     document.getElementById('iTextDeleteCategoryName').textContent = "La categoría tiene frases asociadas.";
     document.getElementById('iTextDeleteCategoryDescription').style.display = "none";
     document.getElementById('iTextDeleteCategoryTitleDescription').style.display = "none";
-    document.getElementById('iButtonAcceptDeleteCategory').style.display = "none";
-    document.getElementById("iButtonCancelDeleteCategory").innerHTML = 'Aceptar';
-    document.getElementById("iButtonCancelDeleteCategory").title = 'Clic para aceptar.';
-
   }
+
   if (categoryId == 1) {
+    console.log('2')
     document.getElementById("iFormEditCategory").style.display = "none";
     document.getElementById("iFormAddCategory").style.display = "none";
     document.getElementById("iFormDeleteCategory").style.display = "block";
@@ -340,12 +339,10 @@ function showFormDeleteCategory(categoryId, categoryName, categoryDescription, t
     document.getElementById('iTextDeleteCategoryName').textContent = "No es posible eliminar esta categoría.";
     document.getElementById('iTextDeleteCategoryDescription').style.display = "none";
     document.getElementById('iTextDeleteCategoryTitleDescription').style.display = "none";
-    document.getElementById('iButtonAcceptDeleteCategory').style.display = "none";
-    document.getElementById("iButtonCancelDeleteCategory").innerHTML = 'Aceptar';
-    document.getElementById("iButtonCancelDeleteCategory").title = 'Clic para aceptar.';
   }
 
   if (totalQuotesCategory == 0 && categoryId != 1) {
+    console.log('3')
     document.getElementById("iFormEditCategory").style.display = "none";
     document.getElementById("iFormAddCategory").style.display = "none";
     document.getElementById("iFormDeleteCategory").style.display = "block";
@@ -354,11 +351,7 @@ function showFormDeleteCategory(categoryId, categoryName, categoryDescription, t
     document.getElementById('iTextDeleteCategoryName').textContent = categoryName;
     document.getElementById('iTextDeleteCategoryTitleDescription').style.display = "Descripción";
     document.getElementById('iTextDeleteCategoryDescription').textContent = categoryDescription;
-    document.getElementById("iButtonCancelDeleteCategory").innerHTML = 'Cancelar';
-    document.getElementById('iButtonAcceptDeleteCategory').style.display = "inline";
-    document.getElementById("iButtonCancelDeleteCategory").title = 'Clic para cancelar.';
   }
-
 
 }
 
@@ -384,6 +377,10 @@ function hiddeFormDeleteCategory() {
  * @return none
  */
 function showFormEditCategory(categoryId, categoryName, categoryDescription) {
+  console.log(categoryId)
+  console.log(categoryName)
+  console.log(categoryDescription)
+
   document.getElementById("iFormEditCategory").style.display = "block";
   document.getElementById("iFormAddCategory").style.display = "none";
   document.getElementById("iFormDeleteCategory").style.display = "none";
@@ -403,4 +400,105 @@ function hiddeFormEditCategory() {
   document.getElementById("iFormEditCategory").style.display = "none";
   document.getElementById("iFormDeleteCategory").style.display = "none";
   document.getElementById("iFormAddCategory").style.display = "block";
+}
+
+
+/* Authors functions ------------------------------------------------------------------------------------------------ */
+
+/**
+ * Show form delete
+ *
+ * @return none
+ * @param {string} authorId
+ * @param {string} authorName
+ * @param {string} totalQuotesAuthor
+ * @param {string} authorDescription
+ */
+function showFormDeleteAuthor(authorId, authorName, authorDescription, totalQuotesAuthor) {
+
+  if (totalQuotesAuthor != 0  && authorId != 1) {
+    document.getElementById("iFormEditAuthor").style.display = "none";
+    document.getElementById("iFormAddAuthor").style.display = "none";
+    document.getElementById("iFormDeleteAuthor").style.display = "block";
+    document.getElementById('iInputDeleteAuthorId').value = authorId;
+    document.getElementById('iTextDeleteAuthorTitleName').textContent = "¡Error al intentar eliminar!";
+    document.getElementById('iTextDeleteAuthorName').textContent = "La categoría tiene frases asociadas.";
+    document.getElementById('iTextDeleteAuthorDescription').style.display = "none";
+    document.getElementById('iTextDeleteAuthorTitleDescription').style.display = "none";
+    document.getElementById('iButtonAcceptDeleteAuthor').style.display = "none";
+    document.getElementById("iButtonCancelDeleteAuthor").innerHTML = 'Aceptar';
+    document.getElementById("iButtonCancelDeleteAuthor").title = 'Clic para aceptar.';
+  }
+
+  if (authorId == 1) {
+    document.getElementById("iFormEditAuthor").style.display = "none";
+    document.getElementById("iFormAddAuthor").style.display = "none";
+    document.getElementById("iFormDeleteAuthor").style.display = "block";
+    document.getElementById('iInputDeleteAuthorId').value = authorId;
+    document.getElementById('iTextDeleteAuthorTitleName').textContent = "¡Error al intentar eliminar!";
+    document.getElementById('iTextDeleteAuthorName').textContent = "No es posible eliminar esta categoría.";
+    document.getElementById('iTextDeleteAuthorDescription').style.display = "none";
+    document.getElementById('iTextDeleteAuthorTitleDescription').style.display = "none";
+    document.getElementById('iButtonAcceptDeleteAuthor').style.display = "none";
+    document.getElementById("iButtonCancelDeleteAuthor").innerHTML = 'Aceptar';
+    document.getElementById("iButtonCancelDeleteAuthor").title = 'Clic para aceptar.';
+  }
+
+  if (totalQuotesAuthor == 0 && authorId != 1) {
+    document.getElementById("iFormEditAuthor").style.display = "none";
+    document.getElementById("iFormAddAuthor").style.display = "none";
+    document.getElementById("iFormDeleteAuthor").style.display = "block";
+    document.getElementById('iInputDeleteAuthorId').value = authorId;
+    document.getElementById('iTextDeleteAuthorTitleName').textContent = "Nombre";
+    document.getElementById('iTextDeleteAuthorName').textContent = authorName;
+    document.getElementById('iTextDeleteAuthorTitleDescription').style.display = "Descripción";
+    document.getElementById('iTextDeleteAuthorDescription').textContent = authorDescription;
+    document.getElementById("iButtonCancelDeleteAuthor").innerHTML = 'Cancelar';
+    document.getElementById('iButtonAcceptDeleteAuthor').style.display = "inline";
+    document.getElementById("iButtonCancelDeleteAuthor").title = 'Clic para cancelar.';
+  }
+
+}
+
+/**
+ * Hidde form delete
+ *
+ * @type void
+ * @param none
+ * @return none
+ */
+function hiddeFormDeleteAuthor() {
+  document.getElementById("iFormEditAuthor").style.display = "none";
+  document.getElementById("iFormDeleteAuthor").style.display = "none";
+  document.getElementById("iFormAddAuthor").style.display = "block";
+}
+
+/**
+ * Show form edit author
+ *
+ * @param {string} authorId Id number of the author
+ * @param {string} authorName of the author to edit
+ * @param {string} authorDescription of the author to edit
+ * @return none
+ */
+function showFormEditAuthor(authorId, authorName, authorDescription) {
+  document.getElementById("iFormEditAuthor").style.display = "block";
+  document.getElementById("iFormAddAuthor").style.display = "none";
+  document.getElementById("iFormDeleteAuthor").style.display = "none";
+  document.getElementById('iInputEditAuthorId').value = authorId;
+  document.getElementById('iInputEditAuthorName').value = authorName;
+  document.getElementById('iTextAreaEditAuthorDescription').textContent = authorDescription;
+}
+
+/**
+ * Hidde form edit author
+ *
+ * @type void
+ * @param none
+ * @return none
+ */
+function hiddeFormEditAuthor() {
+  document.getElementById("iFormEditAuthor").style.display = "none";
+  document.getElementById("iFormDeleteAuthor").style.display = "none";
+  document.getElementById("iFormAddAuthor").style.display = "block";
 }

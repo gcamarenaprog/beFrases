@@ -1,12 +1,17 @@
 <?php
-  /**
-   * @wordpress-plugin
-   *
-   * Plugin Name: beFrases
-   * Plugin URI:  https://guillermocamarena.com/beFrases/
-   * Description: Creates a manage a list of quotes and authors with category option. Display options for your sidebar
-   * (widget). Version:     2.0.0 Author:      Guillermo Camarena Author URI:  https://gcamarenaprog.com/ Text Domain:
-   * beFrases Domain Path: /languages License URI: https://www.gnu.org/licenses/gpl-2.0.html
+  /*
+  @wordpress-plugin
+  
+  Plugin Name: beFrases
+  Plugin URI:  https://guillermocamarena.com/beFrases/
+  Description: Creates a manage a list of quotes and authors with category option. Display options for your sidebar
+  (widget).
+  Version:     2.0.0
+  Author:      Guillermo Camarena
+  Author URI:  https://gcamarenaprog.com/
+  Text Domain: beFrases Domain
+  Path: /languages
+  License URI: https://www.gnu.org/licenses/gpl-2.0.html
    */
   
   include_once dirname (__FILE__) . '/includes/beFrases-widget.php';
@@ -32,6 +37,7 @@
   $urlMain = $urlBaseAdmin . "main.php";
   $urlSettings = $urlBaseAdmin . "settings.php";
   $urlCategories = $urlBaseAdmin . "categories.php";
+  $urlAuthors = $urlBaseAdmin . "authors.php";
   $urlHelp = $urlBaseAdmin . "help.php";
   $urlAbout = $urlBaseAdmin . "about.php";
   $urlWidget = $urlBaseWidget . "beFrases-widget.php";
@@ -41,7 +47,7 @@
   /**
    * Hooks -------------------------------------------------------------------------------------------------------------
    */
-   
+  
   /**
    * Activate hook function, create and insert initial data
    *
@@ -244,18 +250,20 @@
     global $urlMain;
     global $urlSettings;
     global $urlCategories;
+    global $urlAuthors;
     global $urlHelp;
     global $urlAbout;
     global $urlWidget;
     global $urlBeFrases;
     
-    if (($hook != $urlMain) &&
-      ($hook != $urlBeFrases) &&
-      ($hook != $urlSettings) &&
-      ($hook != $urlCategories) &&
-      ($hook != $urlAbout) &&
-      ($hook != $urlWidget) &&
-      ($hook != $urlHelp)) {
+    if (($hook != $urlMain)
+      && ($hook != $urlBeFrases)
+      && ($hook != $urlSettings)
+      && ($hook != $urlCategories)
+      && ($hook != $urlAuthors)
+      && ($hook != $urlAbout)
+      && ($hook != $urlWidget)
+      && ($hook != $urlHelp)) {
       return;
     }
     
@@ -293,6 +301,7 @@
     global $urlMain;
     global $urlSettings;
     global $urlCategories;
+    global $urlAuthors;
     global $urlHelp;
     global $urlAbout;
     global $urlWidget;
@@ -302,6 +311,7 @@
       && ($hook != $urlBeFrases)
       && ($hook != $urlSettings)
       && ($hook != $urlCategories)
+      && ($hook != $urlAuthors)
       && ($hook != $urlAbout)
       && ($hook != $urlWidget)
       && ($hook != $urlHelp)) {
@@ -755,4 +765,53 @@
   {
     global $wpdb;
     return $wpdb->get_var ("SELECT COUNT(befrases_category) FROM {$wpdb -> prefix}befrases WHERE befrases_category = {$idCategory} ");
+  }
+  
+  
+  /**
+   * Authors section functions -----------------------------------------------------------------------------------------
+   */
+  
+  /**
+   * Gets list of all authors from database
+   *
+   * @return array $authorsList associative array with list of all authors and his data
+   */
+  function getAllAuthorsList (): array
+  {
+    global $wpdb;
+    $query = "SELECT * FROM {$wpdb -> prefix}befrases_aut";
+    $authorsList = $wpdb->get_results ($query, ARRAY_A);
+    if (empty($authorsList)) {
+      return array();
+    }
+    return $authorsList;
+  }
+  
+  /**
+   * Count the total quotes of an author with the id number
+   *
+   * @param int $idAuthor Id number of the author to be counted
+   * @return int Number of total records of an author
+   */
+  function countTotalRecordsAuthor (int $idAuthor): int
+  {
+    global $wpdb;
+    return $wpdb->get_var ("SELECT COUNT(befrases_author) FROM {$wpdb -> prefix}befrases WHERE befrases_author = {$idAuthor} ");
+  }
+  
+  /**
+   * Save a new author record
+   *
+   * @param string $authorName The author name of the new record
+   * @return void
+   */
+  function saveNewAuthorRecord (string $authorName): void
+  {
+    global $wpdb;
+    $data = array(
+      'befrases_aut_name' => $authorName
+    );
+    $tableName = "{$wpdb -> prefix}befrases_aut";
+    $wpdb->insert ($tableName, $data);
   }

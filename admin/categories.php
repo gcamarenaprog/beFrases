@@ -22,7 +22,7 @@
   }
   
   # Delete category record from delete form
-  if (isset($_POST['nButtonDeleteCategory'])) {
+  if (isset($_POST['nButtonDeleteAccept'])) {
     $categoryId = $_POST['nInputDeleteCategoryId'];
     deleteCategoryRecord ($categoryId);
   }
@@ -65,7 +65,7 @@
           <form method="post" class="mb-3" style="display: block;" id="iFormAddCategory" name="nFormAddCategory">
 
             <!-- Title and description /-->
-            <h5 class="card-title">Añadir categoría</h5>
+            <h6 class="card-title">Añadir categoría</h6>
             <p class="card-text">Escribe el nombre y la descripción de la nueva categoría.</p>
 
             <hr>
@@ -101,8 +101,8 @@
                     name="nButtonNewCategory"
                     id="iButtonNewCategory"
                     type="submit"
-                    title="Clic para guardar."
-            >Guardar
+                    title="Clic para añadir."
+            >Añadir
             </button>
 
 
@@ -112,7 +112,7 @@
           <form method="post" class="mb-3" style="display: none;" id="iFormEditCategory" name="nFormEditCategory">
 
             <!-- Title and description /-->
-            <h5 class="card-title">Editar categoría</h5>
+            <h6 class="card-title">Editar categoría</h6>
             <p class="card-text">Modificar la categoría seleccionada.</p>
 
             <hr>
@@ -172,8 +172,8 @@
           <form method="post" class="mb-3" style="display: none;" id="iFormDeleteCategory" name="nFormDeleteCategory">
 
             <!-- Title and description /-->
-            <h5 class="card-title">Eliminar categoría</h5>
-            <p class="card-text">¿Desea eliminar el siguiente registro?</p>
+            <h6 class="card-title">Eliminar categoría</h6>
+            <p class="card-text">¿Desea eliminar la siguiente categoría?</p>
 
             <hr>
 
@@ -192,7 +192,7 @@
                id="iTextDeleteCategoryName">
             </p>
 
-            <!-- Descriptionn title /-->
+            <!-- Description title /-->
             <p class="card-text" style="margin-bottom: 0px;">
               <b name="nTextDeleteCategoryTitleDescription"
                  id="iTextDeleteCategoryTitleDescription">Descripción</b>
@@ -206,19 +206,19 @@
 
             <hr>
 
-            <!-- Delete quote /-->
+            <!-- Delete category /-->
             <button type="submit"
                     class="btn btn-success btn-sm"
-                    name="nButtonAcceptDeleteCategory"
-                    id="iButtonAcceptDeleteCategory"
-                    title="Clic para eliminar.">Eliminar
+                    name="nButtonDeleteAccept"
+                    id="iButtonDeleteAccept"
+                    title="Clic para eliminar.">Aceptar
             </button>
 
             <!-- Cancel delete /-->
             <button type="button"
                     class="btn btn-danger btn-sm"
-                    name="nButtonCancelDeleteCategory"
-                    id="iButtonCancelDeleteCategory"
+                    name="nButtonDeleteCancel"
+                    id="iButtonDeleteCancel"
                     title="Clic para cancelar."
                     onclick="hiddeFormDeleteCategory()">Cancelar
             </button>
@@ -234,8 +234,8 @@
       <div class="border mb-3 p-3">
 
         <!-- Title and description /-->
-        <h5 class="card-title">Lista de categorías</h5>
-        <p class="card-text">Lista de categorías, selecciona una para editar o eliminar.</p>
+        <h6 class="card-title">Lista de categorías</h6>
+        <p class="card-text">Selecciona una para editar o eliminar.</p>
 
         <hr>
 
@@ -341,8 +341,8 @@
         "emptyTable": "¡No hay registros para mostrar!",
         "zeroRecords": "¡No hay registros para mostrar!",
         "info": "Mostrando página _PAGE_ de _PAGES_",
-        "infoEmpty": "No hay registros disponinles",
-        "infoFiltered": "(filtered from _MAX_ total records)",
+        "infoEmpty": "No hay registros disponibles.",
+        "infoFiltered": "(filtrados del total de _MAX_ registros)",
         "search": "Buscar:",
         "paginate": {
           first: "Primero",

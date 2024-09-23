@@ -45,8 +45,19 @@ p.be-quote {
 
 /* Override Datatables styles */
 
-.dataTables_filter {
-  margin-bottom: 10px;
+table {
+  font-size: 0.9em;
+}
+
+.dt-info {
+  font-size: 0.9em;
+}
+.dt-paging {
+  font-size: 0.9em;
+}
+
+.dt-search input {
+  font-size: 0.79em !important;
 }
 
 table.dataTable thead th {
@@ -67,11 +78,13 @@ table.dataTable tfoot th {
   padding-bottom: 4px !important
 }
 
+
 /* Override WP Core UI styles */
 
 .wp-core-ui select {
   -webkit-appearance: auto !important;
   background: none !important;
+  font-size: 0.9em !important;
 }
 
 /* Override Bootstrap styles */
@@ -79,6 +92,19 @@ table.dataTable tfoot th {
 label {
   margin-right: 5px;
   margin-bottom: 0px;
+  font-size: 0.9em !important;
+}
+
+.form-text {
+  font-size: 0.80em !important;
+}
+
+.form-control {
+  font-size: 0.9em !important;
+}
+
+.btn-sm, .btn-group-sm > .btn {
+  font-size: 0.9em !important;
 }
 
 input,
@@ -113,5 +139,9 @@ select {
 .card-text {
   margin-top: 0;
   margin-bottom: 1rem;
-  font-size: 1em;
+  font-size: 0.90em;
+}
+
+h6 {
+  font-size: 1.15rem;
 }
