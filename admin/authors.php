@@ -2,12 +2,12 @@
   /**
    * Add authors plugin option
    *
-   * @package   				beFrases
-   * @version  					2.0.0
-   * @author    				Guillermo Camarena <gcamarenaprog@outlook.com>
-   * @copyright 				Copyright (c) 2004 - 2023, Guillermo Camarena
-   * @link      				https://gcamarenaprog.com/beFrases/
-   * @license   				http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
+   * @package            beFrases
+   * @version            2.0.0
+   * @author             Guillermo Camarena <gcamarenaprog@outlook.com>
+   * @copyright          Copyright (c) 2004 - 2023, Guillermo Camarena
+   * @link               https://gcamarenaprog.com/beFrases/
+   * @license            http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
    *
    */
   
@@ -18,12 +18,11 @@
   # Save new author record from add new author form
   if (isset($_POST['nButtonNewAuthor'])) {
     $authorName = $_POST['nInputAuthorName'];
-    $authorDescription = $_POST['nTextAreaAuthorDescription'];
-    saveNewAuthorRecord ($authorName, $authorDescription);
+    saveNewAuthorRecord ($authorName);
   }
   
   # Delete author record from delete form
-  if (isset($_POST['nButtonDeleteAuthor'])) {
+  if (isset($_POST['nButtonDeleteAccept'])) {
     $authorId = $_POST['nInputDeleteAuthorId'];
     deleteAuthorRecord ($authorId);
   }
@@ -32,8 +31,7 @@
   if (isset($_POST['nButtonSaveEditAuthor'])) {
     $idAuthor = $_POST['nInputEditAuthorId'];
     $nameAuthor = $_POST['nInputEditAuthorName'];
-    $descriptionAuthor = $_POST['nTextAreaEditAuthorDescription'];
-    updateAuthorRecord ($idAuthor, $nameAuthor, $descriptionAuthor);
+    updateAuthorRecord ($idAuthor, $nameAuthor);
   }
   
   # Gets list of all authors from database
@@ -50,8 +48,7 @@
         <h5 class="card-header"><?php echo get_admin_page_title (); ?></h5>
         <div class="card-body">
           <p class="card-text">
-            En esta sección podrás añadir, editar o eliminar autores. Para editar o eliminar selecciona una autor
-            de la lista.
+            In this section you can add, edit or delete authors. To edit or delete, select an author from the list.
           </p>
         </div>
       </div>
@@ -66,21 +63,21 @@
           <form method="post" class="mb-3" style="display: block;" id="iFormAddAuthor" name="nFormAddAuthor">
 
             <!-- Title and description /-->
-            <h6 class="card-title">Añadir autor</h6>
-            <p class="card-text">Escribe el nombre y la descripción de la nueva autor.</p>
+            <h6 class="card-title">Add author</h6>
+            <p class="card-text">Write the name and description of the new author.</p>
 
             <hr>
 
             <!-- Categoría /-->
             <div class="mb-3">
-              <label for="iInputAuthorName" class="form-label">Nombre</label>
+              <label for="iInputAuthorName" class="form-label">Name of author</label>
               <input class="form-control"
                      name="nInputAuthorName"
                      id="iInputAuthorName"
-                     title="Nombre del autor."
-                     placeholder="Nombre"
+                     title="Name of author."
+                     placeholder="Name"
                      required>
-              <div id="iHelpAuthorName" class="form-text">Nombre del autor.</div>
+              <div id="iHelpAuthorName" class="form-text">Name of author.</div>
             </div>
 
             <!-- Add button /-->
@@ -88,8 +85,8 @@
                     name="nButtonNewAuthor"
                     id="iButtonNewAuthor"
                     type="submit"
-                    title="Clic para añadir."
-            >Añadir
+                    title="Click to add."
+            >Add
             </button>
 
           </form>
@@ -98,8 +95,8 @@
           <form method="post" class="mb-3" style="display: none;" id="iFormEditAuthor" name="nFormEditAuthor">
 
             <!-- Title and description /-->
-            <h6 class="card-title">Editar autor</h6>
-            <p class="card-text">Modificar el autor seleccionado.</p>
+            <h6 class="card-title">Edit author</h6>
+            <p class="card-text">Modify the selected author.</p>
 
             <hr>
 
@@ -111,44 +108,30 @@
 
             <!-- Name /-->
             <div class="mb-3">
-              <label for="iInputEditAuthorName" class="form-label">Nombre del autor</label>
+              <label for="iInputEditAuthorName" class="form-label">Name of author</label>
               <input class="form-control"
                      name="nInputEditAuthorName"
                      id="iInputEditAuthorName"
                      required
-                     title="Nombre del autor">
-              <div id="iHelpAuthorName" class="form-text">Nombre del autor.</div>
-            </div>
-
-            <!-- Description /-->
-            <div class="mb-3">
-              <label for="iTextAreaEditAuthorDescription" class="form-label">Descripción</label>
-              <textarea class="form-control"
-                        name="nTextAreaEditAuthorDescription"
-                        id="iTextAreaEditAuthorDescription"
-                        placeholder="Descripción del autor"
-                        required
-                        title="Escribe una descripción."
-                        rows="3"></textarea>
-              <div id="iHelpAuthorDescription" class="form-text">Descripción del autor.
-              </div>
+                     title="Name of author">
+              <div id="iHelpAuthorName" class="form-text">Name of author.</div>
             </div>
 
             <!-- Save edit /-->
             <button type="submit"
                     name="nButtonSaveEditAuthor"
                     id="iButtonSaveEditAuthor"
-                    title="Clic para actualizar cambios."
-                    class="btn btn-success btn-sm">Actualizar
+                    title="Click to update changes."
+                    class="btn btn-success btn-sm">Update
             </button>
 
             <!-- Cancel edit /-->
             <button type="button"
                     name="nButtonCancelEditAuthor"
                     id="iButtonCancelEditAuthor"
-                    title="Clic para cancelar."
+                    title="Click to cancel."
                     class="btn btn-danger btn-sm"
-                    onclick="hiddeFormEditAuthor()">Cancelar
+                    onclick="hiddeFormEditAuthor()">Cancel
             </button>
 
 
@@ -157,9 +140,21 @@
           <!-- Delete author form -->
           <form method="post" class="mb-3" style="display: none;" id="iFormDeleteAuthor" name="nFormDeleteAuthor">
 
-            <!-- Title and description /-->
-            <h6 class="card-title">Eliminar autor</h6>
-            <p class="card-text">¿Desea eliminar el siguiente registro?</p>
+            <!-- Title /-->
+            <h6 class="card-title"
+                id="iTitleAuthorDeleteQuestion"
+                name="nTitleAuthorDeleteQuestion">Delete author
+            </h6>
+
+            <!-- Description /-->
+            <div>
+              <p class="card-text"
+                 style="margin-top: 10px;"
+                 id="iTextAuthorDeleteQuestion"
+                 name="nTextAuthorDeleteQuestion">Do you want to delete the following author?
+              </p>
+
+            </div>
 
             <hr>
 
@@ -169,7 +164,7 @@
             <!-- Title /-->
             <p class="card-text" style="margin-bottom: 0px;">
               <b name="nTextDeleteAuthorTitleName"
-                 id="iTextDeleteAuthorTitleName">Nombre</b
+                 id="iTextDeleteAuthorTitleName">Name of author</b
             </p>
 
             <!-- Title text /-->
@@ -178,35 +173,24 @@
                id="iTextDeleteAuthorName">
             </p>
 
-            <!-- Descriptionn title /-->
-            <p class="card-text" style="margin-bottom: 0px;">
-              <b name="nTextDeleteAuthorTitleDescription"
-                 id="iTextDeleteAuthorTitleDescription">Descripción</b>
-            </p>
-
-            <!-- Description text /-->
-            <p class="card-text"
-               name="nTextDeleteAuthorDescription"
-               id="iTextDeleteAuthorDescription">
-            </p>
-
             <hr>
 
-            <!-- Delete quote /-->
+            <!-- Delete category button /-->
             <button type="submit"
-                    class="btn btn-success btn-sm"
-                    name="nButtonAcceptDeleteAuthor"
-                    id="iButtonAcceptDeleteAuthor"
-                    title="Clic para eliminar.">Eliminar
+                    class="btn btn-success btn-sm "
+                    name="nButtonDeleteAccept"
+                    id="iButtonDeleteAccept"
+                    title="Click to delete.">Delete
             </button>
 
-            <!-- Cancel delete /-->
+            <!-- Cancel delete button /-->
             <button type="button"
                     class="btn btn-danger btn-sm"
-                    name="nButtonCancelDeleteAuthor"
-                    id="iButtonCancelDeleteAuthor"
-                    title="Clic para cancelar."
-                    onclick="hiddeFormDeleteAuthor()">Cancelar
+                    name="nButtonDeleteCancel"
+                    id="iButtonDeleteCancel"
+                    title="Click to cancel."
+                    title="Click to cancel."
+                    onclick="hiddeFormDeleteAuthor()">Cancel
             </button>
 
           </form>
@@ -220,8 +204,8 @@
       <div class="border mb-3 p-3">
 
         <!-- Title and description /-->
-        <h6 class="card-title">Lista de autores</h6>
-        <p class="card-text">Selecciona una para editar o eliminar.</p>
+        <h6 class="card-title">List of authors</h6>
+        <p class="card-text">Select one to edit or delete.</p>
 
         <hr>
 
@@ -233,10 +217,10 @@
             <thead>
             <tr>
               <th>#</th>
-              <th>Nombre</th>
-              <th>Frases</th>
-              <th class="text-center">Editar</th>
-              <th class="text-center">Borrar</th>
+              <th>Name</th>
+              <th>Quotes</th>
+              <th class="text-center">Edit</th>
+              <th class="text-center">Delete</th>
             </tr>
             </thead>
 
@@ -260,23 +244,23 @@
 
                   <!-- Edit button /-->
                   <td style="text-align:center">
-                    <button class="btn btn-primary btn-sm"
-                            id="iButtonEditAuthorRegister"
-                            name="nButtonEditAuthorRegister"
-                            title="Clic para editar."
-                            onclick="showFormEditAuthor('<?php echo $authorId; ?>', '<?php echo $authorName; ?>', '<?php echo $authorDescription; ?>')">
-                      Editar
+                    <button class="btn btn-primary btn-sm "
+                            id="iButtonEditListOfAuthors"
+                            name="nButtonEditListOfAuthors"
+                            title="Click to edit."
+                            onclick="showFormEditAuthor('<?php echo $authorId; ?>', '<?php echo $authorName; ?>')">
+                      Edit
                     </button>
                   </td>
 
                   <!-- Delete button /-->
                   <td style="text-align:center">
                     <button class="btn btn-danger btn-sm"
-                            id="iButtonDeleteAuthorRegister"
-                            name="nButtonDeleteAuthorRegister"
-                            title="Clic para eliminar."
-                            onclick="showFormDeleteAuthor('<?php echo $authorId; ?>', '<?php echo $authorName; ?>', '<?php echo $authorDescription; ?>' , '<?php echo $authorTotalQuotes; ?>')">
-                      Eliminar
+                            id="iButtonDeleteListOfAuthors"
+                            name="nButtonDeleteListOfAuthors"
+                            title="Click to delete."
+                            onclick="showFormDeleteAuthor('<?php echo $authorId; ?>', '<?php echo $authorName; ?>', '<?php echo $authorTotalQuotes; ?>')">
+                      Delete
                     </button>
                   </td>
 
@@ -287,10 +271,10 @@
 
             <tfoot>
             <th>#</th>
-            <th>Nombre</th>
-            <th>Frases</th>
-            <th class="text-center">Editar</th>
-            <th class="text-center">Borrar</th>
+            <th>Name</th>
+            <th>Quotes</th>
+            <th class="text-center">Edit</th>
+            <th class="text-center">Delete</th>
             </tfoot>
 
           </table>
@@ -317,18 +301,18 @@
       }],
       "order": [[1, "asc"]],
       "language": {
-        "lengthMenu": "Mostrar _MENU_ registros por página",
-        "emptyTable": "¡No hay registros para mostrar!",
-        "zeroRecords": "¡No hay registros para mostrar!",
-        "info": "Mostrando página _PAGE_ de _PAGES_",
-        "infoEmpty": "No hay registros disponibles.",
-        "infoFiltered": "(filtrados del total de _MAX_ registros)",
-        "search": "Buscar:",
+        "lengthMenu": "Show _MENU_ entries per page",
+        "emptyTable": "There are no records to show!",
+        "zeroRecords": "There are no records to show!",
+        "info": "Showing page _PAGE_ of _PAGES_",
+        "infoEmpty": "No records available.",
+        "infoFiltered": "(filtered from the total _MAX_ records)",
+        "search": "Search:",
         "paginate": {
-          first: "Primero",
-          previous: "Anterior",
-          next: "Siguiente",
-          last: "Último"
+          first: "First",
+          previous: "Previous",
+          next: "Next",
+          last: "Last"
         },
       },
     });

@@ -49,8 +49,8 @@
         <h5 class="card-header"><?php echo get_admin_page_title (); ?></h5>
         <div class="card-body">
           <p class="card-text">
-            En esta sección podrás añadir, editar o eliminar categorías. Para editar o eliminar selecciona una categoría
-            de la lista.
+            In this section you can add, edit or delete categories. To edit or delete, select a category
+            from the list.
           </p>
         </div>
       </div>
@@ -65,35 +65,35 @@
           <form method="post" class="mb-3" style="display: block;" id="iFormAddCategory" name="nFormAddCategory">
 
             <!-- Title and description /-->
-            <h6 class="card-title">Añadir categoría</h6>
-            <p class="card-text">Escribe el nombre y la descripción de la nueva categoría.</p>
+            <h6 class="card-title">Add category</h6>
+            <p class="card-text">Enter the name and description of the new category.</p>
 
             <hr>
 
-            <!-- Categoría /-->
+            <!-- Name of category /-->
             <div class="mb-3">
-              <label for="iInputCategoryName" class="form-label">Nombre</label>
+              <label for="iInputCategoryName" class="form-label">Name of category</label>
               <input class="form-control"
                      name="nInputCategoryName"
                      id="iInputCategoryName"
-                     title="Nombre de la categoría."
-                     placeholder="Nombre.."
+                     title="Name of category."
+                     placeholder="Name of category"
                      required>
-              <div id="iHelpCategoryName" class="form-text">Nombre de la categoría.</div>
+              <div id="iHelpCategoryName" class="form-text">Name of category.</div>
             </div>
 
             <!-- Description /-->
             <div class="mb-3">
-              <label for="iTextAreaCategoryDescription" class="form-label">Descripción</label>
+              <label for="iTextAreaCategoryDescription" class="form-label">Description</label>
               <textarea class="form-control"
                         name="nTextAreaCategoryDescription"
                         id="iTextAreaCategoryDescription"
-                        placeholder="Escribe una descripción.."
+                        placeholder="Write a description.."
                         rows="3"
-                        title="Descripción de la categoría."
+                        title="The description of the category."
                         required
               ></textarea>
-              <div id="iHelpCategoryDescription" class="form-text">La descripción de la categoría.</div>
+              <div id="iHelpCategoryDescription" class="form-text">The description of the category..</div>
             </div>
 
             <!-- Add button /-->
@@ -101,8 +101,8 @@
                     name="nButtonNewCategory"
                     id="iButtonNewCategory"
                     type="submit"
-                    title="Clic para añadir."
-            >Añadir
+                    title="Click to add."
+            >Add
             </button>
 
 
@@ -112,8 +112,8 @@
           <form method="post" class="mb-3" style="display: none;" id="iFormEditCategory" name="nFormEditCategory">
 
             <!-- Title and description /-->
-            <h6 class="card-title">Editar categoría</h6>
-            <p class="card-text">Modificar la categoría seleccionada.</p>
+            <h6 class="card-title">Edit Category</h6>
+            <p class="card-text">Modify the selected category.</p>
 
             <hr>
 
@@ -125,26 +125,26 @@
 
             <!-- Name /-->
             <div class="mb-3">
-              <label for="iInputEditCategoryName" class="form-label">Nombre de la categoría</label>
+              <label for="iInputEditCategoryName" class="form-label">Name of category</label>
               <input class="form-control"
                      name="nInputEditCategoryName"
                      id="iInputEditCategoryName"
                      required
-                     title="Nombre de la categoría">
-              <div id="iHelpCategoryName" class="form-text">Nombre de la categoría.</div>
+                     title="Name of category">
+              <div id="iHelpCategoryName" class="form-text">Name of category.</div>
             </div>
 
             <!-- Description /-->
             <div class="mb-3">
-              <label for="iTextAreaEditCategoryDescription" class="form-label">Descripción</label>
+              <label for="iTextAreaEditCategoryDescription" class="form-label">Description</label>
               <textarea class="form-control"
                         name="nTextAreaEditCategoryDescription"
                         id="iTextAreaEditCategoryDescription"
-                        placeholder="Descripción de la categoría"
+                        placeholder="Description de la categoría"
                         required
-                        title="Escribe una descripción."
+                        title="Write a description."
                         rows="3"></textarea>
-              <div id="iHelpCategoryDescription" class="form-text">Descripción de la categoría.
+              <div id="iHelpCategoryDescription" class="form-text">Category description.
               </div>
             </div>
 
@@ -152,17 +152,17 @@
             <button type="submit"
                     name="nButtonSaveEditCategory"
                     id="iButtonSaveEditCategory"
-                    title="Clic para actualizar cambios."
-                    class="btn btn-success btn-sm">Actualizar
+                    title="Click to update."
+                    class="btn btn-success btn-sm">Update
             </button>
 
             <!-- Cancel edit /-->
             <button type="button"
                     name="nButtonCancelEditCategory"
                     id="iButtonCancelEditCategory"
-                    title="Clic para cancelar."
+                    title="Click to cancel."
                     class="btn btn-danger btn-sm"
-                    onclick="hiddeFormEditCategory()">Cancelar
+                    onclick="hiddeFormEditCategory()">Cancel
             </button>
 
 
@@ -171,9 +171,21 @@
           <!-- Delete category form -->
           <form method="post" class="mb-3" style="display: none;" id="iFormDeleteCategory" name="nFormDeleteCategory">
 
-            <!-- Title and description /-->
-            <h6 class="card-title">Eliminar categoría</h6>
-            <p class="card-text">¿Desea eliminar la siguiente categoría?</p>
+            <!-- Title /-->
+            <h6 class="card-title"
+                id="iTitleCategoryDeleteQuestion"
+                name="nTitleCategoryDeleteQuestion">Delete category
+            </h6>
+
+            <!-- Description /-->
+            <div>
+              <p class="card-text"
+                 style="margin-top: 10px;"
+                 id="iTextCategoryDeleteQuestion"
+                 name="nTextCategoryDeleteQuestion">Do you want to delete the following category?
+              </p>
+         
+            </div>
 
             <hr>
 
@@ -183,7 +195,7 @@
             <!-- Title /-->
             <p class="card-text" style="margin-bottom: 0px;">
               <b name="nTextDeleteCategoryTitleName"
-                 id="iTextDeleteCategoryTitleName">Nombre</b
+                 id="iTextDeleteCategoryTitleName">Name of category</b
             </p>
 
             <!-- Title text /-->
@@ -195,7 +207,7 @@
             <!-- Description title /-->
             <p class="card-text" style="margin-bottom: 0px;">
               <b name="nTextDeleteCategoryTitleDescription"
-                 id="iTextDeleteCategoryTitleDescription">Descripción</b>
+                 id="iTextDeleteCategoryTitleDescription">Description</b>
             </p>
 
             <!-- Description text /-->
@@ -206,21 +218,22 @@
 
             <hr>
 
-            <!-- Delete category /-->
+            <!-- Delete category button /-->
             <button type="submit"
-                    class="btn btn-success btn-sm"
+                    class="btn btn-success btn-sm "
                     name="nButtonDeleteAccept"
                     id="iButtonDeleteAccept"
-                    title="Clic para eliminar.">Aceptar
+                    title="Click to delete.">Delete
             </button>
 
-            <!-- Cancel delete /-->
+            <!-- Cancel delete button /-->
             <button type="button"
                     class="btn btn-danger btn-sm"
                     name="nButtonDeleteCancel"
                     id="iButtonDeleteCancel"
-                    title="Clic para cancelar."
-                    onclick="hiddeFormDeleteCategory()">Cancelar
+                    title="Click to cancel."
+                    title="Click to cancel."
+                    onclick="hiddeFormDeleteCategory()">Cancel
             </button>
 
           </form>
@@ -234,8 +247,9 @@
       <div class="border mb-3 p-3">
 
         <!-- Title and description /-->
-        <h6 class="card-title">Lista de categorías</h6>
-        <p class="card-text">Selecciona una para editar o eliminar.</p>
+        <h6 class="card-title">List of categories</h6>
+
+        <p class="card-text">Select one to edit or delete.</p>
 
         <hr>
 
@@ -247,11 +261,11 @@
             <thead>
             <tr>
               <th>#</th>
-              <th>Nombre</th>
-              <th>Descripción</th>
-              <th>Frases</th>
-              <th class="text-center">Editar</th>
-              <th class="text-center">Borrar</th>
+              <th>Name</th>
+              <th>Description</th>
+              <th>Quotes</th>
+              <th class="text-center">Edit</th>
+              <th class="text-center">Delete</th>
             </tr>
             </thead>
 
@@ -279,23 +293,27 @@
 
                   <!-- Edit button /-->
                   <td style="text-align:center">
-                    <button class="btn btn-primary btn-sm"
-                            id="iButtonEditCategoryRegister"
-                            name="nButtonEditCategoryRegister"
-                            title="Clic para editar."
+                    <button class="btn btn-primary btn-sm <?php if ($categoryId == 1) {
+                      echo "disabled";
+                    } ?>"
+                            id="iButtonEditCategoryListOfCategories"
+                            name="nButtonEditCategoryListOfCategories"
+                            title="Click to edit."
                             onclick="showFormEditCategory('<?php echo $categoryId; ?>', '<?php echo $categoryName; ?>', '<?php echo $categoryDescription; ?>')">
-                      Editar
+                      Edit
                     </button>
                   </td>
 
                   <!-- Delete button /-->
                   <td style="text-align:center">
-                    <button class="btn btn-danger btn-sm"
-                            id="iButtonDeleteCategoryRegister"
-                            name="nButtonDeleteCategoryRegister"
-                            title="Clic para eliminar."
+                    <button class="btn btn-danger btn-sm <?php if ($categoryId == 1) {
+                      echo "disabled";
+                    } ?>"
+                            id="iButtonDeleteCategoryListOfCategories"
+                            name="nButtonDeleteCategoryListOfCategories"
+                            title="Click to delete."
                             onclick="showFormDeleteCategory('<?php echo $categoryId; ?>', '<?php echo $categoryName; ?>', '<?php echo $categoryDescription; ?>' , '<?php echo $categoryTotalQuotes; ?>')">
-                      Eliminar
+                      Delete
                     </button>
                   </td>
 
@@ -306,11 +324,11 @@
 
             <tfoot>
             <th>#</th>
-            <th>Nombre</th>
-            <th>Descripción</th>
-            <th>Frases</th>
-            <th class="text-center">Editar</th>
-            <th class="text-center">Borrar</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Quotes</th>
+            <th class="text-center">Edit</th>
+            <th class="text-center">Delete</th>
             </tfoot>
 
           </table>
@@ -337,18 +355,18 @@
       }],
       "order": [[1, "asc"]],
       "language": {
-        "lengthMenu": "Mostrar _MENU_ registros por página",
-        "emptyTable": "¡No hay registros para mostrar!",
-        "zeroRecords": "¡No hay registros para mostrar!",
-        "info": "Mostrando página _PAGE_ de _PAGES_",
-        "infoEmpty": "No hay registros disponibles.",
-        "infoFiltered": "(filtrados del total de _MAX_ registros)",
-        "search": "Buscar:",
+        "lengthMenu": "Show _MENU_ entries per page",
+        "emptyTable": "There are no records to show!",
+        "zeroRecords": "There are no records to show!",
+        "info": "Showing page _PAGE_ of _PAGES_",
+        "infoEmpty": "No records available.",
+        "infoFiltered": "(filtered from the total _MAX_ records)",
+        "search": "Search:",
         "paginate": {
-          first: "Primero",
-          previous: "Anterior",
-          next: "Siguiente",
-          last: "Último"
+          first: "First",
+          previous: "Previous",
+          next: "Next",
+          last: "Last"
         },
       },
     });

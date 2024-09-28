@@ -172,8 +172,8 @@
     # 'Manage' submenu option
     add_submenu_page (
       plugin_dir_path (__FILE__) . 'admin/main.php',  // Parent slug
-      'Administrar', // Page title
-      'Administrar', // Menu title
+      'Manage', // Page title
+      'Manage', // Menu title
       'manage_options', // Options
       plugin_dir_path (__FILE__) . 'admin/main.php', // Slug
       null // Content
@@ -182,8 +182,8 @@
     # 'Categories' submenu option
     add_submenu_page (
       plugin_dir_path (__FILE__) . 'admin/main.php',  // Parent slug
-      'Categorías', // Page title
-      'Categorías', // Menu title
+      'Categories', // Page title
+      'Categories', // Menu title
       'manage_options', // Capability
       plugin_dir_path (__FILE__) . 'admin/categories.php', // Slug
       null // Content
@@ -192,8 +192,8 @@
     # 'Authors' submenu option
     add_submenu_page (
       plugin_dir_path (__FILE__) . 'admin/main.php',  // Parent slug
-      'Autores', // Page title
-      'Autores', // Menu title
+      'Authors', // Page title
+      'Authors', // Menu title
       'manage_options', // Capability
       plugin_dir_path (__FILE__) . 'admin/authors.php', // Slug
       null // Content
@@ -202,8 +202,8 @@
     # 'Settings' submenu option
     add_submenu_page (
       plugin_dir_path (__FILE__) . 'admin/main.php',  // Parent slug
-      'Ajustes', // Page title
-      'Ajustes', // Menu title
+      'Settings', // Page title
+      'Settings', // Menu title
       'manage_options', // Options
       plugin_dir_path (__FILE__) . 'admin/settings.php', // Slug
       null // Content
@@ -212,8 +212,8 @@
     # 'Help' submenu option
     add_submenu_page (
       plugin_dir_path (__FILE__) . 'admin/main.php',  // Parent slug
-      'Ayuda', // Page title
-      'Ayuda', // Menu title
+      'Help', // Page title
+      'Help', // Menu title
       'manage_options', // Capability
       plugin_dir_path (__FILE__) . 'admin/help.php', // Slug
       null // Content
@@ -222,8 +222,8 @@
     # 'About..' submenu option
     add_submenu_page (
       plugin_dir_path (__FILE__) . 'admin/main.php',  // Parent slug
-      'Acerca de..', // Page title
-      'Acerca de..', // Menu title
+      'About', // Page title
+      'About', // Menu title
       'manage_options', // Capability
       plugin_dir_path (__FILE__) . 'admin/about.php', // Slug
       null // Content
@@ -814,4 +814,38 @@
     );
     $tableName = "{$wpdb -> prefix}befrases_aut";
     $wpdb->insert ($tableName, $data);
+  }
+  
+  /**
+   * Update data of an author record
+   *
+   * @param int    $idAuthor   Id of category to update
+   * @param string $nameAuthor Name of category to update
+   * @return void
+   */
+  function updateAuthorRecord (int $idAuthor, string $nameAuthor): void
+  {
+    global $wpdb;
+    $data = array(
+      'befrases_aut_id' => $idAuthor,
+      'befrases_aut_name' => $nameAuthor
+    );
+    $tableName = "{$wpdb -> prefix}befrases_aut";
+    $wpdb->replace ($tableName, $data);
+  }
+  
+  /**
+   * Delete an author with id number provided
+   *
+   * @param int $idAuthor array with the data of new record
+   * @return void
+   */
+  function deleteAuthorRecord (int $idAuthor): void
+  {
+    global $wpdb;
+    $data = array(
+      'befrases_aut_id' => $idAuthor
+    );
+    $tableName = "{$wpdb -> prefix}befrases_aut";
+    $wpdb->delete ($tableName, $data);
   }

@@ -317,40 +317,32 @@ function changeStyleQuote() {
  */
 function showFormDeleteCategory(categoryId, categoryName, categoryDescription, totalQuotesCategory) {
 
-  if (totalQuotesCategory != 0  && categoryId != 1) {
+  if (totalQuotesCategory != 0) {
     console.log('1')
     document.getElementById("iFormEditCategory").style.display = "none";
     document.getElementById("iFormAddCategory").style.display = "none";
     document.getElementById("iFormDeleteCategory").style.display = "block";
     document.getElementById('iInputDeleteCategoryId').value = categoryId;
-    document.getElementById('iTextDeleteCategoryTitleName').textContent = "¡Error al intentar eliminar!";
-    document.getElementById('iTextDeleteCategoryName').textContent = "La categoría tiene frases asociadas.";
-    document.getElementById('iTextDeleteCategoryDescription').style.display = "none";
-    document.getElementById('iTextDeleteCategoryTitleDescription').style.display = "none";
+    document.getElementById('iTitleCategoryDeleteQuestion').textContent = "Error deleting!";
+    document.getElementById('iTitleCategoryDeleteQuestion').classList.add('text-danger');
+    document.getElementById('iTextCategoryDeleteQuestion').textContent = "This category cannot be deleted, it has: " + totalQuotesCategory + ' associated phrase(s).';
+    document.getElementById('iTextDeleteCategoryName').textContent = categoryName;
+    document.getElementById('iTextDeleteCategoryDescription').textContent = categoryDescription;
+    document.getElementById('iButtonDeleteAccept').classList.add('disabled');
   }
 
-  if (categoryId == 1) {
-    console.log('2')
-    document.getElementById("iFormEditCategory").style.display = "none";
-    document.getElementById("iFormAddCategory").style.display = "none";
-    document.getElementById("iFormDeleteCategory").style.display = "block";
-    document.getElementById('iInputDeleteCategoryId').value = categoryId;
-    document.getElementById('iTextDeleteCategoryTitleName').textContent = "¡Error al intentar eliminar!";
-    document.getElementById('iTextDeleteCategoryName').textContent = "No es posible eliminar esta categoría.";
-    document.getElementById('iTextDeleteCategoryDescription').style.display = "none";
-    document.getElementById('iTextDeleteCategoryTitleDescription').style.display = "none";
-  }
-
-  if (totalQuotesCategory == 0 && categoryId != 1) {
+  if (totalQuotesCategory == 0) {
     console.log('3')
     document.getElementById("iFormEditCategory").style.display = "none";
     document.getElementById("iFormAddCategory").style.display = "none";
     document.getElementById("iFormDeleteCategory").style.display = "block";
     document.getElementById('iInputDeleteCategoryId').value = categoryId;
-    document.getElementById('iTextDeleteCategoryTitleName').textContent = "Nombre";
+    document.getElementById('iTitleCategoryDeleteQuestion').textContent = "Delete Category";
+    document.getElementById('iTitleCategoryDeleteQuestion').classList.remove('text-danger');
+    document.getElementById('iTextCategoryDeleteQuestion').textContent = "Do you want to delete the following category?";
     document.getElementById('iTextDeleteCategoryName').textContent = categoryName;
-    document.getElementById('iTextDeleteCategoryTitleDescription').style.display = "Descripción";
     document.getElementById('iTextDeleteCategoryDescription').textContent = categoryDescription;
+    document.getElementById('iButtonDeleteAccept').classList.remove('disabled');
   }
 
 }
@@ -414,34 +406,18 @@ function hiddeFormEditCategory() {
  * @param {string} totalQuotesAuthor
  * @param {string} authorDescription
  */
-function showFormDeleteAuthor(authorId, authorName, authorDescription, totalQuotesAuthor) {
+function showFormDeleteAuthor(authorId, authorName, totalQuotesAuthor) {
 
-  if (totalQuotesAuthor != 0  && authorId != 1) {
+  if (totalQuotesAuthor != 0) {
     document.getElementById("iFormEditAuthor").style.display = "none";
     document.getElementById("iFormAddAuthor").style.display = "none";
     document.getElementById("iFormDeleteAuthor").style.display = "block";
     document.getElementById('iInputDeleteAuthorId').value = authorId;
-    document.getElementById('iTextDeleteAuthorTitleName').textContent = "¡Error al intentar eliminar!";
-    document.getElementById('iTextDeleteAuthorName').textContent = "La categoría tiene frases asociadas.";
-    document.getElementById('iTextDeleteAuthorDescription').style.display = "none";
-    document.getElementById('iTextDeleteAuthorTitleDescription').style.display = "none";
-    document.getElementById('iButtonAcceptDeleteAuthor').style.display = "none";
-    document.getElementById("iButtonCancelDeleteAuthor").innerHTML = 'Aceptar';
-    document.getElementById("iButtonCancelDeleteAuthor").title = 'Clic para aceptar.';
-  }
-
-  if (authorId == 1) {
-    document.getElementById("iFormEditAuthor").style.display = "none";
-    document.getElementById("iFormAddAuthor").style.display = "none";
-    document.getElementById("iFormDeleteAuthor").style.display = "block";
-    document.getElementById('iInputDeleteAuthorId').value = authorId;
-    document.getElementById('iTextDeleteAuthorTitleName').textContent = "¡Error al intentar eliminar!";
-    document.getElementById('iTextDeleteAuthorName').textContent = "No es posible eliminar esta categoría.";
-    document.getElementById('iTextDeleteAuthorDescription').style.display = "none";
-    document.getElementById('iTextDeleteAuthorTitleDescription').style.display = "none";
-    document.getElementById('iButtonAcceptDeleteAuthor').style.display = "none";
-    document.getElementById("iButtonCancelDeleteAuthor").innerHTML = 'Aceptar';
-    document.getElementById("iButtonCancelDeleteAuthor").title = 'Clic para aceptar.';
+    document.getElementById('iTitleAuthorDeleteQuestion').textContent = "Error deleting!";
+    document.getElementById('iTitleAuthorDeleteQuestion').classList.add('text-danger');
+    document.getElementById('iTextAuthorDeleteQuestion').textContent = "This author cannot be deleted, it has: " + totalQuotesAuthor + ' associated phrase(s).';
+    document.getElementById('iTextDeleteAuthorName').textContent = authorName;
+    document.getElementById('iButtonDeleteAccept').classList.add('disabled');
   }
 
   if (totalQuotesAuthor == 0 && authorId != 1) {
@@ -449,13 +425,11 @@ function showFormDeleteAuthor(authorId, authorName, authorDescription, totalQuot
     document.getElementById("iFormAddAuthor").style.display = "none";
     document.getElementById("iFormDeleteAuthor").style.display = "block";
     document.getElementById('iInputDeleteAuthorId').value = authorId;
-    document.getElementById('iTextDeleteAuthorTitleName').textContent = "Nombre";
+    document.getElementById('iTitleAuthorDeleteQuestion').textContent = "Delete Author";
+    document.getElementById('iTitleAuthorDeleteQuestion').classList.remove('text-danger');
+    document.getElementById('iTextAuthorDeleteQuestion').textContent = "Do you want to delete the following author?";
     document.getElementById('iTextDeleteAuthorName').textContent = authorName;
-    document.getElementById('iTextDeleteAuthorTitleDescription').style.display = "Descripción";
-    document.getElementById('iTextDeleteAuthorDescription').textContent = authorDescription;
-    document.getElementById("iButtonCancelDeleteAuthor").innerHTML = 'Cancelar';
-    document.getElementById('iButtonAcceptDeleteAuthor').style.display = "inline";
-    document.getElementById("iButtonCancelDeleteAuthor").title = 'Clic para cancelar.';
+    document.getElementById('iButtonDeleteAccept').classList.remove('disabled');
   }
 
 }
@@ -481,13 +455,12 @@ function hiddeFormDeleteAuthor() {
  * @param {string} authorDescription of the author to edit
  * @return none
  */
-function showFormEditAuthor(authorId, authorName, authorDescription) {
+function showFormEditAuthor(authorId, authorName) {
   document.getElementById("iFormEditAuthor").style.display = "block";
   document.getElementById("iFormAddAuthor").style.display = "none";
   document.getElementById("iFormDeleteAuthor").style.display = "none";
   document.getElementById('iInputEditAuthorId').value = authorId;
   document.getElementById('iInputEditAuthorName').value = authorName;
-  document.getElementById('iTextAreaEditAuthorDescription').textContent = authorDescription;
 }
 
 /**

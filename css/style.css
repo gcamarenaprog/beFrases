@@ -46,14 +46,14 @@ p.be-quote {
 /* Override Datatables styles */
 
 table {
-  font-size: 0.9em;
+  font-size: 0.95em;
 }
 
 .dt-info {
-  font-size: 0.9em;
+  font-size: 0.95em;
 }
 .dt-paging {
-  font-size: 0.9em;
+  font-size: 0.95em;
 }
 
 .dt-search input {
@@ -84,7 +84,7 @@ table.dataTable tfoot th {
 .wp-core-ui select {
   -webkit-appearance: auto !important;
   background: none !important;
-  font-size: 0.9em !important;
+  font-size: 0.95em !important;
 }
 
 /* Override Bootstrap styles */
@@ -92,19 +92,20 @@ table.dataTable tfoot th {
 label {
   margin-right: 5px;
   margin-bottom: 0px;
-  font-size: 0.9em !important;
+  font-size: 0.95em !important;
+  font-size: 0.95em !important;
 }
 
 .form-text {
-  font-size: 0.80em !important;
+  font-size: 0.95em !important;
 }
 
 .form-control {
-  font-size: 0.9em !important;
+  font-size: 0.95em !important;
 }
 
 .btn-sm, .btn-group-sm > .btn {
-  font-size: 0.9em !important;
+  font-size: 0.95em !important;
 }
 
 input,
@@ -139,7 +140,7 @@ select {
 .card-text {
   margin-top: 0;
   margin-bottom: 1rem;
-  font-size: 0.90em;
+  font-size: 0.95em;
 }
 
 h6 {

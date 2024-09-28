@@ -59,8 +59,8 @@
         <h5 class="card-header"><?php echo get_admin_page_title (); ?></h5>
         <div class="card-body">
           <p class="card-text">
-            Un plugin fácil y simple de usar que te permitirá gestionar una colección de frases célebres con sus autores
-            respectivos, además de categorizarlas y mostrarlas de en un widget aleatoriamente.
+            An easy and simple to use plugin that will allow you to manage a collection of famous quotes with their
+            respective authors, as well as categorize them and display them randomly in a widget.
           </p>
         </div>
       </div>
@@ -75,18 +75,18 @@
           <form method="post" class="mb-3" style="display: block;" id="iFormAddQuote" name="nFormAddQuote">
 
             <!-- Title and description /-->
-            <h6 class="card-title">Añadir frase</h6>
-            <p class="card-text">Escribe el autor, frase y categoría de la frase.</p>
+            <h6 class="card-title">Add quote</h6>
+            <p class="card-text">Write the author, quote and category of the quote.</p>
 
             <hr>
 
             <!-- Author /-->
             <div class="mb-3">
-              <label for="iSelectAuthor" class="form-label">Autor</label>
+              <label for="iSelectAuthor" class="form-label">Author</label>
               <select class="form-select"
                       id="iSelectAuthor"
                       name="nSelectAuthor"
-                      title="Escoge un autor."
+                      title="Choose an author."
                       required
               >
                 <?php
@@ -99,30 +99,31 @@
                   }
                 ?>
               </select>
-              <div id="iHelpCategory" class="form-text">Nombre de la autor.</div>
+              <div id="iHelpCategory" class="form-text">Name of the author.</div>
             </div>
 
             <!-- Quote /-->
             <div class="mb-3">
-              <label for="iTextAreaQuote" class="form-label">Frase</label>
+              <label for="iTextAreaQuote" class="form-label">Quote</label>
               <textarea class="form-control"
                         name="nTextAreaQuote"
                         id="iTextAreaQuote"
-                        placeholder="Escriba una frase.."
+                        placeholder="Write a quote.."
                         rows="4"
-                        title="Escriba la frase sin comillas al inicio y al final."
+                        title="Write the sentence without quotation marks at the beginning and end."
                         required></textarea>
-              <div id="iHelpQuoteDescription" class="form-text">Escriba la frase sin comillas al inicio y al final.
+              <div id="iHelpQuoteDescription" class="form-text">Write the quote without quotation marks at the beginning
+                and end.
               </div>
             </div>
 
             <!-- Category /-->
             <div class="mb-3">
-              <label for="iSelectCategory" class="form-label">Categoría</label>
+              <label for="iSelectCategory" class="form-label">Category</label>
               <select class="form-select"
                       id="iSelectCategory"
                       name="nSelectCategory"
-                      title="Escoge una categoría."
+                      title="Choose a category."
                       required
               >
                 <?php
@@ -134,16 +135,16 @@
                   }
                 ?>
               </select>
-              <div id="iHelpCategory" class="form-text">Nombre de la categoría.</div>
+              <div id="iHelpCategory" class="form-text">Category name.</div>
             </div>
 
             <!-- Add button /-->
             <button id="iButtonNewQuote"
                     name="nButtonNewQuote"
                     type="submit"
-                    title="Clic para añadir la categoría."
+                    title="Click to add category."
                     class="btn btn-success btn-sm">
-              Añadir
+              Add
             </button>
 
           </form>
@@ -152,8 +153,8 @@
           <form method="post" class="mb-3" style="display: none;" id="iFormEditQuote" name="nFormEditQuote">
 
             <!-- Title and description /-->
-            <h6 class="card-title">Editar frase</h6>
-            <p class="card-text">Modificar la frase seleccionada.</p>
+            <h6 class="card-title">Edit quote</h6>
+            <p class="card-text">Modify the selected quote.</p>
 
             <hr>
 
@@ -165,10 +166,10 @@
 
             <!-- Author /-->
             <div class="mb-3">
-              <label for="iSelectEditAuthor" class="form-label">Autor</label>
+              <label for="iSelectEditAuthor" class="form-label">Author</label>
               <select class="form-select"
                       id="iSelectEditAuthor"
-                      title="Escoge un autor."
+                      title="Choose an author."
                       name="nSelectEditAuthor">
                 <?php
                   $namesCategoriesList = getAllDataAuthorsList ();
@@ -179,30 +180,31 @@
                   }
                 ?>
               </select>
-              <div id="iHelpEditAuthor" class="form-text">Nombre del autor.</div>
+              <div id="iHelpEditAuthor" class="form-text">Author's name.</div>
             </div>
 
             <!-- Quote /-->
             <div class="mb-3">
-              <label for="iTextAreaEditQuoteText" class="form-label">Frase</label>
+              <label for="iTextAreaEditQuoteText" class="form-label">Quote</label>
               <textarea class="form-control"
                         name="nTextAreaEditQuoteText"
                         id="iTextAreaEditQuoteText"
                         required
-                        title="Escriba la frase sin comillas al inicio y al final."
+                        title="Write the sentence without quotation marks at the beginning and end."
                         rows="4"></textarea>
-              <div id="iHelpQuoteDescription" class="form-text">Escriba la frase sin comillas al inicio y al final.
+              <div id="iHelpQuoteDescription" class="form-text">Write the sentence without quotation marks at the
+                beginning and end.
               </div>
             </div>
 
             <!-- Category /-->
             <div class="mb-3">
-              <label for="iSelectEditCategory" class="form-label">Categoría</label>
+              <label for="iSelectEditCategory" class="form-label">Category</label>
               <select class="form-select"
                       aria-label="Default select example"
                       id="iSelectEditCategory"
                       name="nSelectEditCategory"
-                      title="Escoge una categoría."
+                      title="Choose a category."
               >
                 <?php
                   $namesCategoriesList = getAllCategoriesList ();
@@ -213,16 +215,16 @@
                   }
                 ?>
               </select>
-              <div id="iHelpEditCategory" class="form-text">Escoge una categoría.</div>
+              <div id="iHelpEditCategory" class="form-text">Choose a category.</div>
             </div>
 
             <!-- Save edit /-->
             <button type="submit"
                     name="nButtonSaveEditQuote"
                     id="iButtonSaveEditQuote"
-                    title="Clic para actualizar los cambios."
+                    title="Click to update changes."
                     class="btn btn-success btn-sm">
-              Actualizar
+              Update
             </button>
 
             <!-- Cancel edit /-->
@@ -230,9 +232,9 @@
                     name="nButtonCancelEditQuote"
                     id="iButtonCancelEditQuote"
                     class="btn btn-danger btn-sm"
-                    title="Clic para cancelar."
+                    title="Click to cancel."
                     onclick="hiddeFormEditQuote()">
-              Cancelar
+              Cancel
             </button>
 
           </form>
@@ -241,8 +243,8 @@
           <form method="post" class="mb-3" style="display: none;" id="iFormDeleteQuote" name="nFormDeleteQuote">
 
             <!-- Title and description /-->
-            <h6 class="card-title">Eliminar frase</h6>
-            <p class="card-text">¿Desea eliminar el siguiente registro?</p>
+            <h6 class="card-title">Delete quote</h6>
+            <p class="card-text">Do you want to delete the following record?</p>
 
             <hr>
 
@@ -269,9 +271,9 @@
             <button type="submit"
                     name="nButtonDeleteQuote"
                     id="iButtonDeleteQuote"
-                    title="Clic para eliminar la frase."
+                    title="Click to delete the quote."
                     class="btn btn-success btn-sm">
-              Eliminar
+              Delete
             </button>
 
             <!-- Cancel delete /-->
@@ -279,9 +281,9 @@
                     name="nButtonCancelDeleteQuote"
                     id="iButtonCancelDeleteQuote"
                     class="btn btn-danger btn-sm"
-                    title="Clic para cancelar."
+                    title="Click to cancel."
                     onclick="hiddeFormDeleteQuote()">
-              Cancelar
+              Cancel
             </button>
 
           </form>
@@ -295,8 +297,8 @@
       <div class="border mb-3 p-3">
 
         <!-- Title and description /-->
-        <h6 class="card-title">Lista de frases</h6>
-        <p class="card-text">Lista de frases, selecciona una para editar o eliminar.</p>
+        <h6 class="card-title">List of quotes</h6>
+        <p class="card-text">List of quotes, select one to edit or delete.</p>
 
         <hr>
 
@@ -306,11 +308,11 @@
           <thead>
           <tr>
             <th>#</th>
-            <th>Autor</th>
-            <th>Frase</th>
-            <th>Categoría</th>
-            <th class="text-center">Editar</th>
-            <th class="text-center">Borrar</th>
+            <th>Author</th>
+            <th>Quote</th>
+            <th>Category</th>
+            <th class="text-center">Edit</th>
+            <th class="text-center">Delete</th>
           </tr>
           </thead>
 
@@ -354,9 +356,9 @@
                       class="btn btn-primary btn-sm"
                       id="iButtonEditQuoteRegister"
                       name="nButtonEditQuoteRegister"
-                      title="Clic para editar."
+                      title="Click to edit."
                       onclick="showFormEditQuote('<?php echo $quoteId; ?>', '<?php echo $quoteAuthorId; ?>', '<?php echo $quoteText; ?>', '<?php echo $quoteCategoryId; ?>')">
-                    Editar
+                    Edit
                   </button>
                 </td>
 
@@ -366,9 +368,9 @@
                       class="btn btn-danger btn-sm"
                       id="iButtonDeleteQuoteRegister"
                       name="nButtonDeleteQuoteRegister"
-                      title="Clic para eliminar."
+                      title="Click to delete."
                       onclick="showFormDeleteQuote('<?php echo $quoteId; ?>', '<?php echo $quoteAuthor; ?>', '<?php echo $quoteText; ?>')">
-                    Eliminar
+                    Delete
                   </button>
                 </td>
 
@@ -379,11 +381,11 @@
 
           <tfoot>
           <th>#</th>
-          <th>Autor</th>
-          <th>Frase</th>
-          <th>Categoría</th>
-          <th class="text-center">Editar</th>
-          <th class="text-center">Borrar</th>
+          <th>Author</th>
+          <th>Quote</th>
+          <th>Category</th>
+          <th class="text-center">Edit</th>
+          <th class="text-center">Delete</th>
           </tfoot>
 
         </table>
@@ -409,18 +411,18 @@
       }],
       "order": [[1, "asc"]],
       "language": {
-        "lengthMenu": "Mostrar _MENU_ registros por página",
-        "emptyTable": "¡No hay registros para mostrar!",
-        "zeroRecords": "¡No hay registros para mostrar!",
-        "info": "Mostrando página _PAGE_ de _PAGES_",
-        "infoEmpty": "No hay registros disponinles",
-        "infoFiltered": "(Filtrado de un total de _MAX_)",
-        "search": "Buscar:",
+        "lengthMenu": "Show _MENU_ entries per page",
+        "emptyTable": "There are no records to show!",
+        "zeroRecords": "There are no records to show!",
+        "info": "Showing page _PAGE_ of _PAGES_",
+        "infoEmpty": "No records available.",
+        "infoFiltered": "(filtered from the total _MAX_ records)",
+        "search": "Search:",
         "paginate": {
-          first: "Primero",
-          previous: "Anterior",
-          next: "Siguiente",
-          last: "Último"
+          first: "First",
+          previous: "Previous",
+          next: "Next",
+          last: "Last"
         },
       },
     });
