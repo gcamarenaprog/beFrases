@@ -162,7 +162,7 @@
                     id="iButtonCancelEditCategory"
                     title="Click to cancel."
                     class="btn btn-danger btn-sm"
-                    onclick="hiddeFormEditCategory()">Cancel
+                    onclick="hideFormEditCategory()">Cancel
             </button>
 
 
@@ -233,7 +233,7 @@
                     id="iButtonDeleteCancel"
                     title="Click to cancel."
                     title="Click to cancel."
-                    onclick="hiddeFormDeleteCategory()">Cancel
+                    onclick="hideFormDeleteCategory()">Cancel
             </button>
 
           </form>

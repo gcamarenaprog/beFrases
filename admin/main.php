@@ -47,6 +47,11 @@
   
   # Get all categories
   $namesCategoriesList = getAllDataCategoriesList ();
+  $totalNamesCategoriesList = count ($namesCategoriesList);
+  
+  # Get all authors
+  $namesAuthorsList = getAllDataAuthorsList ();
+  $totalNamesAuthorsList = count ($namesAuthorsList);
 
 ?>
 
@@ -74,79 +79,90 @@
           <!-- Add quote form /-->
           <form method="post" class="mb-3" style="display: block;" id="iFormAddQuote" name="nFormAddQuote">
 
-            <!-- Title and description /-->
+            <!-- Title /-->
             <h6 class="card-title">Add quote</h6>
-            <p class="card-text">Write the author, quote and category of the quote.</p>
 
-            <hr>
+            <!-- If exist a category and an author then /-->
+            <?php if ($totalNamesAuthorsList != 0 && $totalNamesCategoriesList != 0) : ?>
 
-            <!-- Author /-->
-            <div class="mb-3">
-              <label for="iSelectAuthor" class="form-label">Author</label>
-              <select class="form-select"
-                      id="iSelectAuthor"
-                      name="nSelectAuthor"
-                      title="Choose an author."
-                      required
-              >
-                <?php
-                  $namesAuthorsList = getAllDataAuthorsList ();
-                  echo '<option selected></option>';
-                  foreach ($namesAuthorsList as $key => $value) {
-                    $quoteAuthorId = $value['befrases_aut_id'];
-                    $quoteAuthorName = $value['befrases_aut_name'];
-                    echo '<option value="' . $quoteAuthorId . '">' . $quoteAuthorName . '</option>';
-                  }
-                ?>
-              </select>
-              <div id="iHelpCategory" class="form-text">Name of the author.</div>
-            </div>
+              <!-- Description /-->
+              <p class="card-text">Write the author, quote and category of the quote.</p>
 
-            <!-- Quote /-->
-            <div class="mb-3">
-              <label for="iTextAreaQuote" class="form-label">Quote</label>
-              <textarea class="form-control"
-                        name="nTextAreaQuote"
-                        id="iTextAreaQuote"
-                        placeholder="Write a quote.."
-                        rows="4"
-                        title="Write the sentence without quotation marks at the beginning and end."
-                        required></textarea>
-              <div id="iHelpQuoteDescription" class="form-text">Write the quote without quotation marks at the beginning
-                and end.
+              <hr>
+
+              <!-- Author /-->
+              <div class="mb-3">
+                <label for="iSelectAuthor" class="form-label">Author</label>
+                <select class="form-select"
+                        id="iSelectAuthor"
+                        name="nSelectAuthor"
+                        title="Choose an author."
+                        required
+                >
+                  <?php
+                    echo '<option selected></option>';
+                    foreach ($namesAuthorsList as $key => $value) {
+                      $quoteAuthorId = $value['befrases_aut_id'];
+                      $quoteAuthorName = $value['befrases_aut_name'];
+                      echo '<option value="' . $quoteAuthorId . '">' . $quoteAuthorName . '</option>';
+                    }
+                  ?>
+                </select>
+                <div id="iHelpCategory" class="form-text">Name of the author.</div>
               </div>
-            </div>
 
-            <!-- Category /-->
-            <div class="mb-3">
-              <label for="iSelectCategory" class="form-label">Category</label>
-              <select class="form-select"
-                      id="iSelectCategory"
-                      name="nSelectCategory"
-                      title="Choose a category."
-                      required
-              >
-                <?php
-                  echo '<option selected></option>';
-                  foreach ($namesCategoriesList as $key => $value) {
-                    $quoteCategoryId = $value['befrases_cat_id'];
-                    $quoteCategoryName = $value['befrases_cat_name'];
-                    echo '<option value="' . $quoteCategoryId . '">' . $quoteCategoryName . '</option>';
-                  }
-                ?>
-              </select>
-              <div id="iHelpCategory" class="form-text">Category name.</div>
-            </div>
+              <!-- Quote /-->
+              <div class="mb-3">
+                <label for="iTextAreaQuote" class="form-label">Quote</label>
+                <textarea class="form-control"
+                          name="nTextAreaQuote"
+                          id="iTextAreaQuote"
+                          placeholder="Write a quote.."
+                          rows="4"
+                          title="Write the sentence without quotation marks at the beginning and end."
+                          required></textarea>
+                <div id="iHelpQuoteDescription" class="form-text">Write the quote without quotation marks at the
+                  beginning
+                  and end.
+                </div>
+              </div>
 
-            <!-- Add button /-->
-            <button id="iButtonNewQuote"
-                    name="nButtonNewQuote"
-                    type="submit"
-                    title="Click to add category."
-                    class="btn btn-success btn-sm">
-              Add
-            </button>
+              <!-- Category /-->
+              <div class="mb-3">
+                <label for="iSelectCategory" class="form-label">Category</label>
+                <select class="form-select"
+                        id="iSelectCategory"
+                        name="nSelectCategory"
+                        title="Choose a category."
+                        required
+                >
+                  <?php
+                    echo '<option selected></option>';
+                    foreach ($namesCategoriesList as $key => $value) {
+                      $quoteCategoryId = $value['befrases_cat_id'];
+                      $quoteCategoryName = $value['befrases_cat_name'];
+                      echo '<option value="' . $quoteCategoryId . '">' . $quoteCategoryName . '</option>';
+                    }
+                  ?>
+                </select>
+                <div id="iHelpCategory" class="form-text">Category name.</div>
+              </div>
 
+              <!-- Add button /-->
+              <button id="iButtonNewQuote"
+                      name="nButtonNewQuote"
+                      type="submit"
+                      title="Click to add category."
+                      class="btn btn-success btn-sm">
+                Add
+              </button>
+            
+            <?php else: ?>
+              
+              <!-- Error /-->
+              <p class="card-text text-danger">A category and a registered author must exist in order to add a phrase.</p>
+            
+            <?php endif; ?>
           </form>
 
           <!-- Edit quote form -->
@@ -233,7 +249,7 @@
                     id="iButtonCancelEditQuote"
                     class="btn btn-danger btn-sm"
                     title="Click to cancel."
-                    onclick="hiddeFormEditQuote()">
+                    onclick="hideFormEditQuote()">
               Cancel
             </button>
 
@@ -282,7 +298,7 @@
                     id="iButtonCancelDeleteQuote"
                     class="btn btn-danger btn-sm"
                     title="Click to cancel."
-                    onclick="hiddeFormDeleteQuote()">
+                    onclick="hideFormDeleteQuote()">
               Cancel
             </button>
 

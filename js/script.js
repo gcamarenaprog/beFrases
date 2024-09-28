@@ -37,7 +37,7 @@ function showFormEditQuote(quoteId, autorId, quoteText, categoryId) {
  *
  * @return none
  */
-function hiddeFormEditQuote() {
+function hideFormEditQuote() {
   document.getElementById("iFormEditQuote").style.display = "none";
   document.getElementById("iFormDeleteQuote").style.display = "none";
   document.getElementById("iFormAddQuote").style.display = "block";
@@ -64,7 +64,7 @@ function showFormDeleteQuote(idQuote, authorQuote, contentQuote) {
  *
  * @return none
  */
-function hiddeFormDeleteQuote() {
+function hideFormDeleteQuote() {
   document.getElementById("iFormEditQuote").style.display = "none";
   document.getElementById("iFormDeleteQuote").style.display = "none";
   document.getElementById("iFormAddQuote").style.display = "block";
@@ -304,7 +304,7 @@ function changeStyleQuote() {
 }
 
 
-/* Categories functions --------------------------------------------------------------------------------------------- */
+/* Functions of categories.php file --------------------------------------------------------------------------------- */
 
 /**
  * Show form delete
@@ -316,7 +316,6 @@ function changeStyleQuote() {
  * @param {string} categoryDescription
  */
 function showFormDeleteCategory(categoryId, categoryName, categoryDescription, totalQuotesCategory) {
-
   if (totalQuotesCategory != 0) {
     document.getElementById("iFormEditCategory").style.display = "none";
     document.getElementById("iFormAddCategory").style.display = "none";
@@ -328,9 +327,7 @@ function showFormDeleteCategory(categoryId, categoryName, categoryDescription, t
     document.getElementById('iTextDeleteCategoryName').textContent = categoryName;
     document.getElementById('iTextDeleteCategoryDescription').textContent = categoryDescription;
     document.getElementById('iButtonDeleteAccept').classList.add('disabled');
-  }
-
-  else {
+  } else {
     document.getElementById("iFormEditCategory").style.display = "none";
     document.getElementById("iFormAddCategory").style.display = "none";
     document.getElementById("iFormDeleteCategory").style.display = "block";
@@ -342,7 +339,6 @@ function showFormDeleteCategory(categoryId, categoryName, categoryDescription, t
     document.getElementById('iTextDeleteCategoryDescription').textContent = categoryDescription;
     document.getElementById('iButtonDeleteAccept').classList.remove('disabled');
   }
-
 }
 
 /**
@@ -352,7 +348,7 @@ function showFormDeleteCategory(categoryId, categoryName, categoryDescription, t
  * @param none
  * @return none
  */
-function hiddeFormDeleteCategory() {
+function hideFormDeleteCategory() {
   document.getElementById("iFormEditCategory").style.display = "none";
   document.getElementById("iFormDeleteCategory").style.display = "none";
   document.getElementById("iFormAddCategory").style.display = "block";
@@ -367,10 +363,6 @@ function hiddeFormDeleteCategory() {
  * @return none
  */
 function showFormEditCategory(categoryId, categoryName, categoryDescription) {
-  console.log(categoryId)
-  console.log(categoryName)
-  console.log(categoryDescription)
-
   document.getElementById("iFormEditCategory").style.display = "block";
   document.getElementById("iFormAddCategory").style.display = "none";
   document.getElementById("iFormDeleteCategory").style.display = "none";
@@ -386,14 +378,13 @@ function showFormEditCategory(categoryId, categoryName, categoryDescription) {
  * @param none
  * @return none
  */
-function hiddeFormEditCategory() {
+function hideFormEditCategory() {
   document.getElementById("iFormEditCategory").style.display = "none";
   document.getElementById("iFormDeleteCategory").style.display = "none";
   document.getElementById("iFormAddCategory").style.display = "block";
 }
 
-
-/* Authors functions ------------------------------------------------------------------------------------------------ */
+/* Functions of authors.php file ------------------------------------------------------------------------------------ */
 
 /**
  * Show form delete
@@ -405,7 +396,6 @@ function hiddeFormEditCategory() {
  * @param {string} authorDescription
  */
 function showFormDeleteAuthor(authorId, authorName, totalQuotesAuthor) {
-
   if (totalQuotesAuthor != 0) {
     document.getElementById("iFormEditAuthor").style.display = "none";
     document.getElementById("iFormAddAuthor").style.display = "none";
@@ -416,9 +406,7 @@ function showFormDeleteAuthor(authorId, authorName, totalQuotesAuthor) {
     document.getElementById('iTextAuthorDeleteQuestion').textContent = "This author cannot be deleted, it has: " + totalQuotesAuthor + ' associated phrase(s).';
     document.getElementById('iTextDeleteAuthorName').textContent = authorName;
     document.getElementById('iButtonDeleteAccept').classList.add('disabled');
-  }
-
-  else  {
+  } else {
     document.getElementById("iFormEditAuthor").style.display = "none";
     document.getElementById("iFormAddAuthor").style.display = "none";
     document.getElementById("iFormDeleteAuthor").style.display = "block";
@@ -429,7 +417,6 @@ function showFormDeleteAuthor(authorId, authorName, totalQuotesAuthor) {
     document.getElementById('iTextDeleteAuthorName').textContent = authorName;
     document.getElementById('iButtonDeleteAccept').classList.remove('disabled');
   }
-
 }
 
 /**
@@ -439,7 +426,7 @@ function showFormDeleteAuthor(authorId, authorName, totalQuotesAuthor) {
  * @param none
  * @return none
  */
-function hiddeFormDeleteAuthor() {
+function hideFormDeleteAuthor() {
   document.getElementById("iFormEditAuthor").style.display = "none";
   document.getElementById("iFormDeleteAuthor").style.display = "none";
   document.getElementById("iFormAddAuthor").style.display = "block";
@@ -468,7 +455,7 @@ function showFormEditAuthor(authorId, authorName) {
  * @param none
  * @return none
  */
-function hiddeFormEditAuthor() {
+function hideFormEditAuthor() {
   document.getElementById("iFormEditAuthor").style.display = "none";
   document.getElementById("iFormDeleteAuthor").style.display = "none";
   document.getElementById("iFormAddAuthor").style.display = "block";

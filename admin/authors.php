@@ -131,7 +131,7 @@
                     id="iButtonCancelEditAuthor"
                     title="Click to cancel."
                     class="btn btn-danger btn-sm"
-                    onclick="hiddeFormEditAuthor()">Cancel
+                    onclick="hideFormEditAuthor()">Cancel
             </button>
 
 
@@ -190,7 +190,7 @@
                     id="iButtonDeleteCancel"
                     title="Click to cancel."
                     title="Click to cancel."
-                    onclick="hiddeFormDeleteAuthor()">Cancel
+                    onclick="hideFormDeleteAuthor()">Cancel
             </button>
 
           </form>
