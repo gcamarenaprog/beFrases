@@ -318,7 +318,6 @@ function changeStyleQuote() {
 function showFormDeleteCategory(categoryId, categoryName, categoryDescription, totalQuotesCategory) {
 
   if (totalQuotesCategory != 0) {
-    console.log('1')
     document.getElementById("iFormEditCategory").style.display = "none";
     document.getElementById("iFormAddCategory").style.display = "none";
     document.getElementById("iFormDeleteCategory").style.display = "block";
@@ -331,8 +330,7 @@ function showFormDeleteCategory(categoryId, categoryName, categoryDescription, t
     document.getElementById('iButtonDeleteAccept').classList.add('disabled');
   }
 
-  if (totalQuotesCategory == 0) {
-    console.log('3')
+  else {
     document.getElementById("iFormEditCategory").style.display = "none";
     document.getElementById("iFormAddCategory").style.display = "none";
     document.getElementById("iFormDeleteCategory").style.display = "block";
@@ -420,7 +418,7 @@ function showFormDeleteAuthor(authorId, authorName, totalQuotesAuthor) {
     document.getElementById('iButtonDeleteAccept').classList.add('disabled');
   }
 
-  if (totalQuotesAuthor == 0 && authorId != 1) {
+  else  {
     document.getElementById("iFormEditAuthor").style.display = "none";
     document.getElementById("iFormAddAuthor").style.display = "none";
     document.getElementById("iFormDeleteAuthor").style.display = "block";

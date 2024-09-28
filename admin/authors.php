@@ -244,7 +244,7 @@
 
                   <!-- Edit button /-->
                   <td style="text-align:center">
-                    <button class="btn btn-primary btn-sm "
+                    <button class="btn btn-primary btn-sm"
                             id="iButtonEditListOfAuthors"
                             name="nButtonEditListOfAuthors"
                             title="Click to edit."

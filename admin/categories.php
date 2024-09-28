@@ -293,9 +293,7 @@
 
                   <!-- Edit button /-->
                   <td style="text-align:center">
-                    <button class="btn btn-primary btn-sm <?php if ($categoryId == 1) {
-                      echo "disabled";
-                    } ?>"
+                    <button class="btn btn-primary btn-sm"
                             id="iButtonEditCategoryListOfCategories"
                             name="nButtonEditCategoryListOfCategories"
                             title="Click to edit."
@@ -306,9 +304,7 @@
 
                   <!-- Delete button /-->
                   <td style="text-align:center">
-                    <button class="btn btn-danger btn-sm <?php if ($categoryId == 1) {
-                      echo "disabled";
-                    } ?>"
+                    <button class="btn btn-danger btn-sm"
                             id="iButtonDeleteCategoryListOfCategories"
                             name="nButtonDeleteCategoryListOfCategories"
                             title="Click to delete."
