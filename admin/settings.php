@@ -26,7 +26,7 @@
   # Get options from database
   $listOptions = getSettings ();
   
-  # Assign values on the vars
+  # Assign values on radio buttons
   foreach ($listOptions as $key => $value) {
     $alignmentAuthor = $value['befrases_ali_txt_aut'];
     $styleAuthor = $value['befrases_sty_txt_aut'];
@@ -35,183 +35,264 @@
   }
 
 ?>
-<!-- PHP Code /-->
 
+<form name="form" method="post">
+  <div class="container" style="max-width: 100%">
+    <div class="row g-2" style="margin-right: 10px;">
 
-<!-- HTML Code -->
-<div class="container-fluid">
-
-  <!-- Title and description -->
-  <h1 class="display-6"><?php echo get_admin_page_title (); ?></h1>
-  <p class="lead">Selecciona el tipo de alineación y estilo de fuente para los textos de: autor y frase.</p>
-
-  <hr>
-
-  <!-- Main form -->
-  <form name="form" method="post">
-
-    <!-- Styles and aligns -->
-    <div class="row">
-
-      <p class="be-title"><strong>Alineación y estilo</strong></p>
-
-      <!-- Author text alignment options /-->
-      <div class="col-sm">
-        <div class="form-check">
-          <fieldset>
-            <legend>Autor / Alineación</legend>
-            <label for="nRadioButton1">
-              <input type="radio" id="iRadioButton1-1" name="nRadioButton1" value="0" onclick="changeAlignAuthor()">
-              Derecha
-            </label>
-            <br>
-            <label for="nRadioButton1">
-              <input type="radio" id="iRadioButton1-2" name="nRadioButton1" value="1" onclick="changeAlignAuthor()">
-              Centrar
-            </label>
-            <br>
-            <label for="nRadioButton1">
-              <input type="radio" id="iRadioButton1-3" name="nRadioButton1" value="2" onclick="changeAlignAuthor()">
-              Izquierda
-            </label>
-            <br>
-            <label for="nRadioButton1">
-              <input type="radio" id="iRadioButton1-4" name="nRadioButton1" value="3" onclick="changeAlignAuthor()">
-              Justificado
-            </label>
-          </fieldset>
+      <!-- Title and description /-->
+      <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12">
+        <div class="card">
+          <h5 class="card-header"><?php echo get_admin_page_title (); ?></h5>
+          <div class="card-body">
+            <p class="card-text"> Select the alignment type and font style for the author and phrase texts. </p>
+          </div>
         </div>
       </div>
 
-      <!-- Author font style options /-->
-      <div class="col-sm">
-        <div class="form-check">
-          <fieldset>
-            <legend>Autor / Estilo</legend>
-            <label for="nRadioButton2">
-              <input type="radio" id="iRadioButton2-1" name="nRadioButton2" value="0" onclick="changeStyleAuthor()">
-              Normal
-            </label>
-            <br>
-            <label for="nRadioButton2">
-              <input type="radio" id="iRadioButton2-2" name="nRadioButton2" value="1" onclick="changeStyleAuthor()">
-              Cursiva
-            </label>
-            <br>
-            <label for="nRadioButton2">
-              <input type="radio" id="iRadioButton2-3" name="nRadioButton2" value="2" onclick="changeStyleAuthor()">
-              Negrita
-            </label>
-            <br>
-            <label for="nRadioButton2">
-              <input type="radio" id="iRadioButton2-4" name="nRadioButton2" value="3" onclick="changeStyleAuthor()">
-              Cursiva / Negrita
-            </label>
-          </fieldset>
+      <!-- Author alignment /-->
+      <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-12 col-sm-12">
+        <div class="border mb-3 p-3">
+          <div class="card-body">
+
+            <div class="mb-4" style="display: block;">
+
+              <!-- Title /-->
+              <h6 class="card-title">Author alignment</h6>
+              <hr>
+
+              <div class="form-check">
+                <fieldset>
+                  <label for="nRadioButton1">
+                    <input type="radio" id="iRadioButton1-1" name="nRadioButton1" value="0"
+                           onclick="changeAlignAuthor()">
+                    Derecha
+                  </label>
+                  <br>
+                  <label for="nRadioButton1">
+                    <input type="radio" id="iRadioButton1-2" name="nRadioButton1" value="1"
+                           onclick="changeAlignAuthor()">
+                    Centrar
+                  </label>
+                  <br>
+                  <label for="nRadioButton1">
+                    <input type="radio" id="iRadioButton1-3" name="nRadioButton1" value="2"
+                           onclick="changeAlignAuthor()">
+                    Izquierda
+                  </label>
+                  <br>
+                  <label for="nRadioButton1">
+                    <input type="radio" id="iRadioButton1-4" name="nRadioButton1" value="3"
+                           onclick="changeAlignAuthor()">
+                    Justificado
+                  </label>
+                </fieldset>
+              </div>
+
+
+            </div>
+
+          </div>
         </div>
       </div>
 
-      <!-- Quote text alignment options /-->
-      <div class="col-sm">
-        <div class="form-check">
-          <fieldset>
-            <legend>Frase / Alineación</legend>
-            <label for="nRadioButton3">
-              <input type="radio" id="iRadioButton3-1" name="nRadioButton3" value="0" onclick="changeAlignQuote()">
-              Derecha
-            </label>
-            <br>
-            <label for="nRadioButton3">
-              <input type="radio" id="iRadioButton3-2" name="nRadioButton3" value="1" onclick="changeAlignQuote()">
-              Centrar
-            </label>
-            <br>
-            <label for="nRadioButton3">
-              <input type="radio" id="iRadioButton3-3" name="nRadioButton3" value="2" onclick="changeAlignQuote()">
-              Izquierda
-            </label>
-            <br>
-            <label for="nRadioButton3">
-              <input type="radio" id="iRadioButton3-4" name="nRadioButton3" value="3" onclick="changeAlignQuote()">
-              Justificado
-            </label>
-          </fieldset>
+      <!-- Author style /-->
+      <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-12 col-sm-12">
+        <div class="border mb-3 p-3">
+          <div class="card-body">
+
+            <!-- Author align options /-->
+            <div class="mb-4" style="display: block;">
+
+              <!-- Title /-->
+              <h6 class="card-title">Author style</h6>
+              <hr>
+
+              <div class="form-check">
+                <fieldset>
+
+                  <label for="nRadioButton2">
+                    <input type="radio" id="iRadioButton2-1" name="nRadioButton2" value="0"
+                           onclick="changeStyleAuthor()">
+                    Normal
+                  </label>
+                  <br>
+                  <label for="nRadioButton2">
+                    <input type="radio" id="iRadioButton2-2" name="nRadioButton2" value="1"
+                           onclick="changeStyleAuthor()">
+                    Cursiva
+                  </label>
+                  <br>
+                  <label for="nRadioButton2">
+                    <input type="radio" id="iRadioButton2-3" name="nRadioButton2" value="2"
+                           onclick="changeStyleAuthor()">
+                    Negrita
+                  </label>
+                  <br>
+                  <label for="nRadioButton2">
+                    <input type="radio" id="iRadioButton2-4" name="nRadioButton2" value="3"
+                           onclick="changeStyleAuthor()">
+                    Cursiva / Negrita
+                  </label>
+                </fieldset>
+              </div>
+
+
+            </div>
+
+          </div>
         </div>
       </div>
 
-      <!-- Quote font style options /-->
-      <div class="col-sm">
-        <div class="form-check">
-          <fieldset>
-            <legend>Frase / Estilo</legend>
-            <label for="nRadioButton4">
-              <input type="radio" id="iRadioButton4-1" name="nRadioButton4" value="0" onclick="changeStyleQuote()">
-              Normal
-            </label>
-            <br>
-            <label for="nRadioButton4">
-              <input type="radio" id="iRadioButton4-2" name="nRadioButton4" value="1" onclick="changeStyleQuote()">
-              Cursiva
-            </label>
-            <br>
-            <label for="nRadioButton4">
-              <input type="radio" id="iRadioButton4-3" name="nRadioButton4" value="2" onclick="changeStyleQuote()">
-              Negrita
-            </label>
-            <br>
-            <label for="nRadioButton4">
-              <input type="radio" id="iRadioButton4-4" name="nRadioButton4" value="3" onclick="changeStyleQuote()">
-              Curisva / Negrita
-            </label>
-          </fieldset>
+      <!-- Quote alignment /-->
+      <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-12 col-sm-12">
+        <div class="border mb-3 p-3">
+          <div class="card-body">
+
+            <!-- Author align options /-->
+            <div class="mb-4" style="display: block;">
+
+              <!-- Title /-->
+              <h6 class="card-title">Quote alignment</h6>
+              <hr>
+
+              <div class="col-sm">
+                <div class="form-check">
+                  <fieldset>
+                    <label for="nRadioButton3">
+                      <input type="radio" id="iRadioButton3-1" name="nRadioButton3" value="0"
+                             onclick="changeAlignQuote()">
+                      Derecha
+                    </label>
+                    <br>
+                    <label for="nRadioButton3">
+                      <input type="radio" id="iRadioButton3-2" name="nRadioButton3" value="1"
+                             onclick="changeAlignQuote()">
+                      Centrar
+                    </label>
+                    <br>
+                    <label for="nRadioButton3">
+                      <input type="radio" id="iRadioButton3-3" name="nRadioButton3" value="2"
+                             onclick="changeAlignQuote()">
+                      Izquierda
+                    </label>
+                    <br>
+                    <label for="nRadioButton3">
+                      <input type="radio" id="iRadioButton3-4" name="nRadioButton3" value="3"
+                             onclick="changeAlignQuote()">
+                      Justificado
+                    </label>
+                  </fieldset>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
         </div>
+      </div>
+
+      <!-- Quote style /-->
+      <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-12 col-sm-12">
+        <div class="border mb-3 p-3">
+          <div class="card-body">
+
+            <!-- Author align options /-->
+            <div class="mb-4" style="display: block;">
+
+              <!-- Title /-->
+              <h6 class="card-title">Quote style</h6>
+              <hr>
+
+              <div class="col-sm">
+                <div class="form-check">
+                  <fieldset>
+                    <label for="nRadioButton4">
+                      <input type="radio" id="iRadioButton4-1" name="nRadioButton4" value="0"
+                             onclick="changeStyleQuote()">
+                      Normal
+                    </label>
+                    <br>
+                    <label for="nRadioButton4">
+                      <input type="radio" id="iRadioButton4-2" name="nRadioButton4" value="1"
+                             onclick="changeStyleQuote()">
+                      Cursiva
+                    </label>
+                    <br>
+                    <label for="nRadioButton4">
+                      <input type="radio" id="iRadioButton4-3" name="nRadioButton4" value="2"
+                             onclick="changeStyleQuote()">
+                      Negrita
+                    </label>
+                    <br>
+                    <label for="nRadioButton4">
+                      <input type="radio" id="iRadioButton4-4" name="nRadioButton4" value="3"
+                             onclick="changeStyleQuote()">
+                      Curisva / Negrita
+                    </label>
+                  </fieldset>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- Demo /-->
+      <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12">
+        <div class="card" style="margin-top: -15px;">
+
+          <!-- Title /-->
+          <h5 class="card-header">Demo</h5>
+
+          <div class="card-body">
+
+            <!-- Quote /-->
+            <div id="quote">
+              <p class="card-text" id="quote1" style="display:none;">"Nuestras virtudes y nuestros defectos son
+                inseparables, como la fuerza y la materia. Cuando se separan, el hombre ya no existe". "Si quieres
+                encontrar los secretos del universo, piensa en términos de energía, frecuencia y vibración".</p>
+
+              <p class="card-text" id="quote2" style="display:block;"><em>"Nuestras virtudes y nuestros defectos son
+                  inseparables, como la fuerza y la materia. Cuando se separan, el hombre ya no existe". "Si quieres
+                  encontrar los secretos del universo, piensa en términos de energía, frecuencia y vibración".</em>
+              </p>
+              <p class="card-text" id="quote3" style="display:none;"><b>"Nuestras virtudes y nuestros defectos son
+                  inseparables, como la fuerza y la materia. Cuando se separan, el hombre ya no existe". "Si quieres
+                  encontrar los secretos del universo, piensa en términos de energía, frecuencia y vibración".</b>
+              </p>
+              <p class="card-text" id="quote4" style="display:none;"><b><em>"Nuestras virtudes y nuestros defectos son
+                    inseparables, como la fuerza y la materia. Cuando se separan, el hombre ya no existe". "Si quieres
+                    encontrar los secretos del universo, piensa en términos de energía, frecuencia y
+                    vibración".</em></b></p>
+            </div>
+
+            <!-- Author /-->
+            <div id="authorDemo">
+              <p class="card-text" id="author1" style="display:none;">— Nikola Tesla</p>
+              <p class="card-text" id="author2" style="display:none;"><em>— Nikola Tesla</em></p>
+              <p class="card-text" id="author3" style="display:none;"><b>— Nikola Tesla</b></p>
+              <p class="card-text" id="author4" style="display:block;"><b><em>— Nikola Tesla</em></b></p>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Save button -->
+      <div class="col-auto">
+        <button type="submit"
+                title="Click to save"
+                class="btn btn-primary btn-sm">Save
+        </button>
       </div>
 
     </div>
-
-    <hr>
-
-    <!-- Save button -->
-    <div class="col-auto">
-      <button type="submit" class="btn btn-dark">Guardar</button>
-    </div>
-
-  </form>
-
-  <hr>
-
-  <!-- Demo -->
-  <div class="row">
-
-    <p class="be-title"><strong>Demo</strong></p>
-
-    <div class="col-lg-3 col-md-3 col-sd-12">
-
-      <div id="quote">
-        <p id="quote1" style="display:none;">"Estar solo, ese es el secreto de la invención; estando solo es cuando
-          nacen las ideas".</p>
-        <p id="quote2" style="display:block;"><em>"Estar solo, ese es el secreto de la invención; estando solo es cuando
-            nacen las ideas".</em></p>
-        <p id="quote3" style="display:none;"><b>"Estar solo, ese es el secreto de la invención; estando solo es cuando
-            nacen las ideas".</b></p>
-        <p id="quote4" style="display:none;"><b><em>"Estar solo, ese es el secreto de la invención; estando solo es
-              cuando nacen las ideas".</em></b></p>
-      </div>
-
-      <div id="author">
-        <p id="author1" style="display:none;">— Nikola Tesla</p>
-        <p id="author2" style="display:none;"><em>— Nikola Tesla</em></p>
-        <p id="author3" style="display:none;"><b>— Nikola Tesla</b></p>
-        <p id="author4" style="display:block;"><b><em>— Nikola Tesla</em></b></p>
-      </div>
-
-    </div>
-
   </div>
-
-  <hr>
-
-</div>
+</form>
 
 <script>
 
@@ -221,15 +302,15 @@
   let styleAuthor = '<?php echo $styleAuthor;?>';
 
   // Check option number selected from the group 1 of RadioButtons
-  checkRadioButtonGroup1(alignmentAuthor);
+  changeAuthorAlignment(alignmentAuthor);
 
   // Check option number selected from the group 2 of RadioButtons
-  checkRadioButtonGroup2(styleAuthor);
+  changeAuthorStyle(styleAuthor);
 
   // Check option number selected from the group 3 of RadioButtons
-  checkRadioButtonGroup3(alignmentQuote);
+  changeQuoteAlignment(alignmentQuote);
 
   // Check option number selected from the group 4 of RadioButtons
-  checkRadioButtonGroup4(styleQuote);
+  changeQuoteStyle(styleQuote);
 
 </script>

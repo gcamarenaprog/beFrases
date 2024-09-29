@@ -18,7 +18,7 @@
   if (isset($_POST['nButtonNewCategory'])) {
     $categoryName = $_POST['nInputCategoryName'];
     $categoryDescription = $_POST['nTextAreaCategoryDescription'];
-    saveNewCategoryRecord ($categoryName, $categoryDescription);
+    insertCategoryRecord ($categoryName, $categoryDescription);
   }
   
   # Delete category record from delete form
@@ -184,7 +184,7 @@
                  id="iTextCategoryDeleteQuestion"
                  name="nTextCategoryDeleteQuestion">Do you want to delete the following category?
               </p>
-         
+
             </div>
 
             <hr>
@@ -206,8 +206,7 @@
 
             <!-- Description title /-->
             <p class="card-text" style="margin-bottom: 0px;">
-              <b name="nTextDeleteCategoryTitleDescription"
-                 id="iTextDeleteCategoryTitleDescription">Description</b>
+              <b name="nTextDeleteCategoryTitleDescription" id="iTextDeleteCategoryTitleDescription">Description</b>
             </p>
 
             <!-- Description text /-->
@@ -223,7 +222,8 @@
                     class="btn btn-success btn-sm "
                     name="nButtonDeleteAccept"
                     id="iButtonDeleteAccept"
-                    title="Click to delete.">Delete
+                    title="Click to delete.">
+              Delete
             </button>
 
             <!-- Cancel delete button /-->
@@ -232,8 +232,8 @@
                     name="nButtonDeleteCancel"
                     id="iButtonDeleteCancel"
                     title="Click to cancel."
-                    title="Click to cancel."
-                    onclick="hideFormDeleteCategory()">Cancel
+                    onclick="hideFormDeleteCategory()">
+              Cancel
             </button>
 
           </form>

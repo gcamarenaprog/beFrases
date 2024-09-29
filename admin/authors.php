@@ -18,7 +18,7 @@
   # Save new author record from add new author form
   if (isset($_POST['nButtonNewAuthor'])) {
     $authorName = $_POST['nInputAuthorName'];
-    saveNewAuthorRecord ($authorName);
+    insertAuthorRecord ($authorName);
   }
   
   # Delete author record from delete form

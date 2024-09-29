@@ -21,7 +21,7 @@
     $authorIdQuote = $_POST['nSelectAuthor'];
     $textQuote = $_POST['nTextAreaQuote'];
     $categoryIdQuote = $_POST['nSelectCategory'];
-    addQuoteRecord ($authorIdQuote, $textQuote, $categoryIdQuote);
+    insertQuoteRecord ($authorIdQuote, $textQuote, $categoryIdQuote);
   }
   
   # Update the changes from edit form
@@ -40,18 +40,20 @@
   }
   
   # Get all quotes
-  $listQuotes = getAllQuotes ();
-  
-  # Get all authors from list quotes no repeat
-  $listAuthorsWithoutRepeat = getAllAuthorsWithoutRepeat ($listQuotes);
+  $listQuotes = getAllDataQuotes ();
   
   # Get all categories
-  $namesCategoriesList = getAllDataCategoriesList ();
-  $totalNamesCategoriesList = count ($namesCategoriesList);
+  $namesCategories = getAllDataCategories ();
   
   # Get all authors
-  $namesAuthorsList = getAllDataAuthorsList ();
-  $totalNamesAuthorsList = count ($namesAuthorsList);
+  $namesAuthors = getAllDataAuthors ();
+  
+  # Get all categories
+  $namesCategoriesList = getAllDataCategories ();
+  $totalNamesCategoriesList = count ($namesCategoriesList);
+  
+  # Get total authors
+  $totalNamesAuthorsList = count ($namesAuthors);
 
 ?>
 
@@ -64,8 +66,8 @@
         <h5 class="card-header"><?php echo get_admin_page_title (); ?></h5>
         <div class="card-body">
           <p class="card-text">
-            An easy and simple to use plugin that will allow you to manage a collection of famous quotes with their
-            respective authors, as well as categorize them and display them randomly in a widget.
+            In this section you can add, edit or delete categories. To edit or delete, select a category
+            from the list.
           </p>
         </div>
       </div>
@@ -101,7 +103,7 @@
                 >
                   <?php
                     echo '<option selected></option>';
-                    foreach ($namesAuthorsList as $key => $value) {
+                    foreach ($namesAuthors as $key => $value) {
                       $quoteAuthorId = $value['befrases_aut_id'];
                       $quoteAuthorName = $value['befrases_aut_name'];
                       echo '<option value="' . $quoteAuthorId . '">' . $quoteAuthorName . '</option>';
@@ -158,9 +160,10 @@
               </button>
             
             <?php else: ?>
-              
+
               <!-- Error /-->
-              <p class="card-text text-danger">A category and a registered author must exist in order to add a phrase.</p>
+              <p class="card-text text-danger">A category and a registered author must exist in order to add a
+                phrase.</p>
             
             <?php endif; ?>
           </form>
@@ -188,8 +191,7 @@
                       title="Choose an author."
                       name="nSelectEditAuthor">
                 <?php
-                  $namesCategoriesList = getAllDataAuthorsList ();
-                  foreach ($namesCategoriesList as $key => $value) {
+                  foreach ($namesAuthors as $key => $value) {
                     $quoteAuthorId = $value['befrases_aut_id'];
                     $quoteAuthorName = $value['befrases_aut_name'];
                     echo '<option value="' . $quoteAuthorId . '">' . $quoteAuthorName . '</option>';
@@ -223,8 +225,7 @@
                       title="Choose a category."
               >
                 <?php
-                  $namesCategoriesList = getAllCategoriesList ();
-                  foreach ($namesCategoriesList as $key => $value) {
+                  foreach ($namesCategories as $key => $value) {
                     $quoteCategoryId = $value['befrases_cat_id'];
                     $quoteCategoryName = $value['befrases_cat_name'];
                     echo '<option value="' . $quoteCategoryId . '">' . $quoteCategoryName . '</option>';
@@ -308,7 +309,7 @@
       </div>
     </div>
 
-    <!-- List of quotes /-->
+    <!-- List of categories /-->
     <div class="col-xxl-9 col-xl-9 col-lg-9 col-md-12 col-sm-12">
       <div class="border mb-3 p-3">
 
@@ -334,7 +335,6 @@
 
           <tbody>
           <?php
-            
             foreach ($listQuotes as $key => $value) {
               
               $quoteId = $value['befrases_id'];
@@ -342,12 +342,12 @@
               $quoteText = $value['befrases_quote'];
               $quoteCategoryId = $value['befrases_category'];
               
-              $nameOfCategory = getCategoryName ($quoteCategoryId);
+              $nameOfCategory = getCategoryNameWithCategoryId ($quoteCategoryId);
               foreach ($nameOfCategory as $key => $value) {
                 $quoteCategory = $value['befrases_cat_name'];
               }
               
-              $nameOfAuthor = getAuthorName ($quoteAuthorId);
+              $nameOfAuthor = getAuthorNameWithAuthorId ($quoteAuthorId);
               foreach ($nameOfAuthor as $key => $value) {
                 $quoteAuthor = $value['befrases_aut_name'];
               }
@@ -394,6 +394,8 @@
               <?php
             }
           ?>
+
+          </tbody>
 
           <tfoot>
           <th>#</th>
