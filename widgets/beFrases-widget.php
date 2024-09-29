@@ -27,68 +27,79 @@
     {
       $widget_ops = array(
         'classname' => 'beFrases_widget',
-        'description' => 'A random phrase from the phrase repository');
+        'description' => 'Displays a random quote.');
       parent::__construct ('beFrases_widget', 'beFrases', $widget_ops);
     }
     
+    
     /**
-     * PART 1: Widget elements start and extract data form instance
+     * Widget form from administration
      *
      * @since  1.0.0
      * @access public
      */
     public function form ($instance): void
     {
+      $quoteCategoryNameSelected = '';
       
-      // PART 1: Extract the data from the instance variable
-      $instance = wp_parse_args ((array)$instance, array(
-        'nTitle' => 'beFrases',
-        'nSelectCategoryName' => 1));
+      # Create instance
+      $instance = wp_parse_args ((array)$instance,
+        array('nTitle' => 'beFrases', 'nSelectCategoryName' => 1)
+      );
+      
+      # PART 1: Extract the data from the instance variable
       $title = $instance['nTitle'];
-      $phraseCategory = $instance['nSelectCategoryName'];
+      $quoteCategoryId = $instance['nSelectCategoryName'];
+      
+      # Get category name selected
+      $quoteCategoryNameList = getCategoryNameAndIdWithCategoryId ($quoteCategoryId);
+      
+      # Get category name and category id
+      foreach ($quoteCategoryNameList as $key => $value) {
+        $quoteCategoryNameSelected = $value['befrases_cat_name'];
+        $quoteCategoryIdSelected = $value['befrases_cat_id'];
+      }
+      
+      # Get categories list
+      $namesCategoriesList = getAllCategoriesList ();
       ?>
 
-      <!-- Widget title show and start -->
+      <!-- Title /-->
       <p>
-        <label for="<?php echo $this->get_field_id ('iTitle'); ?>">Title:
-          <input class="widefat" id="<?php echo $this->get_field_id ('iTitle'); ?>"
-                 name="<?php echo $this->get_field_name ('nTitle'); ?>" type="text"
-                 value="<?php echo $title; ?>"/>
-        </label>
+        <label for="<?php echo $this->get_field_id ('iTitle'); ?>">Title:</label>
+        <input class="widefat"
+               id="<?php echo $this->get_field_id ('iTitle'); ?>"
+               name="<?php echo $this->get_field_name ('nTitle'); ?>"
+               type="text"
+               value="<?php echo $title; ?>"/>
       </p>
 
-      <!-- Widget select category shor and start-->
+      <!-- Category /-->
       <p>
-        <label for="<?php echo $this->get_field_id ('text'); ?>">Categoría: <?php echo $phraseCategory; ?>
-          <select class='widefat'
-                  id="<?php echo $this->get_field_id ('nSelectCategoryName'); ?>"
-                  name="<?php echo $this->get_field_name ('nSelectCategoryName'); ?>"
-                  type="text">
-            <?php
-              $namesCategoriesList = getAllCategoriesList ();
-              
-              foreach ($namesCategoriesList as $key => $value) {
-                $phraseCategoryId = $value['befrases_cat_id'];
-                $phraseCategoryName = $value['befrases_cat_name'];
-                
-                if ($phraseCategoryId === $phraseCategory) {
-                  echo '<option selected value="' . $phraseCategoryId . '">' . $phraseCategoryName . '</option>';
-                } else {
-                  echo '<option  value="' . $phraseCategoryId . '">' . $phraseCategoryName . '</option>';
-                }
-              }
-            
-            ?>
-          </select>
+        <label for="<?php echo $this->get_field_id ('text'); ?>">
+          Category: <?php echo $quoteCategoryNameSelected; ?>
         </label>
+        <select class='widefat'
+                id="<?php echo $this->get_field_id ('nSelectCategoryName'); ?>"
+                name="<?php echo $this->get_field_name ('nSelectCategoryName'); ?>"
+                type="text">
+          <?php
+            foreach ($namesCategoriesList as $key => $value) {
+              $quoteCategoryId = $value['befrases_cat_id'];
+              $quoteCategoryName = $value['befrases_cat_name'];
+              if ($quoteCategoryId === $quoteCategoryIdSelected) {
+                echo '<option selected value="' . $quoteCategoryId . '">' . $quoteCategoryName . '</option>';
+              } else {
+                echo '<option  value="' . $quoteCategoryId . '">' . $quoteCategoryName . '</option>';
+              }
+            }
+          ?>
+        </select>
       </p>
+      
       <?php
     }
     
-    
-    /*
-    ** --- Función para actualizar los cambios al guardar ---
-    */
     
     /**
      * PART 2: Update to save changes
@@ -114,54 +125,71 @@
     function widget ($args, $instance): void
     {
       
-      // PART 1: Extracting the arguments + getting the values
+      ## PART 1: Extracting the arguments + getting the values
       extract ($args, EXTR_SKIP);
+      
       $title = empty($instance['nTitle']) ? '' : apply_filters ('widget_title', $instance['nTitle']);
-      $phraseCategoryId = empty($instance['nSelectCategoryName']) ? '' : $instance['nSelectCategoryName'];
+      $quoteCategoryId = empty($instance['nSelectCategoryName']) ? '' : $instance['nSelectCategoryName'];
       
-      // Before widget code, if any
-      echo (isset($before_widget) ? $before_widget : '');
+      ## BEFORE widget code, if any
+      echo ($before_widget ?? '');
       
-      // PART 2: The title and the text output
+      ## PART 2: The title and the text output
       if (!empty($title))
         echo $before_title . $title . $after_title;
-      if (!empty($phraseCategoryId))
+      if (!empty($quoteCategoryId))
         echo "";
-      
-      // Get all phrases of a category for su id
-      $listPhrases = getAllPhrasesFromIdCategory ($phraseCategoryId);
-      
-      // Get lenght array
-      $lenght = count ($listPhrases);
-      
-      // Get random number for use to choice some quote
-      $randomNumber = rand (0, $lenght - 1);
       
       # Get options from database
       $listOptions = getSettings ();
       
-      // Get saved styles and alignments from configuration management option
+      # Get saved styles and alignments from configuration management option
       foreach ($listOptions as $key => $value) {
         $alignmentAuthorText = $value['befrases_ali_txt_aut'];
         $styleAuthorText = $value['befrases_sty_txt_aut'];
-        $alignmentPhraseText = $value['befrases_ali_txt_phr'];
-        $stylePhraseText = $value['befrases_sty_txt_phr'];
+        $alignmentQuoteText = $value['befrases_ali_txt_quo'];
+        $styleQuoteText = $value['befrases_sty_txt_quo'];
       }
       
-      // Get only one phrase with the random number of the list obtained
-      foreach ($listPhrases as $key => $value) {
-        $authorText = $value['befrases_author'];
-        $phraseText = $value['befrases_phrase'];
-        
-        if ($key == $randomNumber) {
-          printPhraseText ($alignmentPhraseText, $stylePhraseText, $phraseText);
-          printAuthorText ($alignmentAuthorText, $styleAuthorText, $authorText);
-        }
-      } ?>
+      # Get all quotes of a category for su id
+      $listQuotes = getAllQuotesFromCategoryId ($quoteCategoryId);
+      $author = '';
+      $quote = '';
       
-      <?php
-      // After widget code, if any  
-      echo (isset($after_widget) ? $after_widget : '');
+      # Get length array
+      $length = count ($listQuotes);
+      
+      # Get author and quote with randomize number
+      if ($length == 0) { // If there are no quotes.
+        echo '<p style="text-align: center;">No hay frases para mostrar.</p>';
+      } elseif ($length == 1) { // If there is a quote.
+        foreach ($listQuotes as $key => $value) {
+          $quote = $value['befrases_quote'];
+          $author = $value['befrases_author'];
+          $nameOfAuthor = getAuthorNameWithAuthorId ($author);
+          foreach ($nameOfAuthor as $key => $value) {
+            $author = $value['befrases_aut_name'];
+          }
+        }
+      } else { // If there is one or more quotes
+        $randomNumber = rand (0, $length - 1);
+        foreach ($listQuotes as $key => $value) {
+          if ($key == $randomNumber) {
+            $quote = $value['befrases_quote'];
+            $author = $value['befrases_author'];
+            $nameOfAuthor = getAuthorNameWithAuthorId ($author);
+            foreach ($nameOfAuthor as $key => $value) {
+              $author = $value['befrases_aut_name'];
+            }
+          }
+        }
+      }
+      
+      printQuoteText ($alignmentQuoteText, $styleQuoteText, $quote);
+      printAuthorText ($alignmentAuthorText, $styleAuthorText, $author);
+      
+      # AFTER widget code, if any
+      echo ($after_widget ?? '');
     }
   }
 

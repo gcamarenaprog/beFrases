@@ -333,3 +333,19 @@
   add_action ('admin_enqueue_scripts', 'fn_CallMyCSS');
   
   
+  /**
+   * Widget ------------------------------------------------------------------------------------------------------------
+   */
+  
+  /**
+   * Widget initialization
+   *
+   * @return mixed
+   */
+  function beFrases_register_widget ()
+  {
+    return register_widget ('beFrases_widget');
+  }
+  
+  add_action ('widgets_init', 'beFrases_register_widget');
+  

@@ -54,10 +54,10 @@
    * @param int $CategoryId Id number of the category
    * @return array $categoryName Name of category
    */
-  function getCategoryNameWithCategoryId (int $CategoryId): array
+  function getCategoryNameAndIdWithCategoryId (int $CategoryId): array
   {
     global $wpdb;
-    return $wpdb->get_results ("SELECT befrases_cat_name FROM  {$wpdb -> prefix}befrases_cat	WHERE	befrases_cat_id = {$CategoryId}", ARRAY_A);
+    return $wpdb->get_results ("SELECT befrases_cat_name, befrases_cat_id FROM  {$wpdb -> prefix}befrases_cat	WHERE	befrases_cat_id = {$CategoryId}", ARRAY_A);
   }
   
   /**

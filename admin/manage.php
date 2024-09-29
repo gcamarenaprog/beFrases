@@ -342,7 +342,7 @@
               $quoteText = $value['befrases_quote'];
               $quoteCategoryId = $value['befrases_category'];
               
-              $nameOfCategory = getCategoryNameWithCategoryId ($quoteCategoryId);
+              $nameOfCategory = getCategoryNameAndIdWithCategoryId ($quoteCategoryId);
               foreach ($nameOfCategory as $key => $value) {
                 $quoteCategory = $value['befrases_cat_name'];
               }
