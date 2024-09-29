@@ -348,7 +348,7 @@ function changeQuoteStyle(styleQuote) {
  * @return none
  */
 function changeAlignAuthor() {
-  var element = document.getElementsByName('nRadioButton1');
+  const element = document.getElementsByName('nRadioButton1');
   for (i = 0; i < element.length; i++) {
     if (element[i].checked) {
       if (i == 0) {
@@ -372,7 +372,7 @@ function changeAlignAuthor() {
  * @return none
  */
 function changeAlignQuote() {
-  var element = document.getElementsByName('nRadioButton3');
+  const element = document.getElementsByName('nRadioButton3');
   for (i = 0; i < element.length; i++) {
     if (element[i].checked) {
       if (i == 0) {
@@ -396,7 +396,7 @@ function changeAlignQuote() {
  * @return none
  */
 function changeStyleAuthor() {
-  var element = document.getElementsByName('nRadioButton2');
+  const element = document.getElementsByName('nRadioButton2');
   for (i = 0; i < element.length; i++) {
     if (element[i].checked) {
 
@@ -433,7 +433,7 @@ function changeStyleAuthor() {
  * @return none
  */
 function changeStyleQuote() {
-  var element = document.getElementsByName('nRadioButton4');
+  const element = document.getElementsByName('nRadioButton4');
   for (i = 0; i < element.length; i++) {
     if (element[i].checked) {
 

@@ -36,6 +36,16 @@
         <div class="card-body">
           <div class="mb-4" style="display: block;">
 
+            <!-- How I search words, category name or author in the quotes list? /-->
+            <h6 class="card-title">How I search words, category name or author in the quotes list?</h6>
+            <div>
+              <p class="card-text">Go to option menu: <em><b>'Manage' -> 'Search filter' -> just type the word and the
+                  matches will be filtered.</b></em>
+              </p>
+            </div>
+
+            <hr>
+
             <!-- How to add a quote? /-->
             <h6 class="card-title">How to add a quote?</h6>
             <div>
@@ -169,6 +179,6 @@
         </div>
       </div>
     </div>
-    
+
   </div>
 </div>

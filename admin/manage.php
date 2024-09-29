@@ -269,10 +269,10 @@
             <div class="mb-4" style="padding: 10px !important;">
 
               <!-- Quote text /-->
-              <p class="card-text be-quote-delete-confirmation" id="iDeleteQuoteText"></p>
+              <p class="card-text" id="iDeleteQuoteText"></p>
 
               <!-- Quote author /-->
-              <p class="card-text be-author-delete-confirmation" id="iDeleteAuthorText"></p>
+              <p class="card-text" id="iDeleteAuthorText"></p>
 
             </div>
 

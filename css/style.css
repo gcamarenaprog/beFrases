@@ -7,36 +7,6 @@
 
 /* Personalized styles */
 
-h1.be-title {
-  font-size: 23px;
-  font-weight: 400;
-  margin: 0;
-  padding: 9px 0 4px;
-  line-height: 1.3;
-}
-
-p.be-title {
-  font-size: 1.1em;
-  font-weight: 300;
-  margin-bottom: 0px;
-}
-
-p.be-description {
-  font-size: 1em;
-  font-weight: 300;
-}
-
-p.be-author-delete-confirmation {
-  text-align: right;
-  font-style: italic;
-  font-weight: 600;
-}
-
-p.be-quote-delete-confirmation {
-  text-align: right;
-  font-style: italic;
-}
-
 p.be-quote {
   font-size: 1.1em;
   font-weight: 400;
@@ -76,7 +46,6 @@ table.dataTable tfoot th {
   padding-top: 4px !important;
   padding-bottom: 4px !important
 }
-
 
 /* Override WP Core UI styles */
 

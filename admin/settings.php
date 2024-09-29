@@ -250,7 +250,7 @@
             <div class="mb-4" style="display: block;">
 
               <!-- Title /-->
-              <h6 class="card-title">Quote style</h6>
+              <h6 class="card-title">Demo</h6>
               <hr>
 
               <!-- Quote /-->
