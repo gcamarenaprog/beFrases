@@ -185,8 +185,10 @@
         }
       }
       
-      printQuoteText ($alignmentQuoteText, $styleQuoteText, $quote);
-      printAuthorText ($alignmentAuthorText, $styleAuthorText, $author);
+      if ($length != 0){
+        printQuoteText ($alignmentQuoteText, $styleQuoteText, $quote);
+        printAuthorText ($alignmentAuthorText, $styleAuthorText, $author);
+      }
       
       # AFTER widget code, if any
       echo ($after_widget ?? '');
