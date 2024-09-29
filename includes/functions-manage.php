@@ -12,11 +12,11 @@
   {
     global $wpdb;
     $query = "SELECT * FROM {$wpdb -> prefix}befrases";
-    $categoriesList = $wpdb->get_results ($query, ARRAY_A);
-    if (empty($categoriesList)) {
+    $quotesList = $wpdb->get_results ($query, ARRAY_A);
+    if (empty($quotesList)) {
       return array();
     }
-    return $categoriesList;
+    return $quotesList;
   }
   
   /**

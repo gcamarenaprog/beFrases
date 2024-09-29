@@ -54,6 +54,18 @@
   
   # Get total authors
   $totalNamesAuthorsList = count ($namesAuthors);
+  
+  # Get all authors from list phrases no repeat
+  $listAuthors = getAllAuthorsWithoutRepeat($listQuotes);
+  
+  $listAuthorsNoRepeat = array();
+  foreach ($listAuthors as $key){
+    $nameOfAuthor = getAuthorNameWithAuthorId ($key);
+    foreach ($nameOfAuthor as $key => $value) {
+      $quoteAuthor = $value['befrases_aut_name'];
+      $listAuthorsNoRepeat[] = $quoteAuthor;
+    }
+  }
 
 ?>
 
@@ -94,23 +106,9 @@
 
               <!-- Author /-->
               <div class="mb-3">
-                <label for="iSelectAuthor" class="form-label">Author</label>
-                <select class="form-select"
-                        id="iSelectAuthor"
-                        name="nSelectAuthor"
-                        title="Choose an author."
-                        required
-                >
-                  <?php
-                    echo '<option selected></option>';
-                    foreach ($namesAuthors as $key => $value) {
-                      $quoteAuthorId = $value['befrases_aut_id'];
-                      $quoteAuthorName = $value['befrases_aut_name'];
-                      echo '<option value="' . $quoteAuthorId . '">' . $quoteAuthorName . '</option>';
-                    }
-                  ?>
-                </select>
-                <div id="iHelpCategory" class="form-text">Name of the author.</div>
+                <label for="iInputAuthor" class="form-label">Autor</label>
+                <input class="form-control" name="nInputAuthor" id="iInputAuthor" placeholder="Autor.." required>
+                <div id="iHelpAuthorName" class="form-text">Autor de la frase</div>
               </div>
 
               <!-- Quote /-->
@@ -199,6 +197,12 @@
                 ?>
               </select>
               <div id="iHelpEditAuthor" class="form-text">Author's name.</div>
+            </div>
+
+            <div class="mb-3">
+              <label for="iInputEditAuthor" class="form-label">Autor</label>
+              <input class="form-control" name="nInputEditAuthor" id="iInputEditAuthor" placeholder="Autor.." required>
+              <div id="iHelpAuthorName" class="form-text">Autor de la frase</div>
             </div>
 
             <!-- Quote /-->
@@ -457,5 +461,22 @@
       .draw();
 
   });
+
+
+  $( function() {
+    var data = <?php echo json_encode($listAuthorsNoRepeat) ?>;
+    $( "#iInputAuthor" ).autocomplete({
+      source: data,
+      minLength: 3
+    });
+  } );
+
+  $( function() {
+    var data = <?php echo json_encode($listAuthorsNoRepeat) ?>;
+    $( "#iInputEditAuthor" ).autocomplete({
+      source: data,
+      minLength: 3
+    });
+  } );
 
 </script>

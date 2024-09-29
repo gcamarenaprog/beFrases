@@ -80,3 +80,22 @@
     $tableName = "{$wpdb -> prefix}befrases_aut";
     $wpdb->delete ($tableName, $data);
   }
+  
+  /**
+   * Get all authors without repeat
+   *
+   * @param $listPhrases
+   * @return array
+   */
+  function getAllAuthorsWithoutRepeat($listPhrases): array
+  {
+    global $wpdb;
+    $listAuthors = array();
+    $lenghtArray = count($listPhrases);
+    for ($i = 0; $i < $lenghtArray; ++$i){
+      $extractedRecord = $listPhrases[$i];
+      $authorExtractedRecord = $extractedRecord['befrases_author'];
+      $listAuthors[] = $authorExtractedRecord;
+    }
+    return $listAuthors;
+  }
