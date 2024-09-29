@@ -2,82 +2,173 @@
   /**
    * Help plugin option
    *
-   * @package   				beFrases
-   * @version  					2.0.0
-   * @author    				Guillermo Camarena <gcamarenaprog@outlook.com>
-   * @copyright 				Copyright (c) 2004 - 2023, Guillermo Camarena
-   * @link      				https://gcamarenaprog.com/beFrases/
-   * @license   				http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
+   * @package            beFrases
+   * @version            2.0.0
+   * @author             Guillermo Camarena <gcamarenaprog@outlook.com>
+   * @copyright          Copyright (c) 2004 - 2023, Guillermo Camarena
+   * @link               https://gcamarenaprog.com/beFrases/
+   * @license            http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
    *
    */
   
   # Prevent PHP code from being executed by inserting the path in the browser bar
   defined ('ABSPATH') or die("Bye bye and remember: Silence is golden!");
 ?>
-<!-- PHP Code /-->
 
 
-<!-- HTML Code -->
-<div class="container-fluid">
+<div class="container" style="max-width: 100%">
+  <div class="row g-2" style="margin-right: 10px;">
 
-  <!-- Title and description -->
-  <h1 class="display-6"><?php echo get_admin_page_title (); ?></h1>
-  <p class="lead">Aquí podrás encontrar información de ayuda sobre el uso de beFrases</p>
-
-  <hr>
-
-  <!-- Content -->
-  <div class="row">
-    <div class="col">
-
-      <p class="be-description"><strong>¿Cómo añadir una frase?</strong></p>
-      <p class="be-description">
-        La opción del menú: <strong>'Administrar' -> 'Añadir frase'</strong>
-      </p>
-
-      <hr>
-
-      <p class="be-description"><strong>¿Cómo editar una frase?</strong></p>
-      <p class="be-description">
-        La opción del menú: <strong>'Administrar' -> 'Lista de frases' -> 'Campo Editar'</strong>
-      </p>
-      </p>
-
-      <hr>
-
-      <p class="be-description"><strong>¿Cómo eliminar una frase?</strong></p>
-      <p class="be-description">
-        La opción del menú: <strong>'Administrar' -> 'Lista de frases' -> 'Campo Eliminar'</strong>
-      </p>
-      </p>
-
-      <hr>
-
-      <p class="be-description"><strong>¿Cómo eliminar todas las frases?</strong></p>
-      <p class="be-description">
-        La opción del menú: <strong>'Administrar' -> 'Eliminar todo'</strong>
-      </p>
-      </p>
-
-      <hr>
-
-      <p class="be-description"><strong>¿Cómo puedo buscar palabras en las frases?</strong></p>
-      <p class="be-description">
-        La opción del menú: <strong>'Administrar' -> 'Lista de frases' -> 'Campo de búsqueda'</strong>, filtra los datos
-        por: <strong>autor, frase y categoría.</strong>
-      </p>
-
-      <hr>
-
-      <p class="be-description"><strong>¿Cómo agregar una nueva categoría?</strong></p>
-      <p class="be-description">
-        La opción del menú: <strong>'Categorías'</strong>, completa los campos: <strong>nombre y descripción.</strong>
-      </p>
-
-      <hr>
-
+    <!-- Title and description /-->
+    <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12">
+      <div class="card">
+        <h5 class="card-header"><?php echo get_admin_page_title (); ?></h5>
+        <div class="card-body">
+          <p class="card-text"> Here you can find helpful information on using beFrases. </p>
+        </div>
+      </div>
     </div>
-  </div>
 
+
+    <!-- Helps /-->
+    <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12">
+      <div class="card">
+        <div class="card-body">
+          <div class="mb-4" style="display: block;">
+
+            <!-- How to add a quote? /-->
+            <h6 class="card-title">How to add a quote?</h6>
+            <div>
+              <p class="card-text">Go to option menu: <em><b>'Manage' -> 'Add quote'</b></em>
+                <br>
+                <b><em style="color: #b02a37">Note: remember to omit the quotation marks at the beginning and end of the
+                    quote.</em></b>
+              </p>
+            </div>
+
+            <hr>
+
+            <!-- How to edit a quote? /-->
+            <h6 class="card-title">How to edit a quote?</h6>
+            <div>
+              <p class="card-text">Go to option menu: <em><b>'Manage' -> 'Quote list' -> 'Click on edit button'</b></em>
+              </p>
+            </div>
+            <hr>
+
+            <!-- How to edit a quote? /-->
+            <h6 class="card-title">How to edit a quote?</h6>
+            <div>
+              <p class="card-text">Go to option menu: <em><b>'Manage' -> 'Quote list' -> 'Click on edit button'</b></em>
+              </p>
+            </div>
+            <hr>
+
+            <!-- How to delete a quote? /-->
+            <h6 class="card-title">How to delete a quote?</h6>
+            <div>
+              <p class="card-text">Go to option menu: <em><b>'Manage' -> 'Quote list' -> 'Click on delete
+                    button'</b></em></p>
+            </div>
+            <hr>
+
+            <!-- How to edit a category? /-->
+            <h6 class="card-title">How to edit a category?</h6>
+            <div>
+              <p class="card-text">Go to option menu: <em><b>'Categories' -> 'Quote list' -> 'Click on edit button'</b></em>
+              </p>
+            </div>
+            <hr>
+
+            <!-- How to edit a category? /-->
+            <h6 class="card-title">How to edit a category?</h6>
+            <div>
+              <p class="card-text">Go to option menu: <em><b>'Categories' -> 'Quote list' -> 'Click on edit button'</b></em>
+              </p>
+            </div>
+            <hr>
+
+            <!-- How to delete a category? /-->
+            <h6 class="card-title">How to delete a category?</h6>
+            <div>
+              <p class="card-text">Go to option menu: <em><b>'Categories' -> 'Quote list' -> 'Click on delete
+                    button'</b></em></p>
+            </div>
+            <hr>
+
+            <!-- How to edit an authors? /-->
+            <h6 class="card-title">How to edit an authors?</h6>
+            <div>
+              <p class="card-text">Go to option menu: <em><b>'Authors' -> 'Quote list' -> 'Click on edit
+                    button'</b></em></p>
+            </div>
+            <hr>
+
+            <!-- How to edit an authors? /-->
+            <h6 class="card-title">How to edit an authors?</h6>
+            <div>
+              <p class="card-text">Go to option menu: <em><b>'Authors' -> 'Quote list' -> 'Click on edit
+                    button'</b></em></p>
+            </div>
+            <hr>
+
+            <!-- How to delete an authors? /-->
+            <h6 class="card-title">How to delete an authors?</h6>
+            <div>
+              <p class="card-text">Go to option menu: <em><b>'Authors' -> 'Quote list' -> 'Click on delete
+                    button'</b></em></p>
+            </div>
+            <hr>
+
+
+            <!-- How to select text alignment for quote? /-->
+            <h6 class="card-title">How to select text alignment for quote?</h6>
+            <div>
+              <p class="card-text">
+                Go to option menu: <b>'Settings' -> 'Quote alignment' -> 'Select: center, right, justify or left.'</b>
+                <br>
+                <b><em style="color: #b02a37">Note: You can see a demo of the text in the "Demo" section.</em></b>
+              </p>
+            </div>
+            <hr>
+
+            <!-- How to select text style for quote? /-->
+            <h6 class="card-title">How to select text style for quote?</h6>
+            <div>
+              <p class="card-text">Go to option menu: <em><b>'Settings' -> 'Quote style' -> 'Select: normal, italics,
+                    bold or italics and bold.'</b>
+                  <br>
+                  <b><em style="color: #b02a37">Note: You can see a demo of the text in the "Demo" section.</em></b>
+              </p>
+            </div>
+            <hr>
+
+            <!-- How to select text alignment for author? /-->
+            <h6 class="card-title">How to select text alignment for author?</h6>
+            <div>
+              <p class="card-text">
+                Go to option menu: <b>'Settings' -> 'Quote alignment' -> 'Select: center, right, justify or left.'</b>
+                <br>
+                <b><em style="color: #b02a37">Note: You can see a demo of the text in the "Demo" section.</em></b>
+              </p>
+            </div>
+            <hr>
+
+            <!-- How to select text style for author? /-->
+            <h6 class="card-title">How to select text style for author?</h6>
+            <div>
+              <p class="card-text">Go to option menu: <em><b>'Settings' -> 'Quote style' -> 'Select: normal, italics,
+                    bold or italics and bold.'</b>
+                  <br>
+                  <b><em style="color: #b02a37">Note: You can see a demo of the text in the "Demo" section.</em></b>
+              </p>
+            </div>
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+    
+  </div>
 </div>
-<!-- HTML Code /-->

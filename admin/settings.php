@@ -50,100 +50,6 @@
         </div>
       </div>
 
-      <!-- Author alignment /-->
-      <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-12 col-sm-12">
-        <div class="border mb-3 p-3">
-          <div class="card-body">
-
-            <div class="mb-4" style="display: block;">
-
-              <!-- Title /-->
-              <h6 class="card-title">Author alignment</h6>
-              <hr>
-
-              <div class="form-check">
-                <fieldset>
-                  <label for="nRadioButton1">
-                    <input type="radio" id="iRadioButton1-1" name="nRadioButton1" value="0"
-                           onclick="changeAlignAuthor()">
-                    Derecha
-                  </label>
-                  <br>
-                  <label for="nRadioButton1">
-                    <input type="radio" id="iRadioButton1-2" name="nRadioButton1" value="1"
-                           onclick="changeAlignAuthor()">
-                    Centrar
-                  </label>
-                  <br>
-                  <label for="nRadioButton1">
-                    <input type="radio" id="iRadioButton1-3" name="nRadioButton1" value="2"
-                           onclick="changeAlignAuthor()">
-                    Izquierda
-                  </label>
-                  <br>
-                  <label for="nRadioButton1">
-                    <input type="radio" id="iRadioButton1-4" name="nRadioButton1" value="3"
-                           onclick="changeAlignAuthor()">
-                    Justificado
-                  </label>
-                </fieldset>
-              </div>
-
-
-            </div>
-
-          </div>
-        </div>
-      </div>
-
-      <!-- Author style /-->
-      <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-12 col-sm-12">
-        <div class="border mb-3 p-3">
-          <div class="card-body">
-
-            <!-- Author align options /-->
-            <div class="mb-4" style="display: block;">
-
-              <!-- Title /-->
-              <h6 class="card-title">Author style</h6>
-              <hr>
-
-              <div class="form-check">
-                <fieldset>
-
-                  <label for="nRadioButton2">
-                    <input type="radio" id="iRadioButton2-1" name="nRadioButton2" value="0"
-                           onclick="changeStyleAuthor()">
-                    Normal
-                  </label>
-                  <br>
-                  <label for="nRadioButton2">
-                    <input type="radio" id="iRadioButton2-2" name="nRadioButton2" value="1"
-                           onclick="changeStyleAuthor()">
-                    Cursiva
-                  </label>
-                  <br>
-                  <label for="nRadioButton2">
-                    <input type="radio" id="iRadioButton2-3" name="nRadioButton2" value="2"
-                           onclick="changeStyleAuthor()">
-                    Negrita
-                  </label>
-                  <br>
-                  <label for="nRadioButton2">
-                    <input type="radio" id="iRadioButton2-4" name="nRadioButton2" value="3"
-                           onclick="changeStyleAuthor()">
-                    Cursiva / Negrita
-                  </label>
-                </fieldset>
-              </div>
-
-
-            </div>
-
-          </div>
-        </div>
-      </div>
-
       <!-- Quote alignment /-->
       <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-12 col-sm-12">
         <div class="border mb-3 p-3">
@@ -240,45 +146,144 @@
         </div>
       </div>
 
-      <!-- Demo /-->
-      <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12">
-        <div class="card" style="margin-top: -15px;">
-
-          <!-- Title /-->
-          <h5 class="card-header">Demo</h5>
-
+      <!-- Author alignment /-->
+      <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-12 col-sm-12">
+        <div class="border mb-3 p-3">
           <div class="card-body">
 
-            <!-- Quote /-->
-            <div id="quote">
-              <p class="card-text" id="quote1" style="display:none;">"Nuestras virtudes y nuestros defectos son
-                inseparables, como la fuerza y la materia. Cuando se separan, el hombre ya no existe". "Si quieres
-                encontrar los secretos del universo, piensa en términos de energía, frecuencia y vibración".</p>
+            <div class="mb-4" style="display: block;">
 
-              <p class="card-text" id="quote2" style="display:block;"><em>"Nuestras virtudes y nuestros defectos son
-                  inseparables, como la fuerza y la materia. Cuando se separan, el hombre ya no existe". "Si quieres
-                  encontrar los secretos del universo, piensa en términos de energía, frecuencia y vibración".</em>
-              </p>
-              <p class="card-text" id="quote3" style="display:none;"><b>"Nuestras virtudes y nuestros defectos son
-                  inseparables, como la fuerza y la materia. Cuando se separan, el hombre ya no existe". "Si quieres
-                  encontrar los secretos del universo, piensa en términos de energía, frecuencia y vibración".</b>
-              </p>
-              <p class="card-text" id="quote4" style="display:none;"><b><em>"Nuestras virtudes y nuestros defectos son
-                    inseparables, como la fuerza y la materia. Cuando se separan, el hombre ya no existe". "Si quieres
-                    encontrar los secretos del universo, piensa en términos de energía, frecuencia y
-                    vibración".</em></b></p>
-            </div>
+              <!-- Title /-->
+              <h6 class="card-title">Author alignment</h6>
+              <hr>
 
-            <!-- Author /-->
-            <div id="authorDemo">
-              <p class="card-text" id="author1" style="display:none;">— Nikola Tesla</p>
-              <p class="card-text" id="author2" style="display:none;"><em>— Nikola Tesla</em></p>
-              <p class="card-text" id="author3" style="display:none;"><b>— Nikola Tesla</b></p>
-              <p class="card-text" id="author4" style="display:block;"><b><em>— Nikola Tesla</em></b></p>
+              <div class="form-check">
+                <fieldset>
+                  <label for="nRadioButton1">
+                    <input type="radio" id="iRadioButton1-1" name="nRadioButton1" value="0"
+                           onclick="changeAlignAuthor()">
+                    Derecha
+                  </label>
+                  <br>
+                  <label for="nRadioButton1">
+                    <input type="radio" id="iRadioButton1-2" name="nRadioButton1" value="1"
+                           onclick="changeAlignAuthor()">
+                    Centrar
+                  </label>
+                  <br>
+                  <label for="nRadioButton1">
+                    <input type="radio" id="iRadioButton1-3" name="nRadioButton1" value="2"
+                           onclick="changeAlignAuthor()">
+                    Izquierda
+                  </label>
+                  <br>
+                  <label for="nRadioButton1">
+                    <input type="radio" id="iRadioButton1-4" name="nRadioButton1" value="3"
+                           onclick="changeAlignAuthor()">
+                    Justificado
+                  </label>
+                </fieldset>
+              </div>
+
+
             </div>
 
           </div>
+        </div>
+      </div>
 
+      <!-- Author style /-->
+      <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-12 col-sm-12">
+        <div class="border mb-3 p-3">
+          <div class="card-body">
+
+            <!-- Author align options /-->
+            <div class="mb-4" style="display: block;">
+
+              <!-- Title /-->
+              <h6 class="card-title">Author style</h6>
+              <hr>
+
+              <div class="form-check">
+                <fieldset>
+
+                  <label for="nRadioButton2">
+                    <input type="radio" id="iRadioButton2-1" name="nRadioButton2" value="0"
+                           onclick="changeStyleAuthor()">
+                    Normal
+                  </label>
+                  <br>
+                  <label for="nRadioButton2">
+                    <input type="radio" id="iRadioButton2-2" name="nRadioButton2" value="1"
+                           onclick="changeStyleAuthor()">
+                    Cursiva
+                  </label>
+                  <br>
+                  <label for="nRadioButton2">
+                    <input type="radio" id="iRadioButton2-3" name="nRadioButton2" value="2"
+                           onclick="changeStyleAuthor()">
+                    Negrita
+                  </label>
+                  <br>
+                  <label for="nRadioButton2">
+                    <input type="radio" id="iRadioButton2-4" name="nRadioButton2" value="3"
+                           onclick="changeStyleAuthor()">
+                    Cursiva / Negrita
+                  </label>
+                </fieldset>
+              </div>
+
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- Demo /-->
+      <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12">
+        <div class="card" style="margin-top: -15px;">
+         
+          <div class="card-body">
+
+            <!-- Author align options /-->
+            <div class="mb-4" style="display: block;">
+
+              <!-- Title /-->
+              <h6 class="card-title">Quote style</h6>
+              <hr>
+
+              <!-- Quote /-->
+              <div id="quote">
+                <p class="card-text" id="quote1" style="display:none;">"Nuestras virtudes y nuestros defectos son
+                  inseparables, como la fuerza y la materia. Cuando se separan, el hombre ya no existe". "Si quieres
+                  encontrar los secretos del universo, piensa en términos de energía, frecuencia y vibración".</p>
+
+                <p class="card-text" id="quote2" style="display:block;"><em>"Nuestras virtudes y nuestros defectos son
+                    inseparables, como la fuerza y la materia. Cuando se separan, el hombre ya no existe". "Si quieres
+                    encontrar los secretos del universo, piensa en términos de energía, frecuencia y vibración".</em>
+                </p>
+                <p class="card-text" id="quote3" style="display:none;"><b>"Nuestras virtudes y nuestros defectos son
+                    inseparables, como la fuerza y la materia. Cuando se separan, el hombre ya no existe". "Si quieres
+                    encontrar los secretos del universo, piensa en términos de energía, frecuencia y vibración".</b>
+                </p>
+                <p class="card-text" id="quote4" style="display:none;"><b><em>"Nuestras virtudes y nuestros defectos son
+                      inseparables, como la fuerza y la materia. Cuando se separan, el hombre ya no existe". "Si quieres
+                      encontrar los secretos del universo, piensa en términos de energía, frecuencia y
+                      vibración".</em></b></p>
+              </div>
+
+              <!-- Author /-->
+              <div id="authorDemo">
+                <p class="card-text" id="author1" style="display:none;">— Nikola Tesla</p>
+                <p class="card-text" id="author2" style="display:none;"><em>— Nikola Tesla</em></p>
+                <p class="card-text" id="author3" style="display:none;"><b>— Nikola Tesla</b></p>
+                <p class="card-text" id="author4" style="display:block;"><b><em>— Nikola Tesla</em></b></p>
+              </div>
+            
+            </div>
+          
+          </div>
         </div>
       </div>
 
