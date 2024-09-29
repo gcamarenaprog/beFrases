@@ -2,73 +2,121 @@
   /**
    * About plugin option
    *
-   * @package   				beFrases
-   * @version  					2.0.0
-   * @author    				Guillermo Camarena <gcamarenaprog@outlook.com>
-   * @copyright 				Copyright (c) 2004 - 2023, Guillermo Camarena
-   * @link      				https://gcamarenaprog.com.com/beFrases/
-   * @license   				http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
+   * @package            beFrases
+   * @version            2.0.0
+   * @author             Guillermo Camarena <gcamarenaprog@outlook.com>
+   * @copyright          Copyright (c) 2004 - 2023, Guillermo Camarena
+   * @link               https://gcamarenaprog.com.com/beFrases/
+   * @license            http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
    *
    */
-
+  
   # Prevent PHP code from being executed by inserting the path in the browser bar
   defined ('ABSPATH') or die("Bye bye and remember: Silence is golden!");
 ?>
 
 
-<div class="container-fluid">
+<div class="container" style="max-width: 100%">
+  <div class="row g-2" style="margin-right: 10px;">
 
-  <!-- Title and description -->
-  <h1 class="display-6"><?php echo get_admin_page_title (); ?></h1>
-  <p class="lead">
-    ¡beFrases, un plugin simple y fácil de usar que te permitirá frases con sus autores y asignarles una categoría.
-    Con la opción de mostrarlas en un widget de manera aleatoria!
-  </p>
-
-  <hr>
-
-  <!-- Content -->
-  <div class="row">
-    <div class="col-md-2">
-
-      <p class="be-description"><strong>Autor:</strong></p>
-      <p class="be-description"><strong>Correo:</strong></p>
-      <p class="be-description"><strong>Sito Web:</strong></p>
-      <p class="be-description"><strong>Facebook:</strong></p>
-      <p class="be-description"><strong>Twitter:</strong></p>
-      <p class="be-description"><strong>Linkedin:</strong></p>
-      <p class="be-description"><strong>Github:</strong></p>
-
+    <!-- Title and description /-->
+    <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12">
+      <div class="card">
+        <h5 class="card-header"><?php echo get_admin_page_title (); ?></h5>
+        <div class="card-body">
+          <p class="card-text"> beFrases, a simple and easy-to-use plugin that will allow you to manage phrases with
+            their authors and categories.
+            With the option to display them in a random widget! </p>
+        </div>
+      </div>
     </div>
 
-    <div class="col-md-10">
+    <!-- Author information /-->
+    <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12">
+      <div class="card">
+        <div class="card-body">
 
-      <p class="be-description">Guillermo Camarena.</p>
-      <p class="be-description"><a href="mailto:gcamarenaprog@outlook.com">gcamarenaprog@outlook.com</a></p>
-      <p class="be-description"><a href="https://gacamarenaprog.com/" target="_blank">gacamarenaprog.com</a></p>
-      <p class="be-description"><a href="https://www.facebook.com/guillermocamarenaprog/" target="_blank">facebook.com/guillermocamarenaprog</a>
-      </p>
-      <p class="be-description"><a href="https://twitter.com/GCamarenaProg" target="_blank">@GCamarenaProg</a></p>
-      <p class="be-description"><a href="https://github.com/gcamarenaprog" target="_blank">github.com/gcamarenaprog</a>
-      </p>
-      <p class="be-description"><a href="https://www.linkedin.com/in/guillermo-camarena-57a25b134/" target="_blank">linkedin.com/in/guillermo-camarena</a>
-      </p>
+          <div class="mb-4" style="display: block;">
 
+            <!-- Author /-->
+            <h6 class="card-title">Author</h6>
+            <p class="card-text">
+              <a href="https://gacamarenaprog.com/" target="_blank">Guillermo Camarena</a>
+            </p>
+
+            <hr>
+
+            <!-- Email /-->
+            <h6 class="card-title">Email</h6>
+            <p class="card-text">
+              <a href="mailto:gcamarenaprog@outlook.com">gcamarenaprog@outlook.com</a></p>
+
+            <hr>
+
+            <!-- Website /-->
+            <h6 class="card-title">Website</h6>
+            <p class="card-text">
+              <a href="https://gacamarenaprog.com/" target="_blank">gacamarenaprog.com</a>
+            </p>
+
+            <hr>
+
+            <!-- Facebook /-->
+            <h6 class="card-title">Facebook</h6>
+            <p class="card-text">
+              <a href="https://www.facebook.com/guillermocamarenaprog/" target="_blank">facebook.com/guillermocamarenaprog</a>
+            </p>
+
+            <hr>
+            
+            <!-- Twitter /-->
+            <h6 class="card-title">Twitter</h6>
+            <p class="card-text">
+              <a href="https://twitter.com/GCamarenaProg" target="_blank"> @GCamarenaProg</a>
+            </p>
+
+            <hr>
+
+            <!-- LinkedIn /-->
+            <h6 class="card-title">LinkedIn</h6>
+            <p class="card-text">
+              <a href="https://www.linkedin.com/in/guillermo-camarena-57a25b134/" target="_blank">
+                linkedin.com/in/guillermo-camarena</a>
+            </p>
+
+            <hr>
+
+            <!-- GitHub /-->
+            <h6 class="card-title">GitHub</h6>
+            <p class="card-text">
+              <a href="https://github.com/gcamarenaprog" target="_blank"> github.com/gcamarenaprog</a>
+            </p>
+
+          </div>
+
+          <hr>
+
+          <!-- Author's quote -->
+          <figure class="text-center">
+            <blockquote class="blockquote">
+              <p class="be-quote"><em>"Vivimos una grandiosa novela, en un gran teatro, montado por gente inteligente
+                  que
+                  le gusta
+                  jugar a las marionetas".</em></p>
+            </blockquote>
+            <figcaption class="blockquote-footer">
+              <em>
+                <b>
+                  Guillermo Camarena<cite title="Source Title"> / Desarrollador Full-Stack, Investigador, Pódcaster y
+                    Bloguero de Fenómenos Forteanos</cite>
+                </b>
+              </em>
+            </figcaption>
+          </figure>
+
+        </div>
+      </div>
     </div>
   </div>
-
-  <hr>
-
-  <!-- Phrase -->
-  <figure class="text-center">
-    <blockquote class="blockquote">
-      <p class="be-quote">"Vivimos una grandiosa novela, en un gran teatro, montado por gente inteligente que le gusta
-        jugar a las marionetas".</p>
-    </blockquote>
-    <figcaption class="blockquote-footer">
-      Guillermo Camarena<cite title="Source Title"> / Desarrollador Full-Stack, Investigador, Pódcaster y Bloguero de
-        Fenómenos Forteanos</cite>
-    </figcaption>
-  </figure>
 
 </div>
