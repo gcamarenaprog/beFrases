@@ -151,8 +151,13 @@
         $styleQuoteText = $value['befrases_sty_txt_quo'];
       }
       
-      # Get all quotes of a category for su id
-      $listQuotes = getAllQuotesFromCategoryId ($quoteCategoryId);
+      # Get all quotes of a category or all categories
+      if($quoteCategoryId == 1){
+        $listQuotes = getAllQuotesFromAllCatgories(); // Get all quotes form all categories.
+      }else {
+        $listQuotes = getAllQuotesFromCategoryId ($quoteCategoryId); // Get all quotes form a category
+      }
+      
       $author = '';
       $quote = '';
       
@@ -171,6 +176,7 @@
             $author = $value['befrases_aut_name'];
           }
         }
+        
       } else { // If there is one or more quotes
         $randomNumber = rand (0, $length - 1);
         foreach ($listQuotes as $key => $value) {
@@ -185,9 +191,6 @@
         }
       }
       
-      if ($length != 0){
-      
-      }
       printQuoteText ($alignmentQuoteText, $styleQuoteText, $quote);
       printAuthorText ($alignmentAuthorText, $styleAuthorText, $author);
       

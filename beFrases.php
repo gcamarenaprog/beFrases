@@ -110,7 +110,7 @@
     $wpdb->query ($sqlDefaultValuesCategoriesTable);
     
     # Insert default values on options table
-    $sqlDefaultValuesOptionsTable = "INSERT IGNORE INTO {$wpdb -> prefix}befrases_opt (befrases_opt_id, befrases_ali_txt_aut, befrases_sty_txt_aut, befrases_ali_txt_quo, befrases_sty_txt_quo) VALUES (1,3,4,4,1)";
+    $sqlDefaultValuesOptionsTable = "INSERT IGNORE INTO {$wpdb -> prefix}befrases_opt (befrases_opt_id, befrases_ali_txt_aut, befrases_sty_txt_aut, befrases_ali_txt_quo, befrases_sty_txt_quo) VALUES (0,2,3,3,0)";
     $wpdb->query ($sqlDefaultValuesOptionsTable);
   }
   

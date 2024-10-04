@@ -10,6 +10,17 @@
    *
    * @return array $listQuotes List of the all quotes with his data
    */
+  function getAllQuotesFromAllCatgories (): array
+  {
+    global $wpdb;
+    return $wpdb->get_results ("SELECT * FROM  {$wpdb -> prefix}befrases", ARRAY_A);
+  }
+  
+  /**
+   * Get all quotes from category id
+   *
+   * @return array $listQuotes List of the all quotes with his data
+   */
   function getAllQuotesFromCategoryId ($quoteCategoryId): array
   {
     global $wpdb;
