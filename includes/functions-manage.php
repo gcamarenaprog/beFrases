@@ -71,3 +71,15 @@
     global $wpdb;
     return $wpdb->get_results ("SELECT befrases_aut_name FROM  {$wpdb -> prefix}befrases_aut	WHERE	befrases_aut_id = {$authorId}", ARRAY_A);
   }
+  
+  /**
+   * Get author id from author name
+   *
+   * @param string $authorName Id number of the author
+   * @return array $authorId Name of author
+   */
+  function getAuthorIdWithName (string $authorName): array
+  {
+    global $wpdb;
+    return $wpdb->get_results ("SELECT befrases_aut_id FROM  {$wpdb -> prefix}befrases_aut	WHERE	befrases_aut_name = '$authorName' ", ARRAY_A);
+  }

@@ -17,25 +17,45 @@
   global $wpdb;
   
   # Add new quote from add form
-  if (isset($_POST['nButtonNewQuote'])) {
-    $authorIdQuote = $_POST['nSelectAuthor'];
-    $textQuote = $_POST['nTextAreaQuote'];
-    $categoryIdQuote = $_POST['nSelectCategory'];
-    insertQuoteRecord ($authorIdQuote, $textQuote, $categoryIdQuote);
+  if (isset($_POST['nButtonAcceptAdd'])) {
+    $authorIdValue = '';
+    $authorName = $_POST['nInputAuthorAdd'];
+    $authorIdObtained = getAuthorIdWithName ($authorName);
+    
+    if (empty($authorIdObtained)) {
+    } else {
+      foreach ($authorIdObtained as $key => $value) {
+        $authorIdValue = $value['befrases_aut_id'];
+      }
+      $authorId = intval ($authorIdValue);
+      $textQuote = $_POST['nTextAreaQuoteAdd'];
+      $categoryIdQuote = $_POST['nSelectCategoryAdd'];
+      insertQuoteRecord ($authorId, $textQuote, $categoryIdQuote);
+    }
   }
   
   # Update the changes from edit form
-  if (isset($_POST['nButtonSaveEditQuote'])) {
-    $idQuote = $_POST['nInputEditQuoteId'];
-    $authorQuote = $_POST['nSelectEditAuthor'];
-    $textQuote = $_POST['nTextAreaEditQuoteText'];
-    $categoryIdQuote = $_POST['nSelectEditCategory'];
-    updateQuoteRecord ($idQuote, $authorQuote, $textQuote, $categoryIdQuote);
+  if (isset($_POST['nButtonAcceptEdit'])) {
+    $authorIdValue = '';
+    $authorName = $_POST['nInputAuthorEdit'];
+    $authorIdObtained = getAuthorIdWithName ($authorName);
+    
+    if (empty($authorIdObtained)) {
+    } else {
+      foreach ($authorIdObtained as $key => $value) {
+        $authorIdValue = $value['befrases_aut_id'];
+      }
+      $authorId = intval ($authorIdValue);
+      $idQuote = $_POST['nInputQuoteIdEdit'];
+      $textQuote = $_POST['nTextAreaQuoteEdit'];
+      $categoryIdQuote = $_POST['nSelectCategoryEdit'];
+      updateQuoteRecord ($idQuote, $authorId, $textQuote, $categoryIdQuote);
+    }
   }
   
   # Delete record from delete form
-  if (isset($_POST['nButtonDeleteQuote'])) {
-    $idQuote = $_POST['nInputDeleteQuoteId'];
+  if (isset($_POST['nButtonAcceptDelete'])) {
+    $idQuote = $_POST['nInputQuoteIdDelete'];
     deleteQuoteRecord ($idQuote);
   }
   
@@ -56,15 +76,10 @@
   $totalNamesAuthorsList = count ($namesAuthors);
   
   # Get all authors from list phrases no repeat
-  $listAuthors = getAllAuthorsWithoutRepeat($listQuotes);
-  
+  $listAuthors = getAllAuthorsList ();
   $listAuthorsNoRepeat = array();
-  foreach ($listAuthors as $key){
-    $nameOfAuthor = getAuthorNameWithAuthorId ($key);
-    foreach ($nameOfAuthor as $key => $value) {
-      $quoteAuthor = $value['befrases_aut_name'];
-      $listAuthorsNoRepeat[] = $quoteAuthor;
-    }
+  foreach ($listAuthors as $key => $value) {
+    $listAuthorsNoRepeat[] = $value['befrases_aut_name'];
   }
 
 ?>
@@ -106,22 +121,28 @@
 
               <!-- Author /-->
               <div class="mb-3">
-                <label for="iInputAuthor" class="form-label">Autor</label>
-                <input class="form-control" name="nInputAuthor" id="iInputAuthor" placeholder="Autor.." required>
-                <div id="iHelpAuthorName" class="form-text">Autor de la frase</div>
+                <label for="iInputAuthorAdd" class="form-label">Author</label>
+                <input class="form-control"
+                       name="nInputAuthorAdd"
+                       id="iInputAuthorAdd"
+                       placeholder="Author.."
+                       title="Write the first three letters of the author."
+                       required>
+                <span id="iInputAuthorErrorAdd" name="nInputAuthorErrorAdd" class="form-text text-danger">This author name not registered!</span>
+                <span id="iInputAuthorHelpAdd" class="form-text">Name of author (auto-complete)</span>
               </div>
 
               <!-- Quote /-->
               <div class="mb-3">
-                <label for="iTextAreaQuote" class="form-label">Quote</label>
+                <label for="iTextAreaQuoteAdd" class="form-label">Quote</label>
                 <textarea class="form-control"
-                          name="nTextAreaQuote"
-                          id="iTextAreaQuote"
+                          name="nTextAreaQuoteAdd"
+                          id="iTextAreaQuoteAdd"
                           placeholder="Write a quote.."
                           rows="4"
                           title="Write the sentence without quotation marks at the beginning and end."
                           required></textarea>
-                <div id="iHelpQuoteDescription" class="form-text">Write the quote without quotation marks at the
+                <div id="iTextAreaQuoteHelpAdd" class="form-text">Write the quote without quotation marks at the
                   beginning
                   and end.
                 </div>
@@ -129,32 +150,35 @@
 
               <!-- Category /-->
               <div class="mb-3">
-                <label for="iSelectCategory" class="form-label">Category</label>
+                <label for="iSelectCategoryAdd" class="form-label">Category</label>
                 <select class="form-select"
-                        id="iSelectCategory"
-                        name="nSelectCategory"
+                        id="iSelectCategoryAdd"
+                        name="nSelectCategoryAdd"
                         title="Choose a category."
                         required
                 >
                   <?php
-                    echo '<option selected></option>';
+                    
                     foreach ($namesCategoriesList as $key => $value) {
-                      $quoteCategoryId = $value['befrases_cat_id'];
-                      $quoteCategoryName = $value['befrases_cat_name'];
-                      echo '<option value="' . $quoteCategoryId . '">' . $quoteCategoryName . '</option>';
+                      if ($value['befrases_cat_id'] != 1) {
+                        $quoteCategoryId = $value['befrases_cat_id'];
+                        $quoteCategoryName = $value['befrases_cat_name'];
+                        echo '<option value="' . $quoteCategoryId . '">' . $quoteCategoryName . '</option>';
+                      }
                     }
                   ?>
                 </select>
-                <div id="iHelpCategory" class="form-text">Category name.</div>
+                <div id="iSelectCategoryHelpAdd" class="form-text">Category name.</div>
               </div>
 
               <!-- Add button /-->
-              <button id="iButtonNewQuote"
-                      name="nButtonNewQuote"
+              <button id="iButtonAcceptAdd"
+                      name="nButtonAcceptAdd"
                       type="submit"
-                      title="Click to add category."
+                      title="Click to accept for to add new quote."
+                      disabled
                       class="btn btn-success btn-sm">
-                Add
+                Accept
               </button>
             
             <?php else: ?>
@@ -178,80 +202,72 @@
             <!-- Quote Id /-->
             <input type="hidden"
                    class="form-control"
-                   name="nInputEditQuoteId"
-                   id="iInputEditQuoteId">
+                   name="nInputQuoteIdEdit"
+                   id="iInputQuoteIdEdit">
 
             <!-- Author /-->
             <div class="mb-3">
-              <label for="iSelectEditAuthor" class="form-label">Author</label>
-              <select class="form-select"
-                      id="iSelectEditAuthor"
-                      title="Choose an author."
-                      name="nSelectEditAuthor">
-                <?php
-                  foreach ($namesAuthors as $key => $value) {
-                    $quoteAuthorId = $value['befrases_aut_id'];
-                    $quoteAuthorName = $value['befrases_aut_name'];
-                    echo '<option value="' . $quoteAuthorId . '">' . $quoteAuthorName . '</option>';
-                  }
-                ?>
-              </select>
-              <div id="iHelpEditAuthor" class="form-text">Author's name.</div>
-            </div>
-
-            <div class="mb-3">
-              <label for="iInputEditAuthor" class="form-label">Autor</label>
-              <input class="form-control" name="nInputEditAuthor" id="iInputEditAuthor" placeholder="Autor.." required>
-              <div id="iHelpAuthorName" class="form-text">Autor de la frase</div>
+              <label for="iInputAuthorEdit" class="form-label">Author</label>
+              <input class="form-control"
+                     name="nInputAuthorEdit"
+                     id="iInputAuthorEdit"
+                     placeholder="Author.."
+                     title="Write the first three letters of the author."
+                     required>
+              <span id="iInputAuthorErrorEdit" name="nInputAuthorErrorEdit" class="form-text text-danger">This author name not registered!</span>
+              <span id="iInputAuthorHelpEdit" class="form-text">Name of author (auto-complete)</span>
             </div>
 
             <!-- Quote /-->
             <div class="mb-3">
-              <label for="iTextAreaEditQuoteText" class="form-label">Quote</label>
+              <label for="iTextAreaQuoteEdit" class="form-label">Quote</label>
               <textarea class="form-control"
-                        name="nTextAreaEditQuoteText"
-                        id="iTextAreaEditQuoteText"
+                        name="nTextAreaQuoteEdit"
+                        id="iTextAreaQuoteEdit"
                         required
                         title="Write the sentence without quotation marks at the beginning and end."
                         rows="4"></textarea>
-              <div id="iHelpQuoteDescription" class="form-text">Write the sentence without quotation marks at the
+              <div id="iTextAreaQuoteHelpEdit" class="form-text">Write the sentence without quotation marks at the
                 beginning and end.
               </div>
             </div>
 
             <!-- Category /-->
             <div class="mb-3">
-              <label for="iSelectEditCategory" class="form-label">Category</label>
+              <label for="iSelectCategoryEdit" class="form-label">Category</label>
               <select class="form-select"
                       aria-label="Default select example"
-                      id="iSelectEditCategory"
-                      name="nSelectEditCategory"
+                      id="iSelectCategoryEdit"
+                      name="nSelectCategoryEdit"
                       title="Choose a category."
               >
                 <?php
                   foreach ($namesCategories as $key => $value) {
-                    $quoteCategoryId = $value['befrases_cat_id'];
-                    $quoteCategoryName = $value['befrases_cat_name'];
-                    echo '<option value="' . $quoteCategoryId . '">' . $quoteCategoryName . '</option>';
+                    if ($value['befrases_cat_id'] != 1) {
+                      $quoteCategoryId = $value['befrases_cat_id'];
+                      $quoteCategoryName = $value['befrases_cat_name'];
+                      echo '<option value="' . $quoteCategoryId . '">' . $quoteCategoryName . '</option>';
+                    }
                   }
                 ?>
               </select>
-              <div id="iHelpEditCategory" class="form-text">Choose a category.</div>
+              <div id="iSelectCategoryHelpEdit" class="form-text">Choose a category.</div>
             </div>
+
 
             <!-- Save edit /-->
             <button type="submit"
-                    name="nButtonSaveEditQuote"
-                    id="iButtonSaveEditQuote"
-                    title="Click to update changes."
+                    name="nButtonAcceptEdit"
+                    id="iButtonAcceptEdit"
+                    title="Click accept to update changes."
                     class="btn btn-success btn-sm">
-              Update
+              Accept
             </button>
 
             <!-- Cancel edit /-->
             <button type="button"
-                    name="nButtonCancelEditQuote"
-                    id="iButtonCancelEditQuote"
+                    name="nButtonCancelEdit"
+                    id="nButtonCancelEdit"
                     class="btn btn-danger btn-sm"
                     title="Click to cancel."
                     onclick="hideFormEditQuote()">
@@ -273,10 +289,10 @@
             <div class="mb-4" style="padding: 10px !important;">
 
               <!-- Quote text /-->
-              <p class="card-text" id="iDeleteQuoteText"></p>
+              <p class="card-text" id="iTextQuoteDelete" name="nTextQuoteDelete"></p>
 
               <!-- Quote author /-->
-              <p class="card-text" id="iDeleteAuthorText"></p>
+              <p class="card-text" id="iTextAuthorDelete" name="nTextAuthorDelete"></p>
 
             </div>
 
@@ -285,22 +301,22 @@
             <!-- Quote Id /-->
             <input type="hidden"
                    class="form-control"
-                   name="nInputDeleteQuoteId"
-                   id="iInputDeleteQuoteId">
+                   name="nInputQuoteIdDelete"
+                   id="iInputQuoteIdDelete">
 
             <!-- Delete quote /-->
             <button type="submit"
-                    name="nButtonDeleteQuote"
-                    id="iButtonDeleteQuote"
-                    title="Click to delete the quote."
+                    name="nButtonAcceptDelete"
+                    id="iButtonAcceptDelete"
+                    title="Click to accept to delete the quote."
                     class="btn btn-success btn-sm">
-              Delete
+              Accept
             </button>
 
             <!-- Cancel delete /-->
             <button type="button"
-                    name="nButtonCancelDeleteQuote"
-                    id="iButtonCancelDeleteQuote"
+                    name="nButtonCancelDelete"
+                    id="iButtonCancelDelete"
                     class="btn btn-danger btn-sm"
                     title="Click to cancel."
                     onclick="hideFormDeleteQuote()">
@@ -377,7 +393,7 @@
                       id="iButtonEditQuoteRegister"
                       name="nButtonEditQuoteRegister"
                       title="Click to edit."
-                      onclick="showFormEditQuote('<?php echo $quoteId; ?>', '<?php echo $quoteAuthorId; ?>', '<?php echo $quoteText; ?>', '<?php echo $quoteCategoryId; ?>')">
+                      onclick="showFormEditQuote('<?php echo $quoteAuthor; ?>', '<?php echo $quoteId; ?>', '<?php echo $quoteAuthorId; ?>', '<?php echo $quoteText; ?>', '<?php echo $quoteCategoryId; ?>')">
                     Edit
                   </button>
                 </td>
@@ -422,6 +438,9 @@
 
   $(document).ready(function () {
 
+    $('#iInputAuthorErrorAdd').hide();
+    $('#iInputAuthorErrorEdit').hide();
+    
     // DataTables
     let t = $('#table').DataTable({
       "responsive": true,
@@ -459,24 +478,56 @@
           });
       })
       .draw();
+  });
 
+  $(function () {
+    var data = <?php echo json_encode ($listAuthorsNoRepeat) ?>;
+    console.log(data)
+    $("#iInputAuthorAdd").autocomplete({
+      source: data,
+      minLength: 1
+    });
+  });
+
+  $(function () {
+    var data = <?php echo json_encode ($listAuthorsNoRepeat) ?>;
+    $("#iInputAuthorEdit").autocomplete({
+      source: data,
+      minLength: 1
+    });
   });
 
 
-  $( function() {
-    var data = <?php echo json_encode($listAuthorsNoRepeat) ?>;
-    $( "#iInputAuthor" ).autocomplete({
-      source: data,
-      minLength: 3
+  $(document).ready(function () {
+    $('#iInputAuthorAdd').on("keyup change focus blur click", function (e) {
+      let value = $('#iInputAuthorAdd').val();
+      let data = <?php echo json_encode ($listAuthorsNoRepeat) ?>;
+      if (data.includes(value)) {
+        $('#iButtonAcceptAdd').removeAttr('disabled');
+        $('#iInputAuthorErrorAdd').hide();
+        $('#iInputAuthorHelpAdd').show();
+      } else {
+        $('#iButtonAcceptAdd').attr('disabled', 'disabled');
+        $('#iInputAuthorErrorAdd').show();
+        $('#iInputAuthorHelpAdd').hide();
+      }
     });
-  } );
+  });
 
-  $( function() {
-    var data = <?php echo json_encode($listAuthorsNoRepeat) ?>;
-    $( "#iInputEditAuthor" ).autocomplete({
-      source: data,
-      minLength: 3
+  $(document).ready(function () {
+    $('#iInputAuthorEdit').on("keyup change focus blur click", function (e) {
+      let value = $('#iInputAuthorEdit').val();
+      let data = <?php echo json_encode ($listAuthorsNoRepeat) ?>;
+      if (data.includes(value)) {
+        $('#iButtonAcceptEdit').removeAttr('disabled');
+        $('#iInputAuthorErrorEdit').hide();
+        $('#iInputAuthorHelpEdit').show();
+      } else {
+        $('#iButtonAcceptEdit').attr('disabled', 'disabled');
+        $('#iInputAuthorErrorEdit').show();
+        $('#iInputAuthorHelpEdit').hide();
+      }
     });
-  } );
+  });
 
 </script>

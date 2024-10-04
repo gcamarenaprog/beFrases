@@ -98,7 +98,7 @@
     $wpdb->query ($sqlOptions);
     
     # Insert default values on befrases table
-    $sqlDefaultValuesBeFrasesTable = "INSERT IGNORE INTO {$wpdb -> prefix}befrases (befrases_id, befrases_author, befrases_quote, befrases_category) VALUES (1, 1, 'Vivimos una grandiosa novela, en un gran teatro, montado por gente inteligente que le gusta jugar a las marionetas', '1'), (2, 2, 'La ciencia no es más que perversión en sí misma a menos que tenga como objetivo último mejorar la humanidad', '1')";
+    $sqlDefaultValuesBeFrasesTable = "INSERT IGNORE INTO {$wpdb -> prefix}befrases (befrases_id, befrases_author, befrases_quote, befrases_category) VALUES (1, 1, 'Vivimos una grandiosa novela, en un gran teatro, montado por gente inteligente que le gusta jugar a las marionetas', '2'), (2, 2, 'La ciencia no es más que perversión en sí misma a menos que tenga como objetivo último mejorar la humanidad', '2')";
     $wpdb->query ($sqlDefaultValuesBeFrasesTable);
     
     # Insert default values on authors table
@@ -106,7 +106,7 @@
     $wpdb->query ($sqlDefaultValuesAuthorsTable);
     
     # Insert default values on categories table
-    $sqlDefaultValuesCategoriesTable = "INSERT IGNORE INTO {$wpdb -> prefix}befrases_cat (befrases_cat_id, befrases_cat_name, befrases_cat_description) VALUES (1, 'Uncategorized', 'Default category if none is chosen.')";
+    $sqlDefaultValuesCategoriesTable = "INSERT IGNORE INTO {$wpdb -> prefix}befrases_cat (befrases_cat_id, befrases_cat_name, befrases_cat_description) VALUES (1, 'All categories', 'Default category if none is chosen.'), (2, 'Uncategorized', 'Default category if none is chosen.')";
     $wpdb->query ($sqlDefaultValuesCategoriesTable);
     
     # Insert default values on options table
@@ -276,6 +276,8 @@
     
     // JQuery UI 1.14.0
     wp_enqueue_script ('script-jquery-ui', plugins_url ('/js/jquery-ui.1.14.0.js', __FILE__), array('jquery'));
+    
+
     
     // DataTables 2.1.6
     wp_enqueue_script ('script-jquery-datatables', plugins_url ('/js/dataTables.2.1.6.js', __FILE__), array('jquery'));

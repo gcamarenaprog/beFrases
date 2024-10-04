@@ -28,7 +28,7 @@
   {
     ?>
 
-    <p style="margin-bottom: -15px; padding-bottom: 0px; margin-top: 5px; margin-bottom: 5px; margin-right: 5px; margin-left: 5px;
+    <p style="margin-bottom: 0px; padding-bottom: 0px; margin-top: 5px;; margin-right: 5px; margin-left: 5px;
     
     <?php if ($alignmentQuoteText == 0): ?>
         text-align: right;">
@@ -102,15 +102,15 @@
       <?php endif; ?>
       
       <?php if ($alignmentAuthorText == 1): ?>
-        "text-align: center;">
+        text-align: center;">
       <?php endif; ?>
       
       <?php if ($alignmentAuthorText == 2): ?>
-        "text-align: left;">
+        text-align: left;">
       <?php endif; ?>
       
       <?php if ($alignmentAuthorText == 3): ?>
-        "text-align: justify;">
+        text-align: justify;">
       <?php endif; ?>
       
       

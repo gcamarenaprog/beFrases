@@ -16,20 +16,21 @@
 /**
  * Show form edit quote
  *
+ * @param {string} nameOfAuthor Name of author
  * @param {string} quoteId Id number of the quote
  * @param {string} autorId Author text of the quote
  * @param {string} quoteText Quote text of the quote
- * @param {string} idCategory Id number of the category associated with the quote
+ * @param categoryId
  * @return none
  */
-function showFormEditQuote(quoteId, autorId, quoteText, categoryId) {
+function showFormEditQuote(nameOfAuthor, quoteId, autorId, quoteText, categoryId) {
   document.getElementById("iFormEditQuote").style.display = "block";
   document.getElementById("iFormAddQuote").style.display = "none";
   document.getElementById("iFormDeleteQuote").style.display = "none";
-  document.getElementById('iInputEditQuoteId').value = quoteId;
-  document.getElementById('iTextAreaEditQuoteText').textContent = quoteText;
-  document.getElementById("iSelectEditAuthor").value = autorId;
-  document.getElementById("iSelectEditCategory").value = categoryId;
+  document.getElementById('iInputQuoteIdEdit').value = quoteId;
+  document.getElementById('iInputAuthorEdit').value = nameOfAuthor;
+  document.getElementById('iTextAreaQuoteEdit').textContent = quoteText;
+  document.getElementById("iSelectCategoryEdit").value = categoryId;
 }
 
 /**
@@ -54,9 +55,9 @@ function showFormDeleteQuote(idQuote, authorQuote, contentQuote) {
   document.getElementById("iFormEditQuote").style.display = "none";
   document.getElementById("iFormAddQuote").style.display = "none";
   document.getElementById("iFormDeleteQuote").style.display = "block";
-  document.getElementById('iInputDeleteQuoteId').value = idQuote;
-  document.getElementById("iDeleteQuoteText").textContent = "\"" + contentQuote + "\"";
-  document.getElementById("iDeleteAuthorText").textContent = "— " + authorQuote;
+  document.getElementById('iInputQuoteIdDelete').value = idQuote;
+  document.getElementById("iTextQuoteDelete").textContent = "\"" + contentQuote + "\"";
+  document.getElementById("iTextAuthorDelete").textContent = "— " + authorQuote;
 }
 
 /**
