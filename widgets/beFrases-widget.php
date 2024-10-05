@@ -152,9 +152,9 @@
       }
       
       # Get all quotes of a category or all categories
-      if($quoteCategoryId == 1){
-        $listQuotes = getAllQuotesFromAllCatgories(); // Get all quotes form all categories.
-      }else {
+      if ($quoteCategoryId == 1) {
+        $listQuotes = getAllQuotesFromAllCategories (); // Get all quotes form all categories.
+      } else {
         $listQuotes = getAllQuotesFromCategoryId ($quoteCategoryId); // Get all quotes form a category
       }
       
@@ -193,6 +193,7 @@
         }
       }
       
+      # Print author and quote on widget
       printQuoteText ($alignmentQuoteText, $styleQuoteText, $quote);
       printAuthorText ($alignmentAuthorText, $styleAuthorText, $author, $authorExtra);
       

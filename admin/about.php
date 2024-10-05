@@ -25,8 +25,7 @@
         <h5 class="card-header"><?php echo get_admin_page_title (); ?></h5>
         <div class="card-body">
           <p class="card-text"> beFrases, a simple and easy-to-use plugin that will allow you to manage phrases with
-            their authors and categories.
-            With the option to display them in a random widget! </p>
+            their authors and categories. With the option to display them in a random widget! </p>
         </div>
       </div>
     </div>
@@ -68,7 +67,7 @@
             </p>
 
             <hr>
-            
+
             <!-- Twitter /-->
             <h6 class="card-title">Twitter</h6>
             <p class="card-text">
@@ -99,16 +98,14 @@
           <!-- Author's quote -->
           <figure class="text-center">
             <blockquote class="blockquote">
-              <p class="be-quote"><em>"Vivimos una grandiosa novela, en un gran teatro, montado por gente inteligente
-                  que
-                  le gusta
-                  jugar a las marionetas".</em></p>
+              <p class="be-quote"><em>"We live a great novel, in a great theater, put together by intelligent people who
+                  like to play puppets.".</em></p>
             </blockquote>
             <figcaption class="blockquote-footer">
               <em>
                 <b>
-                  Guillermo Camarena<cite title="Source Title"> / Desarrollador Full-Stack, Investigador, Pódcaster y
-                    Bloguero de Fenómenos Forteanos</cite>
+                  Guillermo Camarena<cite title="Source Title"> / Full-Stack Developer, Researcher, Podcaster and
+                    Blogger on Fortean Phenomena</cite>
                 </b>
               </em>
             </figcaption>

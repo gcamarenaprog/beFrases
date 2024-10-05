@@ -8,7 +8,7 @@
    *
    * @return array $listQuotes List of the all quotes with his data
    */
-  function getAllQuotesFromAllCatgories (): array
+  function getAllQuotesFromAllCategories (): array
   {
     global $wpdb;
     return $wpdb->get_results ("SELECT * FROM  {$wpdb -> prefix}befrases", ARRAY_A);
@@ -54,7 +54,6 @@
       <?php if ($alignmentQuoteText == 3): ?>
         text-align: justify;">
       <?php endif; ?>
-      
       
       <?php if ($styleQuoteText == 0): ?>
       
@@ -122,7 +121,6 @@
       <?php if ($alignmentAuthorText == 3): ?>
         text-align: justify;">
       <?php endif; ?>
-      
       
       <?php if ($styleAuthorText == 0): ?>
       
