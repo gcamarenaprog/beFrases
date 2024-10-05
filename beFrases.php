@@ -67,7 +67,7 @@
     $sqlMain = "CREATE TABLE IF NOT EXISTS {$wpdb -> prefix}befrases (
     `befrases_id` INT NOT NULL AUTO_INCREMENT,
     `befrases_author` INT(10) NULL,
-    `befrases_quote` VARCHAR(200) NULL,
+    `befrases_quote` VARCHAR(1000) NULL,
     `befrases_category` INT(10) NULL,
     `befrases_author_extra` VARCHAR(100) NULL,
     PRIMARY KEY (`befrases_id`));";
