@@ -7,6 +7,7 @@
    * Insert a new quote record
    *
    * @param int    $authorIdQuote   Author id of the quote
+   * @param string $authorExtra     Author's extra information
    * @param string $textQuote       Text quote of the quote
    * @param int    $categoryIdQuote Category id of the quote
    * @return void
@@ -29,16 +30,18 @@
    *
    * @param int    $idQuote         Id of the quote to update
    * @param string $authorQuote     Name of the quote to update
+   * @param string $authorExtra     Author's extra information
    * @param string $textQuote       Description of the quote to update
    * @param int    $categoryIdQuote Id number of the category of the quote to update
    * @return void
    */
-  function updateQuoteRecord (int $idQuote, string $authorQuote, string $textQuote, int $categoryIdQuote): void
+  function updateQuoteRecord (int $idQuote, string $authorQuote, string $authorExtra,string $textQuote, int $categoryIdQuote): void
   {
     global $wpdb;
     $data = array(
       'befrases_id' => $idQuote,
       'befrases_author' => $authorQuote,
+      'befrases_author_extra' => $authorExtra,
       'befrases_quote' => $textQuote,
       'befrases_category' => $categoryIdQuote
     );

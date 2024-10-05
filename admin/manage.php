@@ -19,6 +19,7 @@
   # Add new quote from add form
   if (isset($_POST['nButtonAcceptAdd'])) {
     $authorIdValue = '';
+    $authorExtra = '';
     $authorName = $_POST['nInputAuthorAdd'];
     $authorExtra = $_POST['nInputAuthorExtraAdd'];
     $authorIdObtained = getAuthorIdWithName ($authorName);
@@ -38,7 +39,9 @@
   # Update the changes from edit form
   if (isset($_POST['nButtonAcceptEdit'])) {
     $authorIdValue = '';
+    $authorExtra = '';
     $authorName = $_POST['nInputAuthorEdit'];
+    $authorExtra = $_POST['nInputAuthorExtraEdit'];
     $authorIdObtained = getAuthorIdWithName ($authorName);
     
     if (empty($authorIdObtained)) {
@@ -50,7 +53,7 @@
       $idQuote = $_POST['nInputQuoteIdEdit'];
       $textQuote = $_POST['nTextAreaQuoteEdit'];
       $categoryIdQuote = $_POST['nSelectCategoryEdit'];
-      updateQuoteRecord ($idQuote, $authorId, $textQuote, $categoryIdQuote);
+      updateQuoteRecord ($idQuote, $authorId, $authorExtra, $textQuote, $categoryIdQuote);
     }
   }
   
@@ -228,6 +231,17 @@
                      required>
               <span id="iInputAuthorErrorEdit" name="nInputAuthorErrorEdit" class="form-text text-danger">This author name not registered!</span>
               <span id="iInputAuthorHelpEdit" class="form-text">Name of author (auto-complete)</span>
+            </div>
+
+            <!-- Author's extra information /-->
+            <div class="mb-3">
+              <label for="iInputAuthorExtraEdit" class="form-label">Author's extra information</label>
+              <input class="form-control"
+                     name="nInputAuthorExtraEdit"
+                     id="iInputAuthorExtraEdit"
+                     placeholder="Author's extra information"
+                     title="Author's extra information appears after the author's name (optional).">
+              <span id="iInputAuthorExtraHelpEdit" class="form-text">Author's extra information (optional)</span>
             </div>
 
             <!-- Quote /-->
@@ -416,7 +430,7 @@
                       id="iButtonEditQuoteRegister"
                       name="nButtonEditQuoteRegister"
                       title="Click to edit."
-                      onclick="showFormEditQuote('<?php echo $quoteAuthor; ?>', '<?php echo $quoteId; ?>', '<?php echo $authorId; ?>', '<?php echo $quote; ?>', '<?php echo $categoryId; ?>')">
+                      onclick="showFormEditQuote('<?php echo $quoteAuthor; ?>', '<?php echo $authorExtra; ?>', '<?php echo $quoteId; ?>', '<?php echo $authorId; ?>', '<?php echo $quote; ?>', '<?php echo $categoryId; ?>')">
                     Edit
                   </button>
                 </td>
@@ -506,7 +520,6 @@
 
   $(function () {
     var data = <?php echo json_encode ($listAuthorsNoRepeat) ?>;
-    console.log(data)
     $("#iInputAuthorAdd").autocomplete({
       source: data,
       minLength: 1

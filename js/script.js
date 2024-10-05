@@ -17,13 +17,14 @@
  * Show form edit quote
  *
  * @param {string} nameOfAuthor Name of author
+ * @param {string} authorExtra Author extra information
  * @param {string} quoteId Id number of the quote
- * @param {string} autorId Author text of the quote
+ * @param {string} autorId Author name
  * @param {string} quoteText Quote text of the quote
- * @param categoryId
+ * @param {string} categoryId Id category
  * @return none
  */
-function showFormEditQuote(nameOfAuthor, quoteId, autorId, quoteText, categoryId) {
+function showFormEditQuote(nameOfAuthor, authorExtra, quoteId, autorId, quoteText, categoryId) {
   document.getElementById("iFormEditQuote").style.display = "block";
   document.getElementById("iFormAddQuote").style.display = "none";
   document.getElementById("iFormDeleteQuote").style.display = "none";
@@ -31,6 +32,7 @@ function showFormEditQuote(nameOfAuthor, quoteId, autorId, quoteText, categoryId
   document.getElementById('iInputAuthorEdit').value = nameOfAuthor;
   document.getElementById('iTextAreaQuoteEdit').textContent = quoteText;
   document.getElementById("iSelectCategoryEdit").value = categoryId;
+  document.getElementById("iInputAuthorExtraEdit").value = authorExtra;
 }
 
 /**
