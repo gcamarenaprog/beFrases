@@ -80,8 +80,8 @@
   $totalNamesAuthorsList = count ($namesAuthors);
   
   # Get all authors from list phrases no repeat
-  $listAuthors = getAllAuthorsList ();
   $listAuthors = array();
+  $listAuthors = getAllAuthorsList ();
   foreach ($listAuthors as $key => $value) {
     $listAuthors[] = $value['befrases_aut_name'];
   }
