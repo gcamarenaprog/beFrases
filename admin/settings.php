@@ -275,10 +275,10 @@
 
               <!-- Author /-->
               <div id="authorDemo">
-                <p class="card-text" id="author1" style="display:none;">— Nikola Tesla</p>
-                <p class="card-text" id="author2" style="display:none;"><em>— Nikola Tesla</em></p>
-                <p class="card-text" id="author3" style="display:none;"><b>— Nikola Tesla</b></p>
-                <p class="card-text" id="author4" style="display:block;"><b><em>— Nikola Tesla</em></b></p>
+                <p class="card-text" id="author1" style="display:none;">— Nikola Tesla / 1856 - 1943</p>
+                <p class="card-text" id="author2" style="display:none;"><em>— Nikola Tesla / 1856 - 1943</em></p>
+                <p class="card-text" id="author3" style="display:none;"><b>— Nikola Tesla / 1856 - 1943</b></p>
+                <p class="card-text" id="author4" style="display:block;"><b><em>— Nikola Tesla / 1856 - 1943</em></b></p>
               </div>
             
             </div>

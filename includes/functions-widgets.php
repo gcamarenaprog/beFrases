@@ -1,6 +1,4 @@
 <?php
-  
-  
   /**
    * Widget functions --------------------------------------------------------------------------------------------------
    */
@@ -102,9 +100,10 @@
    * @param int    $alignmentAuthorText Option number of the alignment author text
    * @param int    $styleAuthorText     Option number of the style author text
    * @param string $authorText          Text of the selected author
+   * @param string $authorExtra         Author's extra information
    * @return void
    */
-  function printAuthorText (int $alignmentAuthorText, int $styleAuthorText, string $authorText): void
+  function printAuthorText (int $alignmentAuthorText, int $styleAuthorText, string $authorText, string $authorExtra): void
   { ?>
 
     <p style=" margin-bottom: 0px; margin-top: 0px; margin-right: 5px;
@@ -141,7 +140,12 @@
           <em><b>
               <?php endif; ?>
               
-              <?php echo "— " . $authorText; ?>
+              <?php
+                echo "— " . $authorText;
+                if ($authorExtra != '') {
+                  echo ', ' . $authorExtra;
+                }
+              ?>
               
               <?php if ($styleAuthorText == 0): ?>
               

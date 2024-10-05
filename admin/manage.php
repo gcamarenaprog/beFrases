@@ -534,7 +534,6 @@
     });
   });
 
-
   $(document).ready(function () {
     $('#iInputAuthorAdd').on("keyup change focus blur click", function (e) {
       let value = $('#iInputAuthorAdd').val();

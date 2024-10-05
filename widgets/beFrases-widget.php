@@ -171,6 +171,7 @@
         foreach ($listQuotes as $key => $value) {
           $quote = $value['befrases_quote'];
           $author = $value['befrases_author'];
+          $authorExtra = $value['befrases_author_extra'];
           $nameOfAuthor = getAuthorNameWithAuthorId ($author);
           foreach ($nameOfAuthor as $key => $value) {
             $author = $value['befrases_aut_name'];
@@ -183,6 +184,7 @@
           if ($key == $randomNumber) {
             $quote = $value['befrases_quote'];
             $author = $value['befrases_author'];
+            $authorExtra = $value['befrases_author_extra'];
             $nameOfAuthor = getAuthorNameWithAuthorId ($author);
             foreach ($nameOfAuthor as $key => $value) {
               $author = $value['befrases_aut_name'];
@@ -192,7 +194,7 @@
       }
       
       printQuoteText ($alignmentQuoteText, $styleQuoteText, $quote);
-      printAuthorText ($alignmentAuthorText, $styleAuthorText, $author);
+      printAuthorText ($alignmentAuthorText, $styleAuthorText, $author, $authorExtra);
       
       # AFTER widget code, if any
       echo ($after_widget ?? '');
