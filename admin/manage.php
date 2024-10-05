@@ -157,10 +157,9 @@
                           rows="4"
                           title="Write the sentence without quotation marks at the beginning and end."
                           required></textarea>
-                <div id="iTextAreaQuoteHelpAdd" class="form-text">Write the quote without quotation marks at the
-                  beginning
-                  and end.
-                </div>
+                <span id="iTextAreaQuoteErrorAdd" name="nTextAreaQuoteErrorAdd" class="form-text text-danger">There must be a maximum of 500 characters.</span>
+                <span id="iTextAreaQuoteHelpAdd" class="form-text">Write the sentence without quotation marks at the
+                  beginning and end.</span>
               </div>
 
               <!-- Category /-->
@@ -253,9 +252,9 @@
                         required
                         title="Write the sentence without quotation marks at the beginning and end."
                         rows="4"></textarea>
-              <div id="iTextAreaQuoteHelpEdit" class="form-text">Write the sentence without quotation marks at the
-                beginning and end.
-              </div>
+              <span id="iTextAreaQuoteErrorEdit" name="nInputAuthorErrorEdit" class="form-text text-danger">There must be a maximum of 500 characters.</span>
+              <span id="iTextAreaQuoteHelpEdit" class="form-text">Write the sentence without quotation marks at the
+                  beginning and end.</span>
             </div>
 
             <!-- Category /-->
@@ -478,7 +477,9 @@
 
     $('#iInputAuthorErrorAdd').hide();
     $('#iInputAuthorErrorEdit').hide();
-
+    $('#iTextAreaQuoteErrorEdit').hide();
+    $('#iTextAreaQuoteErrorAdd').hide();
+    
     // DataTables
     let t = $('#table').DataTable({
       "responsive": true,
@@ -496,9 +497,9 @@
         "info": "Showing page _PAGE_ of _PAGES_",
         "infoEmpty": "No records available.",
         "infoFiltered": "(filtered from the total _MAX_ quotes)",
-        "emptyTable":     "No data available in table",
-        "info":           "Showing _START_ to _END_ of _TOTAL_ quotes",
-        "infoEmpty":      "Showing 0 to 0 of 0 quotes",
+        "emptyTable": "No data available in table",
+        "info": "Showing _START_ to _END_ of _TOTAL_ quotes",
+        "infoEmpty": "Showing 0 to 0 of 0 quotes",
         "search": "Search:",
         "paginate": {
           first: "First",
@@ -538,10 +539,11 @@
   });
 
   $(document).ready(function () {
-    $('#iInputAuthorAdd').on("keyup change focus blur click", function (e) {
-      let value = $('#iInputAuthorAdd').val();
+    $('#iInputAuthorAdd, #iTextAreaQuoteAdd').on("keyup change focus blur click", function (e) {
+      let value0 = $('#iInputAuthorAdd').val();
       let data = <?php echo json_encode ($listAuthors) ?>;
-      if (data.includes(value)) {
+      
+      if (data.includes(value0)) {
         $('#iButtonAcceptAdd').removeAttr('disabled');
         $('#iInputAuthorErrorAdd').hide();
         $('#iInputAuthorHelpAdd').show();
@@ -550,14 +552,27 @@
         $('#iInputAuthorErrorAdd').show();
         $('#iInputAuthorHelpAdd').hide();
       }
+
+      let value1 = $('#iTextAreaQuoteAdd').val();
+      if (value1.length > 500) {
+        $('#iButtonAcceptAdd').attr('disabled', 'disabled');
+        $('#iTextAreaQuoteErrorAdd').show();
+        $('#iTextAreaQuoteHelpAdd').hide();
+      } else {
+        $('#iButtonAcceptAdd').removeAttr('disabled');
+        $('#iTextAreaQuoteErrorAdd').hide();
+        $('#iTextAreaQuoteHelpAdd').show();
+      }
     });
+    
   });
 
   $(document).ready(function () {
-    $('#iInputAuthorEdit').on("keyup change focus blur click", function (e) {
-      let value = $('#iInputAuthorEdit').val();
+    $('#iInputAuthorEdit, #iTextAreaQuoteEdit').on("keyup change focus blur click", function (e) {
+      let value0 = $('#iInputAuthorEdit').val();
       let data = <?php echo json_encode ($listAuthors) ?>;
-      if (data.includes(value)) {
+      
+      if (data.includes(value0)) {
         $('#iButtonAcceptEdit').removeAttr('disabled');
         $('#iInputAuthorErrorEdit').hide();
         $('#iInputAuthorHelpEdit').show();
@@ -566,7 +581,20 @@
         $('#iInputAuthorErrorEdit').show();
         $('#iInputAuthorHelpEdit').hide();
       }
+
+      let value1 = $('#iTextAreaQuoteEdit').val();
+      if (value1.length > 500) {
+        $('#iButtonAcceptEdit').attr('disabled', 'disabled');
+        $('#iTextAreaQuoteErrorEdit').show();
+        $('#iTextAreaQuoteHelpEdit').hide();
+      } else {
+        $('#iButtonAcceptEdit').removeAttr('disabled');
+        $('#iTextAreaQuoteErrorEdit').hide();
+        $('#iTextAreaQuoteHelpEdit').show();
+      }
+      
     });
   });
+
 
 </script>
