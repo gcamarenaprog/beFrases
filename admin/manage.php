@@ -81,9 +81,9 @@
   
   # Get all authors from list phrases no repeat
   $listAuthors = getAllAuthorsList ();
-  $listAuthorsNoRepeat = array();
+  $listAuthors = array();
   foreach ($listAuthors as $key => $value) {
-    $listAuthorsNoRepeat[] = $value['befrases_aut_name'];
+    $listAuthors[] = $value['befrases_aut_name'];
   }
 
 ?>
@@ -519,7 +519,7 @@
   });
 
   $(function () {
-    var data = <?php echo json_encode ($listAuthorsNoRepeat) ?>;
+    var data = <?php echo json_encode ($listAuthors) ?>;
     $("#iInputAuthorAdd").autocomplete({
       source: data,
       minLength: 1
@@ -527,7 +527,7 @@
   });
 
   $(function () {
-    var data = <?php echo json_encode ($listAuthorsNoRepeat) ?>;
+    var data = <?php echo json_encode ($listAuthors) ?>;
     $("#iInputAuthorEdit").autocomplete({
       source: data,
       minLength: 1
@@ -538,7 +538,7 @@
   $(document).ready(function () {
     $('#iInputAuthorAdd').on("keyup change focus blur click", function (e) {
       let value = $('#iInputAuthorAdd').val();
-      let data = <?php echo json_encode ($listAuthorsNoRepeat) ?>;
+      let data = <?php echo json_encode ($listAuthors) ?>;
       if (data.includes(value)) {
         $('#iButtonAcceptAdd').removeAttr('disabled');
         $('#iInputAuthorErrorAdd').hide();
@@ -554,7 +554,7 @@
   $(document).ready(function () {
     $('#iInputAuthorEdit').on("keyup change focus blur click", function (e) {
       let value = $('#iInputAuthorEdit').val();
-      let data = <?php echo json_encode ($listAuthorsNoRepeat) ?>;
+      let data = <?php echo json_encode ($listAuthors) ?>;
       if (data.includes(value)) {
         $('#iButtonAcceptEdit').removeAttr('disabled');
         $('#iInputAuthorErrorEdit').hide();
