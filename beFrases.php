@@ -278,7 +278,6 @@
     // JQuery UI 1.14.0
     wp_enqueue_script ('script-jquery-ui', plugins_url ('/js/jquery-ui.1.14.0.js', __FILE__), array('jquery'));
     
-    
     // DataTables 2.1.6
     wp_enqueue_script ('script-jquery-datatables', plugins_url ('/js/dataTables.2.1.6.js', __FILE__), array('jquery'));
     wp_enqueue_script ('script-responsive-datatables', plugins_url ('/js/responsive.dataTables.js', __FILE__), array('jquery'));

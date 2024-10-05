@@ -31,6 +31,10 @@
       }
       $authorId = intval ($authorIdValue);
       $textQuote = $_POST['nTextAreaQuoteAdd'];
+      $checkTextQuote = substr($textQuote, -1);
+      if($checkTextQuote != '.'){
+        $textQuote = $textQuote . '.';
+      }
       $categoryIdQuote = $_POST['nSelectCategoryAdd'];
       insertQuoteRecord ($authorId, $textQuote, $categoryIdQuote, $authorExtra);
     }
@@ -52,6 +56,10 @@
       $authorId = intval ($authorIdValue);
       $idQuote = $_POST['nInputQuoteIdEdit'];
       $textQuote = $_POST['nTextAreaQuoteEdit'];
+      $checkTextQuote = substr($textQuote, -1);
+      if($checkTextQuote != '.'){
+        $textQuote = $textQuote . '.';
+      }
       $categoryIdQuote = $_POST['nSelectCategoryEdit'];
       updateQuoteRecord ($idQuote, $authorId, $authorExtra, $textQuote, $categoryIdQuote);
     }
