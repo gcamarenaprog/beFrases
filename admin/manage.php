@@ -20,6 +20,7 @@
   if (isset($_POST['nButtonAcceptAdd'])) {
     $authorIdValue = '';
     $authorName = $_POST['nInputAuthorAdd'];
+    $authorExtra = $_POST['nInputAuthorExtraAdd'];
     $authorIdObtained = getAuthorIdWithName ($authorName);
     
     if (empty($authorIdObtained)) {
@@ -30,7 +31,7 @@
       $authorId = intval ($authorIdValue);
       $textQuote = $_POST['nTextAreaQuoteAdd'];
       $categoryIdQuote = $_POST['nSelectCategoryAdd'];
-      insertQuoteRecord ($authorId, $textQuote, $categoryIdQuote);
+      insertQuoteRecord ($authorId, $textQuote, $categoryIdQuote, $authorExtra);
     }
   }
   
@@ -125,11 +126,22 @@
                 <input class="form-control"
                        name="nInputAuthorAdd"
                        id="iInputAuthorAdd"
-                       placeholder="Author.."
+                       placeholder="Author"
                        title="Write the first three letters of the author."
                        required>
                 <span id="iInputAuthorErrorAdd" name="nInputAuthorErrorAdd" class="form-text text-danger">This author name not registered!</span>
                 <span id="iInputAuthorHelpAdd" class="form-text">Name of author (auto-complete)</span>
+              </div>
+
+              <!-- Author's extra information /-->
+              <div class="mb-3">
+                <label for="iInputAuthorExtraAdd" class="form-label">Author's extra information</label>
+                <input class="form-control"
+                       name="nInputAuthorExtraAdd"
+                       id="iInputAuthorExtraAdd"
+                       placeholder="Author's extra information"
+                       title="Author's extra information appears after the author's name (optional).">
+                <span id="iInputAuthorExtraHelpAdd" class="form-text">Author's extra information (optional)</span>
               </div>
 
               <!-- Quote /-->
@@ -346,6 +358,7 @@
           <tr>
             <th>#</th>
             <th>Author</th>
+            <th>Author' extra information</th>
             <th>Quote</th>
             <th>Category</th>
             <th class="text-center">Edit</th>
@@ -358,16 +371,23 @@
             foreach ($listQuotes as $key => $value) {
               
               $quoteId = $value['befrases_id'];
-              $quoteAuthorId = $value['befrases_author'];
-              $quoteText = $value['befrases_quote'];
-              $quoteCategoryId = $value['befrases_category'];
+              $authorId = $value['befrases_author'];
+              $authorExtra = $value['befrases_author_extra'];
+              $quote = $value['befrases_quote'];
+              $categoryId = $value['befrases_category'];
+              $quoteCategory = '';
+              $quoteAuthor = '';
               
-              $nameOfCategory = getCategoryNameAndIdWithCategoryId ($quoteCategoryId);
+              if ($authorExtra == '') {
+                $authorExtra = 'No data';
+              }
+              
+              $nameOfCategory = getCategoryNameAndIdWithCategoryId ($categoryId);
               foreach ($nameOfCategory as $key => $value) {
                 $quoteCategory = $value['befrases_cat_name'];
               }
               
-              $nameOfAuthor = getAuthorNameWithAuthorId ($quoteAuthorId);
+              $nameOfAuthor = getAuthorNameWithAuthorId ($authorId);
               foreach ($nameOfAuthor as $key => $value) {
                 $quoteAuthor = $value['befrases_aut_name'];
               }
@@ -380,8 +400,11 @@
                 <!-- Author /-->
                 <td><?php echo $quoteAuthor; ?></td>
 
+                <!-- Author's extra information /-->
+                <td><?php echo $authorExtra; ?></td>
+
                 <!-- Quote /-->
-                <td>"<?php echo $quoteText; ?>"</td>
+                <td>"<?php echo $quote; ?>"</td>
 
                 <!-- Category /-->
                 <td><?php echo $quoteCategory; ?></td>
@@ -393,7 +416,7 @@
                       id="iButtonEditQuoteRegister"
                       name="nButtonEditQuoteRegister"
                       title="Click to edit."
-                      onclick="showFormEditQuote('<?php echo $quoteAuthor; ?>', '<?php echo $quoteId; ?>', '<?php echo $quoteAuthorId; ?>', '<?php echo $quoteText; ?>', '<?php echo $quoteCategoryId; ?>')">
+                      onclick="showFormEditQuote('<?php echo $quoteAuthor; ?>', '<?php echo $quoteId; ?>', '<?php echo $authorId; ?>', '<?php echo $quote; ?>', '<?php echo $categoryId; ?>')">
                     Edit
                   </button>
                 </td>
@@ -405,7 +428,7 @@
                       id="iButtonDeleteQuoteRegister"
                       name="nButtonDeleteQuoteRegister"
                       title="Click to delete."
-                      onclick="showFormDeleteQuote('<?php echo $quoteId; ?>', '<?php echo $quoteAuthor; ?>', '<?php echo $quoteText; ?>')">
+                      onclick="showFormDeleteQuote('<?php echo $quoteId; ?>', '<?php echo $quoteAuthor; ?>', '<?php echo $quote; ?>')">
                     Delete
                   </button>
                 </td>
@@ -420,6 +443,7 @@
           <tfoot>
           <th>#</th>
           <th>Author</th>
+          <th>Author' extra information</th>
           <th>Quote</th>
           <th>Category</th>
           <th class="text-center">Edit</th>
@@ -440,7 +464,7 @@
 
     $('#iInputAuthorErrorAdd').hide();
     $('#iInputAuthorErrorEdit').hide();
-    
+
     // DataTables
     let t = $('#table').DataTable({
       "responsive": true,

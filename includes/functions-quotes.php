@@ -11,13 +11,14 @@
    * @param int    $categoryIdQuote Category id of the quote
    * @return void
    */
-  function insertQuoteRecord (int $authorIdQuote, string $textQuote, int $categoryIdQuote): void
+  function insertQuoteRecord (int $authorIdQuote, string $textQuote, int $categoryIdQuote, string $authorExtra): void
   {
     global $wpdb;
     $data = array(
       'befrases_author' => $authorIdQuote,
       'befrases_quote' => $textQuote,
-      'befrases_category' => $categoryIdQuote
+      'befrases_category' => $categoryIdQuote,
+      'befrases_author_extra' => $authorExtra
     );
     $tableName = "{$wpdb -> prefix}befrases";
     $wpdb->insert ($tableName, $data);

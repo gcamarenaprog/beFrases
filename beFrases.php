@@ -69,6 +69,7 @@
     `befrases_author` INT(10) NULL,
     `befrases_quote` VARCHAR(200) NULL,
     `befrases_category` INT(10) NULL,
+    `befrases_author_extra` VARCHAR(100) NULL,
     PRIMARY KEY (`befrases_id`));";
     $wpdb->query ($sqlMain);
     
@@ -98,7 +99,7 @@
     $wpdb->query ($sqlOptions);
     
     # Insert default values on befrases table
-    $sqlDefaultValuesBeFrasesTable = "INSERT IGNORE INTO {$wpdb -> prefix}befrases (befrases_id, befrases_author, befrases_quote, befrases_category) VALUES (1, 1, 'Vivimos una grandiosa novela, en un gran teatro, montado por gente inteligente que le gusta jugar a las marionetas', '2'), (2, 2, 'La ciencia no es más que perversión en sí misma a menos que tenga como objetivo último mejorar la humanidad', '2')";
+    $sqlDefaultValuesBeFrasesTable = "INSERT IGNORE INTO {$wpdb -> prefix}befrases (befrases_id, befrases_author, befrases_quote, befrases_category, befrases_author_information) VALUES (1, 1, 'Vivimos una grandiosa novela, en un gran teatro, montado por gente inteligente que le gusta jugar a las marionetas', '2', ''), (2, 2, 'La ciencia no es más que perversión en sí misma a menos que tenga como objetivo último mejorar la humanidad', '2', '(1856-1943)')";
     $wpdb->query ($sqlDefaultValuesBeFrasesTable);
     
     # Insert default values on authors table
