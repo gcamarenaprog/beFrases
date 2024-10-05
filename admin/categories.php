@@ -276,45 +276,49 @@
                 $categoryName = $value['befrases_cat_name'];
                 $categoryDescription = $value['befrases_cat_description'];
                 $categoryTotalQuotes = countTotalRecordsCategory ($categoryId);
-                ?>
-                <tr>
+                
+                if ($categoryName != 'All categories'): ?>
+                  <tr>
 
-                  <!-- # /-->
-                  <td></td>
+                    <!-- # /-->
+                    <td></td>
 
-                  <!-- Name /-->
-                  <td><?php echo $categoryName ?></td>
+                    <!-- Name /-->
+                    <td><?php echo $categoryName ?></td>
 
-                  <!-- Description /-->
-                  <td><?php echo $categoryDescription ?></td>
+                    <!-- Description /-->
+                    <td><?php echo $categoryDescription ?></td>
 
-                  <!-- Quotes /-->
-                  <td><?php echo $categoryTotalQuotes ?></td>
+                    <!-- Quotes /-->
+                    <td><?php echo $categoryTotalQuotes ?></td>
 
-                  <!-- Edit button /-->
-                  <td style="text-align:center">
-                    <button class="btn btn-primary btn-sm"
-                            id="iButtonEditCategoryListOfCategories"
-                            name="nButtonEditCategoryListOfCategories"
-                            title="Click to edit."
-                            onclick="showFormEditCategory('<?php echo $categoryId; ?>', '<?php echo $categoryName; ?>', '<?php echo $categoryDescription; ?>')">
-                      Edit
-                    </button>
-                  </td>
+                    <!-- Edit button /-->
+                    <td style="text-align:center">
+                      <button class="btn btn-primary btn-sm"
+                              id="iButtonEditCategoryListOfCategories"
+                              name="nButtonEditCategoryListOfCategories"
+                              title="Click to edit."
+                              onclick="showFormEditCategory('<?php echo $categoryId; ?>', '<?php echo $categoryName; ?>', '<?php echo $categoryDescription; ?>')">
+                        Edit
+                      </button>
+                    </td>
 
-                  <!-- Delete button /-->
-                  <td style="text-align:center">
-                    <button class="btn btn-danger btn-sm"
-                            id="iButtonDeleteCategoryListOfCategories"
-                            name="nButtonDeleteCategoryListOfCategories"
-                            title="Click to delete."
-                            onclick="showFormDeleteCategory('<?php echo $categoryId; ?>', '<?php echo $categoryName; ?>', '<?php echo $categoryDescription; ?>' , '<?php echo $categoryTotalQuotes; ?>')">
-                      Delete
-                    </button>
-                  </td>
+                    <!-- Delete button /-->
+                    <td style="text-align:center">
+                      <button class="btn btn-danger btn-sm"
+                              id="iButtonDeleteCategoryListOfCategories"
+                              name="nButtonDeleteCategoryListOfCategories"
+                              title="Click to delete."
+                              onclick="showFormDeleteCategory('<?php echo $categoryId; ?>', '<?php echo $categoryName; ?>', '<?php echo $categoryDescription; ?>' , '<?php echo $categoryTotalQuotes; ?>')">
+                        Delete
+                      </button>
+                    </td>
 
-                </tr>
-                <?php
+                  </tr>
+                  
+                  
+                  <?php
+              endif;
               }
             ?>
 
@@ -356,7 +360,10 @@
         "zeroRecords": "There are no records to show!",
         "info": "Showing page _PAGE_ of _PAGES_",
         "infoEmpty": "No records available.",
-        "infoFiltered": "(filtered from the total _MAX_ records)",
+        "infoFiltered": "(filtered from the total _MAX_ categories)",
+        "emptyTable":     "No data available in table",
+        "info":           "Showing _START_ to _END_ of _TOTAL_ categories",
+        "infoEmpty":      "Showing 0 to 0 of 0 categories",
         "search": "Search:",
         "paginate": {
           first: "First",

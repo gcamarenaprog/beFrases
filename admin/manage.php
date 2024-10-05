@@ -495,7 +495,10 @@
         "zeroRecords": "There are no records to show!",
         "info": "Showing page _PAGE_ of _PAGES_",
         "infoEmpty": "No records available.",
-        "infoFiltered": "(filtered from the total _MAX_ records)",
+        "infoFiltered": "(filtered from the total _MAX_ quotes)",
+        "emptyTable":     "No data available in table",
+        "info":           "Showing _START_ to _END_ of _TOTAL_ quotes",
+        "infoEmpty":      "Showing 0 to 0 of 0 quotes",
         "search": "Search:",
         "paginate": {
           first: "First",

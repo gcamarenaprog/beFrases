@@ -306,7 +306,10 @@
         "zeroRecords": "There are no records to show!",
         "info": "Showing page _PAGE_ of _PAGES_",
         "infoEmpty": "No records available.",
-        "infoFiltered": "(filtered from the total _MAX_ records)",
+        "infoFiltered": "(filtered from the total _MAX_ authors)",
+        "emptyTable":     "No data available in table",
+        "info":           "Showing _START_ to _END_ of _TOTAL_ authors",
+        "infoEmpty":      "Showing 0 to 0 of 0 authors",
         "search": "Search:",
         "paginate": {
           first: "First",
