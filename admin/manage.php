@@ -88,10 +88,10 @@
   $totalNamesAuthorsList = count ($namesAuthors);
   
   # Get all authors from list phrases no repeat
-  $listAuthors = array();
-  $listAuthors = getAllAuthorsList ();
-  foreach ($listAuthors as $key => $value) {
-    $listAuthors[] = $value['befrases_aut_name'];
+  $authorsList = array();
+  $authorsList = getAllAuthorsList ();
+  foreach ($authorsList as $key => $value) {
+    $authorsList[] = $value['befrases_aut_name'];
   }
 
 ?>
@@ -531,7 +531,7 @@
   });
 
   $(function () {
-    var data = <?php echo json_encode ($listAuthors) ?>;
+    var data = <?php echo json_encode ($authorsList) ?>;
     $("#iInputAuthorAdd").autocomplete({
       source: data,
       minLength: 1
@@ -539,7 +539,7 @@
   });
 
   $(function () {
-    var data = <?php echo json_encode ($listAuthors) ?>;
+    var data = <?php echo json_encode ($authorsList) ?>;
     $("#iInputAuthorEdit").autocomplete({
       source: data,
       minLength: 1
@@ -552,7 +552,7 @@
       let iInputAuthor = $('#iInputAuthorAdd').val();
       let iTextAreaQuoteAdd = $('#iTextAreaQuoteAdd').val();
       let iTextAreaQuoteAddLength = iTextAreaQuoteAdd.length;
-      let data = <?php echo json_encode ($listAuthors) ?>;
+      let data = <?php echo json_encode ($authorsList) ?>;
       
       if (data.includes(iInputAuthor)) {
         $('#iButtonAcceptAdd').removeAttr('disabled');
@@ -582,7 +582,7 @@
       let iInputAuthor = $('#iInputAuthorEdit').val();
       let iTextAreaQuoteEdit = $('#iTextAreaQuoteEdit').val();
       let iTextAreaQuoteEditLength = iTextAreaQuoteEdit.length;
-      let data = <?php echo json_encode ($listAuthors) ?>;
+      let data = <?php echo json_encode ($authorsList) ?>;
 
       if (data.includes(iInputAuthor)) {
         $('#iButtonAcceptEdit').removeAttr('disabled');

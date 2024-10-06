@@ -49,7 +49,6 @@
   $urlWidget = $urlBaseWidget . "beFrases-widget.php";
   $urlBeFrases = $urlBasePlugin . "beFrases.php";
   
-  
   /**
    * Hooks -------------------------------------------------------------------------------------------------------------
    */

@@ -15,28 +15,32 @@
   defined ('ABSPATH') or die("Bye bye and remember: Silence is golden!");
   
   # Save new category record from add new category form
-  if (isset($_POST['nButtonNewCategory'])) {
-    $categoryName = $_POST['nInputCategoryName'];
-    $categoryDescription = $_POST['nTextAreaCategoryDescription'];
+  if (isset($_POST['nButtonAcceptAdd'])) {
+    $categoryName = $_POST['nInputCategoryAdd'];
+    $categoryDescription = $_POST['nTextAreaDescriptionAdd'];
     insertCategoryRecord ($categoryName, $categoryDescription);
   }
   
   # Delete category record from delete form
-  if (isset($_POST['nButtonDeleteAccept'])) {
-    $categoryId = $_POST['nInputDeleteCategoryId'];
+  if (isset($_POST['nButtonAcceptDelete'])) {
+    $categoryId = $_POST['nInputCategoryIdDelete'];
     deleteCategoryRecord ($categoryId);
   }
   
   # Update the changes from edit form
-  if (isset($_POST['nButtonSaveEditCategory'])) {
-    $idCategory = $_POST['nInputEditCategoryId'];
-    $nameCategory = $_POST['nInputEditCategoryName'];
-    $descriptionCategory = $_POST['nTextAreaEditCategoryDescription'];
+  if (isset($_POST['nButtonAcceptEdit'])) {
+    $idCategory = $_POST['nInputCategoryIdEdit'];
+    $nameCategory = $_POST['nInputCategoryEdit'];
+    $descriptionCategory = $_POST['nTextAreaDescriptionEdit'];
     updateCategoryRecord ($idCategory, $nameCategory, $descriptionCategory);
   }
   
   # Gets list of all categories from database
+  $categoriesListName = array();
   $categoriesList = getAllCategoriesList ();
+  foreach ($categoriesList as $key => $value) {
+    $categoriesListName[] = $value['befrases_cat_name'];
+  }
 
 ?>
 
@@ -70,36 +74,37 @@
 
             <hr>
 
-            <!-- Name of category /-->
+            <!-- Category /-->
             <div class="mb-3">
-              <label for="iInputCategoryName" class="form-label">Name of category</label>
+              <label for="iInputCategoryAdd" class="form-label">Name of category</label>
               <input class="form-control"
-                     name="nInputCategoryName"
-                     id="iInputCategoryName"
+                     name="nInputCategoryAdd"
+                     id="iInputCategoryAdd"
                      title="Name of category."
                      placeholder="Name of category"
                      required>
-              <div id="iHelpCategoryName" class="form-text">Name of category.</div>
+              <span id="iInputCategoryErrorAdd" name="nInputAuthorErrorAdd" class="form-text text-danger">The category's name is registered or empty!</span>
+              <span id="iInputCategoryHelpAdd" class="form-text">Name of category (auto-complete)</span>
             </div>
 
             <!-- Description /-->
             <div class="mb-3">
-              <label for="iTextAreaCategoryDescription" class="form-label">Description</label>
+              <label for="iTextAreaCategoryDescriptionAdd" class="form-label">Description</label>
               <textarea class="form-control"
-                        name="nTextAreaCategoryDescription"
-                        id="iTextAreaCategoryDescription"
+                        name="nTextAreaDescriptionAdd"
+                        id="iTextAreaDescriptionAdd"
                         placeholder="Write a description.."
                         rows="3"
                         title="The description of the category."
                         required
               ></textarea>
-              <div id="iHelpCategoryDescription" class="form-text">The description of the category..</div>
+              <div id="nTextAreaDescriptionHelpAdd" class="form-text">The description of the category..</div>
             </div>
 
             <!-- Add button /-->
             <button class="btn btn-success btn-sm"
-                    name="nButtonNewCategory"
-                    id="iButtonNewCategory"
+                    name="nButtonAcceptAdd"
+                    id="iButtonAcceptAdd"
                     type="submit"
                     title="Click to add."
             >Add
@@ -120,46 +125,47 @@
             <!-- Category Id /-->
             <input type="hidden"
                    class="form-control"
-                   name="nInputEditCategoryId"
-                   id="iInputEditCategoryId">
+                   name="nInputCategoryIdEdit"
+                   id="iInputCategoryIdEdit">
 
             <!-- Name /-->
             <div class="mb-3">
               <label for="iInputEditCategoryName" class="form-label">Name of category</label>
               <input class="form-control"
-                     name="nInputEditCategoryName"
-                     id="iInputEditCategoryName"
+                     name="nInputCategoryEdit"
+                     id="iInputCategoryEdit"
                      required
                      title="Name of category">
-              <div id="iHelpCategoryName" class="form-text">Name of category.</div>
+              <span id="iInputCategoryErrorEdit" name="nInputAuthorErrorEdit" class="form-text text-danger">This category name is registered or empty!</span>
+              <span id="iInputCategoryHelpEdit" class="form-text">Name of category (auto-complete)</span>
             </div>
 
             <!-- Description /-->
             <div class="mb-3">
               <label for="iTextAreaEditCategoryDescription" class="form-label">Description</label>
               <textarea class="form-control"
-                        name="nTextAreaEditCategoryDescription"
-                        id="iTextAreaEditCategoryDescription"
+                        name="nTextAreaDescriptionEdit"
+                        id="iTextAreaDescriptionEdit"
                         placeholder="Description de la categoría"
                         required
                         title="Write a description."
                         rows="3"></textarea>
-              <div id="iHelpCategoryDescription" class="form-text">Category description.
+              <div id="nTextAreaDescriptionHelpEdit" class="form-text">Category description.
               </div>
             </div>
 
             <!-- Save edit /-->
             <button type="submit"
-                    name="nButtonSaveEditCategory"
-                    id="iButtonSaveEditCategory"
-                    title="Click to update."
-                    class="btn btn-success btn-sm">Update
+                    name="nButtonAcceptEdit"
+                    id="iButtonAcceptEdit"
+                    title="Click to accept to update."
+                    class="btn btn-success btn-sm">Accept
             </button>
 
             <!-- Cancel edit /-->
             <button type="button"
-                    name="nButtonCancelEditCategory"
-                    id="iButtonCancelEditCategory"
+                    name="nButtonAcceptCancel"
+                    id="iButtonAcceptCancel"
                     title="Click to cancel."
                     class="btn btn-danger btn-sm"
                     onclick="hideFormEditCategory()">Cancel
@@ -173,40 +179,44 @@
 
             <!-- Title /-->
             <h6 class="card-title"
-                id="iTitleCategoryDeleteQuestion"
-                name="nTitleCategoryDeleteQuestion">Delete category
+                id="iTitleQuestionDelete"
+                name="nTitleQuestionDelete">Delete category
             </h6>
 
             <!-- Description /-->
             <div>
               <p class="card-text"
                  style="margin-top: 10px;"
-                 id="iTextCategoryDeleteQuestion"
-                 name="nTextCategoryDeleteQuestion">Do you want to delete the following category?
+                 id="iTextDescriptionDelete"
+                 name="nTextDescriptionDelete">Do you want to delete the following category?
               </p>
 
             </div>
 
             <hr>
 
-            <!-- Data to delete /-->
-            <input type="hidden" class="form-control" name="nInputDeleteCategoryId" id="iInputDeleteCategoryId">
+            <!-- Category Id /-->
+            <input type="hidden"
+                   class="form-control"
+                   name="nInputCategoryIdDelete"
+                   id="iInputCategoryIdDelete">
 
-            <!-- Title /-->
+            <!-- Name of category /-->
             <p class="card-text" style="margin-bottom: 0px;">
-              <b name="nTextDeleteCategoryTitleName"
-                 id="iTextDeleteCategoryTitleName">Name of category</b
+              <b name="nTextTitleNameOfCategoryDelete"
+                 id="iTextTitleNameOfCategoryDelete">Name of category</b
             </p>
 
-            <!-- Title text /-->
+            <!-- Category's name /-->
             <p class="card-text"
-               name="nTextDeleteCategoryName"
-               id="iTextDeleteCategoryName">
+               name="nTextNameOfCategoryDelete"
+               id="iTextNameOfCategoryDelete">
             </p>
 
-            <!-- Description title /-->
+            <!-- Description /-->
             <p class="card-text" style="margin-bottom: 0px;">
-              <b name="nTextDeleteCategoryTitleDescription" id="iTextDeleteCategoryTitleDescription">Description</b>
+              <b name="nTextDescriptionOfCategoryDelete"
+                 id="iTextDescriptionOfCategoryDelete">Description</b>
             </p>
 
             <!-- Description text /-->
@@ -220,17 +230,17 @@
             <!-- Delete category button /-->
             <button type="submit"
                     class="btn btn-success btn-sm "
-                    name="nButtonDeleteAccept"
-                    id="iButtonDeleteAccept"
-                    title="Click to delete.">
-              Delete
+                    name="nButtonAcceptDelete"
+                    id="iButtonAcceptDelete"
+                    title="Click to accept to delete.">
+              Accept
             </button>
 
             <!-- Cancel delete button /-->
             <button type="button"
                     class="btn btn-danger btn-sm"
-                    name="nButtonDeleteCancel"
-                    id="iButtonDeleteCancel"
+                    name="nButtonCancelDelete"
+                    id="iButtonCancelDelete"
                     title="Click to cancel."
                     onclick="hideFormDeleteCategory()">
               Cancel
@@ -315,10 +325,10 @@
                     </td>
 
                   </tr>
-                  
-                  
-                  <?php
-              endif;
+                
+                
+                <?php
+                endif;
               }
             ?>
 
@@ -341,9 +351,14 @@
 </div>
 
 <script>
-
+  var iInputCurrentCategoryEdit = '';
+  
   $(document).ready(function () {
 
+    $('#iInputCategoryErrorAdd').hide();
+    $('#iInputCategoryErrorEdit').hide();
+    $('#iButtonAcceptAdd').attr('disabled', 'disabled');
+    
     // DataTables
     let t = $('#table').DataTable({
       "responsive": true,
@@ -361,9 +376,9 @@
         "info": "Showing page _PAGE_ of _PAGES_",
         "infoEmpty": "No records available.",
         "infoFiltered": "(filtered from the total _MAX_ categories)",
-        "emptyTable":     "No data available in table",
-        "info":           "Showing _START_ to _END_ of _TOTAL_ categories",
-        "infoEmpty":      "Showing 0 to 0 of 0 categories",
+        "emptyTable": "No data available in table",
+        "info": "Showing _START_ to _END_ of _TOTAL_ categories",
+        "infoEmpty": "Showing 0 to 0 of 0 categories",
         "search": "Search:",
         "paginate": {
           first: "First",
@@ -384,6 +399,59 @@
           });
       })
       .draw();
+  });
+
+  $(function () {
+    let data = <?php echo json_encode ($categoriesListName) ?>;
+    $("#iInputCategoryAdd").autocomplete({
+      source: data,
+      minLength: 1
+    });
+  });
+
+  $(function () {
+    let data = <?php echo json_encode ($categoriesListName) ?>;
+    $("#iInputCategoryEdit").autocomplete({
+      source: data,
+      minLength: 1
+    });
+  });
+
+  $(document).ready(function () {
+    $('#iInputCategoryAdd').on("keyup change focus blur click", function (e) {
+
+      let iInputCategory = $('#iInputCategoryAdd').val();
+      let data = <?php echo json_encode ($categoriesListName) ?>;
+
+      if (data.includes(iInputCategory) || iInputCategory == null || iInputCategory == '') {
+        $('#iButtonAcceptAdd').attr('disabled', 'disabled');
+        $('#iInputCategoryErrorAdd').show();
+        $('#iInputCategoryHelpAdd').hide();
+      } else {
+        $('#iButtonAcceptAdd').removeAttr('disabled');
+        $('#iInputCategoryErrorAdd').hide();
+        $('#iInputCategoryHelpAdd').show();
+      }
+
+    });
+  });
+
+  $(document).ready(function () {
+    $('#iInputCategoryEdit').on("keyup change focus blur click", function (e) {
+      let iInputCategory = $('#iInputCategoryEdit').val();
+      let data = <?php echo json_encode ($categoriesListName) ?>;
+      let index = data.indexOf(iInputCurrentCategoryEdit);
+      data.splice(index, 1);
+      if (data.includes(iInputCategory) || iInputCategory == null || iInputCategory == '') {
+        $('#iButtonAcceptEdit').attr('disabled', 'disabled');
+        $('#iInputCategoryErrorEdit').show();
+        $('#iInputCategoryHelpEdit').hide();
+      } else {
+        $('#iButtonAcceptEdit').removeAttr('disabled');
+        $('#iInputCategoryErrorEdit').hide();
+        $('#iInputCategoryHelpEdit').show();
+      }
+    });
   });
 
 </script>

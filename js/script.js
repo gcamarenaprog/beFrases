@@ -90,24 +90,24 @@ function showFormDeleteCategory(categoryId, categoryName, categoryDescription, t
     document.getElementById("iFormEditCategory").style.display = "none";
     document.getElementById("iFormAddCategory").style.display = "none";
     document.getElementById("iFormDeleteCategory").style.display = "block";
-    document.getElementById('iInputDeleteCategoryId').value = categoryId;
-    document.getElementById('iTitleCategoryDeleteQuestion').textContent = "Error deleting!";
-    document.getElementById('iTitleCategoryDeleteQuestion').classList.add('text-danger');
-    document.getElementById('iTextCategoryDeleteQuestion').textContent = "This category cannot be deleted, it has: " + totalQuotesCategory + ' associated phrase(s).';
-    document.getElementById('iTextDeleteCategoryName').textContent = categoryName;
+    document.getElementById('iInputCategoryIdDelete').value = categoryId;
+    document.getElementById('iTitleQuestionDelete').textContent = "Error deleting!";
+    document.getElementById('iTitleQuestionDelete').classList.add('text-danger');
+    document.getElementById('iTextDescriptionDelete').textContent = "This category cannot be deleted, it has: " + totalQuotesCategory + ' associated phrase(s).';
+    document.getElementById('iTextNameOfCategoryDelete').textContent = categoryName;
     document.getElementById('iTextDeleteCategoryDescription').textContent = categoryDescription;
-    document.getElementById('iButtonDeleteAccept').classList.add('disabled');
+    document.getElementById('iButtonAcceptDelete').classList.add('disabled');
   } else {
     document.getElementById("iFormEditCategory").style.display = "none";
     document.getElementById("iFormAddCategory").style.display = "none";
     document.getElementById("iFormDeleteCategory").style.display = "block";
-    document.getElementById('iInputDeleteCategoryId').value = categoryId;
-    document.getElementById('iTitleCategoryDeleteQuestion').textContent = "Delete Category";
-    document.getElementById('iTitleCategoryDeleteQuestion').classList.remove('text-danger');
-    document.getElementById('iTextCategoryDeleteQuestion').textContent = "Do you want to delete the following category?";
-    document.getElementById('iTextDeleteCategoryName').textContent = categoryName;
+    document.getElementById('iInputCategoryIdDelete').value = categoryId;
+    document.getElementById('iTitleQuestionDelete').textContent = "Delete Category";
+    document.getElementById('iTitleQuestionDelete').classList.remove('text-danger');
+    document.getElementById('iTextDescriptionDelete').textContent = "Do you want to delete the following category?";
+    document.getElementById('iTextNameOfCategoryDelete').textContent = categoryName;
     document.getElementById('iTextDeleteCategoryDescription').textContent = categoryDescription;
-    document.getElementById('iButtonDeleteAccept').classList.remove('disabled');
+    document.getElementById('iButtonAcceptDelete').classList.remove('disabled');
   }
 }
 
@@ -133,12 +133,14 @@ function hideFormDeleteCategory() {
  * @return none
  */
 function showFormEditCategory(categoryId, categoryName, categoryDescription) {
+  iInputCurrentCategoryEdit = categoryName;
+  console.log(iInputCurrentCategoryEdit)
   document.getElementById("iFormEditCategory").style.display = "block";
   document.getElementById("iFormAddCategory").style.display = "none";
   document.getElementById("iFormDeleteCategory").style.display = "none";
-  document.getElementById('iInputEditCategoryId').value = categoryId;
-  document.getElementById('iInputEditCategoryName').value = categoryName;
-  document.getElementById('iTextAreaEditCategoryDescription').textContent = categoryDescription;
+  document.getElementById('iInputCategoryIdEdit').value = categoryId;
+  document.getElementById('iInputCategoryEdit').value = categoryName;
+  document.getElementById('iTextAreaDescriptionEdit').textContent = categoryDescription;
 }
 
 /**
@@ -171,22 +173,22 @@ function showFormDeleteAuthor(authorId, authorName, totalQuotesAuthor) {
     document.getElementById("iFormEditAuthor").style.display = "none";
     document.getElementById("iFormAddAuthor").style.display = "none";
     document.getElementById("iFormDeleteAuthor").style.display = "block";
-    document.getElementById('iInputDeleteAuthorId').value = authorId;
-    document.getElementById('iTitleAuthorDeleteQuestion').textContent = "Error deleting!";
-    document.getElementById('iTitleAuthorDeleteQuestion').classList.add('text-danger');
-    document.getElementById('iTextAuthorDeleteQuestion').textContent = "This author cannot be deleted, it has: " + totalQuotesAuthor + ' associated phrase(s).';
-    document.getElementById('iTextDeleteAuthorName').textContent = authorName;
-    document.getElementById('iButtonDeleteAccept').classList.add('disabled');
+    document.getElementById('iInputAuthorIdDelete').value = authorId;
+    document.getElementById('iTitleQuestionDelete').textContent = "Error deleting!";
+    document.getElementById('iTitleQuestionDelete').classList.add('text-danger');
+    document.getElementById('iTextDescriptionDelete').textContent = "This author cannot be deleted, it has: " + totalQuotesAuthor + ' associated phrase(s).';
+    document.getElementById('iTextNameOfAuthorDelete').textContent = authorName;
+    document.getElementById('iButtonAcceptDelete').classList.add('disabled');
   } else {
     document.getElementById("iFormEditAuthor").style.display = "none";
     document.getElementById("iFormAddAuthor").style.display = "none";
     document.getElementById("iFormDeleteAuthor").style.display = "block";
-    document.getElementById('iInputDeleteAuthorId').value = authorId;
-    document.getElementById('iTitleAuthorDeleteQuestion').textContent = "Delete Author";
-    document.getElementById('iTitleAuthorDeleteQuestion').classList.remove('text-danger');
-    document.getElementById('iTextAuthorDeleteQuestion').textContent = "Do you want to delete the following author?";
-    document.getElementById('iTextDeleteAuthorName').textContent = authorName;
-    document.getElementById('iButtonDeleteAccept').classList.remove('disabled');
+    document.getElementById('iInputAuthorIdDelete').value = authorId;
+    document.getElementById('iTitleQuestionDelete').textContent = "Delete Author";
+    document.getElementById('iTitleQuestionDelete').classList.remove('text-danger');
+    document.getElementById('iTextDescriptionDelete').textContent = "Do you want to delete the following author?";
+    document.getElementById('iTextNameOfAuthorDelete').textContent = authorName;
+    document.getElementById('iButtonAcceptDelete').classList.remove('disabled');
   }
 }
 
@@ -215,8 +217,8 @@ function showFormEditAuthor(authorId, authorName) {
   document.getElementById("iFormEditAuthor").style.display = "block";
   document.getElementById("iFormAddAuthor").style.display = "none";
   document.getElementById("iFormDeleteAuthor").style.display = "none";
-  document.getElementById('iInputEditAuthorId').value = authorId;
-  document.getElementById('iInputEditAuthorName').value = authorName;
+  document.getElementById('iInputAuthorIdEdit').value = authorId;
+  document.getElementById('iInputAuthorEdit').value = authorName;
 }
 
 /**

@@ -11,31 +11,34 @@
    *
    */
   
-  
   # Prevent PHP code from being executed by inserting the path in the browser bar
   defined ('ABSPATH') or die("Bye bye and remember: Silence is golden!");
   
   # Save new author record from add new author form
-  if (isset($_POST['nButtonNewAuthor'])) {
-    $authorName = $_POST['nInputAuthorName'];
+  if (isset($_POST['nButtonAcceptAdd'])) {
+    $authorName = $_POST['nInputAuthorAdd'];
     insertAuthorRecord ($authorName);
   }
   
   # Delete author record from delete form
-  if (isset($_POST['nButtonDeleteAccept'])) {
-    $authorId = $_POST['nInputDeleteAuthorId'];
+  if (isset($_POST['nButtonAcceptDelete'])) {
+    $authorId = $_POST['nInputAuthorIdDelete'];
     deleteAuthorRecord ($authorId);
   }
   
-  # Update the changes from edit form
-  if (isset($_POST['nButtonSaveEditAuthor'])) {
-    $idAuthor = $_POST['nInputEditAuthorId'];
-    $nameAuthor = $_POST['nInputEditAuthorName'];
+  # Edit the changes from edit form
+  if (isset($_POST['nButtonAcceptEdit'])) {
+    $idAuthor = $_POST['nInputAuthorIdEdit'];
+    $nameAuthor = $_POST['nInputAuthorEdit'];
     updateAuthorRecord ($idAuthor, $nameAuthor);
   }
   
   # Gets list of all authors from database
+  $authorsListName = array();
   $authorsList = getAllAuthorsList ();
+  foreach ($authorsList as $key => $value) {
+    $authorsListName[] = $value['befrases_aut_name'];
+  }
 
 ?>
 
@@ -59,7 +62,7 @@
       <div class="border mb-3 p-3">
         <div class="card-body">
 
-          <!-- Add author form /-->
+          <!-- Add author /-->
           <form method="post" class="mb-3" style="display: block;" id="iFormAddAuthor" name="nFormAddAuthor">
 
             <!-- Title and description /-->
@@ -68,30 +71,31 @@
 
             <hr>
 
-            <!-- Categoría /-->
+            <!-- Author /-->
             <div class="mb-3">
-              <label for="iInputAuthorName" class="form-label">Name of author</label>
+              <label for="iInputAuthorAdd" class="form-label">Name of author</label>
               <input class="form-control"
-                     name="nInputAuthorName"
-                     id="iInputAuthorName"
+                     name="nInputAuthorAdd"
+                     id="iInputAuthorAdd"
                      title="Name of author."
                      placeholder="Name"
                      required>
-              <div id="iHelpAuthorName" class="form-text">Name of author.</div>
+              <span id="iInputAuthorErrorAdd" name="nInputAuthorErrorAdd" class="form-text text-danger">The author's name is registered or empty!</span>
+              <span id="iInputAuthorHelpAdd" class="form-text">Name of author (auto-complete)</span>
             </div>
 
-            <!-- Add button /-->
+            <!-- Accept button /-->
             <button class="btn btn-success btn-sm"
-                    name="nButtonNewAuthor"
-                    id="iButtonNewAuthor"
+                    name="nButtonAcceptAdd"
+                    id="iButtonAcceptAdd"
                     type="submit"
-                    title="Click to add."
-            >Add
+                    title="Click to accept."
+            >Accept
             </button>
 
           </form>
 
-          <!-- Edit author form -->
+          <!-- Edit author -->
           <form method="post" class="mb-3" style="display: none;" id="iFormEditAuthor" name="nFormEditAuthor">
 
             <!-- Title and description /-->
@@ -103,37 +107,37 @@
             <!-- Author Id /-->
             <input type="hidden"
                    class="form-control"
-                   name="nInputEditAuthorId"
-                   id="iInputEditAuthorId">
+                   name="nInputAuthorIdEdit"
+                   id="iInputAuthorIdEdit">
 
             <!-- Name /-->
             <div class="mb-3">
-              <label for="iInputEditAuthorName" class="form-label">Name of author</label>
+              <label for="iInputAuthorEdit" class="form-label">Name of author</label>
               <input class="form-control"
-                     name="nInputEditAuthorName"
-                     id="iInputEditAuthorName"
+                     name="nInputAuthorEdit"
+                     id="iInputAuthorEdit"
                      required
                      title="Name of author">
-              <div id="iHelpAuthorName" class="form-text">Name of author.</div>
+              <span id="iInputAuthorErrorEdit" name="nInputAuthorErrorEdit" class="form-text text-danger">This author name is registered or empty!</span>
+              <span id="iInputAuthorHelpEdit" class="form-text">Name of author (auto-complete)</span>
             </div>
 
-            <!-- Save edit /-->
+            <!-- Accept /-->
             <button type="submit"
-                    name="nButtonSaveEditAuthor"
-                    id="iButtonSaveEditAuthor"
-                    title="Click to update changes."
-                    class="btn btn-success btn-sm">Update
+                    name="nButtonAcceptEdit"
+                    id="iButtonAcceptEdit"
+                    title="Click to accept changes."
+                    class="btn btn-success btn-sm">Accept
             </button>
 
-            <!-- Cancel edit /-->
+            <!-- Cancel /-->
             <button type="button"
-                    name="nButtonCancelEditAuthor"
-                    id="iButtonCancelEditAuthor"
+                    name="iButtonCancelEdit"
+                    id="iButtonCancelEdit"
                     title="Click to cancel."
                     class="btn btn-danger btn-sm"
                     onclick="hideFormEditAuthor()">Cancel
             </button>
-
 
           </form>
 
@@ -142,35 +146,35 @@
 
             <!-- Title /-->
             <h6 class="card-title"
-                id="iTitleAuthorDeleteQuestion"
-                name="nTitleAuthorDeleteQuestion">Delete author
+                id="iTitleQuestionDelete"
+                name="nTitleQuestionDelete">Delete author
             </h6>
 
             <!-- Description /-->
-            <div>
-              <p class="card-text"
-                 style="margin-top: 10px;"
-                 id="iTextAuthorDeleteQuestion"
-                 name="nTextAuthorDeleteQuestion">Do you want to delete the following author?
-              </p>
-
-            </div>
+            <p class="card-text"
+               style="margin-top: 10px;"
+               id="iTextDescriptionDelete"
+               name="nTextDescriptionDelete">Do you want to delete the following author?
+            </p>
 
             <hr>
 
-            <!-- Data to delete /-->
-            <input type="hidden" class="form-control" name="nInputDeleteAuthorId" id="iInputDeleteAuthorId">
+            <!-- Author Id /-->
+            <input type="hidden"
+                   class="form-control"
+                   name="nInputAuthorIdDelete"
+                   id="iInputAuthorIdDelete">
 
-            <!-- Title /-->
+            <!-- Name of author /-->
             <p class="card-text" style="margin-bottom: 0px;">
-              <b name="nTextDeleteAuthorTitleName"
-                 id="iTextDeleteAuthorTitleName">Name of author</b
+              <b name="nTextTitleNameOfAuthorDelete"
+                 id="iTextTitleNameOfAuthorDelete">Name of author</b
             </p>
 
-            <!-- Title text /-->
+            <!-- Author's name /-->
             <p class="card-text"
-               name="nTextDeleteAuthorName"
-               id="iTextDeleteAuthorName">
+               name="nTextNameOfAuthorDelete"
+               id="iTextNameOfAuthorDelete">
             </p>
 
             <hr>
@@ -178,17 +182,16 @@
             <!-- Delete category button /-->
             <button type="submit"
                     class="btn btn-success btn-sm "
-                    name="nButtonDeleteAccept"
-                    id="iButtonDeleteAccept"
-                    title="Click to delete.">Delete
+                    name="nButtonAcceptDelete"
+                    id="iButtonAcceptDelete"
+                    title="Click to accept to delete.">Accept
             </button>
 
             <!-- Cancel delete button /-->
             <button type="button"
                     class="btn btn-danger btn-sm"
-                    name="nButtonDeleteCancel"
-                    id="iButtonDeleteCancel"
-                    title="Click to cancel."
+                    name="nButtonCancelDelete"
+                    id="iButtonCancelDelete"
                     title="Click to cancel."
                     onclick="hideFormDeleteAuthor()">Cancel
             </button>
@@ -290,6 +293,10 @@
 
   $(document).ready(function () {
 
+    $('#iInputAuthorErrorAdd').hide();
+    $('#iInputAuthorErrorEdit').hide();
+    $('#iButtonAcceptAdd').attr('disabled', 'disabled');
+
     // DataTables
     let t = $('#table').DataTable({
       "responsive": true,
@@ -307,9 +314,9 @@
         "info": "Showing page _PAGE_ of _PAGES_",
         "infoEmpty": "No records available.",
         "infoFiltered": "(filtered from the total _MAX_ authors)",
-        "emptyTable":     "No data available in table",
-        "info":           "Showing _START_ to _END_ of _TOTAL_ authors",
-        "infoEmpty":      "Showing 0 to 0 of 0 authors",
+        "emptyTable": "No data available in table",
+        "info": "Showing _START_ to _END_ of _TOTAL_ authors",
+        "infoEmpty": "Showing 0 to 0 of 0 authors",
         "search": "Search:",
         "paginate": {
           first: "First",
@@ -332,5 +339,60 @@
       .draw();
 
   });
+
+  $(function () {
+    let data = <?php echo json_encode ($authorsListName) ?>;
+    $("#iInputAuthorAdd").autocomplete({
+      source: data,
+      minLength: 1
+    });
+  });
+
+  $(function () {
+    let data = <?php echo json_encode ($authorsListName) ?>;
+    $("#iInputAuthorEdit").autocomplete({
+      source: data,
+      minLength: 1
+    });
+  });
+
+  $(document).ready(function () {
+    $('#iInputAuthorAdd').on("keyup change focus blur click", function (e) {
+
+      let iInputAuthor = $('#iInputAuthorAdd').val();
+      let data = <?php echo json_encode ($authorsListName) ?>;
+
+      if (data.includes(iInputAuthor) || iInputAuthor == null || iInputAuthor == '') {
+        $('#iButtonAcceptAdd').attr('disabled', 'disabled');
+        $('#iInputAuthorErrorAdd').show();
+        $('#iInputAuthorHelpAdd').hide();
+      } else {
+        $('#iButtonAcceptAdd').removeAttr('disabled');
+        $('#iInputAuthorErrorAdd').hide();
+        $('#iInputAuthorHelpAdd').show();
+      }
+
+    });
+  });
+
+  $(document).ready(function () {
+    $('#iInputAuthorEdit').on("keyup change focus blur click", function (e) {
+
+      let iInputAuthor = $('#iInputAuthorEdit').val();
+      let data = <?php echo json_encode ($authorsListName) ?>;
+
+      if (data.includes(iInputAuthor) || iInputAuthor == null || iInputAuthor == '') {
+        $('#iButtonAcceptEdit').attr('disabled', 'disabled');
+        $('#iInputAuthorErrorEdit').show();
+        $('#iInputAuthorHelpEdit').hide();
+      } else {
+        $('#iButtonAcceptEdit').removeAttr('disabled');
+        $('#iInputAuthorErrorEdit').hide();
+        $('#iInputAuthorHelpEdit').show();
+      }
+
+    });
+  });
+
 
 </script>
