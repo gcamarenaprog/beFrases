@@ -31,8 +31,8 @@
       }
       $authorId = intval ($authorIdValue);
       $textQuote = $_POST['nTextAreaQuoteAdd'];
-      $checkTextQuote = substr($textQuote, -1);
-      if($checkTextQuote != '.'){
+      $checkTextQuote = substr ($textQuote, -1);
+      if ($checkTextQuote != '.') {
         $textQuote = $textQuote . '.';
       }
       $categoryIdQuote = $_POST['nSelectCategoryAdd'];
@@ -56,8 +56,8 @@
       $authorId = intval ($authorIdValue);
       $idQuote = $_POST['nInputQuoteIdEdit'];
       $textQuote = $_POST['nTextAreaQuoteEdit'];
-      $checkTextQuote = substr($textQuote, -1);
-      if($checkTextQuote != '.'){
+      $checkTextQuote = substr ($textQuote, -1);
+      if ($checkTextQuote != '.') {
         $textQuote = $textQuote . '.';
       }
       $categoryIdQuote = $_POST['nSelectCategoryEdit'];
@@ -140,7 +140,7 @@
                        placeholder="Author"
                        title="Write the first three letters of the author."
                        required>
-                <span id="iInputAuthorErrorAdd" name="nInputAuthorErrorAdd" class="form-text text-danger">This author name not registered!</span>
+                <span id="iInputAuthorErrorAdd" name="nInputAuthorErrorAdd" class="form-text text-danger">This author name not registered or empty!</span>
                 <span id="iInputAuthorHelpAdd" class="form-text">Name of author (auto-complete)</span>
               </div>
 
@@ -165,7 +165,7 @@
                           rows="4"
                           title="Write the sentence without quotation marks at the beginning and end."
                           required></textarea>
-                <span id="iTextAreaQuoteErrorAdd" name="nTextAreaQuoteErrorAdd" class="form-text text-danger">There must be a maximum of 500 characters.</span>
+                <span id="iTextAreaQuoteErrorAdd" name="nTextAreaQuoteErrorAdd" class="form-text text-danger">There must be a maximum of 500 characters or not be empty.</span>
                 <span id="iTextAreaQuoteHelpAdd" class="form-text">Write the sentence without quotation marks at the
                   beginning and end.</span>
               </div>
@@ -236,7 +236,7 @@
                      placeholder="Author.."
                      title="Write the first three letters of the author."
                      required>
-              <span id="iInputAuthorErrorEdit" name="nInputAuthorErrorEdit" class="form-text text-danger">This author name not registered!</span>
+              <span id="iInputAuthorErrorEdit" name="nInputAuthorErrorEdit" class="form-text text-danger">This author name not registered or empty!</span>
               <span id="iInputAuthorHelpEdit" class="form-text">Name of author (auto-complete)</span>
             </div>
 
@@ -260,7 +260,7 @@
                         required
                         title="Write the sentence without quotation marks at the beginning and end."
                         rows="4"></textarea>
-              <span id="iTextAreaQuoteErrorEdit" name="nInputAuthorErrorEdit" class="form-text text-danger">There must be a maximum of 500 characters.</span>
+              <span id="iTextAreaQuoteErrorEdit" name="nInputAuthorErrorEdit" class="form-text text-danger">There must be a maximum of 500 characters or not be empty.</span>
               <span id="iTextAreaQuoteHelpEdit" class="form-text">Write the sentence without quotation marks at the
                   beginning and end.</span>
             </div>
@@ -484,10 +484,12 @@
   $(document).ready(function () {
 
     $('#iInputAuthorErrorAdd').hide();
-    $('#iInputAuthorErrorEdit').hide();
-    $('#iTextAreaQuoteErrorEdit').hide();
     $('#iTextAreaQuoteErrorAdd').hide();
     
+    $('#iInputAuthorErrorEdit').hide();
+    $('#iTextAreaQuoteErrorEdit').hide();
+
+
     // DataTables
     let t = $('#table').DataTable({
       "responsive": true,
@@ -548,31 +550,35 @@
 
   $(document).ready(function () {
     $('#iInputAuthorAdd, #iTextAreaQuoteAdd').on("keyup change focus blur click", function (e) {
-      
+
       let iInputAuthor = $('#iInputAuthorAdd').val();
       let iTextAreaQuoteAdd = $('#iTextAreaQuoteAdd').val();
       let iTextAreaQuoteAddLength = iTextAreaQuoteAdd.length;
       let data = <?php echo json_encode ($authorsList) ?>;
-      
-      if (data.includes(iInputAuthor)) {
-        $('#iButtonAcceptAdd').removeAttr('disabled');
-        $('#iInputAuthorErrorAdd').hide();
-        $('#iInputAuthorHelpAdd').show();
-      } else {
+
+      if ((!data.includes(iInputAuthor)) || iInputAuthor == null || iInputAuthor == '') {
         $('#iButtonAcceptAdd').attr('disabled', 'disabled');
         $('#iInputAuthorErrorAdd').show();
         $('#iInputAuthorHelpAdd').hide();
+
+      } else {
+        $('#iButtonAcceptAdd').removeAttr('disabled');
+        $('#iInputAuthorErrorAdd').hide();
+        $('#iInputAuthorHelpAdd').show();
       }
-      if (iTextAreaQuoteAddLength <= 500) {
+
+      if (iTextAreaQuoteAdd == null || iTextAreaQuoteAdd == '' || iTextAreaQuoteAddLength > 500) {
+        $('#iButtonAcceptAdd').attr('disabled', 'disabled');
+
+        $('#iTextAreaQuoteErrorAdd').show();
+        $('#iTextAreaQuoteHelpAdd').hide();
+
+      } else {
         $('#iButtonAcceptAdd').removeAttr('disabled');
         $('#iTextAreaQuoteErrorAdd').hide();
         $('#iTextAreaQuoteHelpAdd').show();
-      } else {
-        $('#iButtonAcceptAdd').attr('disabled', 'disabled');
-        $('#iTextAreaQuoteErrorAdd').show();
-        $('#iTextAreaQuoteHelpAdd').hide();
       }
-      
+
     });
   });
 
@@ -584,25 +590,29 @@
       let iTextAreaQuoteEditLength = iTextAreaQuoteEdit.length;
       let data = <?php echo json_encode ($authorsList) ?>;
 
-      if (data.includes(iInputAuthor)) {
-        $('#iButtonAcceptEdit').removeAttr('disabled');
-        $('#iInputAuthorErrorEdit').hide();
-        $('#iInputAuthorHelpEdit').show();
-      } else {
+      if ((!data.includes(iInputAuthor)) || iInputAuthor == null || iInputAuthor == '' || iTextAreaQuoteEdit == null || iTextAreaQuoteEdit == '' || iTextAreaQuoteEditLength > 500 ) {
         $('#iButtonAcceptEdit').attr('disabled', 'disabled');
+      } else {
+        $('#iButtonAcceptEdit').removeAttr('disabled');
+      }
+
+
+      if ((!data.includes(iInputAuthor)) || iInputAuthor == null || iInputAuthor == '' ) {
         $('#iInputAuthorErrorEdit').show();
         $('#iInputAuthorHelpEdit').hide();
-      }
-      if (iTextAreaQuoteEditLength <= 500) {
-        $('#iButtonAcceptEdit').removeAttr('disabled');
-        $('#iTextAreaQuoteErrorEdit').hide();
-        $('#iTextAreaQuoteHelpEdit').show();
       } else {
-        $('#iButtonAcceptEdit').attr('disabled', 'disabled');
+        $('#iInputAuthorErrorEdit').hide();
+        $('#iInputAuthorHelpEdit').show();
+      }
+
+      if (iTextAreaQuoteEdit == null || iTextAreaQuoteEdit == '' || iTextAreaQuoteEditLength > 500) {
         $('#iTextAreaQuoteErrorEdit').show();
         $('#iTextAreaQuoteHelpEdit').hide();
+      } else {
+        $('#iTextAreaQuoteErrorEdit').hide();
+        $('#iTextAreaQuoteHelpEdit').show();
       }
-      
+
     });
   });
 
