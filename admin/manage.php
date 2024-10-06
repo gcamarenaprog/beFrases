@@ -548,10 +548,13 @@
 
   $(document).ready(function () {
     $('#iInputAuthorAdd, #iTextAreaQuoteAdd').on("keyup change focus blur click", function (e) {
-      let value0 = $('#iInputAuthorAdd').val();
+      
+      let iInputAuthor = $('#iInputAuthorAdd').val();
+      let iTextAreaQuoteAdd = $('#iTextAreaQuoteAdd').val();
+      let iTextAreaQuoteAddLength = iTextAreaQuoteAdd.length;
       let data = <?php echo json_encode ($listAuthors) ?>;
       
-      if (data.includes(value0)) {
+      if (data.includes(iInputAuthor)) {
         $('#iButtonAcceptAdd').removeAttr('disabled');
         $('#iInputAuthorErrorAdd').hide();
         $('#iInputAuthorHelpAdd').show();
@@ -560,27 +563,28 @@
         $('#iInputAuthorErrorAdd').show();
         $('#iInputAuthorHelpAdd').hide();
       }
-
-      let value1 = $('#iTextAreaQuoteAdd').val();
-      if (value1.length > 500) {
-        $('#iButtonAcceptAdd').attr('disabled', 'disabled');
-        $('#iTextAreaQuoteErrorAdd').show();
-        $('#iTextAreaQuoteHelpAdd').hide();
-      } else {
+      if (iTextAreaQuoteAddLength <= 500) {
         $('#iButtonAcceptAdd').removeAttr('disabled');
         $('#iTextAreaQuoteErrorAdd').hide();
         $('#iTextAreaQuoteHelpAdd').show();
+      } else {
+        $('#iButtonAcceptAdd').attr('disabled', 'disabled');
+        $('#iTextAreaQuoteErrorAdd').show();
+        $('#iTextAreaQuoteHelpAdd').hide();
       }
+      
     });
-    
   });
 
   $(document).ready(function () {
     $('#iInputAuthorEdit, #iTextAreaQuoteEdit').on("keyup change focus blur click", function (e) {
-      let value0 = $('#iInputAuthorEdit').val();
+
+      let iInputAuthor = $('#iInputAuthorEdit').val();
+      let iTextAreaQuoteEdit = $('#iTextAreaQuoteEdit').val();
+      let iTextAreaQuoteEditLength = iTextAreaQuoteEdit.length;
       let data = <?php echo json_encode ($listAuthors) ?>;
-      
-      if (data.includes(value0)) {
+
+      if (data.includes(iInputAuthor)) {
         $('#iButtonAcceptEdit').removeAttr('disabled');
         $('#iInputAuthorErrorEdit').hide();
         $('#iInputAuthorHelpEdit').show();
@@ -589,16 +593,14 @@
         $('#iInputAuthorErrorEdit').show();
         $('#iInputAuthorHelpEdit').hide();
       }
-
-      let value1 = $('#iTextAreaQuoteEdit').val();
-      if (value1.length > 500) {
-        $('#iButtonAcceptEdit').attr('disabled', 'disabled');
-        $('#iTextAreaQuoteErrorEdit').show();
-        $('#iTextAreaQuoteHelpEdit').hide();
-      } else {
+      if (iTextAreaQuoteEditLength <= 500) {
         $('#iButtonAcceptEdit').removeAttr('disabled');
         $('#iTextAreaQuoteErrorEdit').hide();
         $('#iTextAreaQuoteHelpEdit').show();
+      } else {
+        $('#iButtonAcceptEdit').attr('disabled', 'disabled');
+        $('#iTextAreaQuoteErrorEdit').show();
+        $('#iTextAreaQuoteHelpEdit').hide();
       }
       
     });
