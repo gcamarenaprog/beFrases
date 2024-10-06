@@ -437,7 +437,7 @@
                       id="iButtonEditQuoteRegister"
                       name="nButtonEditQuoteRegister"
                       title="Click to edit."
-                      onclick="showFormEditQuote('<?php echo $quoteAuthor; ?>', '<?php echo $authorExtra; ?>', '<?php echo $quoteId; ?>', '<?php echo $authorId; ?>', '<?php echo $quote; ?>', '<?php echo $categoryId; ?>')">
+                      onclick='showFormEditQuote("<?php echo $quoteAuthor; ?>", "<?php echo $authorExtra; ?>", "<?php echo $quoteId; ?>", "<?php echo $authorId; ?>", "<?php echo $quote; ?>", "<?php echo $categoryId; ?>")'>
                     Edit
                   </button>
                 </td>
