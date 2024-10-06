@@ -17,6 +17,7 @@
   # Save new category record from add new category form
   if (isset($_POST['nButtonAcceptAdd'])) {
     $categoryName = $_POST['nInputCategoryAdd'];
+    $categoryName = trim($categoryName);
     $categoryDescription = $_POST['nTextAreaDescriptionAdd'];
     insertCategoryRecord ($categoryName, $categoryDescription);
   }
@@ -31,6 +32,7 @@
   if (isset($_POST['nButtonAcceptEdit'])) {
     $idCategory = $_POST['nInputCategoryIdEdit'];
     $nameCategory = $_POST['nInputCategoryEdit'];
+    $nameCategory = trim($nameCategory);
     $descriptionCategory = $_POST['nTextAreaDescriptionEdit'];
     updateCategoryRecord ($idCategory, $nameCategory, $descriptionCategory);
   }
@@ -405,7 +407,7 @@
     let data = <?php echo json_encode ($categoriesListName) ?>;
     $("#iInputCategoryAdd").autocomplete({
       source: data,
-      minLength: 1
+      minLength: 3
     });
   });
 
@@ -413,7 +415,7 @@
     let data = <?php echo json_encode ($categoriesListName) ?>;
     $("#iInputCategoryEdit").autocomplete({
       source: data,
-      minLength: 1
+      minLength: 3
     });
   });
 

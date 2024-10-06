@@ -536,7 +536,7 @@
     var data = <?php echo json_encode ($authorsList) ?>;
     $("#iInputAuthorAdd").autocomplete({
       source: data,
-      minLength: 1
+      minLength: 3
     });
   });
 
@@ -544,7 +544,7 @@
     var data = <?php echo json_encode ($authorsList) ?>;
     $("#iInputAuthorEdit").autocomplete({
       source: data,
-      minLength: 1
+      minLength: 3
     });
   });
 

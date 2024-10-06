@@ -17,6 +17,7 @@
   # Save new author record from add new author form
   if (isset($_POST['nButtonAcceptAdd'])) {
     $authorName = $_POST['nInputAuthorAdd'];
+    $authorName = trim($authorName);
     insertAuthorRecord ($authorName);
   }
   
@@ -30,6 +31,7 @@
   if (isset($_POST['nButtonAcceptEdit'])) {
     $idAuthor = $_POST['nInputAuthorIdEdit'];
     $nameAuthor = $_POST['nInputAuthorEdit'];
+    $nameAuthor = trim($nameAuthor);
     updateAuthorRecord ($idAuthor, $nameAuthor);
   }
   
@@ -344,7 +346,7 @@
     let data = <?php echo json_encode ($authorsListName) ?>;
     $("#iInputAuthorAdd").autocomplete({
       source: data,
-      minLength: 1
+      minLength: 3
     });
   });
 
@@ -352,7 +354,7 @@
     let data = <?php echo json_encode ($authorsListName) ?>;
     $("#iInputAuthorEdit").autocomplete({
       source: data,
-      minLength: 1
+      minLength: 3
     });
   });
 
