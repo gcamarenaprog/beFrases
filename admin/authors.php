@@ -360,9 +360,10 @@
     $('#iInputAuthorAdd').on("keyup change focus blur click", function (e) {
 
       let iInputAuthor = $('#iInputAuthorAdd').val();
+      let iInputAuthorTrim = iInputAuthor.trim();
       let data = <?php echo json_encode ($authorsListName) ?>;
 
-      if (data.includes(iInputAuthor) || iInputAuthor == null || iInputAuthor == '') {
+      if (data.includes(iInputAuthorTrim) || iInputAuthor == null || iInputAuthor == '') {
         $('#iButtonAcceptAdd').attr('disabled', 'disabled');
         $('#iInputAuthorErrorAdd').show();
         $('#iInputAuthorHelpAdd').hide();
@@ -379,9 +380,10 @@
     $('#iInputAuthorEdit').on("keyup change focus blur click", function (e) {
 
       let iInputAuthor = $('#iInputAuthorEdit').val();
+      let iInputAuthorTrim = iInputAuthor.trim();
       let data = <?php echo json_encode ($authorsListName) ?>;
 
-      if (data.includes(iInputAuthor) || iInputAuthor == null || iInputAuthor == '') {
+      if (data.includes(iInputAuthorTrim) || iInputAuthor == null || iInputAuthor == '') {
         $('#iButtonAcceptEdit').attr('disabled', 'disabled');
         $('#iInputAuthorErrorEdit').show();
         $('#iInputAuthorHelpEdit').hide();

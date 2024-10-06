@@ -421,9 +421,10 @@
     $('#iInputCategoryAdd').on("keyup change focus blur click", function (e) {
 
       let iInputCategory = $('#iInputCategoryAdd').val();
+      let iInputCategoryTrim = iInputCategory.trim();
       let data = <?php echo json_encode ($categoriesListName) ?>;
 
-      if (data.includes(iInputCategory) || iInputCategory == null || iInputCategory == '') {
+      if (data.includes(iInputCategoryTrim) || iInputCategory == null || iInputCategory == '') {
         $('#iButtonAcceptAdd').attr('disabled', 'disabled');
         $('#iInputCategoryErrorAdd').show();
         $('#iInputCategoryHelpAdd').hide();
@@ -439,10 +440,11 @@
   $(document).ready(function () {
     $('#iInputCategoryEdit').on("keyup change focus blur click", function (e) {
       let iInputCategory = $('#iInputCategoryEdit').val();
+      let iInputCategoryTrim = iInputCategory.trim();
       let data = <?php echo json_encode ($categoriesListName) ?>;
       let index = data.indexOf(iInputCurrentCategoryEdit);
       data.splice(index, 1);
-      if (data.includes(iInputCategory) || iInputCategory == null || iInputCategory == '') {
+      if (data.includes(iInputCategoryTrim) || iInputCategory == null || iInputCategory == '') {
         $('#iButtonAcceptEdit').attr('disabled', 'disabled');
         $('#iInputCategoryErrorEdit').show();
         $('#iInputCategoryHelpEdit').hide();
