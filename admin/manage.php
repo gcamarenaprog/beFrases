@@ -449,7 +449,7 @@
                       id="iButtonDeleteQuoteRegister"
                       name="nButtonDeleteQuoteRegister"
                       title="Click to delete."
-                      onclick="showFormDeleteQuote('<?php echo $quoteId; ?>', '<?php echo $quoteAuthor; ?>', '<?php echo $quote; ?>')">
+                      onclick='showFormDeleteQuote("<?php echo $quoteId; ?>", "<?php echo $quoteAuthor; ?>", "<?php echo $quote; ?>")'>
                     Delete
                   </button>
                 </td>
