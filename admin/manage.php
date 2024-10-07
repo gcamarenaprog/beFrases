@@ -165,7 +165,7 @@
                           rows="4"
                           title="Write the sentence without quotation marks at the beginning and end."
                           required></textarea>
-                <span id="iTextAreaQuoteErrorAdd" name="nTextAreaQuoteErrorAdd" class="form-text text-danger">There must be a maximum of 500 characters or not be empty.</span>
+                <span id="iTextAreaQuoteErrorAdd" name="nTextAreaQuoteErrorAdd" class="form-text text-danger">There must be a maximum of 1000 characters or not be empty.</span>
                 <span id="iTextAreaQuoteHelpAdd" class="form-text">Write the sentence without quotation marks at the
                   beginning and end.</span>
               </div>
@@ -260,7 +260,7 @@
                         required
                         title="Write the sentence without quotation marks at the beginning and end."
                         rows="4"></textarea>
-              <span id="iTextAreaQuoteErrorEdit" name="nInputAuthorErrorEdit" class="form-text text-danger">There must be a maximum of 500 characters or not be empty.</span>
+              <span id="iTextAreaQuoteErrorEdit" name="nInputAuthorErrorEdit" class="form-text text-danger">There must be a maximum of 1000 characters or not be empty.</span>
               <span id="iTextAreaQuoteHelpEdit" class="form-text">Write the sentence without quotation marks at the
                   beginning and end.</span>
             </div>
@@ -568,7 +568,7 @@
         $('#iInputAuthorHelpAdd').show();
       }
 
-      if (iTextAreaQuoteAdd == null || iTextAreaQuoteAdd == '' || iTextAreaQuoteAddLength > 500) {
+      if (iTextAreaQuoteAdd == null || iTextAreaQuoteAdd == '' || iTextAreaQuoteAddLength > 1000) {
         $('#iButtonAcceptAdd').attr('disabled', 'disabled');
 
         $('#iTextAreaQuoteErrorAdd').show();
@@ -592,7 +592,7 @@
       let iTextAreaQuoteEditLength = iTextAreaQuoteEdit.length;
       let data = <?php echo json_encode ($authorsList) ?>;
 
-      if ((!data.includes(iInputAuthorTrim)) || iInputAuthor == null || iInputAuthor == '' || iTextAreaQuoteEdit == null || iTextAreaQuoteEdit == '' || iTextAreaQuoteEditLength > 500 ) {
+      if ((!data.includes(iInputAuthorTrim)) || iInputAuthor == null || iInputAuthor == '' || iTextAreaQuoteEdit == null || iTextAreaQuoteEdit == '' || iTextAreaQuoteEditLength > 1000 ) {
         $('#iButtonAcceptEdit').attr('disabled', 'disabled');
       } else {
         $('#iButtonAcceptEdit').removeAttr('disabled');
@@ -606,7 +606,7 @@
         $('#iInputAuthorHelpEdit').show();
       }
 
-      if (iTextAreaQuoteEdit == null || iTextAreaQuoteEdit == '' || iTextAreaQuoteEditLength > 500) {
+      if (iTextAreaQuoteEdit == null || iTextAreaQuoteEdit == '' || iTextAreaQuoteEditLength > 1000) {
         $('#iTextAreaQuoteErrorEdit').show();
         $('#iTextAreaQuoteHelpEdit').hide();
       } else {
