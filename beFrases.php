@@ -245,7 +245,7 @@ add_action('admin_menu', 'fn_createMenu');
  * @since  1.0.0
  * @access public
  */
-function add_quote_menu_item($wp_admin_bar)
+function add_quote_add_menu_item($wp_admin_bar)
 {
 
   $args = array(
@@ -258,7 +258,7 @@ function add_quote_menu_item($wp_admin_bar)
   $wp_admin_bar->add_node($args);
 }
 
-add_action('admin_bar_menu', 'add_quote_menu_item');
+add_action('admin_bar_menu', 'add_quote_add_menu_item');
 
 
 /**
