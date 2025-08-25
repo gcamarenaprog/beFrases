@@ -140,9 +140,11 @@
               
               <?php
                 echo "— " . $authorText;
-                if ($authorExtra != '') {
+                if (strpos($authorExtra, 'Sin informaci') !== false || ($authorExtra == '') || strpos($authorExtra, 'No data') !== false) {
+                 
+                }else{
                   echo ', ' . $authorExtra;
-                }
+                }                
               ?>
               
               <?php if ($styleAuthorText == 0): ?>

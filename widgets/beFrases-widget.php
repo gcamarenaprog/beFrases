@@ -192,7 +192,7 @@
           }
         }
       }
-      
+
       # Print author and quote on widget
       printQuoteText ($alignmentQuoteText, $styleQuoteText, $quote);
       printAuthorText ($alignmentAuthorText, $styleAuthorText, $author, $authorExtra);
