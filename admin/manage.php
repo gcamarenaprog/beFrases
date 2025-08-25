@@ -36,6 +36,9 @@
         $textQuote = $textQuote . '.';
       }
       $categoryIdQuote = $_POST['nSelectCategoryAdd'];
+      if(empty($authorExtra)) {
+        $authorExtra = 'Sin información.';
+      }
       insertQuoteRecord ($authorId, $textQuote, $categoryIdQuote, $authorExtra);
     }
   }
@@ -165,7 +168,7 @@
                           rows="4"
                           title="Write the sentence without quotation marks at the beginning and end."
                           required></textarea>
-                <span id="iTextAreaQuoteErrorAdd" name="nTextAreaQuoteErrorAdd" class="form-text text-danger">There must be a maximum of 1000 characters or not be empty.</span>
+                <span id="iTextAreaQuoteErrorAdd" name="nTextAreaQuoteErrorAdd" class="form-text text-danger">There must be a maximum of 500 characters or not be empty.</span>
                 <span id="iTextAreaQuoteHelpAdd" class="form-text">Write the sentence without quotation marks at the
                   beginning and end.</span>
               </div>
@@ -260,7 +263,7 @@
                         required
                         title="Write the sentence without quotation marks at the beginning and end."
                         rows="4"></textarea>
-              <span id="iTextAreaQuoteErrorEdit" name="nInputAuthorErrorEdit" class="form-text text-danger">There must be a maximum of 1000 characters or not be empty.</span>
+              <span id="iTextAreaQuoteErrorEdit" name="nInputAuthorErrorEdit" class="form-text text-danger">There must be a maximum of 500 characters or not be empty.</span>
               <span id="iTextAreaQuoteHelpEdit" class="form-text">Write the sentence without quotation marks at the
                   beginning and end.</span>
             </div>
@@ -399,9 +402,7 @@
               $quoteCategory = '';
               $quoteAuthor = '';
               
-              if ($authorExtra == '') {
-                $authorExtra = 'No data';
-              }
+      
               
               $nameOfCategory = getCategoryNameAndIdWithCategoryId ($categoryId);
               foreach ($nameOfCategory as $key => $value) {
@@ -485,10 +486,8 @@
 
     $('#iInputAuthorErrorAdd').hide();
     $('#iTextAreaQuoteErrorAdd').hide();
-    
     $('#iInputAuthorErrorEdit').hide();
     $('#iTextAreaQuoteErrorEdit').hide();
-
 
     // DataTables
     let t = $('#table').DataTable({
@@ -497,7 +496,7 @@
       "columnDefs": [{
         "searchable": false,
         "orderable": false,
-        "targets": [0, 4, 5]
+        "targets": [0, 5, 6]
       }],
       "order": [[1, "asc"]],
       "language": {
@@ -568,7 +567,7 @@
         $('#iInputAuthorHelpAdd').show();
       }
 
-      if (iTextAreaQuoteAdd == null || iTextAreaQuoteAdd == '' || iTextAreaQuoteAddLength > 1000) {
+      if (iTextAreaQuoteAdd == null || iTextAreaQuoteAdd == '' || iTextAreaQuoteAddLength > 500) {
         $('#iButtonAcceptAdd').attr('disabled', 'disabled');
 
         $('#iTextAreaQuoteErrorAdd').show();
@@ -592,7 +591,7 @@
       let iTextAreaQuoteEditLength = iTextAreaQuoteEdit.length;
       let data = <?php echo json_encode ($authorsList) ?>;
 
-      if ((!data.includes(iInputAuthorTrim)) || iInputAuthor == null || iInputAuthor == '' || iTextAreaQuoteEdit == null || iTextAreaQuoteEdit == '' || iTextAreaQuoteEditLength > 1000 ) {
+      if ((!data.includes(iInputAuthorTrim)) || iInputAuthor == null || iInputAuthor == '' || iTextAreaQuoteEdit == null || iTextAreaQuoteEdit == '' || iTextAreaQuoteEditLength > 500 ) {
         $('#iButtonAcceptEdit').attr('disabled', 'disabled');
       } else {
         $('#iButtonAcceptEdit').removeAttr('disabled');
@@ -606,7 +605,7 @@
         $('#iInputAuthorHelpEdit').show();
       }
 
-      if (iTextAreaQuoteEdit == null || iTextAreaQuoteEdit == '' || iTextAreaQuoteEditLength > 1000) {
+      if (iTextAreaQuoteEdit == null || iTextAreaQuoteEdit == '' || iTextAreaQuoteEditLength > 500) {
         $('#iTextAreaQuoteErrorEdit').show();
         $('#iTextAreaQuoteHelpEdit').hide();
       } else {
