@@ -1,4 +1,13 @@
 # Changelog
+
+* 2.0.1 (August 25, 2025). Stable version.
+
+  * New functions
+    * Added 'Quote' item to the add menu in the Wordpress administration.
+
+  * Bug fixed
+    * Minor bug fixes in widget code.
+
 * 2.0.0 (September 29, 2024). Stable version.
 
   * New compatibility

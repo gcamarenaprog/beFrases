@@ -27,6 +27,16 @@ The WordPress Plugin beFrases includes the following files:
 
 ## Changelog
 
+# Changelog
+
+* 2.0.1 (August 25, 2025). Stable version.
+
+    * New functions
+        * Added 'Quote' item to the add menu in the Wordpress administration.
+
+    * Bug fixed
+        * Minor bug fixes in widget code.
+
 * 2.0.0 (September 29, 2024). Stable version.
 
     * New compatibility
@@ -52,6 +62,7 @@ The WordPress Plugin beFrases includes the following files:
         * Changed to dataTables 2.1.6 version.
         * Changed to jQuery 3.7.1 version.
         * Changed to jQuery UI 1.14.0 version.
+
 * 1.0.0 (January 2, 2021). Initial Release.
 
 ## Features
